@@ -1,42 +1,328 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00. Manager">
+      <UniqueIdentifier>{85612251-9ec0-4941-8aa4-f3c4ba305f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\00. cGameManager">
+      <UniqueIdentifier>{1540c740-013d-4357-ba0a-190d2919cfaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\01. cObjectManager">
+      <UniqueIdentifier>{47f530f0-e843-4b8e-9256-0be8c39e352e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\02. cInputManager">
+      <UniqueIdentifier>{371497f0-8a89-49c7-aab4-ba22393f725e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\03. cTextureManager">
+      <UniqueIdentifier>{212a8f8f-cf43-43d6-b4d1-a811a9131eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\04. cDeviceManager">
+      <UniqueIdentifier>{b65631f6-bbeb-45f0-945e-52055f7e4dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\05. cSoundManager">
+      <UniqueIdentifier>{f4d17f69-d222-4108-ad23-d95c5ac0ec35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager">
+      <UniqueIdentifier>{7c4433d9-d56e-4f77-96e3-8251c222edef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager">
+      <UniqueIdentifier>{8b7f0bdd-16c6-4859-aa9a-fd4a95141945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\08. cTimeManager">
+      <UniqueIdentifier>{43ce3715-67cb-416a-a8ca-8739f60ec5f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject">
+      <UniqueIdentifier>{ead9f54a-7ea3-4c51-ad61-4c642021fd77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\00. cFrame">
+      <UniqueIdentifier>{4f858eb0-2a1f-4c4e-94dd-4622ca4fb56a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\01. cUIObject">
+      <UniqueIdentifier>{2e9fbd2a-41cd-4123-8cea-de0ad6456019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\02. cImageView">
+      <UniqueIdentifier>{5f8e95a9-c5fd-4f04-ad90-831afbb50d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter">
+      <UniqueIdentifier>{0a6e2d5c-f2bb-4603-b05d-870b140e9c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene">
+      <UniqueIdentifier>{68ba4824-f20e-4b18-b3b7-b17b440445ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Loader">
+      <UniqueIdentifier>{ebf74102-af87-4179-ae87-4ab8eb0551d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Loader\00. xFileLoader">
+      <UniqueIdentifier>{6d40c0d0-eaad-49c3-bb9b-e4ebb7915bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. UTIL">
+      <UniqueIdentifier>{4b77aaa9-3ca0-4f0c-9d55-1243093d215e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. UTIL\00. cCamera">
+      <UniqueIdentifier>{aa444145-2022-4c7d-b65f-eba4c4d7ea46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. UTIL\01. cFrustum">
+      <UniqueIdentifier>{334d6da8-eae6-4989-a292-4eabe6333d01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. UTIL\02. Math">
+      <UniqueIdentifier>{be9623d7-f3d6-405d-9ebb-ed4df9e068ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. ETC">
+      <UniqueIdentifier>{279c6060-b5c6-48e7-83ee-0c4fcec0a0bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager\00. cStateMachine">
+      <UniqueIdentifier>{79c6d2d2-3b35-4915-b5f8-b9f29a8995f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager\01. cA%2aManager">
+      <UniqueIdentifier>{e08f613c-f0f2-4e63-90e2-df3b9adcc862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager\01. cA%2aManager\00. Algorithm">
+      <UniqueIdentifier>{e1faa6d4-986d-49ce-93a8-ec25e4b7ac97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager\01. cA%2aManager\00. Algorithm\01. cGraph">
+      <UniqueIdentifier>{11b8f385-9553-44e1-95e0-60d278a56632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\06. cAIManager\01. cA%2aManager\00. Astar">
+      <UniqueIdentifier>{44940c5e-d8c7-4fa7-be14-a2deec9b5c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\00. Entity">
+      <UniqueIdentifier>{a22eb565-6f2f-47df-bbb7-8f537be6e4c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\02. cUnit">
+      <UniqueIdentifier>{18f4936e-df28-40b2-9bca-86a6a3fe05c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\01. cPlayer">
+      <UniqueIdentifier>{15b440dc-426a-41f1-a54b-df0eae8a2aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\09. cSceneManager">
+      <UniqueIdentifier>{6e8ecffe-7e53-445c-8ad7-d23bcdd2c40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\02. cUnit\00. Human_State">
+      <UniqueIdentifier>{06c93ceb-6664-4e1b-96a3-e9442dd054e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\02. cUnit\00. Human_State\00. Footman">
+      <UniqueIdentifier>{ab58f5c0-cde1-48e3-9fe3-8fb0fcb32854}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TeamPortPolio.h" />
+    <ClInclude Include="cAllocateHierarchy.h">
+      <Filter>04. Loader\00. xFileLoader</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cCamera.h">
+      <Filter>98. UTIL\00. cCamera</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cGraph.h">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager\00. Algorithm\01. cGraph</Filter>
     </ClInclude>
-    <ClInclude Include="TeamPortPolio.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cAstar.h">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager\00. Astar</Filter>
+    </ClInclude>
+    <ClInclude Include="cAstarManager.h">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharacter.h">
+      <Filter>02. cCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="cFrame.h">
+      <Filter>01. cObject\00. cFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="cDeviceManager.h">
+      <Filter>00. Manager\04. cDeviceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cFrustum.h">
+      <Filter>98. UTIL\01. cFrustum</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameManager.h">
+      <Filter>00. Manager\00. cGameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cImageView.h">
+      <Filter>01. cObject\02. cImageView</Filter>
+    </ClInclude>
+    <ClInclude Include="cInputManager.h">
+      <Filter>00. Manager\02. cInputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
+      <Filter>01. cObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectManager.h">
+      <Filter>00. Manager\01. cObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>02. cCharacter\01. cPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="cUnit.h">
+      <Filter>02. cCharacter\02. cUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="cSceneManager.h">
+      <Filter>00. Manager\09. cSceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ISteeringEntity.h">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>04. Loader\00. xFileLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cStateMachine.h">
+      <Filter>00. Manager\06. cAIManager\00. cStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>00. Manager\03. cTextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimeManager.h">
+      <Filter>00. Manager\08. cTimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cTitleScene.h">
+      <Filter>03. cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIButton.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIImageView.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUITextView.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIObject.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUImanager.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Human_Melee_State.h">
+      <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntity.h">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>98. UTIL\02. Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>98. UTIL</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMap.h">
+      <Filter>99. ETC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="TeamPortPolio.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="cAllocateHierarchy.cpp">
+      <Filter>04. Loader\00. xFileLoader</Filter>
     </ClCompile>
-    <ClCompile Include="TeamPortPolio.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="cCamera.cpp">
+      <Filter>98. UTIL\00. cCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="cAstar.cpp">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager\00. Astar</Filter>
+    </ClCompile>
+    <ClCompile Include="cGraph.cpp">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager\00. Algorithm\01. cGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="cAstarManager.cpp">
+      <Filter>00. Manager\06. cAIManager\01. cA%2aManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cFrame.cpp">
+      <Filter>01. cObject\00. cFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharacter.cpp">
+      <Filter>02. cCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="cDeviceManager.cpp">
+      <Filter>00. Manager\04. cDeviceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cFrustum.cpp">
+      <Filter>98. UTIL\01. cFrustum</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameManager.cpp">
+      <Filter>00. Manager\00. cGameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cImageView.cpp">
+      <Filter>01. cObject\02. cImageView</Filter>
+    </ClCompile>
+    <ClCompile Include="cObject.cpp">
+      <Filter>01. cObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjectManager.cpp">
+      <Filter>00. Manager\01. cObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>02. cCharacter\01. cPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="cUnit.cpp">
+      <Filter>02. cCharacter\02. cUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="cSceneManager.cpp">
+      <Filter>00. Manager\09. cSceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ISteeringEntity.cpp">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>04. Loader\00. xFileLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>00. Manager\03. cTextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimeManager.cpp">
+      <Filter>00. Manager\08. cTimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cTitleScene.cpp">
+      <Filter>03. cScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIButton.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIImageView.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUITextView.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIObject.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUImanager.cpp">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Human_Melee_Walk.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Human_Melee_Attack.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Human_Melee_Defence.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Human_Melee_Idle.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="IEntity.cpp">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavior.cpp">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>98. UTIL\02. Math</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMap.cpp">
+      <Filter>99. ETC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
