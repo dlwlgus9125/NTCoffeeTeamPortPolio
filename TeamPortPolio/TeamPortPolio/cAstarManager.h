@@ -13,9 +13,11 @@ class cAstarManager :
 	vector<int> m_path;
 	vector<int> vecRoad;
 public:
-	void Setup(int col, int row);
+	void Setup(vector<D3DXVECTOR3> vecPosOfNode);
 	void AddEdge(int from, int col, int row);
 	vector<int> GetPath(int chrindex, int targetIndex);
 	void Release();
+
+	void Render();
 };
 

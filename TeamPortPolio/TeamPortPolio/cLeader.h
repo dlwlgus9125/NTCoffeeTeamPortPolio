@@ -11,7 +11,7 @@ class cLeader :
 	vector<D3DXVECTOR3> m_RectOffest;
 	vector<D3DXVECTOR3> m_TriOffest;
 	float          m_fRotY;
-
+	
 
 public:
 	cLeader(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
