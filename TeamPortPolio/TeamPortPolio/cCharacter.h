@@ -8,8 +8,9 @@ class cCharacter : public cObject
 protected:
 	ISteeringEntity* m_CharacterEntity;
 	MeshSpere        m_CollideSphere;
-	MeshSpere        m_dirSphere;
+	MeshSpere        m_arrangeCollideSphere;
 	cSkinnedMesh*    m_pSkinnedMesh;
+	MODE_STATE       m_currentMode;
 public:
 	cCharacter();
 	virtual ~cCharacter();
@@ -21,6 +22,9 @@ public:
 	MeshSpere        GetMeshSphere() { return m_CollideSphere; }
 	ISteeringEntity* GetCharacterEntity() { return m_CharacterEntity; }
 	cSkinnedMesh*    GetMesh() { return m_pSkinnedMesh; }
+	MODE_STATE       GetMode() { return m_currentMode; }
+
+	void             SetMode(int mode) { m_currentMode = (MODE_STATE)mode; }
 	void RenderSphere();
 
 };

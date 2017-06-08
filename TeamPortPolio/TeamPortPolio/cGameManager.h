@@ -3,7 +3,6 @@
 #include "cPlayer.h"
 
 #define GAMEMAIN cGameManager::Instance()
-class cUIManager;
 class cGameManager : public Singleton<cGameManager>
 {
 private:
@@ -27,7 +26,6 @@ public:
 	IMediaPosition* pPosition;
 	IVideoWindow*   pWindow;
 	long EventCode, Param1, Param2;
-	cUIManager* m_pUIManager;
 
 
 };

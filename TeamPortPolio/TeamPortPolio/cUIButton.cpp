@@ -28,18 +28,18 @@ void cUIButton::SetTexture(char* szNor, char* szOver, char* szSel)
 
 void cUIButton::Update()
 {
-	POINT pt;
-	GetCursorPos(&pt);
-	ScreenToClient(g_hWnd, &pt);
+	POINT pt = INPUT->GetMousePos();
+	
+	D3DXVECTOR3 Pos = m_pParent->GetPosition() + m_vPosition;
 
 	RECT rc;
 
-	if (m_Funtion == FUNTION_OPEN)	{	SetRect(&rc,m_vPosition.x,m_vPosition.y,m_vPosition.x + m_stSize.nWidth,m_vPosition.y + m_stSize.nHeight);	}
-	else							{	SetRect(&rc, (int)m_matWorld._41, (int)m_matWorld._42, (int)m_matWorld._41 + (int)m_stSize.nWidth, (int)m_matWorld._42 + (int)m_stSize.nHeight);	}
+	if (m_Funtion != FUNTION_OPEN) {	SetRect(&rc, (int)Pos.x, (int)Pos.y, (int)Pos.x + (int)m_stSize.nWidth, (int)Pos.y + (int)m_stSize.nHeight);	}
+	else if(m_Funtion==FUNTION_OPEN)	{	SetRect(&rc,m_vPosition.x,m_vPosition.y,m_vPosition.x + m_stSize.nWidth,m_vPosition.y + m_stSize.nHeight);	}
 
 	if (PtInRect(&rc, pt))
 	{
-		if (GetKeyState(VK_LBUTTON)&0x8000)
+		if (INPUT->IsMouseDown(MOUSE_LEFT))
 		{
 			if (m_eButtonState == E_MOUSEOVER)
 			{
@@ -65,21 +65,27 @@ void cUIButton::Update()
 	{
 		m_eButtonState = E_NORMAL;
 	}
-
-	cUIObject::Update();
 }
 
 void cUIButton::Render(LPD3DXSPRITE pSprite)
 {
+	pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	
+	D3DXMATRIXA16 matT;
+	D3DXVECTOR3 pos = m_pParent->GetPosition() + m_vPosition;
+	if (this->GetFuntion() == FUNTION_OPEN) pos = m_vPosition;
 	
-	pSprite->SetTransform(&m_matWorld);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
+
+	;
+
+	pSprite->SetTransform(&matT);
 
 	RECT rc;
 	SetRect(&rc, 0, 0, m_stSize.nWidth, m_stSize.nHeight);
-
 	pSprite->Draw(m_aTexture[m_eButtonState], &rc, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 0, 0), D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	pSprite->End();
 
-	cUIObject::Render(pSprite);
 }

@@ -25,16 +25,22 @@ class cStateMachine
 	int m_currentId;
 
 public:
-	cStateMachine(T obj) { m_obj = obj; }
-
+	cStateMachine(T obj) { m_obj = obj; m_pCurrentState = NULL;}
+	~cStateMachine()
+	{
+		/*for each(auto s in m_stateMap)
+		{
+			SAFE_DELETE(s);
+		}
+		m_stateMap.clear();*/
+	}
 	IState<T>* CurrentState() { return m_pCurrentState; }
 	int CurrentID() { return m_pCurrentState != NULL ? m_pCurrentState->ID() : -1; }
 
 	void Register(int stateId, IState<T>* pState)
 	{
 		m_stateMap[stateId] = pState;
-		m_stateMap[stateId]->SetID(stateId);
-		m_pCurrentState = NULL;
+		m_stateMap[stateId]->SetID(stateId);		
 	}
 
 	void Play(int stateId)

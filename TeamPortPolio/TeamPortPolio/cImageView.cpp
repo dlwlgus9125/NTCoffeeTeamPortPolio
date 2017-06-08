@@ -44,9 +44,7 @@ void cImageView::Render(LPD3DXSPRITE pSprite)
 	D3DXVECTOR3 p = m_pParent->GetPosition() + m_vPosition;
 	D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
 
-	m_matWorld = matT;
-
-	pSprite->SetTransform(&m_matWorld);
+	pSprite->SetTransform(&matT);
 
 	RECT rc;
 	SetRect(&rc, 0, 0, m_stSize.nWidth, m_stSize.nHeight);

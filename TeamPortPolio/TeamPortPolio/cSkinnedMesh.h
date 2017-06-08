@@ -10,6 +10,7 @@ public:
 protected:
 	LPD3DXFRAME m_pRoot;
 	LPD3DXANIMATIONCONTROLLER	m_pAnimController;
+	D3DXMATRIXA16 m_matWorld;
 
 	// >> :
 	float m_fBlendTime;

@@ -9,15 +9,7 @@ void Human_State_Defence::OnBegin(cUnit * pUnit)
 
 void Human_State_Defence::OnUpdate(cUnit * pUnit, float deltaTime)
 {
-	if (INPUT->IsMouseDown(MOUSE_LEFT))
-	{
-		pUnit->FSM()->Play(UNIT_STATE_STATE_ATTACK);
-	}
-	else if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		pUnit->FSM()->Play(UNIT_STATE_STATE_WALK);
-	}
-
+	pUnit->FSM()->Play(UNIT_STATE_STATE_IDLE);
 }
 
 void Human_State_Defence::OnEnd(cUnit * pUnit)

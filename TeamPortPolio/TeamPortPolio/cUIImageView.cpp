@@ -23,12 +23,18 @@ void cUIImageView::SetTexture(char* szFullPath)
 
 void cUIImageView::Render(LPD3DXSPRITE pSprite)
 {
-	pSprite->SetTransform(&m_matWorld);
+	pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
+
+	D3DXMATRIXA16 matT;
+	D3DXVECTOR3 pos = m_pParent->GetPosition() + m_vPosition;
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
+
+	pSprite->SetTransform(&matT);
 
 	RECT rc;
 	SetRect(&rc, 0, 0, m_stSize.nWidth, m_stSize.nHeight);
 	pSprite->Draw(m_pTexture, &rc, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 0, 0), D3DCOLOR_ARGB(255, 255, 255, 255));
 	
-
-	//cUIObject::Render(pSprite);
+	pSprite->End();
 }

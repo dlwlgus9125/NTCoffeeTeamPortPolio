@@ -107,14 +107,14 @@
     <Filter Include="02. cCharacter\02. cUnit\00. Human_State\00. Footman">
       <UniqueIdentifier>{ab58f5c0-cde1-48e3-9fe3-8fb0fcb32854}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. cCharacter\03. cLeader">
+      <UniqueIdentifier>{f52cca8f-9410-4816-8b90-7984340f3da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. cCharacter\03. cLeader\00. Leader_State">
+      <UniqueIdentifier>{fd4c4702-f366-429e-8ac3-c1aecf045285}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamPortPolio.h" />
     <ClInclude Include="cAllocateHierarchy.h">
       <Filter>04. Loader\00. xFileLoader</Filter>
@@ -218,10 +218,36 @@
     <ClInclude Include="TestMap.h">
       <Filter>99. ETC</Filter>
     </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99. ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99. ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99. ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="cLeader.h">
+      <Filter>02. cCharacter\03. cLeader</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIItemSlot.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUILifeBar.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIScrollBar.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cItem.h">
+      <Filter>01. cObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUICursor.h">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="cAllocateHierarchy.cpp">
       <Filter>04. Loader\00. xFileLoader</Filter>
     </ClCompile>
@@ -324,6 +350,27 @@
     <ClCompile Include="TestMap.cpp">
       <Filter>99. ETC</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99. ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="cLeader.cpp">
+      <Filter>02. cCharacter\03. cLeader</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIItemSlot.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUILifeBar.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIScrollBar.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cItem.cpp">
+      <Filter>01. cObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUICursor.cpp">
+      <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">
@@ -337,5 +384,10 @@
     <Image Include="TeamPortPolio.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99. ETC</Filter>
+    </Text>
   </ItemGroup>
 </Project>

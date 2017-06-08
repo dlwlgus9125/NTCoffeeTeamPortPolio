@@ -1,6 +1,7 @@
 #pragma once
 class cObject;
 class IEntity;
+class cLeader;
 #define OBJECT  cObjectManager::Instance()
 
 
@@ -9,7 +10,9 @@ class cObjectManager : public Singleton<cObjectManager>
 {
 	vector<cObject*> m_vecObject;
 	vector<IEntity*> m_vecEntity;
+	vector<cLeader*> m_vecEnemyLeader;
 	cObject*         m_player;
+	
 public:
 
 

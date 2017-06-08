@@ -163,6 +163,13 @@ struct ST_SIZEN
 	ST_SIZEN(int _w, int _h) : nWidth(_w), nHeight(_h) {}
 };
 
+enum MODE_STATE
+{
+	FIGHTING_MODE, 
+	DEFENDING_MODE,
+};
+
+// 보병
 enum FOOTMAN_STATE
 {
 	F_STAND,
@@ -176,9 +183,45 @@ enum FOOTMAN_STATE
 	F_ATTACK2,
 	F_ATTACK3,
 	F_SHEILDBLOCK,
+	F_SHILDUP,
 	F_HIT,
 	F_BATTLECRY,
 	F_DEATH,
+};
+
+// 궁병
+enum BOWMAN_STATE
+{
+	B_STAND,
+	B_WALK,
+	B_BACKWALK,
+	B_RUN,
+	B_READYATTACK,
+	B_BATTLEWALK,
+	B_BATTLERUN,
+	B_BOWATTACK,
+	B_BOWSHEILD,
+	B_HIT,
+	B_BATTLECRY,
+	B_DEATH,
+};
+
+// 기병
+enum KNIGHT_STATE
+{
+	K_STAND,
+	K_WALK,
+	K_RUN,
+	K_HIT,
+	K_BATTLECRY,
+	K_DEATH,
+};
+
+enum ITEM_TAG
+{
+	ITEM_NONE = 0,
+	ITEM_MELEE,
+	ITEM_RANGE,
 };
 
 #define SYNTHESIZE(varType, varName, funName)\

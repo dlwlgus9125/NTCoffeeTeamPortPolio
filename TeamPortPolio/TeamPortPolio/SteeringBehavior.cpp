@@ -76,7 +76,8 @@ void SteeringBehavior::Arrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp( Entity()->Forward(), 0.0f, 0.5f)*(0.005f*distance);
+		movePos += MATH->Clamp( Entity()->Forward()*distance*0.005f, 0.015f, 0.4f);
+		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
 		/*const float multiplier = 2;
 		float speed = MATH->Min(distance * multiplier, Entity()->MaxSpeed());
