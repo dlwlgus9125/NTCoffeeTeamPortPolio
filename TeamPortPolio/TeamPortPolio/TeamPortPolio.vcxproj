@@ -163,6 +163,7 @@
     <ClInclude Include="cObjectManager.h" />
     <ClInclude Include="cObjLoader.h" />
     <ClInclude Include="cPlayer.h" />
+    <ClInclude Include="cRay.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="cObjectManager.cpp" />
     <ClCompile Include="cObjLoader.cpp" />
     <ClCompile Include="cPlayer.cpp" />
+    <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />

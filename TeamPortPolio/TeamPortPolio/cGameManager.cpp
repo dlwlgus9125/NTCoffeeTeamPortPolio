@@ -18,7 +18,7 @@ void cGameManager::Init()
 
 	if (FAILED(hr))
 		::MessageBox(0, "CoInitialize error", 0, 0);
-
+	
 	hr = CoCreateInstance(
 		CLSID_FilterGraph,
 		NULL,
@@ -32,7 +32,7 @@ void cGameManager::Init()
 	hr = pGraph->QueryInterface(IID_IMediaControl, (LPVOID*)&pControl);
 	hr = pGraph->QueryInterface(IID_IMediaEvent, (LPVOID*)&pEvent);
 	hr = pGraph->QueryInterface(IID_IMediaPosition, (LPVOID*)&pPosition);
-	//pGraph->RenderFile(L"swf/013_defeating_isaac_in_the_cathedral.avi", NULL);
+	//pGraph->RenderFile(L"swf/013_defeating_isaac_in_the_cathedral.avi", NULL);;
 
 	pGraph->RenderFile(L"swf/blizzard_logos_black.avi", NULL);
 

@@ -137,6 +137,9 @@
     <Filter Include="98. UTIL\03. cMtlTex">
       <UniqueIdentifier>{260d6086-3a34-4606-88ea-68f484129ecc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98. UTIL\04. cRay">
+      <UniqueIdentifier>{598b46a6-3b49-4821-995e-837e8df6e349}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -272,6 +275,9 @@
     <ClInclude Include="cHeightMap.h">
       <Filter>05. cMap\02. cHeightMap</Filter>
     </ClInclude>
+    <ClInclude Include="cRay.h">
+      <Filter>98. UTIL\04. cRay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -401,6 +407,9 @@
     </ClCompile>
     <ClCompile Include="cHeightMap.cpp">
       <Filter>05. cMap\02. cHeightMap</Filter>
+    </ClCompile>
+    <ClCompile Include="cRay.cpp">
+      <Filter>98. UTIL\04. cRay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
