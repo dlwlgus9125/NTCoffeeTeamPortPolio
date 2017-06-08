@@ -61,7 +61,9 @@ void cGameManager::Init()
 	TESTMAP->Setup();
 	
 	OBJECT->Init();
-	
+	OBJECTDB->Setup();
+	SCENE->Register(0, new cTitleScene());
+	SCENE->StartScene(0);
 	CAMERA->Setup();
 	
 	INPUT->Init();
@@ -106,6 +108,8 @@ void cGameManager::Update()
 			UI->OnUpdate(TIME->DeltaTime());
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
+			SCENE->Update();
+
 		}
 
 	}
@@ -128,6 +132,8 @@ void cGameManager::Render()
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
 		OBJECT->Render();
+		
+		SCENE->Render();
 		UI->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);

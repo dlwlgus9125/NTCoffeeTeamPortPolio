@@ -23,7 +23,7 @@ class cSceneManager :public Singleton<cSceneManager>
 private:
 	map<int, cIScene*> m_scenes;
 	int                m_current;
-
+	 
 public:
 	void     StartScene(int tag);
 	void     Register(int tag, cIScene* pScene);

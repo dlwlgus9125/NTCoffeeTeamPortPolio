@@ -107,6 +107,39 @@
     <Filter Include="02. cCharacter\02. cUnit\00. Human_State\00. Footman">
       <UniqueIdentifier>{ab58f5c0-cde1-48e3-9fe3-8fb0fcb32854}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. cMap">
+      <UniqueIdentifier>{6c0387da-4a37-42a9-8a81-506d908f307b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. cMap\02. cHeightMap">
+      <UniqueIdentifier>{4e376886-51b2-44cf-8528-3c2612491a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. cMap\01. cIMap">
+      <UniqueIdentifier>{e6c647b7-c35f-4949-aff8-0fbb27fddda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Loader\01. ObjLoader">
+      <UniqueIdentifier>{1eead9cd-ec16-4435-ac7e-9feba480d27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Database">
+      <UniqueIdentifier>{c6b7c3fe-2102-43ae-a247-77b7bb9929e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Database\01. cObjectDB">
+      <UniqueIdentifier>{9d623f15-db70-4486-a3de-cdf97d858850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\03. cGroup">
+      <UniqueIdentifier>{4d387467-6525-4c51-b99b-b40e3a9e8538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\04. cConstruct">
+      <UniqueIdentifier>{08b2db81-820e-455e-8f1a-23805a8f2210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. cMap\03. cSkyBox">
+      <UniqueIdentifier>{33930076-1c84-472c-885b-af0a026f7df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. UTIL\03. cMtlTex">
+      <UniqueIdentifier>{260d6086-3a34-4606-88ea-68f484129ecc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
     <Filter Include="02. cCharacter\03. cLeader">
       <UniqueIdentifier>{f52cca8f-9410-4816-8b90-7984340f3da3}</UniqueIdentifier>
     </Filter>
@@ -220,6 +253,30 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>99. ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="cIMap.h">
+      <Filter>05. cMap\01. cIMap</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjLoader.h">
+      <Filter>04. Loader\01. ObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectDB.h">
+      <Filter>06. Database\01. cObjectDB</Filter>
+    </ClInclude>
+    <ClInclude Include="cGroup.h">
+      <Filter>01. cObject\03. cGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="cConstruct.h">
+      <Filter>01. cObject\04. cConstruct</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkyBox.h">
+      <Filter>05. cMap\03. cSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="cMtlTex.h">
+      <Filter>98. UTIL\03. cMtlTex</Filter>
+    </ClInclude>
+    <ClInclude Include="cHeightMap.h">
+      <Filter>05. cMap\02. cHeightMap</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>99. ETC</Filter>
@@ -349,6 +406,30 @@
     </ClCompile>
     <ClCompile Include="TestMap.cpp">
       <Filter>99. ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="cIMap.cpp">
+      <Filter>05. cMap\01. cIMap</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjLoader.cpp">
+      <Filter>04. Loader\01. ObjLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjectDB.cpp">
+      <Filter>06. Database\01. cObjectDB</Filter>
+    </ClCompile>
+    <ClCompile Include="cGroup.cpp">
+      <Filter>01. cObject\03. cGroup</Filter>
+    </ClCompile>
+    <ClCompile Include="cConstruct.cpp">
+      <Filter>01. cObject\04. cConstruct</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkyBox.cpp">
+      <Filter>05. cMap\03. cSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="cMtlTex.cpp">
+      <Filter>98. UTIL\03. cMtlTex</Filter>
+    </ClCompile>
+    <ClCompile Include="cHeightMap.cpp">
+      <Filter>05. cMap\02. cHeightMap</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>99. ETC</Filter>
