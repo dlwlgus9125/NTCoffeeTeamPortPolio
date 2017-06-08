@@ -13,7 +13,7 @@ void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
 	float distance = MATH->Distance(pUnit->GetCharacterEntity()->Pos(), targetPos);
 
-	if (distance > 0.2f)
+	if (distance > 0.5f)
 	{
 		pUnit->GetCharacterEntity()->Steering()->OffsetPursuit(pUnit->GetLeader(), pUnit->GetOffset());
 		pUnit->GetCharacterEntity()->Steering()->ConstrainOverlap(OBJECT->GetEntities());
@@ -24,14 +24,7 @@ void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
 		pUnit->FSM()->Play(UNIT_STATE_STATE_IDLE);	
 	}
 
-	if (INPUT->IsMouseDown(MOUSE_LEFT))
-	{
-		pUnit->FSM()->Play(UNIT_STATE_STATE_ATTACK);
-	}
-	else if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		pUnit->FSM()->Play(UNIT_STATE_STATE_DEFENCE);
-	}
+
 	
 }
 
@@ -48,9 +41,9 @@ void Human_State_Walk::StateChanger(cUnit * pUnit)
 	else if (pUnit->GetMesh()->Getindex() != F_BATTLERUN&&0.5f < pUnit->GetCharacterEntity()->Speed())
 	{
 		pUnit->GetMesh()->SetAnimationIndexBlend(F_BATTLERUN);
-	}
+	}/*
 	else if (pUnit->GetMesh()->Getindex() != F_READYATTACK&&pUnit->GetCharacterEntity()->Speed() < 0.005f)
 	{
 		pUnit->GetMesh()->SetAnimationIndexBlend(F_READYATTACK);
-	}
+	}*/
 }

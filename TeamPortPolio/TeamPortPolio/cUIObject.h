@@ -1,5 +1,6 @@
 #pragma once
-#include "cObject.h"
+#include "cObjectManager.h"
+
 enum UI_FUNTION
 {
 	FUNTION_NONE,
@@ -12,10 +13,11 @@ enum UI_FUNTION
 	FUNTION_TITLE,
 	FUNTION_MAP,
 	FUNTION_LIFE_BAR,
-
+	FUNTION_SCROLLBAR,
+	FUNTION_ITEM,
 };
 
-class cUIObject : public cObject
+class cUIObject 
 {
 public:
 	cUIObject();
@@ -26,12 +28,11 @@ private:
 	POINT m_PrevCursorPos;
 	bool m_isMove;
 	SYNTHESIZE(ST_SIZEN, m_MoveRect, MoveRect);
-
+	LPD3DXLINE m_Line;
 
 protected:
 
 	vector<cUIObject*>	m_vecChild;
-	D3DXMATRIXA16		m_matWorld;
 	SYNTHESIZE(D3DXVECTOR3, m_vPosition, Position);
 	SYNTHESIZE(cUIObject*, m_pParent, Parent);
 	SYNTHESIZE(ST_SIZEN, m_stSize, Size);
@@ -39,6 +40,8 @@ protected:
 
 	bool	m_isHidden;			// 그릴지 말지 결정하는 변수
 	bool	m_isNextPage;
+	bool GetIsMove() { return m_isMove; }
+
 public:
 	virtual void SetPosition(float x, float y, float z = 0);
 	virtual void AddChild(cUIObject* pChild);
@@ -50,6 +53,5 @@ public:
 	void MoveWindow();
 	bool GetisHidden() { return m_isHidden; }
 	void SetIsHidden(bool ishidden) { m_isHidden = ishidden; }
-
 };
 

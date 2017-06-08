@@ -13,7 +13,7 @@ cSkinnedMesh::cSkinnedMesh()
 {
 	m_pIEntity = NULL;
 	m_currentIndex = F_READYATTACK;
-	
+
 }
 
 
@@ -31,7 +31,7 @@ void cSkinnedMesh::Setup(char* szFolder, char* szFile)
 
 	cAllocateHierarchy ah;
 	ah.SetFolder(szFolder);
-
+	//	m_pAnimController->CloneAnimationController()
 	D3DXLoadMeshHierarchyFromX(sFullPath.c_str(),
 		D3DXMESH_MANAGED,
 		D3DDevice,
@@ -49,7 +49,7 @@ void cSkinnedMesh::Setup(char* szFolder, char* szFile)
 void cSkinnedMesh::Update()
 {
 	m_fPassedTime += TIME->GetElapsedTime();
-	
+
 	if (m_isAnimBlend)
 	{
 		m_fPassedBlendTime += TIME->GetElapsedTime();
@@ -59,7 +59,7 @@ void cSkinnedMesh::Update()
 			m_pAnimController->SetTrackWeight(0, 1.0f);
 			m_pAnimController->SetTrackEnable(1, false);
 			//
-			
+
 		}
 		else
 		{
@@ -68,13 +68,13 @@ void cSkinnedMesh::Update()
 			m_pAnimController->SetTrackWeight(1, 1.0f - fWeight);
 		}
 	}
-	
-	
+
+
 	//cout << 1000.0f - (m_pIEntity->Speed()*100.0f )<< endl;
 	//TIME->ElapsedUpdate();
 	m_pAnimController->AdvanceTime(TIME->GetElapsedTime(), NULL);
-	
-	
+
+
 
 	Update(m_pRoot, NULL);
 
@@ -88,11 +88,25 @@ void cSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 
 	ST_BONE* pBone = (ST_BONE*)pFrame;
 	pBone->CombinedTransformationMatrix = pBone->TransformationMatrix;
+
+
+	if (m_pIEntity)
+	{
+		D3DXMATRIXA16 matS, matR, matT;
+		D3DXMatrixIdentity(&matS);
+		D3DXMatrixIdentity(&matR);
+		D3DXMatrixIdentity(&matT);
+		D3DXMatrixScaling(&matS, 2.0f, 2.0f, 2.0f);
+		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_pIEntity->Forward()));
+		D3DXMatrixTranslation(&matT, m_pIEntity->Pos().x, m_pIEntity->Pos().y, m_pIEntity->Pos().z);
+		m_matWorld = matS*matR* matT;
+
+	}
 	if (pParent)
 	{
 		pBone->CombinedTransformationMatrix *=
 			((ST_BONE*)pParent)->CombinedTransformationMatrix;
-	
+
 	}
 	if (pFrame->pFrameFirstChild)
 	{
@@ -112,20 +126,8 @@ void cSkinnedMesh::Render(LPD3DXFRAME pFrame)
 
 	ST_BONE* pBone = (ST_BONE*)pFrame;
 
-	D3DXMATRIXA16 matWorld,matS, matR, matT;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixIdentity(&matT);
 
-	if (m_pIEntity)
-	{
-		D3DXMatrixScaling(&matS, 2.0f, 2.0f, 2.0f);
-		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_pIEntity->Forward()));
-		D3DXMatrixTranslation(&matT, m_pIEntity->Pos().x, m_pIEntity->Pos().y, m_pIEntity->Pos().z);
-		matWorld = matS*matR* matT;
 
-	}
-			
 	D3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	if (pBone->pMeshContainer)
 	{
@@ -133,12 +135,12 @@ void cSkinnedMesh::Render(LPD3DXFRAME pFrame)
 
 		if (pBoneMesh->MeshData.pMesh)
 		{
-			D3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
+			m_matWorld *= pBone->CombinedTransformationMatrix;
+			D3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); ++i)
 			{
 				D3DDevice->SetTexture(0, pBoneMesh->vecTexture[i]);
 				D3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
-				D3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 				pBoneMesh->MeshData.pMesh->DrawSubset(i);
 			}
 		}
@@ -264,7 +266,7 @@ void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_pAnimController->GetTrackDesc(0, &stTrackDesc);
 	m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
 	m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
-	 m_pAnimController->SetTrackDesc(1, &stTrackDesc);
+	m_pAnimController->SetTrackDesc(1, &stTrackDesc);
 
 	m_pAnimController->GetAnimationSet(nIndex, &pNextAnimSet);
 	m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);

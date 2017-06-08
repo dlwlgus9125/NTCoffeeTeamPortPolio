@@ -32,12 +32,13 @@ string cUITextView::GetText(bool Pageofnext)
 
 void cUITextView::Render(LPD3DXSPRITE pSprite)
 {
+	D3DXVECTOR3 pos = m_pParent->GetPosition() + m_vPosition;
+	if (this->GetFuntion() == FUNTION_OPEN) pos = m_vPosition;
+
 	RECT rc;
-	SetRect(&rc, (int)m_matWorld._41, (int)m_matWorld._42, (int)m_matWorld._41 + (int)m_stSize.nWidth, (int)m_matWorld._42 + (int)m_stSize.nHeight);
+	SetRect(&rc, (int)pos.x, (int)pos.y, (int)pos.x + (int)m_stSize.nWidth, (int)pos.y + (int)m_stSize.nHeight);
 
 	m_pFont->DrawText(NULL, GetText(m_pParent->m_isNextPage).c_str(), GetText(m_pParent->m_isNextPage).length(), &rc, m_dwDrawTextFormat, m_dwTextColor);
-
-	//cUIObject::Render(pSprite);
 }
 
 void cUITextView::SetUpFont()

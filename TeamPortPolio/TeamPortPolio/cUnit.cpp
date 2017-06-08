@@ -8,6 +8,7 @@ cUnit::cUnit(IEntity* pLeader, D3DXVECTOR3 offset)
 		pLeader->Forward(), pLeader->Mass(), pLeader->MaxSpeed() * 3);
 	m_pLeader = pLeader;
 	m_offset = offset;
+	m_isDeath = false;
 }
 
 
@@ -20,10 +21,19 @@ cUnit::~cUnit()
 
 void cUnit::Init()
 {
+	m_CollideSphere.m_radius = m_CharacterEntity->Radius();
+	m_CollideSphere.m_vCenter = m_CharacterEntity->Pos();
+	m_CollideSphere.m_vCenter.y += 0.5f;
+
+
+	m_arrangeCollideSphere.m_radius = 2.0f;
+	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
 
+	
+
 	m_pSkinnedMesh = new cSkinnedMesh;
-	m_pSkinnedMesh->Setup("Character/Human", "HumanInfantry.x");
+	m_pSkinnedMesh->Setup("Character/Human", "newfootman.x");
 	m_pSkinnedMesh->SetIEntity(m_CharacterEntity);
 
 	m_pFsm = new cStateMachine<cUnit*>(this);
@@ -39,7 +49,7 @@ void cUnit::Update(float deltaTime)
 	cCharacter::Update(deltaTime);
 
 	m_pFsm->Update(deltaTime);
-	if (m_pSkinnedMesh)m_pSkinnedMesh->Update();
+	if (m_pSkinnedMesh&&m_isDeath==false)m_pSkinnedMesh->Update();
 	
 	
 }

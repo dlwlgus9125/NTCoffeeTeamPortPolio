@@ -3,29 +3,26 @@
 #include "cUITextView.h"
 #include "cUIImageView.h"
 #include "cUIButton.h"
-
+#include "cUIScrollBar.h"
+#include "cUILifeBar.h"
+#include "cUICursor.h"
 cUIManager::cUIManager()
 	: m_pTexture(NULL)
 	, m_pSprite(NULL)
-	/*, m_Hcursor(NULL)
-	, m_cFinger(0)
-	, m_cLClick(0)
-	, m_cRClick(0)*/
-	, m_pUIObject(NULL)
-	, m_pLifeBar(NULL)
+	, m_pCursor(NULL)
 {
+	m_pCursor = new cUICursor;
+	m_pCursor->SetupCursor();
 }
 
 cUIManager::~cUIManager()
 {
-	
+	SAFE_DELETE(m_pCursor);
 }
 
 void cUIManager::OnEnter(Scenetag tag)
 {
-	//SetupCursor();
 	D3DXCreateSprite(D3DDevice, &m_pSprite);
-
 	SetCommonUI();
 
 	switch (tag)
@@ -34,18 +31,17 @@ void cUIManager::OnEnter(Scenetag tag)
 	case 2:SetFieldUI();
 	}//ex;
 
-	m_pUIObject = m_vecUIRoot[0];
 }
 
-void cUIManager::OnUpdate()
+void cUIManager::OnUpdate(float deltatime)
 {
-	
-	for each (auto p in m_vecUIRoot)
+	cObject* pCharactor = OBJECT->GetPlayer();
+	m_pCursor->Update_Cursosr();
+	for each (cUIObject* p in m_vecUIRoot)
 	{
 		p->Update();
 		OpenOnlyOnewindow(p);
 	}
-	
 }
 
 void cUIManager::OnExit()
@@ -56,6 +52,7 @@ void cUIManager::OnExit()
 	}
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pSprite);
+
 }
 
 
@@ -73,84 +70,35 @@ bool cUIManager::GetIsUIOpen()
 
 void cUIManager::OpenOnlyOnewindow(cUIObject * pObj)
 {
-	if (!pObj->GetisHidden() && GetIsUIOpen())
+	if (!pObj->GetisHidden())
 	{
 		for each (cUIObject* p in m_vecUIRoot)
-		{	
-			if(pObj!=p)	p->SetIsHidden(true);
+		{
+			if (pObj != p)p->SetIsHidden(true);
 		}
 	}
 }
 
-void cUIManager::Render_BloodofLifeBar(float maxHp, float CurrentHp)
+
+void cUIManager::SetLifeBar(int posX, int posY, char * szFullPath)
 {
-	float value= CurrentHp / maxHp;
-	float WidthOfLifeBar = m_pLifeBar->GetSize().nWidth;
-	float HeightOfLifeBar= m_pLifeBar->GetSize().nHeight;
-	//>>test
-	static float a = 0;
-	if (INPUT->IsKeyDown(VK_LEFT))a -= 11;
-	if (a > WidthOfLifeBar*0.8) a = WidthOfLifeBar*0.8;
-	if (a < 0) a = 0;
-	//<<
-	D3DXVECTOR3 p[2];
-	p[0] = D3DXVECTOR3(WidthOfLifeBar* 1 / 10, HeightOfLifeBar * 0.5, 0);/*시작지점*/
-	p[1] = D3DXVECTOR3(WidthOfLifeBar*0.1, HeightOfLifeBar* 0.5, 0);/*끝지점*/
-	/* WidthOfLifeBar*value*/
-	LPD3DXLINE pLine;
-	D3DXCreateLine(D3DDevice, &pLine);
-	pLine->SetWidth(m_pLifeBar->GetSize().nHeight*2/3);
-	pLine->Begin();
-
-
-	D3DXMATRIX out, view, proj, world;
-
-	D3DDevice->GetTransform(D3DTS_VIEW, &view);
-	D3DDevice->GetTransform(D3DTS_PROJECTION, &proj);
-	D3DDevice->GetTransform(D3DTS_WORLD, &world);
-
-	D3DXMatrixIdentity(&out);
-	out = world * view * proj;
-	pLine->DrawTransform(p, 2, &out, D3DCOLOR_XRGB(0,255,0));
-	pLine->End();
-	pLine->Release();
+	cUIObject* pObj = new cUIObject;
+	cUILifeBar* p = new cUILifeBar;
+	p->SetPosition(posX, posY);
+	p->SetTexture(szFullPath);
+	p->SetFuntion(FUNTION_LIFE_BAR);
+	pObj->AddChild(p);
+	m_vecUIRoot.push_back(pObj);
 }
 
-//void cUIManager::SetupCursor()
-//{
-//	m_cFinger = (LoadCursorFromFile("cursor/gam1340.cur"));
-//	m_cLClick = (LoadCursorFromFile("cursor/link select.cur"));
-//	m_cRClick = (LoadCursorFromFile("cursor/unavalible.cur"));
-//
-//	m_Hcursor = m_cFinger;
-//}
-//void cUIManager::Update_Cursosr()
-//{
-//	if (GetKeyState(VK_LBUTTON)&0x8000)
-//	{
-//		m_Hcursor = m_cLClick;
-//	}
-//	else if (GetKeyState(VK_RBUTTON) & 0x8000)
-//	{
-//		m_Hcursor = m_cRClick;
-//	}
-//	else
-//	{
-//		m_Hcursor = m_cFinger;
-//	}
-//	SetCursor(m_Hcursor);
-//}
 void cUIManager::Render()
 {
+	SetCursor(g_Cursor);
 
-
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	for each(auto p in m_vecUIRoot)
 	{
 		if (p)p->Render(m_pSprite);
 	}
-	m_pSprite->End();
-	//Render_BloodofLifeBar(10,10);
 }
 
 void cUIManager::SetTownUI()
@@ -165,50 +113,55 @@ void cUIManager::SetFieldUI()
 
 void cUIManager::SetCommonUI()
 {
-	SetLifeBar();
-	SetQuest_UI();
-	SetInventoryUI();
-	SetMapUI();
+	SetUpLifeBar();
+	SetUpQuest_UI();
+	SetUpInventoryUI();
+	//SetUpMapUI();
 }
 
-void cUIManager::SetQuest_UI()		
+void cUIManager::SetUpLifeBar()
 {
+	SetLifeBar(0, 0, "UI/btn-med-over.png");
+}
+
+void cUIManager::SetUpQuest_UI()
+{
+	//test
 	cUIObject* pUiobj = new cUIObject();
 	vector<string> tex;
 	tex.push_back("prev");
 	tex.push_back("next");
-	SetUpWindow(pUiobj, 0, 0, "UI/panel-info.png", "TITLE", tex);
-	SetUpButton(pUiobj, 50, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "열기");
-	SetUpButton(pUiobj, 0, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_NEXT, "다음");
-	SetUpButton(pUiobj, 0, 400, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_PREV, "이전");
-	SetUpButton(pUiobj, 235, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "닫기");
+	SetWindow(pUiobj, 0, 0, "UI/panel-info.png", "TITLE", tex);
+	SetButton(pUiobj, 50, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "열기");
+	SetButton(pUiobj, 0, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_NEXT, "다음");
+	SetButton(pUiobj, 0, 400, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_PREV, "이전");
+	SetButton(pUiobj, 235, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "닫기");
 	m_vecUIRoot.push_back(pUiobj);
 }
-void cUIManager::SetInventoryUI()		
+void cUIManager::SetUpInventoryUI()
 {
+	//test
 	cUIObject* pUiobj = new cUIObject();
-	vector<string> tex;
-	tex.push_back("prev");
-	tex.push_back("next");
-	SetUpWindow(pUiobj, 200, 0, "UI/panel-info.png", "TITLE", tex);
-	SetUpButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "열기");
-	SetUpButton(pUiobj, 200, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_NEXT, "다음");
-	SetUpButton(pUiobj, 200, 400, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_PREV, "이전");
-	SetUpButton(pUiobj, 435, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "닫기");
+
+	SetWindow(pUiobj, 200, 0, "UI/panel-info.png", "TITLE", "text");
+	SetButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "열기");
+	SetButton(pUiobj, 435, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "닫기");
+
+
+	SetScrollBar(pUiobj, 200, 0, "UI/panel-info.png", "UI/BT_STAND.png");
 	m_vecUIRoot.push_back(pUiobj);
 }
-void cUIManager::SetMapUI()		
+void cUIManager::SetUpItemList()
 {
+
+	//SetWindow()
+
+
+
 }
-void cUIManager::SetLifeBar()		
+void cUIManager::SetUpMapUI()
 {
-	cUIObject* pobj = new cUIObject();
-	m_pLifeBar = new cUIImageView;
-	m_pLifeBar->SetPosition(0, 0);
-	m_pLifeBar->SetTexture("UI/btn-med-over.png");
-	m_pLifeBar->SetFuntion(FUNTION_LIFE_BAR);
-	pobj->AddChild(m_pLifeBar);
-	m_vecUIRoot.push_back(m_pLifeBar);
+	// something to do
 }
 
 void cUIManager::SetTitleText(cUIObject* pParent, cUIImageView * pimageView, string text, D3DXCOLOR color)
@@ -247,7 +200,7 @@ void cUIManager::SetBodyText(cUIObject* pParent, cUIObject * ptextView, vector<s
 	pText->SetFuntion(ptextView->GetFuntion());
 	pParent->AddChild(pText);
 }
-void cUIManager::SetUpWindow(cUIObject* pParentObj, int posX, int posY, char* texturePath, string sTitle, vector<string> vsBody, D3DXCOLOR Titlecolor, D3DXCOLOR Bodycolor)
+void cUIManager::SetWindow(cUIObject* pParentObj, int posX, int posY, char* texturePath, string sTitle, vector<string> vsBody, D3DXCOLOR Titlecolor, D3DXCOLOR Bodycolor)
 {
 	cUIImageView* pImageView = new cUIImageView;
 	pImageView->SetPosition(posX, posY);
@@ -257,7 +210,7 @@ void cUIManager::SetUpWindow(cUIObject* pParentObj, int posX, int posY, char* te
 	SetTitleText(pParentObj, pImageView, sTitle, Titlecolor);
 	SetBodyText(pParentObj, pImageView, vsBody, Bodycolor);
 }
-void cUIManager::SetUpButton(cUIObject* pParentObj, int posX, int posY, char* szNor, char* szOver, char* szSel, int funtion, string sText, D3DXCOLOR textColor)
+void cUIManager::SetButton(cUIObject* pParentObj, int posX, int posY, char* szNor, char* szOver, char* szSel, int funtion, string sText, D3DXCOLOR textColor)
 {
 	cUIButton* pButtonCancel = new cUIButton;
 	pButtonCancel->SetTexture(szNor, szOver, szSel);
@@ -266,7 +219,7 @@ void cUIManager::SetUpButton(cUIObject* pParentObj, int posX, int posY, char* sz
 	pParentObj->AddChild(pButtonCancel);
 	SetBodyText(pParentObj, pButtonCancel, sText, textColor);
 }
-void cUIManager::SetUpWindow(cUIObject* pParentObj, int posX, int posY, char* texturePath, string sTitle, string vsBody, D3DXCOLOR Titlecolor, D3DXCOLOR Bodycolor)
+void cUIManager::SetWindow(cUIObject* pParentObj, int posX, int posY, char* texturePath, string sTitle, string vsBody, D3DXCOLOR Titlecolor, D3DXCOLOR Bodycolor)
 {
 	cUIImageView* pImageView = new cUIImageView;
 	pImageView->SetPosition(posX, posY);
@@ -275,4 +228,21 @@ void cUIManager::SetUpWindow(cUIObject* pParentObj, int posX, int posY, char* te
 	pParentObj->SetMoveRect(ST_SIZEN(pImageView->GetSize().nWidth, 100));
 	SetTitleText(pParentObj, pImageView, sTitle, Titlecolor);
 	SetBodyText(pParentObj, pImageView, vsBody, Bodycolor);
+}
+void cUIManager::SetScrollBar(cUIObject * pParentObj, int posX, int posY, char * szLanePath, char * szHeadPath)
+{
+	cUIImageView* pLane = new cUIImageView;
+	pLane->SetPosition(posX, posY);
+	pLane->SetTexture(szLanePath);
+	SetScrollHead(pParentObj, pLane, posX, posY, szHeadPath);
+
+}
+void cUIManager::SetScrollHead(cUIObject * pParentObj, cUIImageView* pLane, int posX, int posY, char * texturePath)
+{
+	cUIScrollBar* pScrollbar = new cUIScrollBar;
+	pScrollbar->SetUIScrollLane(pLane);
+	pScrollbar->SetPosition(posX, posY);
+	pScrollbar->SetTexture(texturePath);
+	pParentObj->AddChild(pLane);
+	pParentObj->AddChild(pScrollbar);
 }

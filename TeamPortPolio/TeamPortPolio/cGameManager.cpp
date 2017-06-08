@@ -60,13 +60,14 @@ void cGameManager::Init()
 	TIME->Init(120);
 	TESTMAP->Setup();
 	
-	OBJECT->Init();
+	//OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->StartScene(0);
 	CAMERA->Setup();
 	
 	INPUT->Init();
+	//UI->OnEnter(Scenetag(0));
 	//<<
 }
 
@@ -104,9 +105,10 @@ void cGameManager::Update()
 
 			m_prevTime = m_currentTime;
 			INPUT->Update();
-			OBJECT->Update(TIME->DeltaTime());
+			//OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
+			//UI->OnUpdate(TIME->DeltaTime());
 
 		}
 
@@ -129,8 +131,8 @@ void cGameManager::Render()
 			1.0f, 0);
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
-		OBJECT->Render();
-		
+		//OBJECT->Render();
+		//UI->Render();
 		SCENE->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
@@ -144,7 +146,7 @@ void cGameManager::Release()
 
 void cGameManager::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	CAMERA->WndProc(hwnd, message, wParam, lParam);
+	if(!UI->GetIsUIOpen())CAMERA->WndProc(hwnd, message, wParam, lParam);
 
 
 	//switch (message)
@@ -162,5 +164,7 @@ void cGameManager::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam
 	//break;
 	//}
 }
+
+
 
 

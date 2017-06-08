@@ -65,6 +65,8 @@ void cTitleScene::OnEnter()
 	m_pSkyBox = new cSkyBox();
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
 	// << 
+	ASTAR->Setup(vecPosOfNode);
+	Setup_DirLight();
 }
 
 void cTitleScene::OnUpdate()
@@ -79,6 +81,18 @@ void cTitleScene::OnExit()
 
 void cTitleScene::OnRender()
 {
+	static bool test = false;
+	if (INPUT->IsKeyDown(VK_TAB))
+	{
+		if (test == false)
+		{
+			test = true;
+		}
+		else
+		{
+			test = false;
+		}
+	}
 	D3DDevice->Clear(NULL,
 		NULL,
 		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
@@ -86,15 +100,18 @@ void cTitleScene::OnRender()
 		1.0f, 0);
 
 	D3DDevice->BeginScene();
-
-	if (m_pSkyBox) m_pSkyBox->Render();
-
-	if (m_pMap) m_pMap->Render();
-
-	for (int i = 0; i < m_vecConstruct.size(); i++)
+	if (test == false)
 	{
-		m_vecConstruct[i]->Render();
+		if (m_pSkyBox) m_pSkyBox->Render();
+
+		if (m_pMap) m_pMap->Render();
+
+		for (int i = 0; i < m_vecConstruct.size(); i++)
+		{
+			m_vecConstruct[i]->Render();
+		}
 	}
+	else { ASTAR->Render(); }
 
 	D3DDevice->EndScene();
 
@@ -103,4 +120,22 @@ void cTitleScene::OnRender()
 
 void cTitleScene::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+}
+
+
+void cTitleScene::Setup_DirLight()
+{
+	D3DLIGHT9 stLight;
+	ZeroMemory(&stLight, sizeof(D3DLIGHT9));
+
+	stLight.Type = D3DLIGHT_DIRECTIONAL;
+	stLight.Ambient = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);            // 주변에 영향을 받는 것들은 색을 띄게 만듬
+	stLight.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	stLight.Specular = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+
+	D3DXVECTOR3   vDir(1.0f, 1.0f, 1.0f);
+	D3DXVec3Normalize(&vDir, &vDir);
+	stLight.Direction = vDir;
+	D3DDevice->SetLight(0, &stLight);
+	D3DDevice->LightEnable(0, true);
 }

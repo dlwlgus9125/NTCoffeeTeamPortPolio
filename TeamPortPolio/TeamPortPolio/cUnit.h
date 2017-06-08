@@ -16,6 +16,8 @@ class cUnit :
 	cStateMachine<cUnit*>* m_pFsm;
 	IEntity* m_pLeader;
 	D3DXVECTOR3 m_offset;
+	cUnit*   m_TargetEnemy;
+	bool m_isDeath;
 public:
 	cUnit(IEntity* pLeader, D3DXVECTOR3 offset);
 	~cUnit();
@@ -27,5 +29,10 @@ public:
 	void SetOffset(D3DXVECTOR3 offset) { m_offset = offset; }
 	D3DXVECTOR3 GetOffset() { return m_offset; }
 	IEntity*    GetLeader() { return m_pLeader; }
+
+	void SetEnemy(cUnit* enemy) { m_TargetEnemy = enemy; }
+	cUnit* GetEnemy() { return m_TargetEnemy; }
+	void SetDeath() { m_isDeath = true; }
+	bool GetDeath() { return m_isDeath; }
 };
 

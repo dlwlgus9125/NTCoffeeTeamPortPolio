@@ -32,5 +32,7 @@ public:
 	void OnExit();
 	void OnRender();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	void Setup_DirLight();
 };
 

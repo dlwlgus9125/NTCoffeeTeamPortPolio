@@ -19,6 +19,7 @@ LPDIRECT3DTEXTURE9 cTextureManager::GetTexture(char * szFullPath)
 LPDIRECT3DTEXTURE9 cTextureManager::GetTexture(std::string & sFullPath)
 {
 	return GetTexture((char*)sFullPath.c_str());
+
 }
 
 void cTextureManager::SetTexture(char * szFullPath)
