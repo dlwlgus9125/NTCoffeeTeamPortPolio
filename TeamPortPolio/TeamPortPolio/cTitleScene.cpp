@@ -43,6 +43,24 @@ void cTitleScene::OnEnter()
 	m_pMap->SetVecMtlTex(vecMtlTex);
 	// << 
 
+	// >> 노드에 쓸 노드 중점의 위치 만드는 부분
+	vector<D3DXVECTOR3> vecPosOfNode;
+	for (int i = 0; i < vecIndex.size(); i += 6)
+	{
+		D3DXVECTOR3 v0 = vecVertex[vecIndex[i + 0]].p;
+		D3DXVECTOR3 v1 = vecVertex[vecIndex[i + 1]].p;
+		D3DXVECTOR3 v2 = vecVertex[vecIndex[i + 2]].p;
+		D3DXVECTOR3 v5 = vecVertex[vecIndex[i + 5]].p;
+
+		D3DXVECTOR3 pos;
+		pos.x = (v0.x + v1.x + v2.x + v5.x) / 4;
+		pos.y = (v0.y + v1.y + v2.y + v5.y) / 4;
+		pos.z = (v0.z + v1.z + v2.z + v5.z) / 4;
+
+		vecPosOfNode.push_back(pos);
+	}
+	// << 
+
 	// >> 스카이박스 생성
 	m_pSkyBox = new cSkyBox();
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
