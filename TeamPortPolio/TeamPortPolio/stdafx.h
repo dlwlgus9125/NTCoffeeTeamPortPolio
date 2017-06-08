@@ -213,4 +213,6 @@ public: virtual void Set##funName(varType var){\
 #include "Math.h"
 #include "cTextureManager.h"
 #include "cStateMachine.h"
+#include "cObjectDB.h"
+#include "cObject.h"
 //<<

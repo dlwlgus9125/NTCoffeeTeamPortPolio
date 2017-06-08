@@ -61,12 +61,12 @@ void cGameManager::Init()
 	TESTMAP->Setup();
 	
 	OBJECT->Init();
-	
+	OBJECTDB->Setup();
+	SCENE->Register(0, new cTitleScene());
+	SCENE->StartScene(0);
 	CAMERA->Setup();
 	
 	INPUT->Init();
-	m_pUIManager = new cUIManager;
-	m_pUIManager->OnEnter(Scenetag(0));
 	//<<
 }
 
@@ -106,7 +106,7 @@ void cGameManager::Update()
 			INPUT->Update();
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
-			
+			SCENE->Update();
 
 		}
 
@@ -130,11 +130,8 @@ void cGameManager::Render()
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
 		OBJECT->Render();
-		if (m_pUIManager)
-		{
-			m_pUIManager->OnUpdate();
-			m_pUIManager->Render();
-		}
+		
+		SCENE->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
 	}

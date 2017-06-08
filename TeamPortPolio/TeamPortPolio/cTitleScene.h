@@ -2,6 +2,13 @@
 #include "cSceneManager.h"
 #include "cImageView.h"
 
+// >> 
+#include "cSkyBox.h"
+#include "cHeightMap.h"
+#include "cObjLoader.h"
+#include "cConstruct.h"
+// << 
+
 class cTitleScene : public cIScene
 {
 private:
@@ -9,6 +16,12 @@ private:
 	LPDIRECT3DTEXTURE9 m_pTexture;
 	D3DXIMAGE_INFO     m_stImageInfo;
 	cImageView         m_pBackgroundImage;
+
+	// >> 
+	cSkyBox*				m_pSkyBox;
+	cHeightMap*					m_pMap;
+	vector<cConstruct*>		m_vecConstruct;
+	// << 
 
 public:
 	cTitleScene();

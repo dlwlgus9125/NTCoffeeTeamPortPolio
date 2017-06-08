@@ -8,6 +8,8 @@ void cSceneManager::StartScene(int tag)
 		::MessageBox(0, "StartScene error - Can't Found Scene ", 0, 0);
 	}
 	m_current = tag;
+	cIScene* currentScene = GetScene(m_current);
+	currentScene->OnEnter();
 }
 
 void cSceneManager::Register(int tag, cIScene * pScene)
