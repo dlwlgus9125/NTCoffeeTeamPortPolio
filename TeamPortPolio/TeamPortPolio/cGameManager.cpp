@@ -57,10 +57,10 @@ void cGameManager::Init()
 		::MessageBox(0, "pWindow QueryInterface error", 0, 0);
 
 
-	TIME->Init(120);
+	TIME->Init(60);
 	TESTMAP->Setup();
 	
-	//OBJECT->Init();
+	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->StartScene(0);
@@ -105,7 +105,7 @@ void cGameManager::Update()
 
 			m_prevTime = m_currentTime;
 			INPUT->Update();
-			//OBJECT->Update(TIME->DeltaTime());
+			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
 			//UI->OnUpdate(TIME->DeltaTime());
@@ -131,7 +131,7 @@ void cGameManager::Render()
 			1.0f, 0);
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
-		//OBJECT->Render();
+		OBJECT->Render();
 		//UI->Render();
 		SCENE->Render();
 		D3DDevice->EndScene();

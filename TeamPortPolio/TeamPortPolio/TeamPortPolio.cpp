@@ -28,7 +28,7 @@ unsigned __stdcall UpdateThread(LPVOID lpParam)
 	while (1)
 	{
 		EnterCriticalSection(&cs);
-
+		if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
 		LeaveCriticalSection(&cs);
 	}
 	return 0;
@@ -38,7 +38,9 @@ unsigned __stdcall TestThread(LPVOID lpParam)
 {
 	while (1)
 	{
-
+		EnterCriticalSection(&cs);
+		//OBJECT->AddArmy();
+		LeaveCriticalSection(&cs);
 	}
 	return 0;
 }

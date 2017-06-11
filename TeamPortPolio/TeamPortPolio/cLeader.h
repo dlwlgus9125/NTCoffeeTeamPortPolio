@@ -31,7 +31,7 @@ public:
 	IEntity*       GetUnitLeader() { return m_unitLeader; }
 	vector<cUnit*> GetUnits() { return m_vectorUnit; }
 
-
-
+	int              GetIndex() { return m_currentIndex; }
+	void             SetIndex(int i) { m_currentIndex = i; }
 };
 

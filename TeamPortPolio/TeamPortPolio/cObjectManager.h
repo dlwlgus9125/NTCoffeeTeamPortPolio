@@ -1,7 +1,13 @@
 #pragma once
+
 class cObject;
-class IEntity;
+class cUnit;
+class cPlayer;
 class cLeader;
+class cSkinnedMesh;
+
+
+class IEntity;
 #define OBJECT  cObjectManager::Instance()
 
 
@@ -11,8 +17,11 @@ class cObjectManager : public Singleton<cObjectManager>
 	vector<cObject*> m_vecObject;
 	vector<IEntity*> m_vecEntity;
 	vector<cLeader*> m_vecEnemyLeader;
-	cObject*         m_player;
+	cPlayer*         m_player;
 	
+	queue<cSkinnedMesh*> m_queFootman;
+
+
 public:
 
 
@@ -23,10 +32,14 @@ public:
 
 	void AddEntity(IEntity* entity);
 	void AddObject(cObject* object);
-	void SetPlayer(cObject* player) { m_player = player; }
+	void SetPlayer(cPlayer* player) { m_player = player; }
 
 	vector<IEntity*> GetEntities() { return m_vecEntity; }
 
-	cObject* GetPlayer() { return m_player; }
+	cPlayer* GetPlayer() { return m_player; }
+
+	cSkinnedMesh* GetFootman();
+
+	void AddArmy();
 };
 

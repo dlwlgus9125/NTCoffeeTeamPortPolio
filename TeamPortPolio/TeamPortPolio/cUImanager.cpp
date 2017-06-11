@@ -35,7 +35,7 @@ void cUIManager::OnEnter(Scenetag tag)
 
 void cUIManager::OnUpdate(float deltatime)
 {
-	cObject* pCharactor = OBJECT->GetPlayer();
+	//cObject* pCharactor = OBJECT->GetPlayer();
 	m_pCursor->Update_Cursosr();
 	for each (cUIObject* p in m_vecUIRoot)
 	{

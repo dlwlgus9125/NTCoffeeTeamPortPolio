@@ -189,6 +189,7 @@
     <ClInclude Include="Human_Melee_State.h" />
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="ISteeringEntity.h" />
+    <ClInclude Include="Leader_State.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Singleton.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="Human_Melee_Walk.cpp" />
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
+    <ClCompile Include="Leader_State_Idle.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

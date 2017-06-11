@@ -305,6 +305,12 @@
     <ClInclude Include="cUICursor.h">
       <Filter>01. cObject\01. cUIObject</Filter>
     </ClInclude>
+    <ClInclude Include="cRay.h">
+      <Filter>98. UTIL\04. cRay</Filter>
+    </ClInclude>
+    <ClInclude Include="Leader_State.h">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -454,6 +460,12 @@
     </ClCompile>
     <ClCompile Include="cUICursor.cpp">
       <Filter>01. cObject\01. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cRay.cpp">
+      <Filter>98. UTIL\04. cRay</Filter>
+    </ClCompile>
+    <ClCompile Include="Leader_State_Idle.cpp">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

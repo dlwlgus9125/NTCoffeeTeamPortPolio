@@ -2,14 +2,6 @@
 #include "cRay.h"
 
 
-cRay::cRay()
-{
-}
-
-
-cRay::~cRay()
-{
-}
 
 // 화면 클릭 시 ray반환하는 함수
 stRay& cRay::CalculatePickingRay(D3DXVECTOR2& cursorPos)
@@ -18,10 +10,10 @@ stRay& cRay::CalculatePickingRay(D3DXVECTOR2& cursorPos)
 	float py = 0.0f;
 
 	D3DVIEWPORT9 viewport;
-	DEVICE->GetViewport(&viewport);
+	D3DDevice->GetViewport(&viewport);
 
 	D3DXMATRIX projection;
-	DEVICE->GetTransform(D3DTS_PROJECTION, &projection);
+	D3DDevice->GetTransform(D3DTS_PROJECTION, &projection);
 
 	px = (((2.0f * cursorPos.x) / viewport.Width) - 1.0f) / projection(0, 0);
 	py = (((-2.0f * cursorPos.y) / viewport.Height) + 1.0f) / projection(1, 1);
@@ -39,7 +31,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 
 	// >> 광선 변환
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
@@ -55,6 +47,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 	for (int i = 0; i < pMesh->GetNumFaces(); i++)
 	{
 		D3DXIntersect(pMesh, &ray.vOrigin, &ray.vDirection, &intersect, &faceIndex, &u, &v, &t, 0, 0);
+		//D3DXIntersectTri()
 		if (intersect)	
 		{
 			collidedPos = ray.vOrigin + ray.vDirection * t;
@@ -76,7 +69,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 
 	// >> 광선 변환
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
@@ -96,6 +89,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 	for (int i = 0; i < pMesh->GetNumFaces(); i++)
 	{
 		D3DXIntersect(pMesh, &ray.vOrigin, &ray.vDirection, &intersect, &faceIndex, &u, &v, &t, 0, 0);
+		
 		if (intersect)
 		{
 			index = (int)faceIndex;
@@ -116,7 +110,7 @@ bool cRay::IsMounseInMap(IN D3DXVECTOR2& cursorPos, IN float& minX, IN float& ma
 
 	// >> 광선 변환
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
@@ -141,4 +135,38 @@ bool cRay::IsMounseInMap(IN D3DXVECTOR2& cursorPos, IN float& minX, IN float& ma
 	//	D3DXIntersectTri(&v0, &v2, &v3, &ray.vOrigin, &ray.vDirection, 0, 0, 0)) return false;
 
 	return true;
+}
+
+bool cRay::RaySphereIntersect(IN D3DXVECTOR2 & cursorPos, IN MeshSpere sphere, IN float minX, IN float maxX)
+{
+	stRay ray = CalculatePickingRay(cursorPos);
+	if (!IsMounseInMap(cursorPos, minX, maxX)) return false;
+	// >> 광선 변환
+	D3DXMATRIX matView, matViewInverse;
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	D3DXMatrixInverse(&matViewInverse, 0, &matView);
+
+	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
+	D3DXVec3TransformNormal(&ray.vDirection, &ray.vDirection, &matViewInverse);
+	D3DXVec3Normalize(&ray.vDirection, &ray.vDirection);
+
+	D3DXVECTOR3 v = ray.vOrigin - sphere.m_vCenter;
+
+	float b = 2.0f * D3DXVec3Dot(&ray.vDirection, &v);
+	float c = D3DXVec3Dot(&v, &v) - (sphere.m_radius * sphere.m_radius);
+
+	float discriminant = (b * b) - (4.0f * c);
+
+	if (discriminant < 0.0f)
+		return false;
+
+	discriminant = sqrtf(discriminant);
+
+	float s0 = (-b + discriminant) / 2.0f;
+	float s1 = (-b - discriminant) / 2.0f;
+
+	if (s0 >= 0.0f || s1 >= 0.0f)
+		return true;
+
+	return false;
 }

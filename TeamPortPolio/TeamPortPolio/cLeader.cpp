@@ -62,7 +62,7 @@ void cLeader::Init()
 	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 1.0f) * 3);
 	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 1.0f) * 3);
 	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 1.0f) * 3);
-
+	
 }
 
 void cLeader::Update(float deltaTime)
@@ -71,7 +71,7 @@ void cLeader::Update(float deltaTime)
 	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
 	D3DXVECTOR3 prevPos = m_CharacterEntity->Pos();
 	D3DXVECTOR3 movePos = m_CharacterEntity->Pos();
-
+	
 	/*if (INPUT->IsKeyPress('W'))
 	{
 		movePos += m_CharacterEntity->Forward()*0.05f;
@@ -116,6 +116,8 @@ void cLeader::Update(float deltaTime)
 	m_CharacterEntity->SetPos(movePos);
 	m_CharacterEntity->SetForward(forward);
 
+
+	
 	//if (INPUT->IsKeyPress('1'))SetRectOffset();
 	//if (INPUT->IsKeyPress('2'))SetTriOffset();
 }

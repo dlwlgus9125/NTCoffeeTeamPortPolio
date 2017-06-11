@@ -17,7 +17,8 @@ public:
 	void AddEdge(int from, int col, int row);
 	vector<int> GetPath(int chrindex, int targetIndex);
 	void Release();
-
+	void Update();
 	void Render();
+	cGraph* GetGraph() { return m_graph; }
 };
 

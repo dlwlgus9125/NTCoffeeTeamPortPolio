@@ -1,5 +1,10 @@
 #include "stdafx.h"
 #include "cTitleScene.h"
+#include "cObject.h"
+#include "cPlayer.h"
+#include "cLeader.h"
+#include "cUnit.h"
+
 
 cTitleScene::cTitleScene() :
 	m_pSprite(NULL),
@@ -66,12 +71,20 @@ void cTitleScene::OnEnter()
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
 	// << 
 	ASTAR->Setup(vecPosOfNode);
+
+	cPlayer* pPlayer = new cPlayer(ASTAR->GetGraph()->GetNode(3501)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	pPlayer->Init();
+	
+	OBJECT->AddObject(pPlayer);
+	OBJECT->SetPlayer(pPlayer);
 	Setup_DirLight();
 }
 
 void cTitleScene::OnUpdate()
 {
 	if (m_pSkyBox) m_pSkyBox->Update(CAMERA->GetCamera());
+	
+	OBJECT->Update(TIME->DeltaTime());
 }
 
 void cTitleScene::OnExit()
@@ -112,7 +125,7 @@ void cTitleScene::OnRender()
 		}
 	}
 	else { ASTAR->Render(); }
-
+	OBJECT->Render();
 	D3DDevice->EndScene();
 
 	D3DDevice->Present(NULL, NULL, NULL, NULL);

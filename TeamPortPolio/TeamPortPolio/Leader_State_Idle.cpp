@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "Human_Melee_State.h"
+#include "Leader_State.h"
 
-void Human_State_Idle::OnBegin(cUnit * pUnit)
+void Leader_State_Idle::OnBegin(cLeader * pUnit)
 {
 
 }
 
-void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
+void Leader_State_Idle::OnUpdate(cLeader * pUnit, float deltaTime)
 {
-	D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
+	/*D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
 	float distance = MATH->Distance(pUnit->GetCharacterEntity()->Pos(), targetPos);
 
@@ -32,13 +32,13 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	float x2 = 50;
 	if (INPUT->IsMouseDown(MOUSE_RIGHT))
 	{
-		if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), pUnit->GetMeshSphere(), x,x2))
+		if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), pUnit->GetMeshSphere(), x, x2))
 		{
 			cout << "index : " << pUnit->GetCharacterEntity()->UniqueID() << endl;
 		}
-	}
+	}*/
 }
 
-void Human_State_Idle::OnEnd(cUnit * pUnit)
+void Leader_State_Idle::OnEnd(cLeader * pUnit)
 {
 }

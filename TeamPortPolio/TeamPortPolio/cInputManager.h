@@ -159,6 +159,7 @@ public:
 
 	POINT GetMousePos() { return m_mouseCurrentPos; }
 	POINT GetMouseDelta() { return m_mouseDeltaPos; }
+	D3DXVECTOR2 GetMousePosVector2() { return D3DXVECTOR2(m_mouseCurrentPos.x, m_mouseCurrentPos.y); }
 	D3DXVECTOR3 GetMouseDeltaInVector3() { return D3DXVECTOR3(m_mouseDeltaPos.x, m_mouseDeltaPos.y, 0); }
 
 	bool IsKeyDown(int key) { return GetKeyState(key) == KEY_DOWN; }

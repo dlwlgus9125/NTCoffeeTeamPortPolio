@@ -32,7 +32,8 @@ void cUnit::Init()
 
 	
 
-	m_pSkinnedMesh = new cSkinnedMesh;
+	m_pSkinnedMesh = new cSkinnedMesh();
+	//m_pSkinnedMesh =  new cSkinnedMesh(*TEXTURE->GetCharacterResource("Character/Human", "newfootman.x"));
 	m_pSkinnedMesh->Setup("Character/Human", "newfootman.x");
 	m_pSkinnedMesh->SetIEntity(m_CharacterEntity);
 

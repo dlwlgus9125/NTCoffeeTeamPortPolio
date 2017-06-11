@@ -11,6 +11,7 @@ protected:
 	MeshSpere        m_arrangeCollideSphere;
 	cSkinnedMesh*    m_pSkinnedMesh;
 	MODE_STATE       m_currentMode;
+	int              m_currentIndex;
 public:
 	cCharacter();
 	virtual ~cCharacter();
