@@ -502,6 +502,9 @@
     <ClCompile Include="cUIChatLog.cpp">
       <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
     </ClCompile>
+    <ClCompile Include="Leader_State_Idle.cpp">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">

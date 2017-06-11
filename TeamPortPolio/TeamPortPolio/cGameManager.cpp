@@ -58,7 +58,7 @@ void cGameManager::Init()
 
 	TIME->Init(60);
 	TESTMAP->Setup();
-	
+	INPUT->Init();
 	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
