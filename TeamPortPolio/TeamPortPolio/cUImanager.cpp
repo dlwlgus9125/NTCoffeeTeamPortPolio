@@ -8,7 +8,7 @@
 #include "cUICursor.h"
 cUIManager::cUIManager()
 	: m_pTexture(NULL)
-	,m_pCursor(NULL)
+	,m_pCursor(NULL)//
 {
 	m_pCursor = new cUICursor;
 	m_pCursor->SetupCursor();
