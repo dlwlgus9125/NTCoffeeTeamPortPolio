@@ -93,13 +93,7 @@ void cTitleScene::OnRender()
 			test = false;
 		}
 	}
-	D3DDevice->Clear(NULL,
-		NULL,
-		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DCOLOR_XRGB(0, 0, 0),
-		1.0f, 0);
 
-	D3DDevice->BeginScene();
 	if (test == false)
 	{
 		if (m_pSkyBox) m_pSkyBox->Render();
@@ -113,9 +107,6 @@ void cTitleScene::OnRender()
 	}
 	else { ASTAR->Render(); }
 
-	D3DDevice->EndScene();
-
-	D3DDevice->Present(NULL, NULL, NULL, NULL);
 }
 
 void cTitleScene::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

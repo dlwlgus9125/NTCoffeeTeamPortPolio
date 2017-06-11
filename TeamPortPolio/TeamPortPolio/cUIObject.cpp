@@ -7,12 +7,16 @@ cUIObject::cUIObject()
 	, m_stSize(0, 0)
 	, m_isHidden(true)
 	, m_isMove(false)
-	, m_isNextPage(false)
+	, m_isOnClick(false)
+	, m_fScaleX(1)
+	,m_fScaleY(1)
 {
+	D3DXMatrixIdentity(&m_Matrix);
 }
 
 cUIObject::~cUIObject()
 {
+
 }
 
 void cUIObject::SetPosition(float x, float y, float z)
@@ -31,22 +35,64 @@ void cUIObject::AddChild(cUIObject* pChild)
 void cUIObject::Update()
 {
 	if (!m_isHidden)   MoveWindow();
+
 	for each(auto c in m_vecChild)
 	{
-		if (m_isHidden&&c->GetFuntion() == FUNTION_OPEN
-			||c->GetFuntion() == FUNTION_LIFE_BAR)	c->Update();
-		else if (!m_isHidden&&c->GetFuntion() != FUNTION_OPEN)	c->Update();
+		if (m_isHidden)
+		{
+			switch (c->GetFuntion())
+			{
+			case FUNTION_OPEN:		c->Update(); break;
+			case FUNTION_CLOSE:		break;
+			case FUNTION_OK:		break;
+			case FUNTION_SCROLL_BAR:break;
+			case FUNTION_LIFE_BAR:  c->Update(); break;
+			case FUNTION_WINDOW:break;
+			}
+		}
+		else
+		{
+			switch (c->GetFuntion())
+			{
+			case FUNTION_OPEN:		 break;
+			case FUNTION_CLOSE:		 c->Update(); break;
+			case FUNTION_OK:		 c->Update(); break;
+			case FUNTION_SCROLL_BAR: c->Update(); break;
+			case FUNTION_LIFE_BAR:	 c->Update(); break;
+			case FUNTION_WINDOW:	 c->Update(); break;
+			}
+		}
 	}
 }
 
 void cUIObject::Render(LPD3DXSPRITE pSprite)
 {
-	
 	for each(auto c in m_vecChild)
 	{
-		if (m_isHidden && (c->GetFuntion() == FUNTION_OPEN 
-			|| c->GetFuntion()==FUNTION_LIFE_BAR)) { c->Render(pSprite); }
-		else if (!m_isHidden) { c->Render(pSprite); }
+		if (m_isHidden)
+		{
+			switch (c->GetFuntion())
+			{
+			case FUNTION_OPEN:		c->Render(pSprite); break;
+			case FUNTION_CLOSE:		break;
+			case FUNTION_OK:		break;
+			case FUNTION_SCROLL_BAR:break;
+			case FUNTION_LIFE_BAR:	c->Render(pSprite); break;
+			case FUNTION_WINDOW: break;
+			}
+		}
+		else 
+		{
+			switch (c->GetFuntion())
+			{
+			case FUNTION_OPEN:		c->Render(pSprite); break;
+			case FUNTION_CLOSE:		c->Render(pSprite); break;
+			case FUNTION_OK:		c->Render(pSprite); break;
+			case FUNTION_SCROLL_BAR:c->Render(pSprite); break;
+			case FUNTION_LIFE_BAR:	c->Render(pSprite); break;
+			case FUNTION_WINDOW:c->Render(pSprite); break;
+			}
+		}
 	}
 }
 
@@ -66,6 +112,11 @@ void cUIObject::SetSize(int x, int y)
 	m_stSize.nHeight = y;
 }
 
+void cUIObject::SetScale(float x, float y)
+{
+	m_fScaleX = x;
+	m_fScaleY = y;
+}
 
 void cUIObject::MoveWindow()
 {

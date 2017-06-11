@@ -18,10 +18,10 @@ stRay& cRay::CalculatePickingRay(D3DXVECTOR2& cursorPos)
 	float py = 0.0f;
 
 	D3DVIEWPORT9 viewport;
-	DEVICE->GetViewport(&viewport);
+	D3DDevice->GetViewport(&viewport);
 
 	D3DXMATRIX projection;
-	DEVICE->GetTransform(D3DTS_PROJECTION, &projection);
+	D3DDevice->GetTransform(D3DTS_PROJECTION, &projection);
 
 	px = (((2.0f * cursorPos.x) / viewport.Width) - 1.0f) / projection(0, 0);
 	py = (((-2.0f * cursorPos.y) / viewport.Height) + 1.0f) / projection(1, 1);
@@ -39,7 +39,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 
 	// >> ±¤¼± º¯È¯
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
@@ -76,7 +76,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 
 	// >> ±¤¼± º¯È¯
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);
@@ -116,7 +116,7 @@ bool cRay::IsMounseInMap(IN D3DXVECTOR2& cursorPos, IN float& minX, IN float& ma
 
 	// >> ±¤¼± º¯È¯
 	D3DXMATRIX matView, matViewInverse;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matViewInverse, 0, &matView);
 
 	D3DXVec3TransformCoord(&ray.vOrigin, &ray.vOrigin, &matViewInverse);

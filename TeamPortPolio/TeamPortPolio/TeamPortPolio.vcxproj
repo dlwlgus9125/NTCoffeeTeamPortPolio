@@ -29,14 +29,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -197,6 +197,11 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamPortPolio.h" />
     <ClInclude Include="TestMap.h" />
+    <ClInclude Include="cUIInventory.h" />
+    <ClInclude Include="cUIMap.h" />
+    <ClInclude Include="cUIQuest.h" />
+    <ClInclude Include="cUIStatus.h" />
+    <ClInclude Include="cUILog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />

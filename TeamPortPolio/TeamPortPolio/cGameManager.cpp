@@ -4,7 +4,6 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
-#include "cUIManager.h"
 void cGameManager::Init()
 {
 	DEVICE->Init();
@@ -56,24 +55,23 @@ void cGameManager::Init()
 	else
 		::MessageBox(0, "pWindow QueryInterface error", 0, 0);
 
-
+	D3DXCreateSprite(D3DDevice, &g_Sprite);
 	TIME->Init(120);
 	TESTMAP->Setup();
-	
-	//OBJECT->Init();
+	OBJECT->Init();
+	INPUT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->StartScene(0);
+	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	
-	INPUT->Init();
-	//UI->OnEnter(Scenetag(0));
 	//<<
 }
 
 void cGameManager::Update()
 {
-	//m_pUIManager->OnUpdate();
+
 	if (!isOkView)
 	{
 		if (pEvent->GetEvent(&EventCode, &Param1, &Param2, 0) != E_ABORT)
@@ -105,10 +103,10 @@ void cGameManager::Update()
 
 			m_prevTime = m_currentTime;
 			INPUT->Update();
-			//OBJECT->Update(TIME->DeltaTime());
+			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
-			//UI->OnUpdate(TIME->DeltaTime());
+			UI->OnUpdate();
 
 		}
 
@@ -131,9 +129,9 @@ void cGameManager::Render()
 			1.0f, 0);
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
-		//OBJECT->Render();
-		//UI->Render();
+		OBJECT->Render();
 		SCENE->Render();
+		UI->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
 	}
