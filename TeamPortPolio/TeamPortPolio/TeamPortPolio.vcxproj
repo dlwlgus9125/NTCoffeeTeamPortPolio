@@ -201,7 +201,8 @@
     <ClInclude Include="cUIMap.h" />
     <ClInclude Include="cUIQuest.h" />
     <ClInclude Include="cUIStatus.h" />
-    <ClInclude Include="cUILog.h" />
+    <ClInclude Include="cUIChatLog.h" />
+    <ClInclude Include="cUIChractorView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />
@@ -260,6 +261,12 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TeamPortPolio.cpp" />
     <ClCompile Include="TestMap.cpp" />
+    <ClCompile Include="cUIInventory.cpp" />
+    <ClCompile Include="cUIMap.cpp" />
+    <ClCompile Include="cUIQuest.cpp" />
+    <ClCompile Include="cUIStatus.cpp" />
+    <ClCompile Include="cUIChractorView.cpp" />
+    <ClCompile Include="cUIChatLog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc" />

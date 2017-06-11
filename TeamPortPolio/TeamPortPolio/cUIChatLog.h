@@ -1,10 +1,10 @@
 #pragma once
 //∏Æ∆—≈‰∏µ«ÿº≠ ø»±Ê∞≈¿”
-class cUIQuest
+class cUIChatLog
 {
 public:
-	cUIQuest();
-	~cUIQuest();
+	cUIChatLog();
+	~cUIChatLog();
 
 private:
 

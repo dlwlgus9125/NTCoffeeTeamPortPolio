@@ -1,2 +1,12 @@
 #pragma once
+
 //∏Æ∆—≈‰∏µ«ÿº≠ ø»±Ê∞≈¿”
+class cUIMap
+{
+private:
+public:
+	cUIMap();
+	~cUIMap();
+
+
+};
