@@ -6,8 +6,7 @@ class cUITextView;
 class cUIScrollBar;
 class cUILifeBar;
 class cUICursor;
-enum Scenetag;
-
+class cUIMap;
 #define UI cUIManager::Instance()
 
 class cUIManager : public Singleton<cUIManager>
@@ -17,7 +16,7 @@ private:
 	LPDIRECT3DTEXTURE9		m_pTexture;
 	cUICursor*				m_pCursor;
 	vector<cUIObject*>		m_vecUIRoot;
-	
+	cUIMap* m_pUIMap;
 	void SetWindow(cUIObject* pParentObj, int posX, int posY,  char * texturePath, string sTitle, string sBody, float scale_x = 1, float scale_y = 1, D3DXCOLOR Titlecolor = D3DCOLOR_XRGB(0, 0, 0), D3DXCOLOR Bodycolor = D3DCOLOR_XRGB(0, 0, 0));
 	void SetButton(cUIObject* pParentObj, int posX, int posY,  char* szNor, char* szOver, char* szSel, int funtion, string sText, float scale_x = 1, float scale_y = 1, D3DXCOLOR textColor = D3DCOLOR_XRGB(0, 0, 0));
 
