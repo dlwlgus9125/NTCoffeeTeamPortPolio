@@ -20,6 +20,7 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 HCURSOR g_Cursor;
+LPD3DXSPRITE g_Sprite;
 HWND			g_hWnd;
 CRITICAL_SECTION cs;
 
@@ -56,7 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 여기에 코드를 입력합니다.
-
+	
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_TEAMPORTPOLIO, szWindowClass, MAX_LOADSTRING);
@@ -173,9 +174,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		return FALSE;
 	}
 	g_hWnd = hWnd;
-
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+	
 
 	return TRUE;
 }

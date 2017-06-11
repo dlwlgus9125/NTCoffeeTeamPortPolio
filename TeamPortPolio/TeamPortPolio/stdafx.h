@@ -61,6 +61,7 @@ enum SCENE_TAG
 //>> define 및 구조체
 extern HWND	g_hWnd;
 extern HCURSOR g_Cursor;
+extern LPD3DXSPRITE g_Sprite;
 #define SAFE_RELEASE(p) { if(p) p->Release(); p = NULL; }
 #define SAFE_DELETE(p) { if(p) delete p; p = NULL; }	// << :
 #define SAFE_ADD_REF(p) { if(p) p->AddRef() ; }
@@ -259,5 +260,7 @@ public: virtual void Set##funName(varType var){\
 #include "cAstarManager.h"
 #include "cObjectDB.h"
 #include "cObject.h"
+#include "cUImanager.h"
+//<<
 #include "cRay.h"
 

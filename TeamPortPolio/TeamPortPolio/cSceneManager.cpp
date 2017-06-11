@@ -28,12 +28,14 @@ void cSceneManager::ChangeScene(int tag)
 		cIScene* prevScene = GetScene(m_current);
 
 		if (prevScene != NULL)
+		{
 			prevScene->OnExit();
+		}
 		else
 			::MessageBox(0, TEXT("prevScene error - NULL"), 0, 0);
 
 		cIScene* nextScene = GetScene(tag);
-
+						
 		if (nextScene != NULL)
 		{
 			nextScene->OnEnter();
@@ -50,20 +52,26 @@ void cSceneManager::ChangeScene(int tag)
 
 void cSceneManager::Update()
 {
+
 	cIScene* currentScene = GetScene(m_current);
 	if (currentScene != NULL)
+	{
 		currentScene->OnUpdate();
+	}
 	else
 		::MessageBox(0, TEXT("Update error - currentScene == NULL"), 0, 0);
 }
 
 void cSceneManager::Render()
 {
+	
 	cIScene* currentScene = GetScene(m_current);
-	if (currentScene != NULL)
+	if (currentScene != NULL) {
 		currentScene->OnRender();
+	}
 	else
 		::MessageBox(0, TEXT("Render error - currentScene == NULL"), 0, 0);
+	
 }
 
 void cSceneManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

@@ -4,7 +4,6 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
-#include "cUIManager.h"
 void cGameManager::Init()
 {
 	DEVICE->Init();
@@ -64,16 +63,15 @@ void cGameManager::Init()
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->StartScene(0);
+	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	
-	INPUT->Init();
-	//UI->OnEnter(Scenetag(0));
 	//<<
 }
 
 void cGameManager::Update()
 {
-	//m_pUIManager->OnUpdate();
+
 	if (!isOkView)
 	{
 		if (pEvent->GetEvent(&EventCode, &Param1, &Param2, 0) != E_ABORT)
@@ -108,7 +106,7 @@ void cGameManager::Update()
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
-			//UI->OnUpdate(TIME->DeltaTime());
+			UI->OnUpdate();
 
 		}
 
@@ -132,8 +130,8 @@ void cGameManager::Render()
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
 		OBJECT->Render();
-		//UI->Render();
 		SCENE->Render();
+		UI->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
 	}

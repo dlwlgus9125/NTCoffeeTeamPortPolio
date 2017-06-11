@@ -17,9 +17,6 @@
     <Filter Include="00. Manager\02. cInputManager">
       <UniqueIdentifier>{371497f0-8a89-49c7-aab4-ba22393f725e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Manager\03. cTextureManager">
-      <UniqueIdentifier>{212a8f8f-cf43-43d6-b4d1-a811a9131eff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Manager\04. cDeviceManager">
       <UniqueIdentifier>{b65631f6-bbeb-45f0-945e-52055f7e4dfb}</UniqueIdentifier>
     </Filter>
@@ -139,6 +136,9 @@
     </Filter>
     <Filter Include="98. UTIL\04. cRay">
       <UniqueIdentifier>{598b46a6-3b49-4821-995e-837e8df6e349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\03. cTextureManager">
+      <UniqueIdentifier>{212a8f8f-cf43-43d6-b4d1-a811a9131eff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +310,22 @@
     </ClInclude>
     <ClInclude Include="Leader_State.h">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClInclude>
+    <ClInclude Include="cRay.h" />
+    <ClInclude Include="cUIInventory.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIMap.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIQuest.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIStatus.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUILog.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

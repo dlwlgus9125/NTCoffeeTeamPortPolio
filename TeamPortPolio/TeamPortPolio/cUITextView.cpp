@@ -6,7 +6,6 @@ cUITextView::cUITextView()
 	: m_dwDrawTextFormat(DT_LEFT | DT_TOP)
 	, m_dwTextColor(D3DCOLOR_XRGB(0, 0, 0))
 {
-	SetUpFont();
 }
 
 
@@ -18,36 +17,37 @@ cUITextView::~cUITextView()
 
 void cUITextView::SetText(string Text)
 {
-	m_vecText.push_back(Text);
+	m_sText = Text;
 }
 
-string cUITextView::GetText(bool Pageofnext)
+string cUITextView::GetText()
 {
-	if(Pageofnext)
-	{
-		return m_vecText.back();
-	}
-	else return m_vecText.front();
+	return m_sText;
 }
 
 void cUITextView::Render(LPD3DXSPRITE pSprite)
 {
-	D3DXVECTOR3 pos = m_pParent->GetPosition() + m_vPosition;
-	if (this->GetFuntion() == FUNTION_OPEN) pos = m_vPosition;
+	D3DXVECTOR3 pos;
+	if (m_Funtion == FUNTION_OPEN)pos = m_vPosition;
+	else  pos = m_vPosition + m_pParent->GetPosition();
+
 
 	RECT rc;
-	SetRect(&rc, (int)pos.x, (int)pos.y, (int)pos.x + (int)m_stSize.nWidth, (int)pos.y + (int)m_stSize.nHeight);
+	SetRect(&rc, (int)pos.x, (int)pos.y, (int)pos.x + ((int)m_stSize.nWidth)*m_fScaleX, (int)pos.y + ((int)m_stSize.nHeight)*m_fScaleX);
+	SetUpFont(20,25);
 
-	m_pFont->DrawText(NULL, GetText(m_pParent->m_isNextPage).c_str(), GetText(m_pParent->m_isNextPage).length(), &rc, m_dwDrawTextFormat, m_dwTextColor);
+	m_pFont->DrawText(NULL, GetText().c_str(), GetText().length(), &rc, m_dwDrawTextFormat, m_dwTextColor);
+
+	SAFE_RELEASE(m_pFont);
 }
 
-void cUITextView::SetUpFont()
+void cUITextView::SetUpFont(float width,float height)
 {
 	D3DXFONT_DESC fd;
 	ZeroMemory(&fd, sizeof(D3DXFONT_DESC));
 
-	fd.Height = 25;
-	fd.Width = 12;
+	fd.Height = height;
+	fd.Width = width;
 	fd.Weight = FW_BOLD;
 	fd.Italic = false;
 	fd.CharSet = DEFAULT_CHARSET;
