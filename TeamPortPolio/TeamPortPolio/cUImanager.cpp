@@ -6,9 +6,11 @@
 #include "cUIScrollBar.h"
 #include "cUILifeBar.h"
 #include "cUICursor.h"
+#include "cUIMap.h"
 cUIManager::cUIManager()
 	: m_pTexture(NULL)
 	,m_pCursor(NULL)//
+	, m_pUIMap(NULL)
 {
 	m_pCursor = new cUICursor;
 	m_pCursor->SetupCursor();
@@ -17,6 +19,7 @@ cUIManager::cUIManager()
 cUIManager::~cUIManager()
 {
 	SAFE_DELETE(m_pCursor);
+	SAFE_DELETE(m_pUIMap);
 }
 
 void cUIManager::OnEnter(int tag)
@@ -110,9 +113,9 @@ void cUIManager::SetFieldUI()
 
 void cUIManager::SetCommonUI()
 {
-	SetUpLifeBar();
-	SetUpQuest_UI();
-	SetUpInventoryUI();
+	//SetUpLifeBar();
+	//SetUpQuest_UI();
+	//SetUpInventoryUI();
 	SetUpMapUI();
 }
 
@@ -124,25 +127,25 @@ void cUIManager::SetUpLifeBar()
 void cUIManager::SetUpQuest_UI()		
 {
 	//test
-	//cUIObject* pUiobj = new cUIObject();
-	//pUiobj->SetFuntion(FUNTION_NONE);
-	//pUiobj->SetScale(0.1,0.1);
+	cUIObject* pUiobj = new cUIObject();
+	pUiobj->SetFuntion(FUNTION_NONE);
+	pUiobj->SetScale(0.1,0.1);
 
-	//SetWindow(pUiobj, 0, 0, "UI/panel-info.png", "TITLE","text",1,1);
-	//SetButton(pUiobj, 50, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "¿­±â",0.5,1);
-	//SetButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "´Ý±â");
-	//m_vecUIRoot.push_back(pUiobj);
+	SetWindow(pUiobj, 0, 0, "UI/panel-info.png", "TITLE","text",1,1);
+	SetButton(pUiobj, 50, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "¿­±â",0.5,1);
+	SetButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "´Ý±â");
+	m_vecUIRoot.push_back(pUiobj);
 }
 void cUIManager::SetUpInventoryUI()		
 {
 	//test
-	/*cUIObject* pUiobj = new cUIObject();
+	cUIObject* pUiobj = new cUIObject();
 	SetWindow(pUiobj, 200, 0, "UI/panel-info.png", "TITLE", "text");
 	SetButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "¿­±â");
 	SetButton(pUiobj, 435, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "´Ý±â");
 	SetScrollBar(pUiobj, 30, 0, "UI/panel-info.png", "UI/BT_STAND.png",0.2,0.5);
 	SetUpItemList(pUiobj);
-	m_vecUIRoot.push_back(pUiobj);*/
+	m_vecUIRoot.push_back(pUiobj);
 }
 void cUIManager::SetUpItemList(cUIObject* pParentUIobject)
 {
@@ -153,15 +156,9 @@ void cUIManager::SetUpItemList(cUIObject* pParentUIobject)
 }
 void cUIManager::SetUpMapUI()		
 {
-	// something to do
-	cUIObject* pObj = new cUIObject();
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-
-	SetWindow(pObj, 0, 0, "UI/wholeMapTest.png", "", "",2);
-	SetButton(pObj, rc.left, rc.bottom-30, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "¿­±â");
-	SetButton(pObj, 560, 345, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "´Ý±â");
-	m_vecUIRoot.push_back(pObj);
+	m_pUIMap = new cUIMap;
+	m_pUIMap->SetUp();
+	m_vecUIRoot.push_back(m_pUIMap->GetRootUI());
 }
 
 void cUIManager::SetTitleText(cUIObject* pParent, cUIImageView * pimageView, string text, float scale_x, float scale_y,D3DXCOLOR color)
@@ -202,13 +199,14 @@ void cUIManager::SetButton(cUIObject* pParentObj, int posX, int posY, char* szNo
 void cUIManager::SetWindow(cUIObject* pParentObj, int posX, int posY,  char* texturePath, string sTitle, string vsBody, float scale_x, float scale_y, D3DXCOLOR Titlecolor, D3DXCOLOR Bodycolor)
 {
 	cUIImageView* pImageView = new cUIImageView;
+	pParentObj->SetPosition(posX, posY);
 	pImageView->SetFuntion(FUNTION_WINDOW);
 	pImageView->SetPosition(posX, posY);
 	pImageView->SetTexture(texturePath);
 	pImageView->SetScale(scale_x, scale_y);
 	SetBodyText(pParentObj, pImageView, vsBody, scale_x, scale_y, Bodycolor);
 	SetTitleText(pParentObj, pImageView, sTitle, scale_x, scale_y,Titlecolor);
-	pParentObj->SetMoveRect(ST_SIZEN(posX+(pImageView->GetSize().nWidth), 100));
+	pParentObj->SetMoveRect(ST_SIZEN((pImageView->GetSize().nWidth), 100));
 	pParentObj->AddChild(pImageView);
 }
 
