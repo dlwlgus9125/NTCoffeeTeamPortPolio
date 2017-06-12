@@ -17,11 +17,7 @@ private:
 	D3DXIMAGE_INFO     m_stImageInfo;
 	cImageView         m_pBackgroundImage;
 
-	// >> 
-	cSkyBox*				m_pSkyBox;
-	cHeightMap*					m_pMap;
-	vector<cConstruct*>		m_vecConstruct;
-	// << 
+	
 
 public:
 	cTitleScene();
