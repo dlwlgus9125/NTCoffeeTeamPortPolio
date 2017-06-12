@@ -268,6 +268,7 @@ public: virtual void Set##funName(varType var){\
 #include "cObjectDB.h"
 #include "cObject.h"
 #include "cMapManager.h"
+#include "cUIManager.h"
 //<<
 #include "cRay.h"
 

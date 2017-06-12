@@ -177,6 +177,9 @@
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
+    <ClInclude Include="cUIImage.h" />
+    <ClInclude Include="cUIManager.h" />
+    <ClInclude Include="cUIObject.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="Human_Melee_State.h" />
     <ClInclude Include="IEntity.h" />
@@ -223,6 +226,9 @@
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />
+    <ClCompile Include="cUIImage.cpp" />
+    <ClCompile Include="cUIManager.cpp" />
+    <ClCompile Include="cUIObject.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="Human_Melee_Attack.cpp" />
     <ClCompile Include="Human_Melee_Defence.cpp" />
