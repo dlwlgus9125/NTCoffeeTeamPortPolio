@@ -162,6 +162,7 @@
     <ClInclude Include="cImageView.h" />
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
+    <ClInclude Include="cMainTitleScene.h" />
     <ClInclude Include="cMapManager.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cImageView.cpp" />
     <ClCompile Include="cIMap.cpp" />
+    <ClCompile Include="cMainTitleScene.cpp" />
     <ClCompile Include="cMapManager.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
