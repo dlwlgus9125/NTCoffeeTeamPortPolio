@@ -45,6 +45,7 @@ void cHeightMap::Update()
 
 bool cHeightMap::GetHeight(IN float x, OUT float&y, IN float z)
 {
+
 	return true;
 }
 
