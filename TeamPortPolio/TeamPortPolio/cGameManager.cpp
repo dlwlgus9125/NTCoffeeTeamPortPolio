@@ -33,7 +33,7 @@ void cGameManager::Init()
 	hr = pGraph->QueryInterface(IID_IMediaPosition, (LPVOID*)&pPosition);
 	//pGraph->RenderFile(L"swf/013_defeating_isaac_in_the_cathedral.avi", NULL);;
 
-	pGraph->RenderFile(L"swf/blizzard_logos_black.avi", NULL);
+	pGraph->RenderFile(L"Videos/NT_Coffee.avi", NULL); // 폴더경로 변경 및 불필요 자료 삭제 (변경자: 김윤중)
 
 	hr = pGraph->QueryInterface(IID_IVideoWindow, (LPVOID*)&pWindow);
 
