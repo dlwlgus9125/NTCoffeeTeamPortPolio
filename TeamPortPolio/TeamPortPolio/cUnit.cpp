@@ -51,9 +51,9 @@ void cUnit::Update(float deltaTime)
 
 	m_pFsm->Update(deltaTime);
 	if (m_pSkinnedMesh&&m_isDeath==false)m_pSkinnedMesh->Update();
-	/*D3DXVECTOR3 pos = m_CharacterEntity->Pos();
+	D3DXVECTOR3 pos = m_CharacterEntity->Pos();
 	MAP->GetHeight(pos.x, pos.y, pos.z);
-	m_CharacterEntity->SetPos(pos);*/
+	m_CharacterEntity->SetPos(pos);
 }
 
 void cUnit::UpdateState()
