@@ -34,6 +34,9 @@ public:
 	// 도착 : 목표점으로 도착하는 조종힘을 합산
 	void Arrive(D3DXVECTOR3 targetPos);
 
+	// 도착 : 부대가 목표점으로 도착하는 조종힘을 합산
+	void LeaderArrive(D3DXVECTOR3 targetPos);
+	
 	// 추격
 	void Pursuit(IEntity* pTarget);
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cTextureManager.h"
-
+#include "cSkinnedMesh.h"
 
 void cTextureManager::Init()
 {
@@ -20,6 +20,22 @@ LPDIRECT3DTEXTURE9 cTextureManager::GetTexture(std::string & sFullPath)
 {
 	return GetTexture((char*)sFullPath.c_str());
 
+}
+
+cSkinnedMesh* cTextureManager::GetCharacterResource(char * folder, char* filename)
+{
+	if (m_mapCharacterResource.find(filename) == m_mapCharacterResource.end())
+	{
+		cSkinnedMesh* pSkinnedMesh = new cSkinnedMesh;
+		pSkinnedMesh->Setup(folder, filename);
+		m_mapCharacterResource[filename] = pSkinnedMesh;
+	}
+	return m_mapCharacterResource[filename];
+}
+
+cSkinnedMesh* cTextureManager::GetCharacterResource(string& folder, string& filename)
+{
+	return GetCharacterResource((char*)folder.c_str(), (char*)filename.c_str());
 }
 
 void cTextureManager::SetTexture(char * szFullPath)

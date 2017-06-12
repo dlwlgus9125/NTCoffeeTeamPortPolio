@@ -39,6 +39,11 @@ bool Math::IsCollided(ST_SPHERE c0, ST_SPHERE c1)
 	return SqrDistance(c0.vCenter, c1.vCenter) <= totalRadius * totalRadius;
 }
 
+bool Math::IsCollided(MeshSpere c0, MeshSpere c1)
+{
+	float totalRadius = c0.m_radius + c1.m_radius;
+	return SqrDistance(c0.m_vCenter, c1.m_vCenter) <= totalRadius * totalRadius;
+}
 
 
 // 원과 원의 겹쳐진 벡터 반환

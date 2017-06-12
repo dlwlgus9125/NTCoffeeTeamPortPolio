@@ -12,7 +12,7 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
 	float distance = MATH->Distance(pUnit->GetCharacterEntity()->Pos(), targetPos);
 
-	if (distance > 0.5f)
+	if (distance > 0.1f)
 	{
 		pUnit->FSM()->Play(UNIT_STATE_STATE_WALK);
 	}
@@ -26,6 +26,16 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 			pUnit->GetMesh()->SetAnimationIndexBlend(F_STAND); break;
 		}
 
+	}
+	D3DXVECTOR3 pos;
+	float x = -50;
+	float x2 = 50;
+	if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	{
+		if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), pUnit->GetMeshSphere(), x,x2))
+		{
+			cout << "index : " << pUnit->GetCharacterEntity()->UniqueID() << endl;
+		}
 	}
 }
 

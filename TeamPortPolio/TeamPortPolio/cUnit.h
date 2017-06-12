@@ -27,7 +27,7 @@ public:
 	void UpdateState();
 	void Render();
 	void SetOffset(D3DXVECTOR3 offset) { m_offset = offset; }
-	D3DXVECTOR3 GetOffset() { return m_offset; }
+	D3DXVECTOR3 GetOffset() { return D3DXVECTOR3(m_offset.x, 0 , m_offset.z); }
 	IEntity*    GetLeader() { return m_pLeader; }
 
 	void SetEnemy(cUnit* enemy) { m_TargetEnemy = enemy; }

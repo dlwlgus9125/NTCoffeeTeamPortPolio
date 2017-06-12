@@ -41,6 +41,7 @@
 #pragma comment(lib, "Strmiids.lib")
 
 #include <d3dx9.h>
+#include <d3dx9math.h>
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
@@ -261,4 +262,7 @@ public: virtual void Set##funName(varType var){\
 #include "cObjectDB.h"
 #include "cObject.h"
 #include "cUImanager.h"
+#include "cMapManager.h"
 //<<
+#include "cRay.h"
+
