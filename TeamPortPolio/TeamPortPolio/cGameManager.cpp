@@ -4,6 +4,8 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
+#include "cMainTitleScene.h"
+
 void cGameManager::Init()
 {
 	DEVICE->Init();
@@ -62,7 +64,8 @@ void cGameManager::Init()
 	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
-	SCENE->StartScene(0);
+	SCENE->Register(1, new cMainTitleScene());
+	SCENE->StartScene(1);
 	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	
