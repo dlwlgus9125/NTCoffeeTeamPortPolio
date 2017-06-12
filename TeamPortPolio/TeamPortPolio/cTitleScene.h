@@ -1,6 +1,5 @@
 #pragma once
 #include "cSceneManager.h"
-#include "cImageView.h"
 
 // >> 
 #include "cSkyBox.h"
@@ -15,7 +14,6 @@ private:
 	LPD3DXSPRITE       m_pSprite;
 	LPDIRECT3DTEXTURE9 m_pTexture;
 	D3DXIMAGE_INFO     m_stImageInfo;
-	cImageView         m_pBackgroundImage;
 
 	
 
