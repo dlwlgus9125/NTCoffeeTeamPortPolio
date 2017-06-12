@@ -151,6 +151,7 @@
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cConstruct.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
     <ClInclude Include="cLeader.h" />
     <ClInclude Include="cFrame.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="cUIImage.h" />
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="Human_Melee_State.h" />
     <ClInclude Include="IEntity.h" />
@@ -202,6 +204,7 @@
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cConstruct.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cLeader.cpp" />
     <ClCompile Include="cFrame.cpp" />
@@ -229,6 +232,7 @@
     <ClCompile Include="cUIImage.cpp" />
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="Human_Melee_Attack.cpp" />
     <ClCompile Include="Human_Melee_Defence.cpp" />

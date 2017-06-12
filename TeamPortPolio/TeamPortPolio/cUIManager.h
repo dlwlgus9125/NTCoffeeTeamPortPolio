@@ -10,7 +10,7 @@ public:
 	void Setup();
 	void Release();
 	void Update();
-	void Render();
+	void Render(LPD3DXSPRITE pSprite);
 	void Changer(int sceneID);
 };
 

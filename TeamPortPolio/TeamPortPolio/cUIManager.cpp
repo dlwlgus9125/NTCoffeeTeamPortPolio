@@ -17,7 +17,7 @@ void cUIManager::Update()
 
 }
 
-void cUIManager::Render()
+void cUIManager::Render(LPD3DXSPRITE pSprite)
 {
 
 }
