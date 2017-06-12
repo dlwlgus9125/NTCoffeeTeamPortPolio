@@ -55,11 +55,11 @@ void cGameManager::Init()
 	else
 		::MessageBox(0, "pWindow QueryInterface error", 0, 0);
 
-	D3DXCreateSprite(D3DDevice, &g_Sprite);
-	TIME->Init(120);
+
+	TIME->Init(60);
 	TESTMAP->Setup();
-	OBJECT->Init();
 	INPUT->Init();
+	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->StartScene(0);

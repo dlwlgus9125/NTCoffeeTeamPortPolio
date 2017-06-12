@@ -5,6 +5,7 @@ class cSkinnedMesh
 {
 public:
 	cSkinnedMesh();
+	cSkinnedMesh(const cSkinnedMesh& pResource);
 	~cSkinnedMesh();
 
 protected:
@@ -41,5 +42,6 @@ public:
 	int  Getindex() { return m_currentIndex; }
 	LPD3DXANIMATIONSET GetCurrentAnim() { return m_currentAnim; }
 	float GetPassedTime() { return m_fPassedTime; }
+	LPD3DXFRAME CopyFrame(LPD3DXFRAME pFrame, const LPD3DXFRAME& pCopyedFrame);
 };
 

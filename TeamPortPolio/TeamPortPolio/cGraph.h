@@ -8,7 +8,7 @@ class GraphNode
 	MeshSpere   m_mesh;
 
 public:
-	GraphNode(int id = 0) {}
+	GraphNode(int id = 0) { m_mesh.m_radius = 0.8f; }
 
 	bool Active() { return m_active; }
 	int Id() { return m_id; }
@@ -19,7 +19,8 @@ public:
 	{ 
 		m_pos = pos;
 		m_mesh.m_vCenter = m_pos;
-		D3DXCreateSphere(D3DDevice, 0.5f, 10, 10, &m_mesh.m_pMeshSphere, NULL);
+		
+		D3DXCreateSphere(D3DDevice, m_mesh.m_radius, 10, 10, &m_mesh.m_pMeshSphere, NULL);
 		ZeroMemory(&m_mesh.m_stMtlSphere, sizeof(D3DMATERIAL9));
 		m_mesh.m_stMtlSphere.Ambient = D3DXCOLOR(255.0f, 0.7f, 0.7f, 1.0f);
 		m_mesh.m_stMtlSphere.Diffuse = D3DXCOLOR(255.0f, 0.7f, 0.7f, 1.0f);

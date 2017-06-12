@@ -10,7 +10,7 @@ cCharacter::cCharacter()
 
 cCharacter::~cCharacter()
 {
-	SAFE_DELETE( m_pSkinnedMesh);
+	//SAFE_DELETE( m_pSkinnedMesh);
 }
 
 void cCharacter::Init()
@@ -27,7 +27,7 @@ void cCharacter::Init()
 	m_arrangeCollideSphere.m_stMtlSphere.Ambient = D3DXCOLOR(255.0f, 0.7f, 255.0f, 1.0f);
 	m_arrangeCollideSphere.m_stMtlSphere.Diffuse = D3DXCOLOR(255.0f, 0.7f, 255.0f, 1.0f);
 	m_arrangeCollideSphere.m_stMtlSphere.Specular = D3DXCOLOR(255.0f, 0.7f, 255.0f, 1.0f);
-
+	m_currentIndex = 0;
 	
 }
 
@@ -67,6 +67,6 @@ void cCharacter::RenderSphere()
 	D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_CollideSphere.m_pMeshSphere->DrawSubset(0);
 	D3DDevice->SetTransform(D3DTS_WORLD, &matDir);
-	m_arrangeCollideSphere.m_pMeshSphere->DrawSubset(0);
+	//m_arrangeCollideSphere.m_pMeshSphere->DrawSubset(0);
 	D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 }

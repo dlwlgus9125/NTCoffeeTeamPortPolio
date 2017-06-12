@@ -36,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -162,6 +162,7 @@
     <ClInclude Include="cImageView.h" />
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
+    <ClInclude Include="cMapManager.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cObjectDB.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Human_Melee_State.h" />
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="ISteeringEntity.h" />
+    <ClInclude Include="Leader_State.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Singleton.h" />
@@ -222,6 +224,7 @@
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cImageView.cpp" />
     <ClCompile Include="cIMap.cpp" />
+    <ClCompile Include="cMapManager.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cObjectDB.cpp" />
@@ -251,6 +254,8 @@
     <ClCompile Include="Human_Melee_Walk.cpp" />
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
+    <ClCompile Include="Leader_State_Idle.cpp" />
+    <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

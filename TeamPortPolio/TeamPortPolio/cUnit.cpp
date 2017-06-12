@@ -21,7 +21,7 @@ cUnit::~cUnit()
 
 void cUnit::Init()
 {
-	m_CollideSphere.m_radius = m_CharacterEntity->Radius();
+	m_CollideSphere.m_radius = 0.1f;
 	m_CollideSphere.m_vCenter = m_CharacterEntity->Pos();
 	m_CollideSphere.m_vCenter.y += 0.5f;
 
@@ -32,7 +32,8 @@ void cUnit::Init()
 
 	
 
-	m_pSkinnedMesh = new cSkinnedMesh;
+	m_pSkinnedMesh = new cSkinnedMesh();
+	//m_pSkinnedMesh =  new cSkinnedMesh(*TEXTURE->GetCharacterResource("Character/Human", "newfootman.x"));
 	m_pSkinnedMesh->Setup("Character/Human", "newfootman.x");
 	m_pSkinnedMesh->SetIEntity(m_CharacterEntity);
 
@@ -50,8 +51,9 @@ void cUnit::Update(float deltaTime)
 
 	m_pFsm->Update(deltaTime);
 	if (m_pSkinnedMesh&&m_isDeath==false)m_pSkinnedMesh->Update();
-	
-	
+	/*D3DXVECTOR3 pos = m_CharacterEntity->Pos();
+	MAP->GetHeight(pos.x, pos.y, pos.z);
+	m_CharacterEntity->SetPos(pos);*/
 }
 
 void cUnit::UpdateState()

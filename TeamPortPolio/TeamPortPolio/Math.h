@@ -25,7 +25,7 @@ public:
 	float GetRotY(D3DXVECTOR3 dir);
 	D3DXVECTOR3 Clamp(D3DXVECTOR3 v, float min, float max);
 	bool IsCollided(ST_SPHERE c0, ST_SPHERE c1);
-
+	bool IsCollided(MeshSpere c0, MeshSpere c1);
 
 
 	// 원과 원의 겹쳐진 벡터 반환

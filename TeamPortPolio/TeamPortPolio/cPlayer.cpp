@@ -90,16 +90,16 @@ void cPlayer::Update(float deltaTime)
 
 	if (INPUT->IsKeyPress('W'))
 	{
-		movePos += m_CharacterEntity->Forward()*0.05f;
+		movePos += m_CharacterEntity->Forward()*0.02f;
 		if (INPUT->IsKeyPress(VK_SHIFT))
 		{
-			movePos += m_CharacterEntity->Forward()*0.15f;
+			movePos += m_CharacterEntity->Forward()*0.03f;
 		}
 
 	}
 	if (INPUT->IsKeyPress('S'))
 	{
-		movePos -= m_CharacterEntity->Forward()*0.05f;
+		movePos -= m_CharacterEntity->Forward()*0.02f;
 	}
 	if (INPUT->IsKeyPress('A'))
 	{

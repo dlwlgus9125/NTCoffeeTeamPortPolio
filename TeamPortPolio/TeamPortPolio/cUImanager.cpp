@@ -30,6 +30,7 @@ void cUIManager::OnEnter(int tag)
 	case 1:SetTownUI();
 	case 2:SetFieldUI();
 	}//ex;
+	D3DXCreateSprite(D3DDevice, &g_Sprite);
 
 }
 
