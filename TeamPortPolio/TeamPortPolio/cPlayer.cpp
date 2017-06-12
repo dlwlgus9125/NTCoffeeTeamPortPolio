@@ -131,6 +131,8 @@ void cPlayer::Update(float deltaTime)
 	D3DXMatrixRotationY(&matR, m_fRotY);
 	D3DXVECTOR3 forward = D3DXVECTOR3(0, 0, 1);
 	D3DXVec3TransformCoord(&forward, &forward, &matR);
+
+	MAP->GetHeight(movePos.x, movePos.y, movePos.z);
 	m_CharacterEntity->SetPos(movePos);
 	m_CharacterEntity->SetForward(forward);
 
