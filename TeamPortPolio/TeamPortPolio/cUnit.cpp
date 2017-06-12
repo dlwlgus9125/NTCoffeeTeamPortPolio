@@ -50,10 +50,14 @@ void cUnit::Update(float deltaTime)
 	cCharacter::Update(deltaTime);
 
 	m_pFsm->Update(deltaTime);
+	
+	D3DXVECTOR3 pos = m_CharacterEntity->Pos();
+	MAP->GetHeight(pos.x, pos.y, pos.z);
+	m_CharacterEntity->SetPos(pos);
 	m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
 	/*D3DXVECTOR3 pos = m_CharacterEntity->Pos();
 	MAP->GetHeight(pos.x, pos.y, pos.z);
-	m_CharacterEntity->SetPos(pos);*/
+	m_CharacterEntity->SetPos(pos);
 }
 
 void cUnit::UpdateState()

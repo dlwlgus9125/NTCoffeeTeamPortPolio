@@ -35,7 +35,6 @@ void cTitleScene::OnEnter()
 
 void cTitleScene::OnUpdate()
 {
-	
 	MAP->Update();
 	OBJECT->Update(TIME->DeltaTime());
 	
