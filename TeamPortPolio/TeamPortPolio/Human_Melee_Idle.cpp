@@ -30,13 +30,7 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	D3DXVECTOR3 pos;
 	float x = -50;
 	float x2 = 50;
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), pUnit->GetMeshSphere(), x,x2))
-		{
-			cout << "index : " << pUnit->GetCharacterEntity()->UniqueID() << endl;
-		}
-	}
+
 }
 
 void Human_State_Idle::OnEnd(cUnit * pUnit)

@@ -32,7 +32,7 @@ unsigned __stdcall UpdateThread(LPVOID lpParam)
 	while (1)
 	{
 		EnterCriticalSection(&cs);
-		//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+		
 		LeaveCriticalSection(&cs);
 	}
 	return 0;
@@ -115,6 +115,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		else
 		{
 			GAMEMAIN->Update();
+
 			GAMEMAIN->Render();
 
 		}
