@@ -19,7 +19,6 @@ void Leader_State_Idle::OnUpdate(cLeader * pLeader, float deltaTime)
 					pLeader->SetTargetIndex(i);
 					if (pLeader->GetIndex() != pLeader->GetTargetIndex())
 					{
-						cout << "index : " << i<< endl;
 						pLeader->SetPath(ASTAR->GetPath(pLeader->GetIndex(), pLeader->GetTargetIndex()));
 						break;
 					}
