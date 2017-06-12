@@ -67,6 +67,6 @@ void cCharacter::RenderSphere()
 	D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_CollideSphere.m_pMeshSphere->DrawSubset(0);
 	D3DDevice->SetTransform(D3DTS_WORLD, &matDir);
-	m_arrangeCollideSphere.m_pMeshSphere->DrawSubset(0);
+	//m_arrangeCollideSphere.m_pMeshSphere->DrawSubset(0);
 	D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 }

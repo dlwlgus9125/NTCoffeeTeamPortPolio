@@ -10,46 +10,46 @@
 class Leader_State_Idle : public IState<cLeader*>
 {
 public:
-	void OnBegin(cLeader* pUnit);
+	void OnBegin(cLeader* pLeader);
 
-	void OnUpdate(cLeader* pUnit, float deltaTime);
+	void OnUpdate(cLeader* pLeader, float deltaTime);
 
-	void OnEnd(cLeader* pUnit);
+	void OnEnd(cLeader* pLeader);
 
 };
 
 class Leader_State_Walk : public IState<cLeader*>
 {
 public:
-	void OnBegin(cLeader* pUnit);
+	void OnBegin(cLeader* pLeader);
 
-	void OnUpdate(cLeader* pUnit, float deltaTime);
+	void OnUpdate(cLeader* pLeader, float deltaTime);
 
-	void OnEnd(cLeader* pUnit);
+	void OnEnd(cLeader* pLeader);
 
-	void StateChanger(cLeader * pUnit);
+	void StateChanger(cLeader * pLeader);
 };
 
 class Leader_State_Attack : public IState<cLeader*>
 {
 	float fPassedTime;
 public:
-	void OnBegin(cLeader* pUnit);
+	void OnBegin(cLeader* pLeader);
 
-	void OnUpdate(cLeader* pUnit, float deltaTime);
+	void OnUpdate(cLeader* pLeader, float deltaTime);
 
-	void OnEnd(cLeader* pUnit);
+	void OnEnd(cLeader* pLeader);
 
-	void StateChanger(cLeader * pUnit);
+	void StateChanger(cLeader * pLeader);
 };
 
 class Leader_State_Defence : public IState<cLeader*>
 {
 public:
-	void OnBegin(cLeader* pUnit);
+	void OnBegin(cLeader* pLeader);
 
-	void OnUpdate(cLeader* pUnit, float deltaTime);
+	void OnUpdate(cLeader* pLeader, float deltaTime);
 
-	void OnEnd(cLeader* pUnit);
+	void OnEnd(cLeader* pLeader);
 };
 

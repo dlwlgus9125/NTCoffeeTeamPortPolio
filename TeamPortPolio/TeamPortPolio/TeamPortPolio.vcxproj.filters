@@ -143,6 +143,9 @@
     <Filter Include="00. Manager\07. cUIManager\cUIComponants">
       <UniqueIdentifier>{92f4f4b4-811c-4d6a-826a-40261cbdf333}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Manager\10. cMapManager">
+      <UniqueIdentifier>{7f0c78a3-c82b-4032-a5bd-7f3e3ec4320f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -333,6 +336,9 @@
     <ClInclude Include="cUIChatLog.h">
       <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
     </ClInclude>
+    <ClInclude Include="cMapManager.h">
+      <Filter>00. Manager\10. cMapManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -483,7 +489,6 @@
     <ClCompile Include="cUICursor.cpp">
       <Filter>01. cObject\01. cUIObject</Filter>
     </ClCompile>
-    <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cUIInventory.cpp">
       <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
     </ClCompile>
@@ -503,6 +508,15 @@
       <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
     </ClCompile>
     <ClCompile Include="Leader_State_Idle.cpp">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClCompile>
+    <ClCompile Include="cRay.cpp">
+      <Filter>98. UTIL\04. cRay</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapManager.cpp">
+      <Filter>00. Manager\10. cMapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Leader_State_Walk.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
   </ItemGroup>

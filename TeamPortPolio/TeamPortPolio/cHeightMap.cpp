@@ -43,8 +43,43 @@ void cHeightMap::Update()
 
 }
 
+
 bool cHeightMap::GetHeight(IN float x, OUT float&y, IN float z)
 {
+	if (x < 0.0f || z < 0.0f || x >= m_nCellPerRow || z >= m_nCellPerRow)
+	{
+		y = 0;
+		return false;
+	}
+
+	int nX = x;
+	int nZ = z;
+
+	float fDeltaX = x - nX;
+	float fDeltaZ = z - nZ;
+
+	int _0 = (nZ + 0) * (m_nCellPerRow + 1) + nX + 0;
+	int _1 = (nZ + 1) * (m_nCellPerRow + 1) + nX + 0;
+	int _2 = (nZ + 1) * (m_nCellPerRow + 1) + nX + 1;
+	int _3 = (nZ + 0) * (m_nCellPerRow + 1) + nX + 1;
+
+	if (fDeltaX + fDeltaZ < 1.0f)
+	{
+		D3DXVECTOR3   v10 = m_vecVertex[_0].p - m_vecVertex[_1].p;
+		D3DXVECTOR3   v21 = m_vecVertex[_2].p - m_vecVertex[_1].p;
+		y = m_vecVertex[_1].p.y + (v10 * fDeltaZ + v21 * fDeltaX).y;         // аб го╢э
+	}
+	else
+	{
+		fDeltaX = 1.0f - fDeltaX;
+		fDeltaZ = 1.0f - fDeltaZ;
+		D3DXVECTOR3   v23 = m_vecVertex[_3].p - m_vecVertex[_2].p;
+		D3DXVECTOR3   v03 = m_vecVertex[_3].p - m_vecVertex[_0].p;
+
+		y = m_vecVertex[_3].p.y + (v23 * fDeltaZ + v03 * fDeltaX).y;
+		return true;
+	}
+
 	return true;
 }
 

@@ -12,7 +12,7 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
 	float distance = MATH->Distance(pUnit->GetCharacterEntity()->Pos(), targetPos);
 
-	if (distance > 0.5f)
+	if (distance > 0.1f)
 	{
 		pUnit->FSM()->Play(UNIT_STATE_STATE_WALK);
 	}
