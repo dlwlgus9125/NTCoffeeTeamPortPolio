@@ -31,11 +31,11 @@ void cUnit::Init()
 	cCharacter::Init();
 
 	
-
-	m_pSkinnedMesh = new cSkinnedMesh();
-	//m_pSkinnedMesh =  new cSkinnedMesh(*TEXTURE->GetCharacterResource("Character/Human", "newfootman.x"));
-	m_pSkinnedMesh->Setup("Character/Human", "newfootman.x");
-	m_pSkinnedMesh->SetIEntity(m_CharacterEntity);
+	m_pSkinnedMesh = NULL;
+	//m_pSkinnedMesh = new cSkinnedMesh();
+	m_pSkinnedMesh =  new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/Human/", "newfootman.x"));
+	
+	
 
 	m_pFsm = new cStateMachine<cUnit*>(this);
 	m_pFsm->Register(UNIT_STATE_STATE_IDLE,    new Human_State_Idle());
@@ -50,8 +50,12 @@ void cUnit::Update(float deltaTime)
 	cCharacter::Update(deltaTime);
 
 	m_pFsm->Update(deltaTime);
-	if (m_pSkinnedMesh&&m_isDeath==false)m_pSkinnedMesh->Update();
+	
 	D3DXVECTOR3 pos = m_CharacterEntity->Pos();
+	MAP->GetHeight(pos.x, pos.y, pos.z);
+	m_CharacterEntity->SetPos(pos);
+	m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
+	/*D3DXVECTOR3 pos = m_CharacterEntity->Pos();
 	MAP->GetHeight(pos.x, pos.y, pos.z);
 	m_CharacterEntity->SetPos(pos);
 }
@@ -79,19 +83,25 @@ void cUnit::UpdateState()
 		m_pSkinnedMesh->SetAnimationIndexBlend(F_READYATTACK);
 	}*/
 
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		FOOTMAN_STATE state = F_SHEILDBLOCK;
-		//m_pSkinnedMesh->
+	//if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	//{
+	//	FOOTMAN_STATE state = F_SHEILDBLOCK;
+	//	//m_pSkinnedMesh->
 
-		m_pSkinnedMesh->SetAnimationIndexBlend(state);
-	}
+	//	m_pSkinnedMesh->SetAnimationIndexBlend(state);
+	//}
 }
 
 void cUnit::Render()
 {
 	cCharacter::Render();
 	
-	if (m_pSkinnedMesh) m_pSkinnedMesh->Render(NULL);
+	if (m_pSkinnedMesh)
+	{
+		if (FRUSTUM->IsIn(m_pSkinnedMesh->GetBoundingSphere()))
+		{
+			m_pSkinnedMesh->UpdateAndRender();
+		}
+	}
 
 }

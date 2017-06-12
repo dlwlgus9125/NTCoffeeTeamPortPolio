@@ -20,12 +20,6 @@ cTitleScene::~cTitleScene()
 {
 	SAFE_RELEASE(m_pSprite);
 	SAFE_RELEASE(m_pTexture);
-	SAFE_DELETE(m_pMap);
-	SAFE_DELETE(m_pSkyBox);
-	for each(auto p in m_vecConstruct)
-	{
-		SAFE_DELETE(p);
-	}
 }
 
 void cTitleScene::OnEnter()
@@ -48,7 +42,6 @@ void cTitleScene::OnUpdate()
 
 void cTitleScene::OnExit()
 {
-	SAFE_DELETE(m_pSkyBox);
 }
 
 void cTitleScene::OnRender()

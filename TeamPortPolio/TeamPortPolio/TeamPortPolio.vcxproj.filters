@@ -339,7 +339,9 @@
     <ClInclude Include="cMapManager.h">
       <Filter>00. Manager\10. cMapManager</Filter>
     </ClInclude>
-    <ClInclude Include="cMainTitleScene.h" />
+    <ClInclude Include="cMainTitleScene.h">
+      <Filter>03. cScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -520,7 +522,9 @@
     <ClCompile Include="Leader_State_Walk.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
-    <ClCompile Include="cMainTitleScene.cpp" />
+    <ClCompile Include="cMainTitleScene.cpp">
+      <Filter>03. cScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">
