@@ -115,6 +115,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		else
 		{
 			GAMEMAIN->Update();
+
 			GAMEMAIN->Render();
 
 		}

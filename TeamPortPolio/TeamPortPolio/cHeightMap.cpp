@@ -100,6 +100,37 @@ bool cHeightMap::GetHeight(IN float x, OUT float&y, IN float z)
 	return true;
 }
 
+bool cHeightMap::GetIndex(IN float x, IN float z, OUT int& index)
+{
+	// 맵 밖으로 나갔을 경우 중단
+	if (x < m_fMinX || z < m_fMinX || x > m_fMaxX || z > m_fMaxZ)
+	{
+		index = -1;
+		return false;
+	}
+
+	// 맵 폴리곤의 버텍스는 minx, minz부터 좌측으로 순차적으로 생김
+	// cell 갯수 +1 만큼 채워지면 z에 1이 더해짐
+
+	int nX = x;
+	int nZ = z;
+
+	float fDeltaX = x - nX;
+	float fDeltaZ = z - nZ;
+
+	/*		1 ㅡ 2			높이 계산을 위한 버텍스 계산 순서
+	ㅣ / ㅣ
+	0 ㅡ 3
+	*/
+
+	int nCol = nX + m_nCellPerRow / m_fCellSpace * 0.5f;
+	int nRow = nZ + m_nCellPerRow / m_fCellSpace * 0.5f;
+
+	index = nRow * m_nCellPerRow + nCol;
+
+	return true;
+}
+
 void cHeightMap::Render()
 {
 	D3DXMATRIXA16 matWorld;

@@ -84,41 +84,23 @@ void cAstarManager::Update()
 	{
 		if (INPUT->IsMouseDown(MOUSE_RIGHT))
 		{
-			for (int i = 0; i < m_graph->NodeCount(); i++)
-			{
-				if (m_graph->GetNode(i)->Active() != false)
-				{
-					if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), m_graph->GetNode(i)->GetMesh(), m_graph->GetNode(0)->Pos().x, m_graph->GetNode(149)->Pos().x))
-					{
+			int cellIndex = -1;	// 메쉬 충돌 없으면 인덱스는 -1. 아니라면 해당 인덱스 나올 것임.
 
+			D3DXVECTOR3 posOnMap = D3DXVECTOR3(-1000, -1000, -1000);	//	쓰레기값 넣어두기. 맵 범위 내 찍지 않았으면 이 쓰레기값 그대로 나옴.
 
-					}
-				}
-			}
+			float minX = MAP->GetMinX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+			float maxX = MAP->GetMaxX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+
+			cRay::IsCollidedWithMesh(INPUT->GetMousePosVector2(), MAP->GetMesh(), cellIndex, posOnMap, minX, maxX);
+			
+			cout << cellIndex << endl;
+			
+			int nodeIndex = (float)cellIndex * 0.5f;
+
+			if (m_graph->GetNode(nodeIndex)->Active() != false) cout << "Active !!" << endl;
+			else cout << "Non-Active !!" << endl;
 		}
-		for (int i = 0; i < ASTAR->GetGraph()->NodeCount(); i++)
-		{
-			if ((OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().x + 2.0f)
-				&& (OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().z + 2.0f))
-			{
-				if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetUnitLeader()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
-				{
-					D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos();
-					D3DXVECTOR3 targetPos = ASTAR->GetGraph()->GetNode(i)->Pos();
-					LeaderPos.y = 0;
-					targetPos.y = 0;
-
-
-					float distance = MATH->Distance(LeaderPos, targetPos);
-
-					if (distance <= 0.5f)
-					{
-						OBJECT->GetPlayer()->GetUnitLeader()->SetIndex(ASTAR->GetGraph()->GetNode(i)->Id());
-						//cout << OBJECT->GetPlayer()->GetUnitLeader()->GetIndex() << endl;
-					}
-				}
-			}
-		}
+		
 	}
 }
 

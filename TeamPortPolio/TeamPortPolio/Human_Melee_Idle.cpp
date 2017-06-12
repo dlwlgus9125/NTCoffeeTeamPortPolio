@@ -20,23 +20,17 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	{
 		switch (pUnit->GetMode())
 		{
-		case FIGHTING_MODE: if ((FOOTMAN_STATE)pUnit->GetMesh()->GetIndex() != F_READYATTACK)
-			pUnit->GetMesh()->SetAnimationIndex(F_READYATTACK); break;
-		case DEFENDING_MODE:if ((FOOTMAN_STATE)pUnit->GetMesh()->GetIndex() != F_STAND)
-			pUnit->GetMesh()->SetAnimationIndex(F_STAND); break;
+		case FIGHTING_MODE: if ((FG_STATE)pUnit->GetMesh()->GetIndex() != FG_READYATTACK)
+			pUnit->GetMesh()->SetAnimationIndex(FG_READYATTACK); break;
+		case DEFENDING_MODE:if ((FG_STATE)pUnit->GetMesh()->GetIndex() != FG_STAND)
+			pUnit->GetMesh()->SetAnimationIndex(FG_STAND); break;
 		}
 
 	}
 	D3DXVECTOR3 pos;
 	float x = -50;
 	float x2 = 50;
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), pUnit->GetMeshSphere(), x,x2))
-		{
-			cout << "index : " << pUnit->GetCharacterEntity()->UniqueID() << endl;
-		}
-	}
+
 }
 
 void Human_State_Idle::OnEnd(cUnit * pUnit)

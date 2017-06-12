@@ -97,6 +97,21 @@ bool cMapManager::GetHeight(IN float x, OUT float & y, IN float z)
 	return false;
 }
 
+LPD3DXMESH cMapManager::GetMesh()
+{
+	return m_pMap->GetMesh();
+}
+
+float cMapManager::GetMaxX()
+{
+	return m_pMap->GetMaxX();
+}
+
+float cMapManager::GetMinX()
+{
+	return m_pMap->GetMinX();
+}
+
 void cMapManager::Destroy()
 {
 	SAFE_DELETE(m_pSkyBox);

@@ -25,6 +25,9 @@ public:
 	void Render();
 
 	bool GetHeight(IN float x, OUT float&y, IN float z);
+	LPD3DXMESH GetMesh();
+	float GetMaxX();
+	float GetMinX();
 
 	void Destroy();
 };

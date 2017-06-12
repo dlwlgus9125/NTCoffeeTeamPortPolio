@@ -15,10 +15,10 @@ class cHeightMap :
 	SYNTHESIZE(int	, m_nCellPerRow, CellPerRow);
 	int m_nVertPerRow;
 
-	float m_fMinX;
-	float m_fMaxX;
-	float m_fMaxZ;
-	float m_fMinZ;
+	SYNTHESIZE(float, m_fMinX, MinX);
+	SYNTHESIZE(float, m_fMaxX, MaxX);
+	SYNTHESIZE(float, m_fMaxZ, MaxZ);
+	SYNTHESIZE(float, m_fMinZ, MinZ);
 	
 public:
 	cHeightMap();
@@ -27,6 +27,7 @@ public:
 	void Setup(int cellPerRow, float cellSpace, vector<ST_PNT_VERTEX> vecVertex, vector<DWORD> vecIndex);
 	virtual void Update();
 	virtual bool GetHeight(IN float x, OUT float&y, IN float z) override;
+	bool GetIndex(IN float x, IN float z, OUT int& index);
 	virtual void Render() override;
 };
 

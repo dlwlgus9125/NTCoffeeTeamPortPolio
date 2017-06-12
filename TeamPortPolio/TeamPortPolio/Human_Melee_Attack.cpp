@@ -4,7 +4,7 @@
 
 void Human_State_Attack::OnBegin(cUnit * pUnit)
 {
-	pUnit->GetMesh()->SetAnimationIndex(F_ATTACK1);
+	pUnit->GetMesh()->SetAnimationIndex(FG_ATTACK1);
 	fPassedTime = 0.0f;
 }
 
@@ -20,7 +20,7 @@ void Human_State_Attack::OnEnd(cUnit * pUnit)
 
 void Human_State_Attack::StateChanger(cUnit * pUnit)
 {
-	FOOTMAN_STATE state;
+	FG_STATE state;
 	//if (INPUT->IsMouseDown(MOUSE_LEFT))
 	//{
 	//	if ((FOOTMAN_STATE)pUnit->GetMesh()->Getindex() == F_ATTACK1) { state = F_ATTACK2; fPassedTime = 0.0f; }
