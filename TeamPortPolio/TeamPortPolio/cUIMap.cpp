@@ -23,13 +23,13 @@ void cUIMap::SetUpOpenButton(cUIObject* pRoot)
 	GetClientRect(g_hWnd, &rc);
 	m_pButtonOpen = new cUIButton;
 	m_pButtonOpen->SetFuntion(FUNTION_OPEN);
-	m_pButtonOpen->SetPosition(rc.left, rc.bottom - 30);
 	m_pButtonOpen->SetTexture("UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png");
+	m_pButtonOpen->SetPosition(rc.right - m_pButtonOpen->GetSize().nWidth, rc.bottom - m_pButtonOpen->GetSize().nHeight);
 	
 	cUITextView* pText = new cUITextView;
 	pText->SetText("¿­±â");
 	pText->SetSize(m_pButtonOpen->GetSize());
-	pText->SetPosition(rc.left, rc.bottom - 30);
+	pText->SetPosition(m_pButtonOpen->GetPosition());
 	pText->SetDrawTextFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
 	pText->SetFuntion(m_pButtonOpen->GetFuntion());
 	pRoot->AddChild(m_pButtonOpen);
@@ -60,10 +60,8 @@ void cUIMap::SetUpCloseButton(cUIObject* pRoot)
 }
 void cUIMap::SetUpMapImage(cUIObject* pRoot)
 {
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
 	m_pMapImage = new cUIImageView;
-	m_pMapImage->SetFuntion(FUNTION_OK);
+	m_pMapImage->SetFuntion(FUNTION_NONE);
 	m_pMapImage->SetTexture("UI/wholeMapTest.png");
 	m_pRoot->SetMoveRect(ST_SIZEN(m_pMapImage->GetSize().nWidth, 100));
 	pRoot->AddChild(m_pMapImage);

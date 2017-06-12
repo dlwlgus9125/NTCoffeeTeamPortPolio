@@ -5,6 +5,9 @@
 #include "TeamPortPolio.h"
 #include "cGameManager.h"
 
+//창크기
+#define WND_WIDTH 1280
+#define WND_HEIGHT 720
 
 #define MAX_LOADSTRING 100
 
@@ -29,7 +32,7 @@ unsigned __stdcall UpdateThread(LPVOID lpParam)
 	while (1)
 	{
 		EnterCriticalSection(&cs);
-		if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+		//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
 		LeaveCriticalSection(&cs);
 	}
 	return 0;
@@ -167,7 +170,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+		CW_USEDEFAULT, 0, WND_WIDTH, WND_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
 	if (!hWnd)
 	{

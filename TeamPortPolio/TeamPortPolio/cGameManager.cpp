@@ -4,6 +4,8 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
+#include "cMainTitleScene.h"
+
 void cGameManager::Init()
 {
 	DEVICE->Init();
@@ -33,7 +35,7 @@ void cGameManager::Init()
 	hr = pGraph->QueryInterface(IID_IMediaPosition, (LPVOID*)&pPosition);
 	//pGraph->RenderFile(L"swf/013_defeating_isaac_in_the_cathedral.avi", NULL);;
 
-	pGraph->RenderFile(L"swf/blizzard_logos_black.avi", NULL);
+	pGraph->RenderFile(L"Videos/NT_Coffee.avi", NULL); // 폴더경로 변경 및 불필요 자료 삭제 (변경자: 김윤중)
 
 	hr = pGraph->QueryInterface(IID_IVideoWindow, (LPVOID*)&pWindow);
 
@@ -62,7 +64,8 @@ void cGameManager::Init()
 	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
-	SCENE->StartScene(0);
+	SCENE->Register(1, new cMainTitleScene());
+	SCENE->StartScene(1);
 	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	
