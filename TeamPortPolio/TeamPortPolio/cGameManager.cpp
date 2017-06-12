@@ -65,7 +65,7 @@ void cGameManager::Init()
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
 	SCENE->Register(1, new cMainTitleScene());
-	SCENE->StartScene(1);
+	SCENE->StartScene(0);
 	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	

@@ -98,12 +98,12 @@ void cAstarManager::Update()
 		}
 		for (int i = 0; i < ASTAR->GetGraph()->NodeCount(); i++)
 		{
-			if ((OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x + 2.0f)
-				&& (OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z + 2.0f))
+			if ((OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().x + 2.0f)
+				&& (OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos().z + 2.0f))
 			{
-				if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
+				if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetUnitLeader()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
 				{
-					D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetCharacterEntity()->Pos();
+					D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetUnitLeader()->GetCharacterEntity()->Pos();
 					D3DXVECTOR3 targetPos = ASTAR->GetGraph()->GetNode(i)->Pos();
 					LeaderPos.y = 0;
 					targetPos.y = 0;
