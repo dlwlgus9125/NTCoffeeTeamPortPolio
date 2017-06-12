@@ -141,15 +141,15 @@ void cPlayer::Update(float deltaTime)
 
 	if (0.01f<MATH->Distance(prevPos, movePos) && MATH->Distance(prevPos, movePos)<=0.03f)
 	{
-		m_pSkinnedMesh->SetAnimationIndex(F_WALK);
+		m_pSkinnedMesh->SetAnimationIndex(FG_WALK);
 	}
 	else if (0.03f<MATH->Distance(prevPos, movePos) )
 	{
-		m_pSkinnedMesh->SetAnimationIndex(F_RUN);
+		m_pSkinnedMesh->SetAnimationIndex(FG_RUN);
 	}
 	else
 	{
-		m_pSkinnedMesh->SetAnimationIndex(F_STAND);
+		m_pSkinnedMesh->SetAnimationIndex(FG_STAND);
 	}
 
 

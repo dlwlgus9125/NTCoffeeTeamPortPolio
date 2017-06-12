@@ -33,7 +33,7 @@ void cUnit::Init()
 	
 	m_pSkinnedMesh = NULL;
 	//m_pSkinnedMesh = new cSkinnedMesh();
-	m_pSkinnedMesh =  new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/Human/", "newfootman.x"));
+	m_pSkinnedMesh =  new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
 	
 	
 
