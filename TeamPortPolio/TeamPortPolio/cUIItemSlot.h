@@ -24,7 +24,7 @@ private:
 		}
 	};
 
-	int m_nScrolledIndex;
+	SYNTHESIZE(int, m_nScrolledIndex,ScrolledIndex);
 	SYNTHESIZE(cUIScrollBar*, m_pbar, ScrollBar);
 	ItemSlot m_stItemSlot[10];
 	LPDIRECT3DTEXTURE9 m_aTexture[2];

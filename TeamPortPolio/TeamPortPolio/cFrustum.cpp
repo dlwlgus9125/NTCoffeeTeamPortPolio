@@ -49,6 +49,17 @@ bool cFrustum::IsIn(MeshSpere pShere)
 	return true;
 }
 
+bool cFrustum::IsIn(ST_SPHERE* pSphere)
+{
+	for each(D3DXPLANE p in m_vecPlane)
+	{
+		if (D3DXPlaneDotCoord(&p, &pSphere->vCenter) > pSphere->fRadius)
+			return false;
+	}
+	return true;
+}
+
+
 void cFrustum::PlaneSetup()
 {
 	D3DXMATRIXA16 matView, matProj;

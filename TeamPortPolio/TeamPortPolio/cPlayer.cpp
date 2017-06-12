@@ -25,7 +25,9 @@ void cPlayer::Init()
 	m_CollideSphere.m_radius = m_CharacterEntity->Radius();
 	m_CollideSphere.m_vCenter = m_CharacterEntity->Pos();
 	m_CollideSphere.m_vCenter.y += 0.5f;
-
+	m_pSkinnedMesh = NULL;
+	//m_pSkinnedMesh = new cSkinnedMesh();
+	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/Human/", "newfootman.x"));
 
 	m_arrangeCollideSphere.m_radius = 20.0f;
 	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
@@ -129,26 +131,30 @@ void cPlayer::Update(float deltaTime)
 	D3DXMatrixRotationY(&matR, m_fRotY);
 	D3DXVECTOR3 forward = D3DXVECTOR3(0, 0, 1);
 	D3DXVec3TransformCoord(&forward, &forward, &matR);
+
+	MAP->GetHeight(movePos.x, movePos.y, movePos.z);
 	m_CharacterEntity->SetPos(movePos);
 	m_CharacterEntity->SetForward(forward);
 
-	m_unitLeader->GetCharacterEntity()->SetPos(movePos);
-	m_unitLeader->GetCharacterEntity()->SetForward(forward);
+
+	m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
+
+	if (0.01f<MATH->Distance(prevPos, movePos) && MATH->Distance(prevPos, movePos)<=0.03f)
+	{
+		m_pSkinnedMesh->SetAnimationIndex(F_WALK);
+	}
+	else if (0.03f<MATH->Distance(prevPos, movePos) )
+	{
+		m_pSkinnedMesh->SetAnimationIndex(F_RUN);
+	}
+	else
+	{
+		m_pSkinnedMesh->SetAnimationIndex(F_STAND);
+	}
 
 
 	CAMERA->SetLookAt(movePos, m_fRotY);
-	//m_CharacterEntity->Steering()->UpdateVelocity(deltaTime);
-	//	m_CharacterEntity->AddPos(m_CharacterEntity->Velocity()*deltaTime);
-
-
-	//if (m_vectorUnit.size() > 0)
-	//{
-	//	for (int i = 0; i < m_vectorUnit.size(); i++)
-	//	{
-	//		m_vectorUnit[i]->Update(deltaTime);
-	//	}
-	//	m_frustum->Update();
-	//}
+	
 
 	if (INPUT->IsKeyPress('1'))m_unitLeader->SetRectOffset();
 	if (INPUT->IsKeyPress('2'))m_unitLeader->SetTriOffset();
@@ -157,18 +163,12 @@ void cPlayer::Update(float deltaTime)
 void cPlayer::Render()
 {
 	cCharacter::Render();
-	//int count = 0;
-
-	//if (m_vectorUnit.size() > 0)
-	//{
-	//	for (int i = 0; i < m_vectorUnit.size(); i++)
-	//	{
-	//		if (m_frustum->IsIn(m_vectorUnit[i]->GetMeshSphere()))
-	//		{
-	//			m_vectorUnit[i]->Render();
-	//			//count++;
-	//		}
-	//	}
-	//}
-	//cout << "RenderCount : " << count << endl;
+	
+	if (m_pSkinnedMesh)
+	{
+		if (FRUSTUM->IsIn(m_pSkinnedMesh->GetBoundingSphere()))
+		{
+			m_pSkinnedMesh->UpdateAndRender();
+		}
+	}
 }

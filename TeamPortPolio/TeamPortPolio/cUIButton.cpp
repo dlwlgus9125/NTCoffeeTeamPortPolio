@@ -62,12 +62,8 @@ void cUIButton::Update()
 				{
 				case FUNTION_OPEN:	m_pParent->SetIsHidden(false);	break;
 				case FUNTION_CLOSE:	m_pParent->SetIsHidden(true);	break;
-				case FUNTION_OK: 
-				{
-					if (m_pParent->GetOnClick()) SetOnClick(false);
-					else m_pParent->SetOnClick(true);
-				}
-				break;
+				case FUNTION_OK: SetOnClick(true); break;
+		
 				}
 			}
 			m_eButtonState = E_MOUSEOVER;

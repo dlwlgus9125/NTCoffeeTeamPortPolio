@@ -80,40 +80,42 @@ vector<int> cAstarManager::GetPath(int chrindex, int targetIndex)
 void cAstarManager::Update()
 {
 	D3DXVECTOR3 colliedPos;
-
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	if (m_graph)
 	{
-		for (int i = 0; i < m_graph->NodeCount(); i++)
+		if (INPUT->IsMouseDown(MOUSE_RIGHT))
 		{
-			if (m_graph->GetNode(i)->Active() != false)
+			for (int i = 0; i < m_graph->NodeCount(); i++)
 			{
-				if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), m_graph->GetNode(i)->GetMesh(), m_graph->GetNode(0)->Pos().x, m_graph->GetNode(149)->Pos().x))
+				if (m_graph->GetNode(i)->Active() != false)
 				{
-					
-				
+					if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), m_graph->GetNode(i)->GetMesh(), m_graph->GetNode(0)->Pos().x, m_graph->GetNode(149)->Pos().x))
+					{
+
+
+					}
 				}
 			}
 		}
-	}
-	for (int i = 0; i < ASTAR->GetGraph()->NodeCount(); i++)
-	{
-		if ((OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x + 2.0f)
-			&& (OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z + 2.0f))
+		for (int i = 0; i < ASTAR->GetGraph()->NodeCount(); i++)
 		{
-			if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
+			if ((OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x + 2.0f)
+				&& (OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z + 2.0f))
 			{
-				D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetCharacterEntity()->Pos();
-				D3DXVECTOR3 targetPos = ASTAR->GetGraph()->GetNode(i)->Pos();
-				LeaderPos.y = 0;
-				targetPos.y = 0;
-
-
-				float distance = MATH->Distance(LeaderPos, targetPos);
-
-				if (distance <= 0.5f)
+				if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
 				{
-					OBJECT->GetPlayer()->GetUnitLeader()->SetIndex(ASTAR->GetGraph()->GetNode(i)->Id());
-					//cout << OBJECT->GetPlayer()->GetUnitLeader()->GetIndex() << endl;
+					D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetCharacterEntity()->Pos();
+					D3DXVECTOR3 targetPos = ASTAR->GetGraph()->GetNode(i)->Pos();
+					LeaderPos.y = 0;
+					targetPos.y = 0;
+
+
+					float distance = MATH->Distance(LeaderPos, targetPos);
+
+					if (distance <= 0.5f)
+					{
+						OBJECT->GetPlayer()->GetUnitLeader()->SetIndex(ASTAR->GetGraph()->GetNode(i)->Id());
+						//cout << OBJECT->GetPlayer()->GetUnitLeader()->GetIndex() << endl;
+					}
 				}
 			}
 		}
@@ -122,7 +124,7 @@ void cAstarManager::Update()
 
 void cAstarManager::Release()
 {
-	SAFE_DELETE(m_graph);
+	if(m_graph)SAFE_DELETE(m_graph);
 }
 
 void cAstarManager::Render()

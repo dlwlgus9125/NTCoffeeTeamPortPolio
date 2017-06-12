@@ -4,12 +4,15 @@
 #include "cFrustum.h"
 
 class cLeader;
+class cSkinnedMesh;
+
 class cPlayer :
 	public cCharacter
 {
 private:
 	cLeader*       m_unitLeader;//부대이동을 담당할 멤버변수
 	cFrustum*      m_frustum;
+	cSkinnedMesh*  m_SkinnedMesh;
 	float          m_fRotY;
 
 
