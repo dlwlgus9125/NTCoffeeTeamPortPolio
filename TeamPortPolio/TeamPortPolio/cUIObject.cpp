@@ -43,24 +43,12 @@ void cUIObject::Update()
 			switch (c->GetFuntion())
 			{
 			case FUNTION_OPEN:		c->Update(); break;
-			case FUNTION_CLOSE:		break;
-			case FUNTION_OK:		break;
-			case FUNTION_SCROLL_BAR:break;
 			case FUNTION_LIFE_BAR:  c->Update(); break;
-			case FUNTION_WINDOW:break;
 			}
 		}
 		else
 		{
-			switch (c->GetFuntion())
-			{
-			case FUNTION_OPEN:		 break;
-			case FUNTION_CLOSE:		 c->Update(); break;
-			case FUNTION_OK:		 c->Update(); break;
-			case FUNTION_SCROLL_BAR: c->Update(); break;
-			case FUNTION_LIFE_BAR:	 c->Update(); break;
-			case FUNTION_WINDOW:	 c->Update(); break;
-			}
+			c->Update();
 		}
 	}
 }
@@ -74,24 +62,12 @@ void cUIObject::Render(LPD3DXSPRITE pSprite)
 			switch (c->GetFuntion())
 			{
 			case FUNTION_OPEN:		c->Render(pSprite); break;
-			case FUNTION_CLOSE:		break;
-			case FUNTION_OK:		break;
-			case FUNTION_SCROLL_BAR:break;
 			case FUNTION_LIFE_BAR:	c->Render(pSprite); break;
-			case FUNTION_WINDOW: break;
 			}
 		}
 		else 
 		{
-			switch (c->GetFuntion())
-			{
-			case FUNTION_OPEN:		c->Render(pSprite); break;
-			case FUNTION_CLOSE:		c->Render(pSprite); break;
-			case FUNTION_OK:		c->Render(pSprite); break;
-			case FUNTION_SCROLL_BAR:c->Render(pSprite); break;
-			case FUNTION_LIFE_BAR:	c->Render(pSprite); break;
-			case FUNTION_WINDOW:c->Render(pSprite); break;
-			}
+			c->Render(pSprite);
 		}
 	}
 }

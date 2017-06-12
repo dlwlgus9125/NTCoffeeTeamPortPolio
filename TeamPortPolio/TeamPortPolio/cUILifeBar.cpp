@@ -6,6 +6,7 @@ cUILifeBar::cUILifeBar()
 	:m_pTexture(NULL)
 	, m_pLine(NULL)
 {
+	SetFuntion(FUNTION_LIFE_BAR);
 }
 
 cUILifeBar::~cUILifeBar()

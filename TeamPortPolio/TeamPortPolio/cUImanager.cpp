@@ -7,10 +7,13 @@
 #include "cUILifeBar.h"
 #include "cUICursor.h"
 #include "cUIMap.h"
+#include "cUIChractorView.h"
+#include "cUIInventory.h"
 cUIManager::cUIManager()
 	: m_pTexture(NULL)
-	,m_pCursor(NULL)//
+	, m_pCursor(NULL)//
 	, m_pUIMap(NULL)
+	, m_pUICharactorView(NULL)
 {
 	m_pCursor = new cUICursor;
 	m_pCursor->SetupCursor();
@@ -66,6 +69,14 @@ bool cUIManager::GetIsUIOpen()
 	return false;
 }
 
+cUIObject * cUIManager::GetCurrentUI()
+{
+	for each(auto p in m_vecUIRoot)
+	{
+		if (!p->GetIsHidden())return p;
+	}
+}
+
 void cUIManager::OpenOnlyOnewindow(cUIObject * pObj)
 {
 	if (!pObj->GetIsHidden())
@@ -112,14 +123,17 @@ void cUIManager::SetFieldUI()
 
 void cUIManager::SetCommonUI()
 {
-	//SetUpLifeBar();
-	//SetUpQuest_UI();
 	//SetUpInventoryUI();
+	SetUpLifeBar();
+	//SetUpQuest_UI();
 	SetUpMapUI();
 }
 
 void cUIManager::SetUpLifeBar()
 {
+	m_pUICharactorView = new cUIChractorView;
+	m_pUICharactorView->SetUp();
+	m_vecUIRoot.push_back(m_pUICharactorView->GetRootUI());
 	//SetLifeBar(0, 0, "UI/btn-med-over.png",0.2,0.2);
 }
 
@@ -138,13 +152,17 @@ void cUIManager::SetUpQuest_UI()
 void cUIManager::SetUpInventoryUI()		
 {
 	//test
-	cUIObject* pUiobj = new cUIObject();
+	/*cUIObject* pUiobj = new cUIObject();
 	SetWindow(pUiobj, 200, 0, "UI/panel-info.png", "TITLE", "text");
 	SetButton(pUiobj, 250, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_OPEN, "¿­±â");
 	SetButton(pUiobj, 435, 435, "UI/BT_STAND.png", "UI/BT_MOUSE_OVER.png", "UI/BT_SELECT.png", FUNTION_CLOSE, "´Ý±â");
 	SetScrollBar(pUiobj, 30, 0, "UI/panel-info.png", "UI/BT_STAND.png",0.2,0.5);
 	SetUpItemList(pUiobj);
-	m_vecUIRoot.push_back(pUiobj);
+	m_vecUIRoot.push_back(pUiobj);*/
+
+	m_pUIInventory = new cUIInventory;
+	m_pUIInventory->SetUp();
+	m_vecUIRoot.push_back(m_pUIInventory->GetRootUI());
 }
 void cUIManager::SetUpItemList(cUIObject* pParentUIobject)
 {
@@ -199,7 +217,7 @@ void cUIManager::SetWindow(cUIObject* pParentObj, int posX, int posY,  char* tex
 {
 	cUIImageView* pImageView = new cUIImageView;
 	pParentObj->SetPosition(posX, posY);
-	pImageView->SetFuntion(FUNTION_WINDOW);
+	pImageView->SetFuntion(FUNTION_NONE);
 	pImageView->SetPosition(posX, posY);
 	pImageView->SetTexture(texturePath);
 	pImageView->SetScale(scale_x, scale_y);
@@ -210,12 +228,12 @@ void cUIManager::SetWindow(cUIObject* pParentObj, int posX, int posY,  char* tex
 }
 
 void cUIManager::SetScrollBar(cUIObject * pParentObj,int posX, int posY, char * szLane, char * szHead, float scale_x, float scale_y)
-{
+{/*
 	cUIScrollBar* pScrollhead = new cUIScrollBar;
 	pScrollhead->SetFuntion(FUNTION_SCROLL_BAR);
 	pScrollhead->SetLanePos(D3DXVECTOR3(posX,posY,0));
 	pScrollhead->SetPosition(posX, posY);
 	pScrollhead->SetTexture(szLane,szHead);
 	pScrollhead->SetScale(scale_x, scale_y);
-	pParentObj->AddChild(pScrollhead);
+	pParentObj->AddChild(pScrollhead);*/
 }
