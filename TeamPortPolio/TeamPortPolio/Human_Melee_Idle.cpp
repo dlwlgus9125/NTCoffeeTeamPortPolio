@@ -20,10 +20,10 @@ void Human_State_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 	{
 		switch (pUnit->GetMode())
 		{
-		case FIGHTING_MODE: if ((FOOTMAN_STATE)pUnit->GetMesh()->Getindex() != F_READYATTACK)
-			pUnit->GetMesh()->SetAnimationIndexBlend(F_READYATTACK); break;
-		case DEFENDING_MODE:if ((FOOTMAN_STATE)pUnit->GetMesh()->Getindex() != F_STAND)
-			pUnit->GetMesh()->SetAnimationIndexBlend(F_STAND); break;
+		case FIGHTING_MODE: if ((FG_STATE)pUnit->GetMesh()->Getindex() != FG_READYATTACK)
+			pUnit->GetMesh()->SetAnimationIndexBlend(FG_READYATTACK); break;
+		case DEFENDING_MODE:if ((FG_STATE)pUnit->GetMesh()->Getindex() != FG_STAND)
+			pUnit->GetMesh()->SetAnimationIndexBlend(FG_STAND); break;
 		}
 
 	}

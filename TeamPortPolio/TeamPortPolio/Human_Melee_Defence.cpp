@@ -4,7 +4,7 @@
 
 void Human_State_Defence::OnBegin(cUnit * pUnit)
 {
-	pUnit->GetMesh()->SetAnimationIndexBlend(F_SHEILDBLOCK);
+	pUnit->GetMesh()->SetAnimationIndexBlend(FG_SHEILDBLOCK);
 }
 
 void Human_State_Defence::OnUpdate(cUnit * pUnit, float deltaTime)

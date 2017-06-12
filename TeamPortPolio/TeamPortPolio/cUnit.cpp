@@ -34,7 +34,7 @@ void cUnit::Init()
 
 	m_pSkinnedMesh = new cSkinnedMesh();
 	//m_pSkinnedMesh =  new cSkinnedMesh(*TEXTURE->GetCharacterResource("Character/Human", "newfootman.x"));
-	m_pSkinnedMesh->Setup("Character/Human", "newfootman.x");
+	m_pSkinnedMesh->Setup("Character/BloodeHuman", "b_footman.x");
 	m_pSkinnedMesh->SetIEntity(m_CharacterEntity);
 
 	m_pFsm = new cStateMachine<cUnit*>(this);
@@ -81,7 +81,7 @@ void cUnit::UpdateState()
 
 	if (INPUT->IsMouseDown(MOUSE_RIGHT))
 	{
-		FOOTMAN_STATE state = F_SHEILDBLOCK;
+		FG_STATE state = FG_SHEILDBLOCK;
 		//m_pSkinnedMesh->
 
 		m_pSkinnedMesh->SetAnimationIndexBlend(state);

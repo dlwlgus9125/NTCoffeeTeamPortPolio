@@ -12,7 +12,7 @@ cSkinnedMesh::cSkinnedMesh()
 	, m_isAnimBlend(false)
 {
 	m_pIEntity = NULL;
-	m_currentIndex = F_READYATTACK;
+	m_currentIndex = FG_READYATTACK;
 
 }
 
@@ -31,7 +31,7 @@ cSkinnedMesh::cSkinnedMesh(const cSkinnedMesh & pResource)
 	pResource.m_pAnimController->CloneAnimationController(pResource.m_pAnimController->GetMaxNumAnimationOutputs(), pResource.m_pAnimController->GetMaxNumAnimationSets(), pResource.m_pAnimController->GetMaxNumTracks(), pResource.m_pAnimController->GetMaxNumEvents(), &m_pAnimController);
 	
 	m_pIEntity = NULL;
-	m_currentIndex = F_READYATTACK;
+	m_currentIndex = FG_READYATTACK;
 
 	SetupBoneMatrixPtrs(m_pRoot);
 	m_fPassedTime = 0.0f;

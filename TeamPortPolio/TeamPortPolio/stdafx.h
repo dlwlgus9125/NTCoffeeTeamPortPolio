@@ -171,24 +171,28 @@ enum MODE_STATE
 	DEFENDING_MODE,
 };
 
+/////////////////////////////////////////////////////////////////
+// 애니메이션 키 값
+/////////////////////////////////////////////////////////////////
 // 보병
-enum FOOTMAN_STATE
+enum FG_STATE // F: Footman, G: Grunt
 {
-	F_STAND,
-	F_WALK,
-	F_BACKWALK,
-	F_RUN,
-	F_READYATTACK,
-	F_BATTLEWALK,
-	F_BATTLERUN,
-	F_ATTACK1,
-	F_ATTACK2,
-	F_ATTACK3,
-	F_SHEILDBLOCK,
-	F_SHILDUP,
-	F_HIT,
-	F_BATTLECRY,
-	F_DEATH,
+	FG_STAND,
+	FG_WALK,
+	FG_BACKWALK,
+	FG_RUN,
+	FG_READYATTACK,
+	FG_BATTLEWALK,
+	FG_BATTLERUN,
+	FG_ATTACK1,
+	FG_ATTACK2,
+	FG_ATTACK3,
+	FG_SHEILDBLOCK,
+	FG_SHEILDUP,
+	FG_HIT,
+	FG_BATTLECRY,
+	FG_KNOCKDOWN,
+	FG_DEATH,
 };
 
 // 궁병
@@ -201,10 +205,12 @@ enum BOWMAN_STATE
 	B_READYATTACK,
 	B_BATTLEWALK,
 	B_BATTLERUN,
-	B_BOWATTACK,
+	B_BOWATTACK1,
+	B_BOWATTACK2,
 	B_BOWSHEILD,
 	B_HIT,
 	B_BATTLECRY,
+	B_KNOCKDOWN,
 	B_DEATH,
 };
 
