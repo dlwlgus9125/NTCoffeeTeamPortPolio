@@ -72,30 +72,4 @@ void cObjectManager::AddObject(cObject * object)
 	m_vecObject.push_back(object);
 }
 
-cSkinnedMesh* cObjectManager::GetFootman()
-{
-	if (!m_queFootman.empty())
-	{
-		cSkinnedMesh* pSkin = m_queFootman.front();
-		m_queFootman.pop();
-		return pSkin;
-	}
-	else
-	{
-		cSkinnedMesh* pSkinnedMesh = new cSkinnedMesh;
-		pSkinnedMesh->Setup("Character/Human", "newfootman.x");
-		return pSkinnedMesh;
-	}
-}
 
-void cObjectManager::AddArmy()
-{
-	if (m_queFootman.size() <= 20)
-	{
-		cSkinnedMesh* pSkinnedMesh = new cSkinnedMesh;
-		pSkinnedMesh->Setup("Character/Human", "newfootman.x");
-		m_queFootman.push(pSkinnedMesh);
-	};
-
-
-}

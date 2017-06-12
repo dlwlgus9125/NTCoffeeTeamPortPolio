@@ -4,7 +4,7 @@
 
 void Human_State_Attack::OnBegin(cUnit * pUnit)
 {
-	pUnit->GetMesh()->SetAnimationIndexBlend(F_ATTACK1);
+	pUnit->GetMesh()->SetAnimationIndex(F_ATTACK1);
 	fPassedTime = 0.0f;
 }
 

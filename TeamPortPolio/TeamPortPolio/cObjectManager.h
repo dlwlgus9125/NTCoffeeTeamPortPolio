@@ -38,8 +38,6 @@ public:
 
 	cPlayer* GetPlayer() { return m_player; }
 
-	cSkinnedMesh* GetFootman();
-
-	void AddArmy();
+	
 };
 

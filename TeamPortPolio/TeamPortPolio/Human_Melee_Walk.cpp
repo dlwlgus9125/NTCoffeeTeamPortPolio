@@ -3,7 +3,7 @@
 
 void Human_State_Walk::OnBegin(cUnit * pUnit)
 {
-	pUnit->GetMesh()->SetAnimationIndexBlend(F_BATTLEWALK);
+	pUnit->GetMesh()->SetAnimationIndex(F_BATTLEWALK);
 }
 
 void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
@@ -39,11 +39,11 @@ void Human_State_Walk::OnEnd(cUnit * pUnit)
 
 void Human_State_Walk::StateChanger(cUnit * pUnit)
 {
-	if (pUnit->GetMesh()->Getindex() != F_BATTLEWALK&&0.002f <= pUnit->GetCharacterEntity()->Speed() && pUnit->GetCharacterEntity()->Speed() <= 0.05f)
+	if (pUnit->GetMesh()->GetIndex() != F_BATTLEWALK&&0.002f <= pUnit->GetCharacterEntity()->Speed() && pUnit->GetCharacterEntity()->Speed() <= 0.05f)
 	{
 		pUnit->GetMesh()->SetAnimationIndexBlend(F_BATTLEWALK);
 	}
-	else if (pUnit->GetMesh()->Getindex() != F_BATTLERUN&&0.05f < pUnit->GetCharacterEntity()->Speed())
+	else if (pUnit->GetMesh()->GetIndex() != F_BATTLERUN&&0.05f < pUnit->GetCharacterEntity()->Speed())
 	{
 		pUnit->GetMesh()->SetAnimationIndexBlend(F_BATTLERUN);
 	}/*
