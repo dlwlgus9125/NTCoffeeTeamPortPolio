@@ -59,6 +59,16 @@ enum SCENE_TAG
 	SCENE_NONE, SCENE_TITLE, SCENE_LOADING, SCENE_TOWN, SCENE_LOGIN,
 };
 
+enum UI_TAG
+{
+	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, 
+};
+
+enum FONT_TAG
+{
+	FONT_DEF,
+};
+
 //>> define 및 구조체
 extern HWND	g_hWnd;
 extern HCURSOR g_Cursor;
@@ -267,8 +277,9 @@ public: virtual void Set##funName(varType var){\
 #include "cAstarManager.h"
 #include "cObjectDB.h"
 #include "cObject.h"
-#include "cUImanager.h"
 #include "cMapManager.h"
+#include "cUIManager.h"
+#include "cFontManager.h"
 //<<
 #include "cRay.h"
 

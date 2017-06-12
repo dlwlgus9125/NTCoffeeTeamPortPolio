@@ -38,12 +38,6 @@
     <Filter Include="01. cObject\00. cFrame">
       <UniqueIdentifier>{4f858eb0-2a1f-4c4e-94dd-4622ca4fb56a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. cObject\01. cUIObject">
-      <UniqueIdentifier>{2e9fbd2a-41cd-4123-8cea-de0ad6456019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. cObject\02. cImageView">
-      <UniqueIdentifier>{5f8e95a9-c5fd-4f04-ad90-831afbb50d85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. cCharacter">
       <UniqueIdentifier>{0a6e2d5c-f2bb-4603-b05d-870b140e9c01}</UniqueIdentifier>
     </Filter>
@@ -122,12 +116,6 @@
     <Filter Include="06. Database\01. cObjectDB">
       <UniqueIdentifier>{9d623f15-db70-4486-a3de-cdf97d858850}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. cObject\03. cGroup">
-      <UniqueIdentifier>{4d387467-6525-4c51-b99b-b40e3a9e8538}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. cObject\04. cConstruct">
-      <UniqueIdentifier>{08b2db81-820e-455e-8f1a-23805a8f2210}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05. cMap\03. cSkyBox">
       <UniqueIdentifier>{33930076-1c84-472c-885b-af0a026f7df8}</UniqueIdentifier>
     </Filter>
@@ -140,11 +128,35 @@
     <Filter Include="00. Manager\03. cTextureManager">
       <UniqueIdentifier>{212a8f8f-cf43-43d6-b4d1-a811a9131eff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Manager\07. cUIManager\cUIComponants">
-      <UniqueIdentifier>{92f4f4b4-811c-4d6a-826a-40261cbdf333}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Manager\10. cMapManager">
       <UniqueIdentifier>{7f0c78a3-c82b-4032-a5bd-7f3e3ec4320f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\02. cConstruct">
+      <UniqueIdentifier>{08b2db81-820e-455e-8f1a-23805a8f2210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\01. cGroup">
+      <UniqueIdentifier>{4d387467-6525-4c51-b99b-b40e3a9e8538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\01. cTitleScene">
+      <UniqueIdentifier>{d208f0ed-a1e4-4bf4-a008-de67667491e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\02. cTownScene">
+      <UniqueIdentifier>{7625283c-81ec-4bab-b1b3-993eeb0cddd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\00. cUIObject">
+      <UniqueIdentifier>{68342aad-ac20-4c08-bc1e-7c53a712919e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\01. cUIImage">
+      <UniqueIdentifier>{6884dbb3-27ca-4b65-b5e7-3408c15782a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\02. cUIText">
+      <UniqueIdentifier>{0ba9ec17-2177-47dc-b75b-5c0818ee5a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\03. cUIButton">
+      <UniqueIdentifier>{5fcd1a10-77ee-4001-9081-5dbfb58f3f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\11. cFontManager">
+      <UniqueIdentifier>{889df18f-b33d-47a4-8fe1-2ee7850a9708}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +200,6 @@
     <ClInclude Include="cGameManager.h">
       <Filter>00. Manager\00. cGameManager</Filter>
     </ClInclude>
-    <ClInclude Include="cImageView.h">
-      <Filter>01. cObject\02. cImageView</Filter>
-    </ClInclude>
     <ClInclude Include="cInputManager.h">
       <Filter>00. Manager\02. cInputManager</Filter>
     </ClInclude>
@@ -224,24 +233,6 @@
     <ClInclude Include="cTimeManager.h">
       <Filter>00. Manager\08. cTimeManager</Filter>
     </ClInclude>
-    <ClInclude Include="cTitleScene.h">
-      <Filter>03. cScene</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIButton.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIImageView.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUITextView.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIObject.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUImanager.h">
-      <Filter>00. Manager\07. cUIManager</Filter>
-    </ClInclude>
     <ClInclude Include="Human_Melee_State.h">
       <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
     </ClInclude>
@@ -273,10 +264,10 @@
       <Filter>06. Database\01. cObjectDB</Filter>
     </ClInclude>
     <ClInclude Include="cGroup.h">
-      <Filter>01. cObject\03. cGroup</Filter>
+      <Filter>01. cObject\01. cGroup</Filter>
     </ClInclude>
     <ClInclude Include="cConstruct.h">
-      <Filter>01. cObject\04. cConstruct</Filter>
+      <Filter>01. cObject\02. cConstruct</Filter>
     </ClInclude>
     <ClInclude Include="cSkyBox.h">
       <Filter>05. cMap\03. cSkyBox</Filter>
@@ -296,20 +287,8 @@
     <ClInclude Include="cLeader.h">
       <Filter>02. cCharacter\03. cLeader</Filter>
     </ClInclude>
-    <ClInclude Include="cUIItemSlot.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUILifeBar.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIScrollBar.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClInclude>
     <ClInclude Include="cItem.h">
       <Filter>01. cObject</Filter>
-    </ClInclude>
-    <ClInclude Include="cUICursor.h">
-      <Filter>01. cObject\01. cUIObject</Filter>
     </ClInclude>
     <ClInclude Include="cRay.h">
       <Filter>98. UTIL\04. cRay</Filter>
@@ -318,29 +297,29 @@
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClInclude>
     <ClInclude Include="cRay.h" />
-    <ClInclude Include="cUIInventory.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIChractorView.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIQuest.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIMap.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIStatus.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIChatLog.h">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClInclude>
     <ClInclude Include="cMapManager.h">
       <Filter>00. Manager\10. cMapManager</Filter>
     </ClInclude>
-    <ClInclude Include="cMainTitleScene.h">
-      <Filter>03. cScene</Filter>
+    <ClInclude Include="cTitleScene.h">
+      <Filter>03. cScene\01. cTitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cTownScene.h">
+      <Filter>03. cScene\02. cTownScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIManager.h">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIObject.h">
+      <Filter>00. Manager\07. cUIManager\00. cUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIImage.h">
+      <Filter>00. Manager\07. cUIManager\01. cUIImage</Filter>
+    </ClInclude>
+    <ClInclude Include="cFontManager.h">
+      <Filter>00. Manager\11. cFontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIText.h">
+      <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -375,9 +354,6 @@
     <ClCompile Include="cGameManager.cpp">
       <Filter>00. Manager\00. cGameManager</Filter>
     </ClCompile>
-    <ClCompile Include="cImageView.cpp">
-      <Filter>01. cObject\02. cImageView</Filter>
-    </ClCompile>
     <ClCompile Include="cObject.cpp">
       <Filter>01. cObject</Filter>
     </ClCompile>
@@ -404,24 +380,6 @@
     </ClCompile>
     <ClCompile Include="cTimeManager.cpp">
       <Filter>00. Manager\08. cTimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cTitleScene.cpp">
-      <Filter>03. cScene</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIButton.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIImageView.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUITextView.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIObject.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUImanager.cpp">
-      <Filter>00. Manager\07. cUIManager</Filter>
     </ClCompile>
     <ClCompile Include="Human_Melee_Walk.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Human_State\00. Footman</Filter>
@@ -457,10 +415,10 @@
       <Filter>06. Database\01. cObjectDB</Filter>
     </ClCompile>
     <ClCompile Include="cGroup.cpp">
-      <Filter>01. cObject\03. cGroup</Filter>
+      <Filter>01. cObject\01. cGroup</Filter>
     </ClCompile>
     <ClCompile Include="cConstruct.cpp">
-      <Filter>01. cObject\04. cConstruct</Filter>
+      <Filter>01. cObject\02. cConstruct</Filter>
     </ClCompile>
     <ClCompile Include="cSkyBox.cpp">
       <Filter>05. cMap\03. cSkyBox</Filter>
@@ -477,38 +435,8 @@
     <ClCompile Include="cLeader.cpp">
       <Filter>02. cCharacter\03. cLeader</Filter>
     </ClCompile>
-    <ClCompile Include="cUIItemSlot.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUILifeBar.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIScrollBar.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
     <ClCompile Include="cItem.cpp">
       <Filter>01. cObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUICursor.cpp">
-      <Filter>01. cObject\01. cUIObject</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIInventory.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIMap.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIStatus.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIChractorView.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIQuest.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIChatLog.cpp">
-      <Filter>00. Manager\07. cUIManager\cUIComponants</Filter>
     </ClCompile>
     <ClCompile Include="Leader_State_Idle.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
@@ -522,8 +450,26 @@
     <ClCompile Include="Leader_State_Walk.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
-    <ClCompile Include="cMainTitleScene.cpp">
-      <Filter>03. cScene</Filter>
+    <ClCompile Include="cTitleScene.cpp">
+      <Filter>03. cScene\01. cTitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cTownScene.cpp">
+      <Filter>03. cScene\02. cTownScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIManager.cpp">
+      <Filter>00. Manager\07. cUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIObject.cpp">
+      <Filter>00. Manager\07. cUIManager\00. cUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIImage.cpp">
+      <Filter>00. Manager\07. cUIManager\01. cUIImage</Filter>
+    </ClCompile>
+    <ClCompile Include="cFontManager.cpp">
+      <Filter>00. Manager\11. cFontManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIText.cpp">
+      <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

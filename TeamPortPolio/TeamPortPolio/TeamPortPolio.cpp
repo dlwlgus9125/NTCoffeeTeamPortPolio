@@ -7,7 +7,7 @@
 
 //Ã¢Å©±â
 #define WND_WIDTH 1280
-#define WND_HEIGHT 720
+#define WND_HEIGHT 768
 
 #define MAX_LOADSTRING 100
 

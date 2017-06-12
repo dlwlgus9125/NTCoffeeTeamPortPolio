@@ -4,7 +4,7 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
-#include "cMainTitleScene.h"
+#include "cTownScene.h"
 
 void cGameManager::Init()
 {
@@ -64,9 +64,8 @@ void cGameManager::Init()
 	OBJECT->Init();
 	OBJECTDB->Setup();
 	SCENE->Register(0, new cTitleScene());
-	SCENE->Register(1, new cMainTitleScene());
+	SCENE->Register(1, new cTownScene());
 	SCENE->StartScene(0);
-	UI->OnEnter(SCENE->Current());
 	CAMERA->Setup();
 	
 	//<<
@@ -109,8 +108,7 @@ void cGameManager::Update()
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
-			UI->OnUpdate();
-		//	if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+			if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
 		}
 
 	}
@@ -134,7 +132,6 @@ void cGameManager::Render()
 		TESTMAP->Render();
 		OBJECT->Render();
 		SCENE->Render();
-		UI->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
 	}
@@ -147,7 +144,7 @@ void cGameManager::Release()
 
 void cGameManager::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if(!UI->GetIsUIOpen())CAMERA->WndProc(hwnd, message, wParam, lParam);
+	CAMERA->WndProc(hwnd, message, wParam, lParam);
 
 
 	//switch (message)

@@ -11,8 +11,6 @@ cTitleScene::cTitleScene() :
 	m_pTexture(NULL)
 {
 	D3DXCreateSprite(D3DDevice, &m_pSprite);
-	m_pBackgroundImage.SetPosition(0, 0, 0);
-	m_pBackgroundImage.SetTexture("Image/TitleScene.png");
 }
 
 
