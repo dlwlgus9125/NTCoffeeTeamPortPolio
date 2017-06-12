@@ -60,7 +60,7 @@ void cTitleScene::OnRender()
 
 void cTitleScene::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	MAP->Render();
+
 }
 
 

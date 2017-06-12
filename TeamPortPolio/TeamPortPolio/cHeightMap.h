@@ -27,6 +27,7 @@ public:
 	void Setup(int cellPerRow, float cellSpace, vector<ST_PNT_VERTEX> vecVertex, vector<DWORD> vecIndex);
 	virtual void Update();
 	virtual bool GetHeight(IN float x, OUT float&y, IN float z) override;
+	bool GetIndex(IN float x, IN float z, OUT int& index);
 	virtual void Render() override;
 };
 
