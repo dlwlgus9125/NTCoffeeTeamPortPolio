@@ -96,8 +96,7 @@ void SteeringBehavior::Arrive(D3DXVECTOR3 targetPos)
 void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 {
 	D3DXVECTOR3 vPos = Entity()->Pos();
-	vPos.y = 0;
-	targetPos.y = 0;
+	
 	D3DXVECTOR3 vToTarget = targetPos - vPos;
 	float distance = MATH->SqrMagnitude(vToTarget);
 	//cout << "distance : " << distance << endl;
@@ -109,7 +108,7 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.5f, 0.005f, 0.4f);
+		movePos += MATH->Clamp(Entity()->Forward()*0.01f, 0.005f, 0.4f);
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
 		/*const float multiplier = 2;

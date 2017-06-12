@@ -110,7 +110,7 @@ void cGameManager::Update()
 			CAMERA->Update();
 			SCENE->Update();
 			UI->OnUpdate();
-			if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+		//	if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
 		}
 
 	}

@@ -25,7 +25,7 @@ cTitleScene::~cTitleScene()
 void cTitleScene::OnEnter()
 {
 	MAP->Init("TESTMAP.txt");
-	cPlayer* pPlayer = new cPlayer(D3DXVECTOR3(-8,0,30), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	cPlayer* pPlayer = new cPlayer(ASTAR->GetGraph()->GetNode(16001)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
 	pPlayer->Init();
 	
 	OBJECT->AddObject(pPlayer);

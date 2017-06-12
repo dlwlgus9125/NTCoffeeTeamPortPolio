@@ -54,6 +54,7 @@ void cMapManager::Init(string fileName)
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
 	// << 
 	ASTAR->Setup(m_vecPosOfNode);
+	
 }
 
 void cMapManager::Update()
@@ -68,11 +69,11 @@ void cMapManager::Render()
 	{
 		if (test == false)
 		{
-			//test = true;
+			test = true;
 		}
 		else
 		{
-			//test = false;
+			test = false;
 		}
 	}
 
@@ -122,4 +123,5 @@ void cMapManager::Destroy()
 		SAFE_DELETE(m_vecConstruct[i]);
 	}
 	m_vecConstruct.clear();
+	
 }

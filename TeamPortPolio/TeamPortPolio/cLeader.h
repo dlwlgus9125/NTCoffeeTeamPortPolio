@@ -22,7 +22,7 @@ class cLeader :
 	float          m_fRotY;
 	int            m_targetIndex;
 	vector<int>    m_path;
-
+	MeshSpere      m_meshSphere;
 public:
 	cLeader(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
 	~cLeader();
@@ -45,6 +45,7 @@ public:
 	int              GetIndex() { return m_currentIndex; }
 	void             SetIndex(int i) { m_currentIndex = i; }
 	void             SetPath(vector<int> path) { m_path = path; }
+	void             PathClear() { m_path.clear(); }
 	vector<int>      GetPath() { return m_path; }
 	void             SetTargetIndex(int i) { m_targetIndex = i; }
 	int              GetTargetIndex() { return m_targetIndex; }

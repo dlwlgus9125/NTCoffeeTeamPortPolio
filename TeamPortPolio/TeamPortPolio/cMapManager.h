@@ -16,6 +16,7 @@ class cMapManager : public Singleton<cMapManager>
 	vector<D3DXVECTOR3>     m_vecPosOfNode;
 	int                     m_CellPerRow;
 	float                   m_fCellSpace;
+	
 public:
 	cMapManager();
 	~cMapManager();
@@ -30,5 +31,9 @@ public:
 	float GetMinX();
 
 	void Destroy();
+
+	cHeightMap* GetMap() { return m_pMap; }
+
+	
 };
 

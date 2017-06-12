@@ -21,13 +21,13 @@ cUnit::~cUnit()
 
 void cUnit::Init()
 {
-	m_CollideSphere.m_radius = 0.1f;
-	m_CollideSphere.m_vCenter = m_CharacterEntity->Pos();
-	m_CollideSphere.m_vCenter.y += 0.5f;
+	m_CollideSphere.fRadius = 0.1f;
+	m_CollideSphere.vCenter = m_CharacterEntity->Pos();
+	m_CollideSphere.vCenter.y += 0.5f;
 
 
-	m_arrangeCollideSphere.m_radius = 2.0f;
-	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
+	m_arrangeCollideSphere.fRadius = 2.0f;
+	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
 
 	

@@ -21,6 +21,7 @@ public:
 		m_pGraph = pGraph;
 		m_source = source;
 		m_target = target;
+		if (m_target < 0)m_target = source;
 	}
 
 	bool Search();

@@ -5,10 +5,10 @@ class GraphNode
 	bool m_active;
 	int m_id;
 	D3DXVECTOR3 m_pos;
-	MeshSpere   m_mesh;
+	ST_SPHERE   m_sphere;
 
 public:
-	GraphNode(int id = 0) { m_mesh.m_radius = 0.8f; }
+	GraphNode(int id = 0) { m_sphere.fRadius = 0.1f; }
 
 	bool Active() { return m_active; }
 	int Id() { return m_id; }
@@ -18,23 +18,9 @@ public:
 	void SetPos(D3DXVECTOR3 pos) 
 	{ 
 		m_pos = pos;
-		m_mesh.m_vCenter = m_pos;
-		
-		D3DXCreateSphere(D3DDevice, m_mesh.m_radius, 10, 10, &m_mesh.m_pMeshSphere, NULL);
-		ZeroMemory(&m_mesh.m_stMtlSphere, sizeof(D3DMATERIAL9));
-		m_mesh.m_stMtlSphere.Ambient = D3DXCOLOR(255.0f, 0.7f, 0.7f, 1.0f);
-		m_mesh.m_stMtlSphere.Diffuse = D3DXCOLOR(255.0f, 0.7f, 0.7f, 1.0f);
-		m_mesh.m_stMtlSphere.Specular = D3DXCOLOR(255.0f, 0.7f, 0.7f, 1.0f);
+		m_sphere.vCenter = m_pos;
 	}
-	void Render() 
-	{ 
-		D3DXMATRIXA16 matT;
-		D3DXMatrixIdentity(&matT);
-		D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y, m_pos.z);
-		D3DDevice->SetTransform(D3DTS_WORLD, &matT);
-		m_mesh.m_pMeshSphere->DrawSubset(0); 
-	}
-	MeshSpere GetMesh() { return m_mesh; }
+	ST_SPHERE GetSphere() { return m_sphere; }
 };
 
 class GraphEdge
@@ -66,7 +52,6 @@ class cGraph
 	LPD3DXLINE m_line;
 	NodeVector m_nodes;
 	EdgeListVector m_edges;
-	cFrustum*   m_frust;
 public:
 	cGraph(int nodeCount);
 
