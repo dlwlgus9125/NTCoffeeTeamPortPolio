@@ -9,10 +9,10 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
+	m_unitLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(16001)->Id());
 	OBJECT->AddObject(m_unitLeader);
-
+	OBJECT->AddLeader(m_unitLeader);
 	m_fRotY = 0.0f;
-	m_frustum = new cFrustum();
 }
 
 
@@ -22,71 +22,25 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
-	m_CollideSphere.m_radius = m_CharacterEntity->Radius();
-	m_CollideSphere.m_vCenter = m_CharacterEntity->Pos();
-	m_CollideSphere.m_vCenter.y += 0.5f;
+	m_CollideSphere.fRadius = m_CharacterEntity->Radius();
+	m_CollideSphere.vCenter = m_CharacterEntity->Pos();
+	m_CollideSphere.vCenter.y += 0.5f;
 	m_pSkinnedMesh = NULL;
 	//m_pSkinnedMesh = new cSkinnedMesh();
-	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/Human/", "newfootman.x"));
+	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
 
-	m_arrangeCollideSphere.m_radius = 20.0f;
-	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
+	m_arrangeCollideSphere.fRadius = 20.0f;
+	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
-	m_frustum->Setup();
 
-	/*for (float z = -2.0f; z <= 1.0f; z++)
-	{
-		for (float x = 2.0f; x >= -2.0f; x--)
-		{
-			AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(x, 0, z) * 3));
-			m_RectOffest.push_back(D3DXVECTOR3(x, 0, z) * 3);
-		}
-	}*/
-	//AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(2, 0, 2) * 3));
-	/*m_RectOffest.push_back(D3DXVECTOR3(2, 0, 2) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(0, 0, -4.0f) * 3);
-
-	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -3.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -3.0f) * 3);
-
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, -2.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, -2.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, -2.0f) * 3);
-
-
-	m_TriOffest.push_back(D3DXVECTOR3(1.5f, 0, -1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.5f, 0, -1.0f) * 3);
-
-	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 0.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 0.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 0.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 0.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 0.0f) * 3);
-
-	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 1.0f) * 3);
-	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 1.0f) * 3);*/
-
-	/*for (int x = -2; x <= 0; x++)
-	{
-	for (int z = -2; z <= 2; z++)
-	{
-	if (x == 0 && z == 0) continue;
-
-	AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(x, 0, z) * 5));
-	}
-	}*/
+	
 
 }
 
 void cPlayer::Update(float deltaTime)
 {
 	cCharacter::Update(deltaTime);
-	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
+	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	D3DXVECTOR3 prevPos = m_CharacterEntity->Pos();
 	D3DXVECTOR3 movePos = m_CharacterEntity->Pos();
 
@@ -97,7 +51,6 @@ void cPlayer::Update(float deltaTime)
 		{
 			movePos += m_CharacterEntity->Forward()*0.03f;
 		}
-
 	}
 	if (INPUT->IsKeyPress('S'))
 	{
@@ -134,6 +87,13 @@ void cPlayer::Update(float deltaTime)
 
 	MAP->GetHeight(movePos.x, movePos.y, movePos.z);
 	m_CharacterEntity->SetPos(movePos);
+	int index = 0;
+	MAP->GetMap()->GetIndex(movePos.x, movePos.z, index);
+	/*if (INPUT->IsKeyDown(VK_SPACE))
+	{
+		cout << "move.x : " << movePos.x << ", move.z : " << movePos.z << ", index : " << index << endl;
+		cout << "id : " << ASTAR->GetGraph()->GetNode(index)->Id() << ", move.x : " << ASTAR->GetGraph()->GetNode(index)->Pos().x << ", move.z : " << ASTAR->GetGraph()->GetNode(index)->Pos().z << endl;
+	}*///m_CharacterEntity->SetPos(m_unitLeader->GetCharacterEntity()->Pos());
 	m_CharacterEntity->SetForward(forward);
 
 
@@ -163,7 +123,7 @@ void cPlayer::Update(float deltaTime)
 void cPlayer::Render()
 {
 	cCharacter::Render();
-	
+	m_unitLeader->Render();
 	if (m_pSkinnedMesh)
 	{
 		if (FRUSTUM->IsIn(m_pSkinnedMesh->GetBoundingSphere()))

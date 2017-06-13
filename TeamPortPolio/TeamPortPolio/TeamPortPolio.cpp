@@ -26,7 +26,7 @@ unsigned __stdcall UpdateThread(LPVOID lpParam)
 	while (1)
 	{
 		EnterCriticalSection(&cs);
-		
+		if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
 		LeaveCriticalSection(&cs);
 	}
 	return 0;

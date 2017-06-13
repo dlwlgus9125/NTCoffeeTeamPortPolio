@@ -19,7 +19,9 @@ void cAstarManager::Setup(vector<D3DXVECTOR3> vecPosOfNode)
 		//그렇게하면 높이값까지 코스트로 적용이 가능하기때문에 오히려 자연스러움
 
 		m_graph->GetNode(i)->SetPos(vecPosOfNode[i]);
-		m_graph->GetNode(i)->SetID(i);
+		int index=0;
+		MAP->GetMap()->GetIndex(vecPosOfNode[i].x, vecPosOfNode[i].z, index);
+		m_graph->GetNode(i)->SetID(index);
 	}
 	for (int i = 0; i < vecPosOfNode.size(); i++)
 	{
@@ -43,12 +45,13 @@ void cAstarManager::Setup(vector<D3DXVECTOR3> vecPosOfNode)
 		AddEdge(i, x + 1, z + 1);
 	}
 
-
+	m_isMapLoadingComplete = true;
 }
 
 void cAstarManager::AddEdge(int from, int col, int row)
 {
 	if (col >= 0 && col < 150 && row >= 0 && row < 150)
+	//if (col >= 0 && col < 15 && row >= 0 && row < 15)
 	{
 		int to = col + row * 150;
 		D3DXVECTOR3 fromPos = m_graph->GetNode(from)->Pos();//get노드로 처리해서 엣지추가여부 결정하기
@@ -58,7 +61,7 @@ void cAstarManager::AddEdge(int from, int col, int row)
 		{
 			D3DXVECTOR3 length = toPos - fromPos;
 
-			m_graph->AddEdge(from, to, sqrt(pow(length.x, 2) + pow(length.z, 2)));
+			m_graph->AddEdge(from, to, sqrt(pow(length.x, 2)+ pow(length.y, 2) + pow(length.z, 2)));
 		}
 	}
 }
@@ -79,37 +82,67 @@ vector<int> cAstarManager::GetPath(int chrindex, int targetIndex)
 
 void cAstarManager::Update()
 {
-	D3DXVECTOR3 colliedPos;
-	if (m_graph)
+	if (m_isMapLoadingComplete == true)
 	{
-		if (INPUT->IsMouseDown(MOUSE_RIGHT))
+		for (int i = 0; i < OBJECT->GetLeader().size(); i++)
 		{
-			int cellIndex = -1;	// 메쉬 충돌 없으면 인덱스는 -1. 아니라면 해당 인덱스 나올 것임.
+			D3DXVECTOR3 pos = OBJECT->GetLeader()[i]->GetCharacterEntity()->Pos();
+			int index = 0;
+			MAP->GetMap()->GetIndex(pos.x, pos.z, index);
+			if (OBJECT->GetLeader()[i]->GetIndex() != index)OBJECT->GetLeader()[i]->SetIndex(index);
+			/*for (int j = 0; j < ASTAR->GetGraph()->NodeCount(); j++)
+			{
+				if (MATH->IsCollided(OBJECT->GetLeader()[i]->GetSphere(), ASTAR->GetGraph()->GetNode(j)->GetSphere()))
+				{
+					if (OBJECT->GetLeader()[i]->GetIndex() != j)OBJECT->GetLeader()[i]->SetIndex(j);
+				}
+			}*/
+			if (OBJECT->GetLeader()[i]->GetPath().size() <= 0 && OBJECT->GetLeader()[i]->GetIndex() != OBJECT->GetLeader()[i]->GetTargetIndex())
+			{
+				cAstar as(m_graph, OBJECT->GetLeader()[i]->GetIndex(), OBJECT->GetLeader()[i]->GetTargetIndex());
+				if (as.Search())
+				{
+					cout << "current : " << OBJECT->GetLeader()[i]->GetIndex() << "target : " << OBJECT->GetLeader()[i]->GetTargetIndex() << endl;
+					OBJECT->GetLeader()[i]->SetPath(as.GetPath());
+					//m_path = as.GetRoute();
+			cout << "size : " << OBJECT->GetLeader()[i]->GetPath().size()<<endl;
+				}
+			}
 
-			D3DXVECTOR3 posOnMap = D3DXVECTOR3(-1000, -1000, -1000);	//	쓰레기값 넣어두기. 맵 범위 내 찍지 않았으면 이 쓰레기값 그대로 나옴.
-
-			float minX = MAP->GetMinX();	// IsCollidedWithMesh의 예외처리를 위한 변수
-			float maxX = MAP->GetMaxX();	// IsCollidedWithMesh의 예외처리를 위한 변수
-
-			cRay::IsCollidedWithMesh(INPUT->GetMousePosVector2(), MAP->GetMesh(), cellIndex, posOnMap, minX, maxX);
-			
-			cout << cellIndex << endl;
-			
-			int nodeIndex = (float)cellIndex * 0.5f;
-
-			if (m_graph->GetNode(nodeIndex)->Active() != false) cout << "Active !!" << endl;
-			else cout << "Non-Active !!" << endl;
 		}
-		
+
+
 	}
 }
 
 void cAstarManager::Release()
 {
-	if(m_graph)SAFE_DELETE(m_graph);
+	m_isMapLoadingComplete = false;
+	if (m_graph)SAFE_DELETE(m_graph);
+
 }
 
 void cAstarManager::Render()
 {
 	m_graph->Render();
+}
+
+bool cAstarManager::GetCursorIndex(int & TargetIndex)
+{
+	if (m_graph)
+	{
+		int cellIndex = -1;	// 메쉬 충돌 없으면 인덱스는 -1. 아니라면 해당 인덱스 나올 것임.
+
+		D3DXVECTOR3 posOnMap = D3DXVECTOR3(-1000, -1000, -1000);	//	쓰레기값 넣어두기. 맵 범위 내 찍지 않았으면 이 쓰레기값 그대로 나옴.
+
+		float minX = MAP->GetMinX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+		float maxX = MAP->GetMaxX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+
+		cRay::IsCollidedWithMesh(INPUT->GetMousePosVector2(), MAP->GetMesh(), cellIndex, posOnMap, minX, maxX);
+		//cout << "posOnMap.x : " << posOnMap.x << "posOnMap.z : " << posOnMap.z<< endl;
+		if (m_graph->GetNode(cellIndex)->Active() != false) { cout << "Active !! cellindex : " <<cellIndex<<endl; TargetIndex = cellIndex; return true; }
+		else { cout << "Non-Active !!" << endl; return false; }
+
+	}
+	return false;
 }

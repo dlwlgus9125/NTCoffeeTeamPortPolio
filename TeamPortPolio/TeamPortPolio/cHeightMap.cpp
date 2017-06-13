@@ -127,7 +127,6 @@ bool cHeightMap::GetIndex(IN float x, IN float z, OUT int& index)
 	int nRow = nZ + m_nCellPerRow / m_fCellSpace * 0.5f;
 
 	index = nRow * m_nCellPerRow + nCol;
-
 	return true;
 }
 
