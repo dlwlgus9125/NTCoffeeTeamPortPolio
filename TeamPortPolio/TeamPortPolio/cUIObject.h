@@ -11,8 +11,7 @@ protected:
 	D3DXMATRIXA16 m_matWorld;
 	SYNTHESIZE(D3DXVECTOR3, m_vPosition, Position);
 	SYNTHESIZE(cUIObject*, m_pParent, Parent);
-	SYNTHESIZE(ST_SIZE_UV, m_stSize_UV, SizeUV);
-	SYNTHESIZE(ST_SIZE_WH, m_stSize_WH, SizeWH);
+	SYNTHESIZE(ST_SIZEN, m_stSize, Size);
 
 	SYNTHESIZE(int, m_nTag, Tag);
 

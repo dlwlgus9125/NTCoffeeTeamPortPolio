@@ -2,7 +2,7 @@
 #include "cUIObject.h"
 
 
-cUIObject::cUIObject() : m_vPosition(0,0,0), m_pParent(NULL), m_stSize_UV(0,0), m_stSize_WH(0,0),m_isHidden(false), m_nTag(0)
+cUIObject::cUIObject() : m_vPosition(0,0,0), m_pParent(NULL), m_stSize(0,0), m_isHidden(false), m_nTag(0)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -87,7 +87,7 @@ D3DXVECTOR2 cUIObject::LeftVCenter()
 {
 	D3DXVECTOR2 leftVCenter;
 	leftVCenter.x = m_vPosition.x;
-	leftVCenter.y = m_vPosition.y + m_stSize_WH.nHeight * 0.5f;
+	leftVCenter.y = m_vPosition.y + m_stSize.nHeight * 0.5f;
 
 	return leftVCenter;
 }
@@ -95,15 +95,15 @@ D3DXVECTOR2 cUIObject::LeftVCenter()
 D3DXVECTOR2 cUIObject::RightBottom()
 {
 	D3DXVECTOR2 rightBottom;
-	rightBottom.x = m_vPosition.x + m_stSize_WH.nWidth;
-	rightBottom.y = m_vPosition.y + m_stSize_WH.nHeight;
+	rightBottom.x = m_vPosition.x + m_stSize.nWidth;
+	rightBottom.y = m_vPosition.y + m_stSize.nHeight;
 	return rightBottom;
 }
 
 D3DXVECTOR2 cUIObject::RightVCenter()
 {
 	D3DXVECTOR2 rightVCenter;
-	rightVCenter.x = m_vPosition.x + m_stSize_WH.nWidth;
-	rightVCenter.y = m_vPosition.y + m_stSize_WH.nHeight * 0.5f;
+	rightVCenter.x = m_vPosition.x + m_stSize.nWidth;
+	rightVCenter.y = m_vPosition.y + m_stSize.nHeight * 0.5f;
 	return rightVCenter;
 }

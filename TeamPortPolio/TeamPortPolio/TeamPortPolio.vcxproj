@@ -178,6 +178,7 @@
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
+    <ClInclude Include="cUIButton.h" />
     <ClInclude Include="cUIImage.h" />
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />
+    <ClCompile Include="cUIButton.cpp" />
     <ClCompile Include="cUIImage.cpp" />
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
