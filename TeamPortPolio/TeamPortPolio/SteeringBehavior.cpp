@@ -99,7 +99,6 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 	
 	D3DXVECTOR3 vToTarget = targetPos - vPos;
 	float distance = MATH->SqrMagnitude(vToTarget);
-	//cout << "distance : " << distance << endl;
 	if (distance > EPSILON)
 	{
 
@@ -108,17 +107,9 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.01f, 0.005f, 0.4f);
+		movePos += MATH->Clamp(Entity()->Forward()*0.02f, 0.005f, 0.4f);
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
-		/*const float multiplier = 2;
-		float speed = MATH->Min(distance * multiplier, Entity()->MaxSpeed());
-		D3DXVECTOR3 targetVelocity;
-		D3DXVec3Normalize(&vToTarget, &vToTarget);
-		targetVelocity = vToTarget*speed;
-		AddForce(targetVelocity - Entity()->Velocity());*/
-		//cout << "targetVelocity : " << targetVelocity.x << ", " << targetVelocity.y << ", " << targetVelocity.z << endl;
-		//cout << MATH->SqrMagnitude(movePos - prevPos)*100 << endl;
 		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
 
 	}

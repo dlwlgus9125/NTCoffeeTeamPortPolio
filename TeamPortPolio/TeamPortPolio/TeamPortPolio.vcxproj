@@ -245,6 +245,7 @@
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
     <ClCompile Include="Leader_State_Idle.cpp" />
+    <ClCompile Include="Leader_State_Pursuit.cpp" />
     <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="stdafx.cpp">

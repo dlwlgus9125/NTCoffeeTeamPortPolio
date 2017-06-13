@@ -4,7 +4,7 @@
 
 cCharacter::cCharacter()
 {
-
+	m_targetObject = NULL;
 }
 
 

@@ -22,11 +22,11 @@ public:
 	void Init();
 	void Update(float deltaTime);
 	void Render();
-
+	
 
 	//Scene에서 부대 이동을 관리할 겟함수
 	cLeader*       GetUnitLeader() { return m_unitLeader; }
-
+	void           SetUnitLeaderTargetIndex(int index);
 	
 };
 

@@ -110,7 +110,9 @@ void cGameManager::Update()
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
-			if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+			
+			
 		}
 
 	}
@@ -122,7 +124,6 @@ void cGameManager::Render()
 	
 	if(!isOkView)
 		pControl->Run();
-
 	else if (isOkView)
 	{
 		D3DDevice->Clear(NULL,

@@ -11,6 +11,9 @@ cSkinnedMesh::cSkinnedMesh(cSkinnedMesh* pSkinnedMesh)
 	, m_pEffect(NULL)
 	, m_vPosition(0, 0, 0)
 	, m_vForward(0, 0, 0)
+	, m_fBlendTime(0.3f)
+	, m_fPassedBlendTime(0.0f)
+	, m_isAnimBlend(false)
 {
 	//cSkinnedMesh* pSkinnedMesh = pSkinnedMesh;
 
@@ -35,6 +38,9 @@ cSkinnedMesh::cSkinnedMesh()
 	, m_dwWorkingPaletteSize(0)
 	, m_pmWorkingPalette(NULL)
 	, m_pEffect(NULL)
+	, m_fBlendTime(0.3f)
+	, m_fPassedBlendTime(0.0f)
+	, m_isAnimBlend(false)
 {
 	m_currentIndex = 0;
 }
@@ -87,15 +93,33 @@ void cSkinnedMesh::UpdateAndRender()
 {
 	if (m_pAnimController)
 	{
+		if (m_isAnimBlend)
+		{
+			m_fPassedBlendTime += TIME->GetElapsedTime();
+			if (m_fPassedBlendTime >= m_fBlendTime)
+			{
+				m_isAnimBlend = false;
+				m_pAnimController->SetTrackWeight(0, 1.0f);
+				m_pAnimController->SetTrackEnable(1, false);
+			}
+			else
+			{
+				float fWeight = m_fPassedBlendTime / m_fBlendTime;
+				m_pAnimController->SetTrackWeight(0, fWeight);
+				m_pAnimController->SetTrackWeight(1, 1.0f - fWeight);
+
+			}
+		}
 		m_pAnimController->AdvanceTime(TIME->GetElapsedTime(), NULL);
 	}
 
 	if (m_pRootFrame)
 	{
-		D3DXMATRIXA16 mat, matR, matT;
+		D3DXMATRIXA16 mat,matS, matR, matT;
+		D3DXMatrixScaling(&matS, 4.0f, 4.0f, 4.0f);
 		D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_vForward));
-		mat = matR*matT;
+		mat =matS* matR*matT;
 		Update(m_pRootFrame, &mat);
 		Render(m_pRootFrame);
 	}
@@ -165,7 +189,7 @@ void cSkinnedMesh::Render(ST_BONE* pBone /*= NULL*/)
 
 			UINT uiPasses, uiPass;
 
-			
+
 			// run through each pass and draw
 			m_pEffect->Begin(&uiPasses, 0);
 			for (uiPass = 0; uiPass < uiPasses; ++uiPass)
@@ -248,6 +272,7 @@ LPD3DXEFFECT cSkinnedMesh::LoadEffect(char* szFilename)
 
 void cSkinnedMesh::Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent)
 {
+	
 	pCurrent->CombinedTransformationMatrix = pCurrent->TransformationMatrix;
 	if (pmatParent)
 	{
@@ -320,7 +345,7 @@ void cSkinnedMesh::SetAnimationIndex(int nIndex)
 
 void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 {
-	/*m_isAnimBlend = true;
+	m_isAnimBlend = true;
 	m_fPassedBlendTime = 0.0f;
 	int num = m_pAnimController->GetNumAnimationSets();
 	if (nIndex > num)nIndex = nIndex%num;
@@ -329,11 +354,11 @@ void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	LPD3DXANIMATIONSET pNextAnimSet = NULL;
 
 	D3DXTRACK_DESC stTrackDesc;
-
 	m_pAnimController->GetTrackDesc(0, &stTrackDesc);
+
 	m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
 	m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
-	 m_pAnimController->SetTrackDesc(1, &stTrackDesc);
+	m_pAnimController->SetTrackDesc(1, &stTrackDesc);
 
 	m_pAnimController->GetAnimationSet(nIndex, &pNextAnimSet);
 	m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);
@@ -343,12 +368,11 @@ void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_pAnimController->SetTrackWeight(0, 0.0f);
 	m_pAnimController->SetTrackWeight(1, 1.0f);
 
+
 	SAFE_RELEASE(pPrevAnimSet);
 	SAFE_RELEASE(pNextAnimSet);
 
-	m_fPassedTime = 0.0f;
 	m_currentIndex = nIndex;
-	m_pAnimController->GetAnimationSet(m_currentIndex, &m_currentAnim);*/
 }
 
 void cSkinnedMesh::Destroy()
