@@ -71,7 +71,7 @@ void cUIManager::Change(int sceneID)
 
 void cUIManager::PressKey()
 {
-	if (INPUT->IsKeyDown(VK_TAB))
+	if (INPUT->IsKeyDown(VK_CONTROL))
 	{
 		bool isHidden = m_pMiniMap->GetHidden();
 		m_pMiniMap->SetHidden(!isHidden);

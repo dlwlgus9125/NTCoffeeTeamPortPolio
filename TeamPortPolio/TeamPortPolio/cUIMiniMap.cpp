@@ -54,7 +54,7 @@ int cUIMiniMap::GetIndex()
 		int col = (int)(pos.x * m_nCellPerRow / m_stSize_WH.nWidth) % m_nCellPerRow;
 		int row = (int)(pos.y * m_nCellPerRow / m_stSize_WH.nHeight) % m_nCellPerRow;
 
-		row = m_nCellPerRow - row;	// 맵이 -x, -z쪽부터 좌측으로 그려지기 때문에 row를 거꾸로 함.
+		row = (m_nCellPerRow - 1) - row;	// 맵이 -x, -z쪽부터 좌측으로 그려지기 때문에 row를 거꾸로 함.
 
 		return row * m_nCellPerRow + col;
 	}
