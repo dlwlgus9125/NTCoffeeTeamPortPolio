@@ -82,15 +82,7 @@ void cPlayer::Update(float deltaTime)
 
 
 	int i = m_unitLeader->GetTargetIndex();
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		m_unitLeader->PathClear();
-		if (ASTAR->GetCursorIndex(i))
-		{
-			m_unitLeader->SetTargetIndex(i);
-			cout << "targetInd : " << i << endl;
-		}
-	}
+
 
 	D3DXMATRIXA16 matR;
 	D3DXMatrixIdentity(&matR);
@@ -149,5 +141,15 @@ void cPlayer::Render()
 		{
 			m_pSkinnedMesh->UpdateAndRender();
 		}
+	}
+}
+
+void cPlayer::SetUnitLeaderTargetIndex(int index)
+{
+	m_unitLeader->PathClear();
+	if (ASTAR->GetGraph()->GetNode(index)->Active())
+	{
+		m_unitLeader->SetTargetIndex(index);
+		cout << "targetInd : " << index << endl;
 	}
 }

@@ -86,7 +86,7 @@ void cAstarManager::Update()
 	{
 		SetObjectIndex();
 		SetLeaderPath();
-		SetTargetOfLeader;
+		SetTargetOfLeader();
 	}
 }
 

@@ -51,8 +51,8 @@ void cTitleScene::OnUpdate()
 	UI->GetEvent(indexInMiniMap);
 	if (indexInMiniMap > 0)
 	{
-		int a = 0;
-
+		OBJECT->GetPlayer()->SetUnitLeaderTargetIndex(indexInMiniMap);
+		cout << "UI Index : " << indexInMiniMap << endl;
 	}
 	// <<
 
