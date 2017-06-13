@@ -180,6 +180,7 @@
     <ClInclude Include="cTownScene.h" />
     <ClInclude Include="cUIImage.h" />
     <ClInclude Include="cUIManager.h" />
+    <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="cTownScene.cpp" />
     <ClCompile Include="cUIImage.cpp" />
     <ClCompile Include="cUIManager.cpp" />
+    <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />

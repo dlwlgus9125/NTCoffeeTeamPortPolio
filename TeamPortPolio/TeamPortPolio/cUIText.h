@@ -11,6 +11,6 @@ public:
 
 	virtual void Render(LPD3DXSPRITE pSprite);
 
-	void Setup_Text(string text, FONT_TAG tag = FONT_DEF);
+	void Setup_Text(string text, int width, int height, FONT_TAG tag = FONT_DEF);
 };
 

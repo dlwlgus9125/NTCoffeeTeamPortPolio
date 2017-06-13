@@ -1,7 +1,7 @@
 #pragma once
 #include "Singleton.h"
 
-#define FONT cFontManager::GetInstance()
+#define FONT cFontManager::Instance()
 
 class cFontManager : public Singleton<cFontManager>
 {

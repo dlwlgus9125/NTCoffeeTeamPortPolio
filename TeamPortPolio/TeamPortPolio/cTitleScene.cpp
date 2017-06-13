@@ -7,22 +7,21 @@
 
 
 cTitleScene::cTitleScene() :
-	m_pSprite(NULL),
-	m_pTexture(NULL)
-{
-	D3DXCreateSprite(D3DDevice, &m_pSprite);
+	m_pSprite(NULL)
+{	
 }
 
 
 cTitleScene::~cTitleScene()
 {
 	SAFE_RELEASE(m_pSprite);
-	SAFE_RELEASE(m_pTexture);
 }
 
 void cTitleScene::OnEnter()
 {
+	D3DXCreateSprite(D3DDevice, &m_pSprite);
 	MAP->Init("TESTMAP.txt");
+	UI->Change(SCENE_TITLE);
 	cPlayer* pPlayer = new cPlayer(D3DXVECTOR3(-8,0,30), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
 	pPlayer->Init();
 	
@@ -34,17 +33,30 @@ void cTitleScene::OnEnter()
 void cTitleScene::OnUpdate()
 {
 	MAP->Update();
-	OBJECT->Update(TIME->DeltaTime());
-	
+	UI->Update(TIME->DeltaTime());
+
+	// >> UI의 이벤트 정보 
+	int indexInMiniMap;
+	UI->GetEvent(indexInMiniMap);
+	if (indexInMiniMap > 0)
+	{
+		int a = 0;
+
+	}
+	// <<
+
+	OBJECT->Update(TIME->DeltaTime());	
 }
 
 void cTitleScene::OnExit()
 {
+	SAFE_RELEASE(m_pSprite);
 }
 
 void cTitleScene::OnRender()
 {
 	MAP->Render();
+	UI->Render(m_pSprite);
 	OBJECT->Render();
 	
 }

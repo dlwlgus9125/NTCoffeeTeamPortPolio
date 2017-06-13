@@ -158,6 +158,9 @@
     <Filter Include="00. Manager\11. cFontManager">
       <UniqueIdentifier>{889df18f-b33d-47a4-8fe1-2ee7850a9708}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Manager\07. cUIManager\04. cUIMiniMap">
+      <UniqueIdentifier>{3ef3e8bc-2305-46f2-8364-1f156be2026e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -321,6 +324,9 @@
     <ClInclude Include="cUIText.h">
       <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClInclude>
+    <ClInclude Include="cUIMiniMap.h">
+      <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -470,6 +476,9 @@
     </ClCompile>
     <ClCompile Include="cUIText.cpp">
       <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIMiniMap.cpp">
+      <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
