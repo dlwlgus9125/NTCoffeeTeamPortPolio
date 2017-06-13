@@ -9,6 +9,7 @@ cLeader::cLeader(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 	m_fRotY = 0.0f;
 	m_CharacterEntity->SetForward(-m_CharacterEntity->Forward());
 	m_targetIndex = m_currentIndex;
+	m_camp = CAMP_NONE;
 }
 
 
@@ -69,9 +70,10 @@ void cLeader::Init()
 	m_pFsm = new cStateMachine<cLeader*>(this);
 	m_pFsm->Register(LEADER_STATE_STATE_IDLE, new Leader_State_Idle());
 	m_pFsm->Register(LEADER_STATE_STATE_WALK, new Leader_State_Walk());
+	m_pFsm->Register(LEADER_STATE_STATE_PURSUIT, new Leader_State_Pursuit());
 	m_pFsm->Play(LEADER_STATE_STATE_IDLE);
-	m_meshSphere.m_vCenter = m_CollideSphere.vCenter;
-	D3DXCreateSphere(D3DDevice, m_CollideSphere.fRadius, 10, 10, &m_meshSphere.m_pMeshSphere, NULL);
+	m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
+	D3DXCreateSphere(D3DDevice, m_arrangeCollideSphere.fRadius, 10, 10, &m_meshSphere.m_pMeshSphere, NULL);
 	ZeroMemory(&m_meshSphere.m_stMtlSphere, sizeof(D3DMATERIAL9));
 	m_meshSphere.m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_meshSphere.m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
@@ -85,23 +87,16 @@ void cLeader::Update(float deltaTime)
 
 	D3DXVECTOR3 pos = m_CharacterEntity->Pos();
 	
-	MAP->GetHeight(pos.x, pos.y, pos.z);
-	m_CharacterEntity->SetPos(pos);
-	int i = GetTargetIndex();
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
-	{
-		PathClear();
-		if (ASTAR->GetCursorIndex(i))
-		{
-			SetTargetIndex(i);
-			cout << "targetInd : " << i << endl;
-		}
-	}
-	CAMERA->SetLookAt(pos, 0);
+	//MAP->GetHeight(pos.x, pos.y, pos.z);
+	//m_CharacterEntity->SetPos(pos);
+	
+	//CAMERA->SetLookAt(pos, 0);
 	m_pFsm->Update(deltaTime);
 	//if (INPUT->IsKeyPress('1'))SetRectOffset();
 	//if (INPUT->IsKeyPress('2'))SetTriOffset();
-	m_meshSphere.m_vCenter = m_CollideSphere.vCenter;
+	m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
+
+	
 }
 
 void cLeader::Render()
@@ -112,7 +107,7 @@ void cLeader::Render()
 	D3DXMatrixIdentity(&matR);
 	D3DXMatrixIdentity(&matT);
 
-	D3DXMatrixTranslation(&matT, m_CollideSphere.vCenter.x, m_CollideSphere.vCenter.y, m_CollideSphere.vCenter.z);
+	D3DXMatrixTranslation(&matT, m_meshSphere.m_vCenter.x, m_meshSphere.m_vCenter.y, m_meshSphere.m_vCenter.z);
 	matWorld = matR*matT;
 
 	
@@ -131,6 +126,7 @@ void cLeader::AddUnit(cUnit * pUnit)
 	pUnit->Init();
 	m_vectorUnit.push_back(pUnit);
 	OBJECT->AddObject(pUnit);
+	OBJECT->AddCharacter(pUnit);
 	OBJECT->AddEntity(pUnit->GetCharacterEntity());
 }
 

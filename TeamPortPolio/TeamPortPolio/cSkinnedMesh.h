@@ -19,6 +19,11 @@ private:
 	D3DXVECTOR3					m_vPosition;
 	D3DXVECTOR3					m_vForward;
 	int                         m_currentIndex;
+
+	//Blend¿ë
+	float                       m_fBlendTime;
+	float                       m_fPassedBlendTime;
+	bool                        m_isAnimBlend;
 public:
 	cSkinnedMesh(cSkinnedMesh* pSkinnedMesh);
 	~cSkinnedMesh(void);

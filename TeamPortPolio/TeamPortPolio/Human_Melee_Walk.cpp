@@ -3,7 +3,7 @@
 
 void Human_State_Walk::OnBegin(cUnit * pUnit)
 {
-	pUnit->GetMesh()->SetAnimationIndex(FG_BATTLEWALK);
+	pUnit->GetMesh()->SetAnimationIndexBlend(FG_BATTLEWALK);
 }
 
 void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)

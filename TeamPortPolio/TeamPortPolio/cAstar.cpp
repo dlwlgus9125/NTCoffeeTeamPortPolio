@@ -31,7 +31,7 @@ bool cAstar::Search()
 				float gCost = m_cost[pEdge->From()] + pEdge->Cost();
 				D3DXVECTOR3 length = pTargetNode->Pos() - pNode->Pos();
 				float hCost = pow(length.x, 2) + pow(length.z, 2);
-				float totalCost = gCost + hCost;
+				float totalCost = gCost*0.5f + hCost;
 				if (totalCost < m_cost[pEdge->To()])
 				{
 					m_cost[pEdge->To()] = totalCost;

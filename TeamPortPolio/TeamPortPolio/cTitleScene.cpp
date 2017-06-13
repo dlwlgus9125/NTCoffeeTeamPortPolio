@@ -22,12 +22,23 @@ cTitleScene::~cTitleScene()
 
 void cTitleScene::OnEnter()
 {
-	MAP->Init("TESTMAP.txt");
+	MAP->Init("TESTMAP3.txt");
 	cPlayer* pPlayer = new cPlayer(ASTAR->GetGraph()->GetNode(16001)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
 	pPlayer->Init();
-	
+	OBJECT->AddCharacter(pPlayer);
+
+
+
 	OBJECT->AddObject(pPlayer);
 	OBJECT->SetPlayer(pPlayer);
+
+
+	cLeader* pLeader = new cLeader(ASTAR->GetGraph()->GetNode(11581)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	pLeader->Init();
+	pLeader->SetCamp(CAMP_ENEMY1);
+	pLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(11581)->Id());
+	OBJECT->AddObject(pLeader);
+	OBJECT->AddLeader(pLeader);
 	Setup_DirLight();
 }
 

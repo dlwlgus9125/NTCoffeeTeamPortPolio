@@ -9,6 +9,7 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
+	m_unitLeader->SetCamp(CAMP_PLAYER);
 	m_unitLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(16001)->Id());
 	OBJECT->AddObject(m_unitLeader);
 	OBJECT->AddLeader(m_unitLeader);
@@ -33,7 +34,7 @@ void cPlayer::Init()
 	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
 
-	
+
 
 }
 
@@ -79,6 +80,18 @@ void cPlayer::Update(float deltaTime)
 		}
 	}
 
+
+	int i = m_unitLeader->GetTargetIndex();
+	if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	{
+		m_unitLeader->PathClear();
+		if (ASTAR->GetCursorIndex(i))
+		{
+			m_unitLeader->SetTargetIndex(i);
+			cout << "targetInd : " << i << endl;
+		}
+	}
+
 	D3DXMATRIXA16 matR;
 	D3DXMatrixIdentity(&matR);
 	D3DXMatrixRotationY(&matR, m_fRotY);
@@ -99,22 +112,28 @@ void cPlayer::Update(float deltaTime)
 
 	m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
 
-	if (0.01f<MATH->Distance(prevPos, movePos) && MATH->Distance(prevPos, movePos)<=0.03f)
+	if (0.01f < MATH->Distance(prevPos, movePos) && MATH->Distance(prevPos, movePos) <= 0.03f)
 	{
-		m_pSkinnedMesh->SetAnimationIndex(FG_WALK);
+		if (m_pSkinnedMesh->GetIndex() != FG_WALK)m_pSkinnedMesh->SetAnimationIndexBlend(FG_WALK);
 	}
-	else if (0.03f<MATH->Distance(prevPos, movePos) )
+	else if (0.03f < MATH->Distance(prevPos, movePos))
 	{
-		m_pSkinnedMesh->SetAnimationIndex(FG_RUN);
+		if (m_pSkinnedMesh->GetIndex() != FG_RUN)m_pSkinnedMesh->SetAnimationIndexBlend(FG_RUN);
 	}
 	else
 	{
-		m_pSkinnedMesh->SetAnimationIndex(FG_STAND);
+		if (m_pSkinnedMesh->GetIndex() != FG_STAND)m_pSkinnedMesh->SetAnimationIndexBlend(FG_STAND);
+	}
+
+	if (INPUT->IsKeyDown(VK_SPACE))
+	{
+		if (m_pSkinnedMesh->GetIndex() != FG_SHEILDUP) { m_pSkinnedMesh->SetAnimationIndexBlend(FG_SHEILDUP); }
+
 	}
 
 
 	CAMERA->SetLookAt(movePos, m_fRotY);
-	
+
 
 	if (INPUT->IsKeyPress('1'))m_unitLeader->SetRectOffset();
 	if (INPUT->IsKeyPress('2'))m_unitLeader->SetTriOffset();

@@ -7,8 +7,14 @@ enum LEADER_STATE
 {
 	LEADER_STATE_STATE_IDLE,
 	LEADER_STATE_STATE_WALK,
-	LEADER_STATE_STATE_ATTACK,
+	LEADER_STATE_STATE_PURSUIT,
 	LEADER_STATE_STATE_DEFENCE,
+};
+enum CAMP_STATE
+{
+	CAMP_PLAYER,
+	CAMP_ENEMY1,
+	CAMP_NONE,
 };
 
 class cLeader :
@@ -23,6 +29,9 @@ class cLeader :
 	int            m_targetIndex;
 	vector<int>    m_path;
 	MeshSpere      m_meshSphere;
+	CAMP_STATE     m_camp;
+
+
 public:
 	cLeader(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
 	~cLeader();
@@ -42,8 +51,8 @@ public:
 	IEntity*       GetUnitLeader() { return m_unitLeader; }
 	vector<cUnit*> GetUnits() { return m_vectorUnit; }
 
-	int              GetIndex() { return m_currentIndex; }
-	void             SetIndex(int i) { m_currentIndex = i; }
+	void             SetCamp(int camp) { m_camp = (CAMP_STATE)camp; }
+	CAMP_STATE       GetCamp() { return m_camp; }
 	void             SetPath(vector<int> path) { m_path = path; }
 	void             PathClear() { m_path.clear(); }
 	vector<int>      GetPath() { return m_path; }

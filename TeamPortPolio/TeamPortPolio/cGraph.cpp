@@ -78,23 +78,29 @@ void cGraph::Render()
 	D3DDevice->GetTransform(D3DTS_VIEW, &view);
 	D3DDevice->GetTransform(D3DTS_PROJECTION, &proj);
 	out = view * proj;
+	
 	for (int i = 0; i < m_nodes.size(); i++)
 	{
 		if (m_nodes[i]->Active() == TRUE)
 		{
-			EdgeList list = GetEdgeList(i);
-			for (EdgeListIter it = list.begin(); it != list.end(); it++)
+			if (FRUSTUM->IsIn(&m_nodes[i]->GetSphere()))
 			{
-				D3DXVECTOR3 pos[2];
-				pos[0] = m_nodes[(*it)->From()]->Pos();
-				pos[1] = m_nodes[(*it)->To()]->Pos();
-				m_line->Begin();
+				EdgeList list = GetEdgeList(i);
+				for (EdgeListIter it = list.begin(); it != list.end(); it++)
+				{
+					D3DXVECTOR3 pos[2];
+					pos[0] = m_nodes[(*it)->From()]->Pos();
+					pos[1] = m_nodes[(*it)->To()]->Pos();
 
-				m_line->DrawTransform(pos, 2, &out, D3DXCOLOR(255, 255, 255, 1));
+					m_line->Begin();
+					m_line->DrawTransform(pos, 2, &out, D3DXCOLOR(255, 255, 255, 1));
+					m_line->End();
 
-				m_line->End();
+
+				}
 			}
 		}
 	}
+	
 
 }
