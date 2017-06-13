@@ -60,13 +60,15 @@ void cGameManager::Init()
 
 	TIME->Init(60);
 	TESTMAP->Setup();
+	UI->Setup();
 	INPUT->Init();
 	OBJECT->Init();
 	OBJECTDB->Setup();
-	SCENE->Register(0, new cTitleScene());
-	SCENE->Register(1, new cTownScene());
-	SCENE->StartScene(0);
+	SCENE->Register(SCENE_TITLE, new cTitleScene());
+	SCENE->Register(SCENE_TOWN, new cTownScene());
+	SCENE->StartScene(SCENE_TITLE);
 	CAMERA->Setup();
+
 	
 	//<<
 }

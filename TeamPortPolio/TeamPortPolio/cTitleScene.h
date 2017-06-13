@@ -11,11 +11,7 @@
 class cTitleScene : public cIScene
 {
 private:
-	LPD3DXSPRITE       m_pSprite;
-	LPDIRECT3DTEXTURE9 m_pTexture;
-	D3DXIMAGE_INFO     m_stImageInfo;
-
-	
+	LPD3DXSPRITE       m_pSprite;	
 
 public:
 	cTitleScene();

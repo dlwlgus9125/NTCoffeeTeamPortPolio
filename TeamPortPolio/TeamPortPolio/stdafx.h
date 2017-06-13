@@ -61,7 +61,7 @@ enum SCENE_TAG
 
 enum UI_TAG
 {
-	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, 
+	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, 
 };
 
 enum FONT_TAG
@@ -93,6 +93,10 @@ extern LPD3DXSPRITE g_Sprite;
 #define ANGLE_TO_RADIAN		0.0174533f
 #define RADIAN_TO_ANGLE		57.2958f
 
+#define WND_WIDTH 1280
+#define WND_HEIGHT 768
+
+#define MAX_LOADSTRING 100
 
 struct ST_PN_VERTEX
 {
@@ -167,12 +171,20 @@ struct ST_SPHERE
 	float fRadius;
 };
 
-struct ST_SIZEN
+struct ST_SIZE_WH
 {
 	int nWidth;
 	int nHeight;
-	ST_SIZEN() : nWidth(0), nHeight(0) {}
-	ST_SIZEN(int _w, int _h) : nWidth(_w), nHeight(_h) {}
+	ST_SIZE_WH() : nWidth(0), nHeight(0) {}
+	ST_SIZE_WH(int _w, int _h) : nWidth(_w), nHeight(_h) {}
+};
+
+struct ST_SIZE_UV
+{
+	float fU;
+	float fV;
+	ST_SIZE_UV() : fU(0), fV(0) {}
+	ST_SIZE_UV(float _u, float _v) : fU(_u), fV(_v) {}
 };
 
 enum MODE_STATE

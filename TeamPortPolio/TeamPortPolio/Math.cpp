@@ -45,6 +45,15 @@ bool Math::IsCollided(MeshSpere c0, MeshSpere c1)
 	return SqrDistance(c0.m_vCenter, c1.m_vCenter) <= totalRadius * totalRadius;
 }
 
+bool Math::IsCollided(D3DXVECTOR2 cursorPos, D3DXVECTOR2 leftTop, D3DXVECTOR2 rightBottom)
+{
+	if (cursorPos.x >= leftTop.x &&
+		cursorPos.y >= leftTop.y &&
+		cursorPos.x <= rightBottom.x &&
+		cursorPos.y <= rightBottom.y) return true;
+	
+	return false;
+}
 
 // 원과 원의 겹쳐진 벡터 반환
 D3DXVECTOR3 Math::GetOverlappedVector(ST_SPHERE from, ST_SPHERE to)

@@ -25,8 +25,9 @@ void cUIText::Render(LPD3DXSPRITE pSprite)
 }
 
 
-void cUIText::Setup_Text(string text, FONT_TAG tag)
+void cUIText::Setup_Text(string text, int width, int height, FONT_TAG tag)
 {
 	m_sText = text;
 	m_eFont = tag;
+	m_stSize_WH = ST_SIZE_WH(width, height);
 }
