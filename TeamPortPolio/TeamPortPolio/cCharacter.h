@@ -3,12 +3,21 @@
 #include "cSkinnedMesh.h"
 #include "cObject.h"
 
+
+struct CharacterStatus
+{
+	float m_HP;
+	float m_Damage;
+
+};
+
 class cCharacter : public cObject
 {
 protected:
 	ISteeringEntity* m_CharacterEntity;
 	ST_SPHERE        m_CollideSphere;
 	ST_SPHERE        m_arrangeCollideSphere;
+	ST_SPHERE        m_attackCollider;
 	cSkinnedMesh*    m_pSkinnedMesh;
 	MODE_STATE       m_currentMode;
 	
@@ -39,5 +48,7 @@ public:
 	cObject*         GetTargetObject() { return m_targetObject; }
 	void             SetTargetObject(cObject* object) { m_targetObject = object; }
 
+	D3DXMATRIXA16 SetAttackCollider();
+	ST_SPHERE     GetAttackCollider() { return m_attackCollider; }
 };
 

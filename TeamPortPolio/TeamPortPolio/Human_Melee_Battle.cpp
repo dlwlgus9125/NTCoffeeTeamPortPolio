@@ -64,7 +64,11 @@ void Human_Melee_Battle::OnUpdate(cUnit * pUnit, float deltaTime)
 
 				if (pUnit->GetMesh()->GetIndex() != FG_ATTACK1)pUnit->GetMesh()->SetAnimationIndexBlend(FG_ATTACK1);
 				else if (pUnit->GetMesh()->GetIndex() == FG_ATTACK1)pUnit->GetMesh()->SetAnimationIndexBlend(FG_ATTACK2);
-				//else if (pUnit->GetMesh()->GetIndex() == FG_ATTACK2)pUnit->GetMesh()->SetAnimationIndexBlend(FG_ATTACK3);
+				
+			}
+			if (MATH->IsCollided(pUnit->GetAttackCollider(), ((cCharacter*)BattleTarget)->GetSphere()))
+			{
+				if (((cCharacter*)BattleTarget)->GetMesh()->GetIndex() != FG_HIT)((cCharacter*)BattleTarget)->GetMesh()->SetAnimationIndexBlend(FG_HIT);
 			}
 		}
 		pUnit->GetCharacterEntity()->Steering()->ConstrainOverlap(OBJECT->GetEntities());

@@ -21,9 +21,14 @@ class cUnit :
 
 	//자신을 겨누고있는 최대 적의 수를 파악
 	vector<cUnit*> m_targetedEnemy;
+
+	//충돌판
+
+	MeshSpere      m_meshSphere;
 public:
 	cUnit(IEntity* pLeader, D3DXVECTOR3 offset);
-	~cUnit();
+	cUnit() {};
+	virtual	~cUnit();
 	cStateMachine<cUnit*>* FSM() { return m_pFsm; }
 	void Init();
 	void Update(float deltaTime);
@@ -48,5 +53,7 @@ public:
 		return false;
 	}
 	void ClearTargetedEnemy() { m_targetedEnemy.clear(); }
+
+	
 };
 

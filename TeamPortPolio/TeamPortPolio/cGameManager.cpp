@@ -133,7 +133,6 @@ void cGameManager::Render()
 			1.0f, 0);
 		D3DDevice->BeginScene();
 		TESTMAP->Render();
-		OBJECT->Render();
 		SCENE->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);

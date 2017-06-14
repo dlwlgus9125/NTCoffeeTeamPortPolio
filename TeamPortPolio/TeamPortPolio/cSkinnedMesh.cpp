@@ -30,6 +30,8 @@ cSkinnedMesh::cSkinnedMesh(cSkinnedMesh* pSkinnedMesh)
 		pSkinnedMesh->m_pAnimController->GetMaxNumEvents(),
 		&m_pAnimController);
 	m_currentIndex = 0;
+
+	FindBone(m_pRootFrame);
 }
 
 cSkinnedMesh::cSkinnedMesh()
@@ -275,10 +277,12 @@ void cSkinnedMesh::Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent)
 {
 	
 	pCurrent->CombinedTransformationMatrix = pCurrent->TransformationMatrix;
+	
 	if (pmatParent)
 	{
 		pCurrent->CombinedTransformationMatrix =
 			pCurrent->CombinedTransformationMatrix * (*pmatParent);
+
 	}
 
 	if (pCurrent->pFrameSibling)
@@ -300,7 +304,9 @@ void cSkinnedMesh::SetupBoneMatrixPtrs(ST_BONE* pBone)
 	// 프레임의 매트릭스를 ppBoneMatrixPtrs에 연결한다.
 	if (pBone->pMeshContainer)
 	{
+		
 		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
+
 		if (pBoneMesh->pSkinInfo)
 		{
 			LPD3DXSKININFO pSkinInfo = pBoneMesh->pSkinInfo;
@@ -312,14 +318,17 @@ void cSkinnedMesh::SetupBoneMatrixPtrs(ST_BONE* pBone)
 			for (DWORD i = 0; i < dwNumBones; ++i)
 			{
 				LPCSTR szBoneName = pSkinInfo->GetBoneName(i);
+				
 				if (szBoneName == NULL || strlen(szBoneName) == 0)
 					continue;
 				ST_BONE* pInfluence = (ST_BONE*)D3DXFrameFind(m_pRootFrame, szBoneName);
+
 				pBoneMesh->ppBoneMatrixPtrs[i] = &(pInfluence->CombinedTransformationMatrix);
 			}
 		}
 	}
 
+	
 	//재귀적으로 모든 프레임에 대해서 실행.
 	if (pBone->pFrameSibling)
 	{
@@ -383,6 +392,29 @@ void cSkinnedMesh::Destroy()
 	D3DXFrameDestroy((LPD3DXFRAME)m_pRootFrame, &ah);
 	SAFE_DELETE_ARRAY(m_pmWorkingPalette);
 	SAFE_RELEASE(m_pEffect);
+}
+
+void cSkinnedMesh::FindBone(ST_BONE * pBone)
+{
+	if (pBone->Name)
+	{
+		char* text = pBone->Name;
+
+		if ((string("Sword_2H_Broadsword_A_03_Bone08") == (string)text))
+		{
+			m_colliderBone = pBone;
+		}
+	}
+	//재귀적으로 모든 프레임에 대해서 실행.
+	if (pBone->pFrameSibling)
+	{
+		FindBone((ST_BONE*)pBone->pFrameSibling);
+	}
+
+	if (pBone->pFrameFirstChild)
+	{
+		FindBone((ST_BONE*)pBone->pFrameFirstChild);
+	}
 }
 
 void cSkinnedMesh::SetRandomTrackPosition()

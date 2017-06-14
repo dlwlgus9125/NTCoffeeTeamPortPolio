@@ -339,7 +339,9 @@
     <ClInclude Include="Player_State.h">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClInclude>
-    <ClInclude Include="cMeleeUnit.h" />
+    <ClInclude Include="cMeleeUnit.h">
+      <Filter>02. cCharacter\02. cUnit\00. cMeleeUnit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -511,7 +513,9 @@
     <ClCompile Include="Player_Walk.cpp">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
-    <ClCompile Include="cMeleeUnit.cpp" />
+    <ClCompile Include="cMeleeUnit.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. cMeleeUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">
