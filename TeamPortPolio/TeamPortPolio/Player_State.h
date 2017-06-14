@@ -20,7 +20,9 @@ public:
 
 	void OnEnd(cPlayer* pPlayer);
 
-	void StateChanger(cPlayer * pPlayer);
+	void StateChanger(cPlayer * pPlayer, D3DXVECTOR3 prevPos, D3DXVECTOR3 movePos);
+
+	void Move(cPlayer* pPlayer);
 };
 
 class Player_Attack : public IState<cPlayer*>

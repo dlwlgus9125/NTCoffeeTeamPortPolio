@@ -161,6 +161,9 @@
     <Filter Include="00. Manager\07. cUIManager\04. cUIMiniMap">
       <UniqueIdentifier>{3ef3e8bc-2305-46f2-8364-1f156be2026e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. cCharacter\01. cPlayer\01.cPlayer_State">
+      <UniqueIdentifier>{b986df2c-d74b-4237-af49-00b69e9f9d43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -331,7 +334,7 @@
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClInclude>
     <ClInclude Include="Player_State.h">
-      <Filter>02. cCharacter\01. cPlayer\01.Player</Filter>
+      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,17 +495,17 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClCompile>
-    <ClCompile Include="Player_Walk.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Idle.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.Player</Filter>
+    <ClCompile Include="Player_Attack.cpp">
+      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
     <ClCompile Include="Player_Defence.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.Player</Filter>
+      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
-    <ClCompile Include="Player_Attack.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.Player</Filter>
+    <ClCompile Include="Player_Idle.cpp">
+      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Walk.cpp">
+      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

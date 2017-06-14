@@ -23,7 +23,7 @@ private:
 	cLeader*       m_unitLeader;//부대이동을 담당할 멤버변수
 	cSkinnedMesh*  m_SkinnedMesh;
 	float          m_fRotY;
-
+	cStateMachine<cPlayer*>* m_pFsm;
 
 public:
 	cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
@@ -39,5 +39,6 @@ public:
 
 	// 추가
 	cStateMachine<cPlayer*>* FSM() { return m_pFsm; }
+	void SetUnitLeaderTargetIndex(int index);
 };
 

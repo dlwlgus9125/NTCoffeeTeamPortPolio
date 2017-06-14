@@ -3,16 +3,13 @@
 
 void Player_Idle::OnBegin(cPlayer* pPlayer)
 {
-	pPlayer->GetMesh()->SetAnimationIndex(P_STAND);
+	pPlayer->GetMesh()->SetAnimationIndexBlend(P_STAND);
 }
 
 void Player_Idle::OnUpdate(cPlayer* pPlayer, float deltaTime)
 {
 
-	if (INPUT->IsKeyPress(VK_W) ||
-		INPUT->IsKeyPress(VK_A) ||
-		INPUT->IsKeyPress(VK_S) ||
-		INPUT->IsKeyPress(VK_D))
+	if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_A))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_WALK);
 	}

@@ -7,6 +7,7 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 
 {
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
+	m_unitLeader = NULL;
 	/*m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
 	m_unitLeader->SetCamp(CAMP_PLAYER);
@@ -50,6 +51,30 @@ void cPlayer::Update(float deltaTime)
 	cCharacter::Update(deltaTime);
 
 	m_pFsm->Update(deltaTime);
+
+	D3DXVECTOR3 movePos = m_CharacterEntity->Pos();
+	MAP->GetHeight(movePos.x, movePos.y, movePos.z);
+	m_CharacterEntity->SetPos(movePos);
+
+	if (INPUT->IsKeyPress(VK_A))
+	{
+		m_fRotY -= 0.03;
+	}
+	if (INPUT->IsKeyPress(VK_D))
+	{
+		m_fRotY += 0.03;
+	}
+	D3DXMATRIXA16 matR;
+	D3DXVECTOR3 forward = D3DXVECTOR3(0, 0, 1);
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixRotationY(&matR, m_fRotY);
+
+	D3DXVec3TransformCoord(&forward, &forward, &matR);
+	m_CharacterEntity->SetForward(forward);
+
+	m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
+
+	CAMERA->SetLookAt(m_CharacterEntity->Pos(), m_fRotY);
 
 	/*m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	D3DXVECTOR3 prevPos = m_CharacterEntity->Pos();
@@ -98,8 +123,7 @@ void cPlayer::Update(float deltaTime)
 	D3DXVECTOR3 forward = D3DXVECTOR3(0, 0, 1);
 	D3DXVec3TransformCoord(&forward, &forward, &matR);
 
-	MAP->GetHeight(movePos.x, movePos.y, movePos.z);
-	m_CharacterEntity->SetPos(movePos);
+	
 	int index = 0;
 	MAP->GetMap()->GetIndex(movePos.x, movePos.z, index);*/
 	/*if (INPUT->IsKeyDown(VK_SPACE))
@@ -108,7 +132,7 @@ void cPlayer::Update(float deltaTime)
 		cout << "id : " << ASTAR->GetGraph()->GetNode(index)->Id() << ", move.x : " << ASTAR->GetGraph()->GetNode(index)->Pos().x << ", move.z : " << ASTAR->GetGraph()->GetNode(index)->Pos().z << endl;
 	}*///m_CharacterEntity->SetPos(m_unitLeader->GetCharacterEntity()->Pos());
 	//m_CharacterEntity->SetForward(forward);
-	//m_pSkinnedMesh->SetPosition(m_CharacterEntity->Pos(), m_CharacterEntity->Forward());
+	//
 
 	//if (0.01f<MATH->Distance(prevPos, movePos) && MATH-//>Distance(prevPos, movePos)<=0.03f)
 	//{
@@ -123,7 +147,7 @@ void cPlayer::Update(float deltaTime)
 	//	m_pSkinnedMesh->SetAnimationIndex(P_STAND);
 	//}
 
-	//CAMERA->SetLookAt(movePos, m_fRotY);
+	//
 	//if (INPUT->IsKeyPress('1'))m_unitLeader->SetRectOffset();
 	//if (INPUT->IsKeyPress('2'))m_unitLeader->SetTriOffset();
 }
@@ -143,11 +167,14 @@ void cPlayer::Render()
 
 void cPlayer::SetUnitLeaderTargetIndex(int index)
 {
-	m_unitLeader->PathClear();
-	if (ASTAR->GetGraph()->GetNode(index)->Active())
+	if (m_unitLeader)
 	{
-		m_unitLeader->SetTargetIndex(index);
-		/*cout << "targetInd : " << index << endl;
-		cout << "size : " << m_unitLeader->GetPath().size() << endl;*/
+		m_unitLeader->PathClear();
+		if (ASTAR->GetGraph()->GetNode(index)->Active())
+		{
+			m_unitLeader->SetTargetIndex(index);
+			/*cout << "targetInd : " << index << endl;
+			cout << "size : " << m_unitLeader->GetPath().size() << endl;*/
+		}
 	}
 }
