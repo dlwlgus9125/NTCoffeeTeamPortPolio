@@ -151,6 +151,8 @@
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cConstruct.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cEffectManager.h" />
+    <ClInclude Include="cFog.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
     <ClInclude Include="cLeader.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
+    <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
@@ -207,6 +210,8 @@
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cConstruct.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cEffectManager.cpp" />
+    <ClCompile Include="cFog.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cLeader.cpp" />
@@ -228,6 +233,7 @@
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
+    <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
