@@ -8,12 +8,12 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 {
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader = NULL;
-	m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
+	/*m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
 	m_unitLeader->SetCamp(CAMP_PLAYER);
 	m_unitLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(16001)->Id());
 	OBJECT->AddObject(m_unitLeader);
-	OBJECT->AddLeader(m_unitLeader);
+	OBJECT->AddLeader(m_unitLeader);*/
 	m_fRotY = 0.0f;
 }
 
@@ -37,15 +37,7 @@ void cPlayer::Init()
 	m_pSkinnedMesh = NULL;
 	//m_pSkinnedMesh = new cSkinnedMesh();
 	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
-
-	m_meshSphere.m_radius = 0.1f;
-
-	D3DXCreateSphere(D3DDevice, m_meshSphere.m_radius, 10, 10, &m_meshSphere.m_pMeshSphere, NULL);
-	ZeroMemory(&m_meshSphere.m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_meshSphere.m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_meshSphere.m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_meshSphere.m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
+		
 	m_pFsm = new cStateMachine<cPlayer*>(this);
 	m_pFsm->Register(PLAYER_STATE_IDLE, new Player_Idle());
 	m_pFsm->Register(PLAYER_STATE_WALK, new Player_Walk());
@@ -169,13 +161,6 @@ void cPlayer::Render()
 		if (FRUSTUM->IsIn(m_pSkinnedMesh->GetBoundingSphere()))
 		{
 			m_pSkinnedMesh->UpdateAndRender();
-
-			D3DDevice->SetTransform(D3DTS_WORLD, &SetAttackCollider());
-			D3DDevice->SetMaterial(&m_meshSphere.m_stMtlSphere);
-
-			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-			m_meshSphere.m_pMeshSphere->DrawSubset(0);
-			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		}
 	}
 }

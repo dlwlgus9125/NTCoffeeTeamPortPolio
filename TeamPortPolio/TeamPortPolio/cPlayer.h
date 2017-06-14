@@ -25,9 +25,6 @@ private:
 	float          m_fRotY;
 	cStateMachine<cPlayer*>* m_pFsm;
 
-	//충돌판
-
-	MeshSpere      m_meshSphere;
 public:
 	cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
 	~cPlayer();
@@ -43,6 +40,5 @@ public:
 	// 추가
 	cStateMachine<cPlayer*>* FSM() { return m_pFsm; }
 	void SetUnitLeaderTargetIndex(int index);
-
 };
 

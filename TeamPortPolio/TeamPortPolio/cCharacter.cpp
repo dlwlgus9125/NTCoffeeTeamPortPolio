@@ -70,15 +70,3 @@ void cCharacter::RenderSphere()
 	////m_arrangeCollideSphere.m_pMeshSphere->DrawSubset(0);
 	//D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 }
-
-D3DXMATRIXA16 cCharacter::SetAttackCollider()
-{
-	m_attackCollider.vCenter = D3DXVECTOR3(0, 0, 0);
-	D3DXVec3TransformCoord(&m_attackCollider.vCenter, &m_attackCollider.vCenter, &m_pSkinnedMesh->GetAttackBone()->CombinedTransformationMatrix);
-	D3DXMATRIXA16 TranslationMat;
-	D3DXMatrixIdentity(&TranslationMat);
-
-	D3DXMatrixTranslation(&TranslationMat, m_attackCollider.vCenter.x, m_attackCollider.vCenter.y, m_attackCollider.vCenter.z);
-
-	return TranslationMat;
-}
