@@ -102,7 +102,7 @@ void Human_Melee_Battle::StateChanger(cUnit * pUnit)
 	//cout << pUnit->GetMesh()->GetCurrentAnim()->GetPeriod() << endl;
 }
 
-//가장 가까운 적을 찾는 함수
+//자신과 충돌한 적을 찾는 함수
 void Human_Melee_Battle::FindTarget(cUnit * pUnit)
 {
 	for (int i = 0; i < ((cLeader*)pUnit->GetTargetObject())->GetUnits().size(); i++)
@@ -113,7 +113,7 @@ void Human_Melee_Battle::FindTarget(cUnit * pUnit)
 		}
 	}
 }
-
+//자신과 제일 가까운 적을 찾는 함수
 void Human_Melee_Battle::FindNearTarget(cUnit * pUnit)
 {
 	D3DXVECTOR3 nextTargetPos, prevTargetPos;
