@@ -144,19 +144,17 @@ void cAstarManager::SetLeaderPath()
 {
 	for (int i = 0; i < OBJECT->GetLeader().size(); i++)
 	{
-		if (OBJECT->GetLeader()[i]->GetPath().size() <= 0 && OBJECT->GetLeader()[i]->GetIndex() != OBJECT->GetLeader()[i]->GetTargetIndex())
+		if (OBJECT->GetLeader()[i]->GetPath().size()<=0&&OBJECT->GetLeader()[i]->GetIndex() != OBJECT->GetLeader()[i]->GetTargetIndex())
 		{
-			cAstar as(m_graph, OBJECT->GetLeader()[i]->GetIndex(), OBJECT->GetLeader()[i]->GetTargetIndex());
-			if (as.Search())
-			{
-				cout << "current : " << OBJECT->GetLeader()[i]->GetIndex() << "target : " << OBJECT->GetLeader()[i]->GetTargetIndex() << endl;
-				OBJECT->GetLeader()[i]->SetPath(as.GetPath());
-				//m_path = as.GetRoute();
-				cout << "size : " << OBJECT->GetLeader()[i]->GetPath().size() << endl;
-			}
+
+		//	cout << "current : " << OBJECT->GetLeader()[i]->GetIndex() << "target : " << OBJECT->GetLeader()[i]->GetTargetIndex() << endl;
+			OBJECT->GetLeader()[i]->SetPath(this->GetPath(OBJECT->GetLeader()[i]->GetIndex(), OBJECT->GetLeader()[i]->GetTargetIndex()));
+			//m_path = as.GetRoute();
+			//cout << "size : " << OBJECT->GetLeader()[i]->GetPath().size() << endl;
 		}
 	}
 }
+
 
 void cAstarManager::SetTargetOfLeader()
 {
@@ -168,7 +166,7 @@ void cAstarManager::SetTargetOfLeader()
 			{
 				if (MATH->IsCollided(OBJECT->GetLeader()[thisLeader]->GetArrangeSphere(), OBJECT->GetLeader()[anotherLeader]->GetArrangeSphere()))
 				{
-					if(OBJECT->GetLeader()[thisLeader]->GetTargetObject()!= OBJECT->GetLeader()[anotherLeader])
+					if (OBJECT->GetLeader()[thisLeader]->GetTargetObject() != OBJECT->GetLeader()[anotherLeader])
 						OBJECT->GetLeader()[thisLeader]->SetTargetObject(OBJECT->GetLeader()[anotherLeader]);
 				}
 			}

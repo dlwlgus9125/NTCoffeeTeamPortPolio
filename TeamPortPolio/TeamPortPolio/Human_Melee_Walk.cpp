@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Human_Melee_State.h"
 
-void Human_State_Walk::OnBegin(cUnit * pUnit)
+void Human_Melee_Walk::OnBegin(cUnit * pUnit)
 {
 	pUnit->GetMesh()->SetAnimationIndexBlend(FG_BATTLEWALK);
 }
 
-void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
+void Human_Melee_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
 {
 	StateChanger(pUnit);
 	D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
@@ -26,18 +26,18 @@ void Human_State_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
 	else
 	{
 		pUnit->GetCharacterEntity()->SetForward(pUnit->GetLeader()->Forward());		
-		pUnit->FSM()->Play(UNIT_STATE_STATE_IDLE);	
+		pUnit->FSM()->Play(UNIT_STATE_MELEE_IDLE);	
 	}
 
 
 	
 }
 
-void Human_State_Walk::OnEnd(cUnit * pUnit)
+void Human_Melee_Walk::OnEnd(cUnit * pUnit)
 {
 }
 
-void Human_State_Walk::StateChanger(cUnit * pUnit)
+void Human_Melee_Walk::StateChanger(cUnit * pUnit)
 {
 	if (pUnit->GetMesh()->GetIndex() != FG_BATTLEWALK&&0.002f <= pUnit->GetCharacterEntity()->Speed() && pUnit->GetCharacterEntity()->Speed() <= 0.05f)
 	{

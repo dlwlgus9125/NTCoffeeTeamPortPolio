@@ -150,6 +150,7 @@ void cPlayer::SetUnitLeaderTargetIndex(int index)
 	if (ASTAR->GetGraph()->GetNode(index)->Active())
 	{
 		m_unitLeader->SetTargetIndex(index);
-		cout << "targetInd : " << index << endl;
+		/*cout << "targetInd : " << index << endl;
+		cout << "size : " << m_unitLeader->GetPath().size() << endl;*/
 	}
 }

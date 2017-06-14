@@ -393,9 +393,6 @@
     <ClCompile Include="Human_Melee_Walk.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
-    <ClCompile Include="Human_Melee_Attack.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
     <ClCompile Include="Human_Melee_Defence.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
@@ -480,11 +477,14 @@
     <ClCompile Include="cUIText.cpp">
       <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClCompile>
-    <ClCompile Include="Leader_State_Pursuit.cpp">
-      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
-    </ClCompile>
     <ClCompile Include="cUIMiniMap.cpp">
       <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Leader_State_Battle.cpp">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClCompile>
+    <ClCompile Include="Human_Melee_Battle.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
     <ClCompile Include="cUIButton.cpp">
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>

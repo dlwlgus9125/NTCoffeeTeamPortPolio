@@ -91,6 +91,7 @@ void cSkinnedMesh::Load(char* szDirectory, char* szFilename)
 
 void cSkinnedMesh::UpdateAndRender()
 {
+	m_fPassedTime += TIME->GetElapsedTime();
 	if (m_pAnimController)
 	{
 		if (m_isAnimBlend)
@@ -116,7 +117,7 @@ void cSkinnedMesh::UpdateAndRender()
 	if (m_pRootFrame)
 	{
 		D3DXMATRIXA16 mat,matS, matR, matT;
-		D3DXMatrixScaling(&matS, 4.0f, 4.0f, 4.0f);
+		D3DXMatrixScaling(&matS, 3.0f, 3.0f, 3.0f);
 		D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_vForward));
 		mat =matS* matR*matT;
@@ -371,8 +372,9 @@ void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 
 	SAFE_RELEASE(pPrevAnimSet);
 	SAFE_RELEASE(pNextAnimSet);
-
+	m_fPassedTime = 0.0f;
 	m_currentIndex = nIndex;
+	m_pAnimController->GetAnimationSet(m_currentIndex, &m_currentAnim);
 }
 
 void cSkinnedMesh::Destroy()

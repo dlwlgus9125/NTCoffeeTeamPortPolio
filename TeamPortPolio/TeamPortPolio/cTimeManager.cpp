@@ -54,7 +54,7 @@ void cTimeManager::ElapsedUpdate()
 
 float cTimeManager::GetElapsedTime()
 {
-	return m_fEllapsedTime/2000.0f;
+	return m_fEllapsedTime/2500.0f;
 }
 
 float cTimeManager::GetLastUpdateTime()
