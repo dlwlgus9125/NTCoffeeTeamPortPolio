@@ -48,7 +48,9 @@ void cTitleScene::OnUpdate()
 
 	// >> UI의 이벤트 정보 
 	int indexInMiniMap;
-	UI->GetEvent(indexInMiniMap);
+	int buttonIndex;
+
+	UI->GetEvent(indexInMiniMap, buttonIndex);
 	if (indexInMiniMap > 0)
 	{
 		OBJECT->GetPlayer()->SetUnitLeaderTargetIndex(indexInMiniMap);
