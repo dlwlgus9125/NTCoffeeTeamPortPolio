@@ -1,5 +1,7 @@
 #pragma once
-class cFrustum
+
+#define FRUSTUM cFrustum::Instance()
+class cFrustum : public Singleton<cFrustum>
 {
 public:
 	cFrustum();
@@ -12,6 +14,7 @@ public:
 	void Setup();
 	void Update();
 	bool IsIn(MeshSpere pShere/**/);
+	bool cFrustum::IsIn(ST_SPHERE* pSphere);
 
 	void PlaneSetup();
 

@@ -12,6 +12,8 @@ class cAstarManager :
 	cGraph*            m_graph;
 	vector<int> m_path;
 	vector<int> vecRoad;
+
+	bool                    m_isMapLoadingComplete;
 public:
 	void Setup(vector<D3DXVECTOR3> vecPosOfNode);
 	void AddEdge(int from, int col, int row);
@@ -20,5 +22,14 @@ public:
 	void Update();
 	void Render();
 	cGraph* GetGraph() { return m_graph; }
+
+	bool GetCursorIndex(int& TargetIndex);
+	bool IsLoadingComplete() { return m_isMapLoadingComplete; }
+
+	void SetObjectIndex();
+	void SetLeaderPath();
+	void SetTargetOfLeader();
+
+	
 };
 

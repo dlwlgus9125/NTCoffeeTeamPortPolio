@@ -7,10 +7,15 @@ class cCharacter : public cObject
 {
 protected:
 	ISteeringEntity* m_CharacterEntity;
-	MeshSpere        m_CollideSphere;
-	MeshSpere        m_arrangeCollideSphere;
+	ST_SPHERE        m_CollideSphere;
+	ST_SPHERE        m_arrangeCollideSphere;
 	cSkinnedMesh*    m_pSkinnedMesh;
 	MODE_STATE       m_currentMode;
+	
+
+	//>>목표 타겟 평소엔 NULL
+	cObject*         m_targetObject;
+	//<<
 	int              m_currentIndex;
 public:
 	cCharacter();
@@ -20,13 +25,19 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 
-	MeshSpere        GetMeshSphere() { return m_CollideSphere; }
+	ST_SPHERE        GetSphere() { return m_CollideSphere; }
+	ST_SPHERE        GetArrangeSphere() { return m_arrangeCollideSphere; }
 	ISteeringEntity* GetCharacterEntity() { return m_CharacterEntity; }
 	cSkinnedMesh*    GetMesh() { return m_pSkinnedMesh; }
 	MODE_STATE       GetMode() { return m_currentMode; }
 
 	void             SetMode(int mode) { m_currentMode = (MODE_STATE)mode; }
-	void RenderSphere();
+	int              GetIndex() { return m_currentIndex; }
+	void             SetIndex(int index) { m_currentIndex = index; }
+	void             RenderSphere();
+
+	cObject*         GetTargetObject() { return m_targetObject; }
+	void             SetTargetObject(cObject* object) { m_targetObject = object; }
 
 };
 

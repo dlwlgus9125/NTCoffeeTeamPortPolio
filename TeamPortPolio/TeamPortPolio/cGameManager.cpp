@@ -4,6 +4,8 @@
 #include "TestMap.h"
 #include "cSceneManager.h"
 #include "cTitleScene.h"
+#include "cTownScene.h"
+
 void cGameManager::Init()
 {
 	DEVICE->Init();
@@ -58,13 +60,15 @@ void cGameManager::Init()
 
 	TIME->Init(60);
 	TESTMAP->Setup();
+	UI->Setup();
 	INPUT->Init();
 	OBJECT->Init();
 	OBJECTDB->Setup();
-	SCENE->Register(0, new cTitleScene());
-	SCENE->StartScene(0);
-	UI->OnEnter(SCENE->Current());
+	SCENE->Register(SCENE_TITLE, new cTitleScene());
+	SCENE->Register(SCENE_TOWN, new cTownScene());
+	SCENE->StartScene(SCENE_TITLE);
 	CAMERA->Setup();
+
 	
 	//<<
 }
@@ -106,8 +110,9 @@ void cGameManager::Update()
 			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
-			UI->OnUpdate();
-
+			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
+			
+			
 		}
 
 	}
@@ -119,7 +124,6 @@ void cGameManager::Render()
 	
 	if(!isOkView)
 		pControl->Run();
-
 	else if (isOkView)
 	{
 		D3DDevice->Clear(NULL,
@@ -131,7 +135,6 @@ void cGameManager::Render()
 		TESTMAP->Render();
 		OBJECT->Render();
 		SCENE->Render();
-		UI->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
 	}
@@ -144,7 +147,7 @@ void cGameManager::Release()
 
 void cGameManager::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if(!UI->GetIsUIOpen())CAMERA->WndProc(hwnd, message, wParam, lParam);
+	CAMERA->WndProc(hwnd, message, wParam, lParam);
 
 
 	//switch (message)

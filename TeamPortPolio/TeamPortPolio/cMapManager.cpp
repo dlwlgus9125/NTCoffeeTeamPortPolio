@@ -54,6 +54,7 @@ void cMapManager::Init(string fileName)
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
 	// << 
 	ASTAR->Setup(m_vecPosOfNode);
+	
 }
 
 void cMapManager::Update()
@@ -68,17 +69,17 @@ void cMapManager::Render()
 	{
 		if (test == false)
 		{
-			//test = true;
+			test = true;
 		}
 		else
 		{
-			//test = false;
+			test = false;
 		}
 	}
 
 	if (test == false)
 	{
-		if (m_pSkyBox) m_pSkyBox->Render();
+		//if (m_pSkyBox) m_pSkyBox->Render();
 
 		if (m_pMap) m_pMap->Render();
 
@@ -97,6 +98,21 @@ bool cMapManager::GetHeight(IN float x, OUT float & y, IN float z)
 	return false;
 }
 
+LPD3DXMESH cMapManager::GetMesh()
+{
+	return m_pMap->GetMesh();
+}
+
+float cMapManager::GetMaxX()
+{
+	return m_pMap->GetMaxX();
+}
+
+float cMapManager::GetMinX()
+{
+	return m_pMap->GetMinX();
+}
+
 void cMapManager::Destroy()
 {
 	SAFE_DELETE(m_pSkyBox);
@@ -107,4 +123,5 @@ void cMapManager::Destroy()
 		SAFE_DELETE(m_vecConstruct[i]);
 	}
 	m_vecConstruct.clear();
+	
 }

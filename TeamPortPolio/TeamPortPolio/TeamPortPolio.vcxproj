@@ -36,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -151,6 +151,7 @@
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cConstruct.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
     <ClInclude Include="cLeader.h" />
     <ClInclude Include="cFrame.h" />
@@ -159,7 +160,6 @@
     <ClInclude Include="cGraph.h" />
     <ClInclude Include="cGroup.h" />
     <ClInclude Include="cHeightMap.h" />
-    <ClInclude Include="cImageView.h" />
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
     <ClInclude Include="cMapManager.h" />
@@ -177,15 +177,13 @@
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
+    <ClInclude Include="cTownScene.h" />
     <ClInclude Include="cUIButton.h" />
-    <ClInclude Include="cUICursor.h" />
-    <ClInclude Include="cUIImageView.h" />
-    <ClInclude Include="cUIItemSlot.h" />
-    <ClInclude Include="cUILifeBar.h" />
-    <ClInclude Include="cUImanager.h" />
+    <ClInclude Include="cUIImage.h" />
+    <ClInclude Include="cUIManager.h" />
+    <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
-    <ClInclude Include="cUIScrollBar.h" />
-    <ClInclude Include="cUITextView.h" />
+    <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="Human_Melee_State.h" />
     <ClInclude Include="IEntity.h" />
@@ -199,23 +197,16 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamPortPolio.h" />
     <ClInclude Include="TestMap.h" />
-    <ClInclude Include="cUIInventory.h" />
-    <ClInclude Include="cUIMap.h" />
-    <ClInclude Include="cUIQuest.h" />
-    <ClInclude Include="cUIStatus.h" />
-    <ClInclude Include="cUIChatLog.h" />
-    <ClInclude Include="cUIChractorView.h" />
-    <ClInclude Include="cThrow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />
-    <ClCompile Include="cThrow.cpp" />
     <ClCompile Include="cAstar.cpp" />
     <ClCompile Include="cAstarManager.cpp" />
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cConstruct.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cLeader.cpp" />
     <ClCompile Include="cFrame.cpp" />
@@ -224,7 +215,6 @@
     <ClCompile Include="cGraph.cpp" />
     <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cHeightMap.cpp" />
-    <ClCompile Include="cImageView.cpp" />
     <ClCompile Include="cIMap.cpp" />
     <ClCompile Include="cMapManager.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
@@ -240,23 +230,22 @@
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
+    <ClCompile Include="cTownScene.cpp" />
     <ClCompile Include="cUIButton.cpp" />
-    <ClCompile Include="cUICursor.cpp" />
-    <ClCompile Include="cUIImageView.cpp" />
-    <ClCompile Include="cUIItemSlot.cpp" />
-    <ClCompile Include="cUILifeBar.cpp" />
-    <ClCompile Include="cUImanager.cpp" />
+    <ClCompile Include="cUIImage.cpp" />
+    <ClCompile Include="cUIManager.cpp" />
+    <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
-    <ClCompile Include="cUIScrollBar.cpp" />
-    <ClCompile Include="cUITextView.cpp" />
+    <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
-    <ClCompile Include="Human_Melee_Attack.cpp" />
+    <ClCompile Include="Human_Melee_Battle.cpp" />
     <ClCompile Include="Human_Melee_Defence.cpp" />
     <ClCompile Include="Human_Melee_Idle.cpp" />
     <ClCompile Include="Human_Melee_Walk.cpp" />
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
     <ClCompile Include="Leader_State_Idle.cpp" />
+    <ClCompile Include="Leader_State_Battle.cpp" />
     <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -268,12 +257,6 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TeamPortPolio.cpp" />
     <ClCompile Include="TestMap.cpp" />
-    <ClCompile Include="cUIInventory.cpp" />
-    <ClCompile Include="cUIMap.cpp" />
-    <ClCompile Include="cUIQuest.cpp" />
-    <ClCompile Include="cUIStatus.cpp" />
-    <ClCompile Include="cUIChractorView.cpp" />
-    <ClCompile Include="cUIChatLog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc" />

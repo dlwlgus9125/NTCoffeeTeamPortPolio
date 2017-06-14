@@ -30,9 +30,10 @@ public:
 	void StateChanger(cLeader * pLeader);
 };
 
-class Leader_State_Attack : public IState<cLeader*>
+class Leader_State_Battle : public IState<cLeader*>
 {
 	float fPassedTime;
+	
 public:
 	void OnBegin(cLeader* pLeader);
 
@@ -40,7 +41,6 @@ public:
 
 	void OnEnd(cLeader* pLeader);
 
-	void StateChanger(cLeader * pLeader);
 };
 
 class Leader_State_Defence : public IState<cLeader*>

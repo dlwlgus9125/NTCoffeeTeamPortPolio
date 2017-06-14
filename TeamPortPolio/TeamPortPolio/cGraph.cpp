@@ -14,8 +14,6 @@ cGraph::cGraph(int nodeCount)
 		m_edges.push_back(list<GraphEdge*>());
 	}
 	D3DXCreateLine(D3DDevice, &m_line);
-	m_frust = new cFrustum();
-	m_frust->Setup();
 }
 
 cGraph::~cGraph()
@@ -32,7 +30,6 @@ cGraph::~cGraph()
 		m_edges[i].clear();
 	}
 	m_edges.clear();
-	SAFE_DELETE(m_frust);
 }
 
 int cGraph::NodeCount() { return m_nodes.size(); }
@@ -77,32 +74,33 @@ void cGraph::RemoveEdge(int from, int to)
 
 void cGraph::Render()
 {
-	m_frust->Update();
 	D3DXMATRIXA16 out, proj, view;
 	D3DDevice->GetTransform(D3DTS_VIEW, &view);
 	D3DDevice->GetTransform(D3DTS_PROJECTION, &proj);
 	out = view * proj;
-	m_nodes[15000]->Render();
+	
 	for (int i = 0; i < m_nodes.size(); i++)
 	{
-		
-		if (m_nodes[i]->Active() == TRUE)m_nodes[i]->Render();
-		/*if (m_nodes[i]->Active() == TRUE)
-		{*/
-			//EdgeList list = GetEdgeList(i);
-			//for (EdgeListIter it = list.begin(); it != list.end(); it++)
-			//{
-			//	//GraphEdge* pEdge = GetNode((*it)->From());
-			//	D3DXVECTOR3 pos[2];
-			//	pos[0] = m_nodes[(*it)->From()]->Pos();
-			//	pos[1] = m_nodes[(*it)->To()]->Pos();
-			//	m_line->Begin();
+		if (m_nodes[i]->Active() == TRUE)
+		{
+			if (FRUSTUM->IsIn(&m_nodes[i]->GetSphere()))
+			{
+				EdgeList list = GetEdgeList(i);
+				for (EdgeListIter it = list.begin(); it != list.end(); it++)
+				{
+					D3DXVECTOR3 pos[2];
+					pos[0] = m_nodes[(*it)->From()]->Pos();
+					pos[1] = m_nodes[(*it)->To()]->Pos();
 
-			//	m_line->DrawTransform(pos, 2, &out, D3DXCOLOR(255, 255, 255, 1));
+					m_line->Begin();
+					m_line->DrawTransform(pos, 2, &out, D3DXCOLOR(255, 255, 255, 1));
+					m_line->End();
 
-			//	m_line->End();
-			//}
-		/*}*/
+
+				}
+			}
+		}
 	}
+	
 
 }

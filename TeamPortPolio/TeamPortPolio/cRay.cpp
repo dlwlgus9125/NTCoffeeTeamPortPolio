@@ -92,7 +92,7 @@ bool cRay::IsCollidedWithMesh(IN D3DXVECTOR2& cursorPos, IN LPD3DXMESH pMesh, OU
 		
 		if (intersect)
 		{
-			index = (int)faceIndex;
+			index = faceIndex*0.5f;
 			outPos = ray.vOrigin + ray.vDirection * t;
 			break;
 		}

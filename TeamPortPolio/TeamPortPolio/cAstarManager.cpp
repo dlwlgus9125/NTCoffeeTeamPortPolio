@@ -13,19 +13,21 @@ void cAstarManager::Setup(vector<D3DXVECTOR3> vecPosOfNode)
 	int col = sqrt(vecPosOfNode.size());
 	for (int i = 0; i < vecPosOfNode.size(); i++)
 	{
-		m_graph->GetNode(i)->SetActive(true);
+		m_graph->GetNode(i)->SetActive(false);
 
 		D3DXVECTOR3 pos;//<-여기에 heightmap연산해서 좌표넣기
 		//그렇게하면 높이값까지 코스트로 적용이 가능하기때문에 오히려 자연스러움
 
 		m_graph->GetNode(i)->SetPos(vecPosOfNode[i]);
-		m_graph->GetNode(i)->SetID(i);
+		int index = 0;
+		MAP->GetMap()->GetIndex(vecPosOfNode[i].x, vecPosOfNode[i].z, index);
+		m_graph->GetNode(i)->SetID(index);
 	}
 	for (int i = 0; i < vecPosOfNode.size(); i++)
 	{
-		if (vecPosOfNode[i].y > 4.1f)
+		if (vecPosOfNode[i].y == 0.0f || vecPosOfNode[i].y == 1.0f || vecPosOfNode[i].y == 2.0f || vecPosOfNode[i].y == 3.0f || vecPosOfNode[i].y == 4.0f)
 		{
-			m_graph->GetNode(i)->SetActive(false);
+			m_graph->GetNode(i)->SetActive(true);
 		}
 	}
 	for (int i = 0; i < vecPosOfNode.size(); i++)
@@ -43,18 +45,19 @@ void cAstarManager::Setup(vector<D3DXVECTOR3> vecPosOfNode)
 		AddEdge(i, x + 1, z + 1);
 	}
 
-
+	m_isMapLoadingComplete = true;
 }
 
 void cAstarManager::AddEdge(int from, int col, int row)
 {
 	if (col >= 0 && col < 150 && row >= 0 && row < 150)
+		//if (col >= 0 && col < 15 && row >= 0 && row < 15)
 	{
 		int to = col + row * 150;
 		D3DXVECTOR3 fromPos = m_graph->GetNode(from)->Pos();//get노드로 처리해서 엣지추가여부 결정하기
 		D3DXVECTOR3 toPos = m_graph->GetNode(to)->Pos();
 
-		if (abs(fromPos.y - toPos.y) <= 0.5f&&m_graph->GetNode(from)->Active() == true && m_graph->GetNode(to)->Active() == true)
+		if (abs(fromPos.y - toPos.y) <= 1.0f&&m_graph->GetNode(from)->Active() == true && m_graph->GetNode(to)->Active() == true)
 		{
 			D3DXVECTOR3 length = toPos - fromPos;
 
@@ -79,53 +82,94 @@ vector<int> cAstarManager::GetPath(int chrindex, int targetIndex)
 
 void cAstarManager::Update()
 {
-	D3DXVECTOR3 colliedPos;
-
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	if (m_isMapLoadingComplete == true)
 	{
-		for (int i = 0; i < m_graph->NodeCount(); i++)
-		{
-			if (m_graph->GetNode(i)->Active() != false)
-			{
-				if (cRay::RaySphereIntersect(INPUT->GetMousePosVector2(), m_graph->GetNode(i)->GetMesh(), m_graph->GetNode(0)->Pos().x, m_graph->GetNode(149)->Pos().x))
-				{
-					
-				
-				}
-			}
-		}
-	}
-	for (int i = 0; i < ASTAR->GetGraph()->NodeCount(); i++)
-	{
-		if ((OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().x&&ASTAR->GetGraph()->GetNode(i)->Pos().x < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().x + 2.0f)
-			&& (OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z - 2.0f < ASTAR->GetGraph()->GetNode(i)->Pos().z&&ASTAR->GetGraph()->GetNode(i)->Pos().z < OBJECT->GetPlayer()->GetCharacterEntity()->Pos().z + 2.0f))
-		{
-			if (ASTAR->GetGraph()->GetNode(i)->Active() == true && MATH->IsCollided(OBJECT->GetPlayer()->GetMeshSphere(), ASTAR->GetGraph()->GetNode(i)->GetMesh()))
-			{
-				D3DXVECTOR3 LeaderPos = OBJECT->GetPlayer()->GetCharacterEntity()->Pos();
-				D3DXVECTOR3 targetPos = ASTAR->GetGraph()->GetNode(i)->Pos();
-				LeaderPos.y = 0;
-				targetPos.y = 0;
-
-
-				float distance = MATH->Distance(LeaderPos, targetPos);
-
-				if (distance <= 0.5f)
-				{
-					OBJECT->GetPlayer()->GetUnitLeader()->SetIndex(ASTAR->GetGraph()->GetNode(i)->Id());
-					//cout << OBJECT->GetPlayer()->GetUnitLeader()->GetIndex() << endl;
-				}
-			}
-		}
+		SetObjectIndex();
+		SetLeaderPath();
+		SetTargetOfLeader();
 	}
 }
 
 void cAstarManager::Release()
 {
-	SAFE_DELETE(m_graph);
+	m_isMapLoadingComplete = false;
+	if (m_graph)SAFE_DELETE(m_graph);
+
 }
 
 void cAstarManager::Render()
 {
 	m_graph->Render();
+}
+
+bool cAstarManager::GetCursorIndex(int & TargetIndex)
+{
+	if (m_graph)
+	{
+		int cellIndex = -1;	// 메쉬 충돌 없으면 인덱스는 -1. 아니라면 해당 인덱스 나올 것임.
+
+		D3DXVECTOR3 posOnMap = D3DXVECTOR3(-1000, -1000, -1000);	//	쓰레기값 넣어두기. 맵 범위 내 찍지 않았으면 이 쓰레기값 그대로 나옴.
+
+		float minX = MAP->GetMinX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+		float maxX = MAP->GetMaxX();	// IsCollidedWithMesh의 예외처리를 위한 변수
+
+		cRay::IsCollidedWithMesh(INPUT->GetMousePosVector2(), MAP->GetMesh(), cellIndex, posOnMap, minX, maxX);
+		//cout << "posOnMap.x : " << posOnMap.x << "posOnMap.z : " << posOnMap.z<< endl;
+		if (cellIndex != -1 && m_graph->GetNode(cellIndex)->Active() != false) { cout << "Active !! cellindex : " << cellIndex << endl; TargetIndex = cellIndex; return true; }
+		else { cout << "Non-Active !!" << endl; return false; }
+
+	}
+	return false;
+}
+
+void cAstarManager::SetObjectIndex()
+{
+	for (int i = 0; i < OBJECT->GetCharacter().size(); i++)
+	{
+		D3DXVECTOR3 pos = OBJECT->GetCharacter()[i]->GetCharacterEntity()->Pos();
+		int index = 0;
+		MAP->GetMap()->GetIndex(pos.x, pos.z, index);
+		if (OBJECT->GetCharacter()[i]->GetIndex() != index)OBJECT->GetCharacter()[i]->SetIndex(index);
+	}
+	for (int i = 0; i < OBJECT->GetLeader().size(); i++)
+	{
+		D3DXVECTOR3 pos = OBJECT->GetLeader()[i]->GetCharacterEntity()->Pos();
+		int index = 0;
+		MAP->GetMap()->GetIndex(pos.x, pos.z, index);
+		if (OBJECT->GetLeader()[i]->GetIndex() != index)OBJECT->GetLeader()[i]->SetIndex(index);
+	}
+}
+
+void cAstarManager::SetLeaderPath()
+{
+	for (int i = 0; i < OBJECT->GetLeader().size(); i++)
+	{
+		if (OBJECT->GetLeader()[i]->GetPath().size()<=0&&OBJECT->GetLeader()[i]->GetIndex() != OBJECT->GetLeader()[i]->GetTargetIndex())
+		{
+
+		//	cout << "current : " << OBJECT->GetLeader()[i]->GetIndex() << "target : " << OBJECT->GetLeader()[i]->GetTargetIndex() << endl;
+			OBJECT->GetLeader()[i]->SetPath(this->GetPath(OBJECT->GetLeader()[i]->GetIndex(), OBJECT->GetLeader()[i]->GetTargetIndex()));
+			//m_path = as.GetRoute();
+			//cout << "size : " << OBJECT->GetLeader()[i]->GetPath().size() << endl;
+		}
+	}
+}
+
+
+void cAstarManager::SetTargetOfLeader()
+{
+	for (int thisLeader = 0; thisLeader < OBJECT->GetLeader().size(); thisLeader++)
+	{
+		for (int anotherLeader = 0; anotherLeader < OBJECT->GetLeader().size(); anotherLeader++)
+		{
+			if (OBJECT->GetLeader()[thisLeader]->GetCamp() != OBJECT->GetLeader()[anotherLeader]->GetCamp())
+			{
+				if (MATH->IsCollided(OBJECT->GetLeader()[thisLeader]->GetArrangeSphere(), OBJECT->GetLeader()[anotherLeader]->GetArrangeSphere()))
+				{
+					if (OBJECT->GetLeader()[thisLeader]->GetTargetObject() != OBJECT->GetLeader()[anotherLeader])
+						OBJECT->GetLeader()[thisLeader]->SetTargetObject(OBJECT->GetLeader()[anotherLeader]);
+				}
+			}
+		}
+	}
 }

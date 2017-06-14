@@ -1,108 +1,109 @@
 #include "stdafx.h"
 #include "cUIObject.h"
 
-cUIObject::cUIObject()
-	: m_vPosition(0, 0, 0)
-	, m_pParent(NULL)
-	, m_stSize(0, 0)
-	, m_isHidden(true)
-	, m_isMove(false)
-	, m_isOnClick(false)
-	, m_fScaleX(1)
-	,m_fScaleY(1)
+
+cUIObject::cUIObject() : m_vPosition(0,0,0), m_pParent(NULL), m_stSize(0,0), m_isHidden(false), m_nTag(0)
 {
-	D3DXMatrixIdentity(&m_Matrix);
+	D3DXMatrixIdentity(&m_matWorld);
 }
+
 
 cUIObject::~cUIObject()
 {
-
 }
 
-void cUIObject::SetPosition(float x, float y, float z)
+void cUIObject::Setup(D3DXVECTOR3 pos, int tag)
 {
-	m_vPosition.x = x;
-	m_vPosition.y = y;
-	m_vPosition.z = z;
+	m_vPosition = pos;
+
+	m_nTag = tag;
+
+	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void cUIObject::AddChild(cUIObject* pChild)
+void cUIObject::Update(float deltaTime)
 {
-	pChild->SetParent(this);
-	m_vecChild.push_back(pChild);
-}
+	if (m_isHidden) return;
 
-void cUIObject::Update()
-{
-	if (!m_isHidden)   MoveWindow();
-
-	for each(auto c in m_vecChild)
+	for each (auto p in m_vecChild)
 	{
-		if (m_isHidden)
-		{
-			switch (c->GetFuntion())
-			{
-			case FUNTION_OPEN:		c->Update(); break;
-			case FUNTION_LIFE_BAR:  c->Update(); break;
-			}
-		}
-		else
-		{
-			c->Update();
-		}
+		p->Update(deltaTime);
 	}
 }
 
 void cUIObject::Render(LPD3DXSPRITE pSprite)
 {
-	for each(auto c in m_vecChild)
+	if (m_isHidden) return;
+
+	for each(auto child in m_vecChild)
 	{
-		if (m_isHidden)
-		{
-			switch (c->GetFuntion())
-			{
-			case FUNTION_OPEN:		c->Render(pSprite); break;
-			case FUNTION_LIFE_BAR:	c->Render(pSprite); break;
-			}
-		}
-		else 
-		{
-			c->Render(pSprite);
-		}
+		child->Render(pSprite);
 	}
 }
 
 void cUIObject::Destroy()
 {
-	m_isHidden = true;
-
-	for each(auto c in m_vecChild)
+	for each(auto child in m_vecChild)
 	{
-		c->Destroy();
+		child->Destroy();
+	}
+
+	delete this;
+}
+
+void cUIObject::AddChild(cUIObject* pChild)
+{
+	m_vecChild.push_back(pChild);
+	pChild->SetParent(this);
+
+	pChild->SetPosition(pChild->GetPosition() + m_vPosition);
+
+	pChild->m_matWorld._41 += m_matWorld._41;
+	pChild->m_matWorld._42 += m_matWorld._42;
+	pChild->m_matWorld._43 += m_matWorld._43;
+}
+
+void cUIObject::SetHiddenAll(bool isHidden)
+{
+	m_isHidden = isHidden;
+
+	for each(auto child in m_vecChild)
+	{
+		child->SetHidden(isHidden);
 	}
 }
 
-void cUIObject::SetSize(int x, int y)
+D3DXVECTOR2 cUIObject::LeftTop()
 {
-	m_stSize.nWidth = x;
-	m_stSize.nHeight = y;
+	D3DXVECTOR2 leftTop;
+	leftTop.x = m_vPosition.x;
+	leftTop.y = m_vPosition.y;
+
+	return leftTop;
 }
 
-void cUIObject::SetScale(float x, float y)
+D3DXVECTOR2 cUIObject::LeftVCenter()
 {
-	m_fScaleX = x;
-	m_fScaleY = y;
+	D3DXVECTOR2 leftVCenter;
+	leftVCenter.x = m_vPosition.x;
+	leftVCenter.y = m_vPosition.y + m_stSize.nHeight * 0.5f;
+
+	return leftVCenter;
 }
 
-void cUIObject::MoveWindow()
+D3DXVECTOR2 cUIObject::RightBottom()
 {
-	POINT pt = INPUT->GetMousePos();
+	D3DXVECTOR2 rightBottom;
+	rightBottom.x = m_vPosition.x + m_stSize.nWidth;
+	rightBottom.y = m_vPosition.y + m_stSize.nHeight;
+	return rightBottom;
+}
 
-	RECT rc;
-	SetRect(&rc, m_vPosition.x, m_vPosition.y, m_vPosition.x + m_MoveRect.nWidth, m_vPosition.y + m_MoveRect.nHeight);
-	
-	if (PtInRect(&rc, pt) && INPUT->IsMouseDown(MOUSE_LEFT))m_isMove = true;
-	else if (INPUT->IsMouseUp(MOUSE_LEFT)) m_isMove = false;
-
-	if (m_isMove)m_vPosition += INPUT->GetMouseDeltaInVector3();
+D3DXVECTOR2 cUIObject::RightVCenter()
+{
+	D3DXVECTOR2 rightVCenter;
+	rightVCenter.x = m_vPosition.x + m_stSize.nWidth;
+	rightVCenter.y = m_vPosition.y + m_stSize.nHeight * 0.5f;
+	return rightVCenter;
 }

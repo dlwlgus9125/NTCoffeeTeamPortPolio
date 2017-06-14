@@ -1,47 +1,63 @@
 #pragma once
 
-class IEntity;
+struct ST_BONE;
+
 class cSkinnedMesh
 {
-public:
-	cSkinnedMesh();
-	cSkinnedMesh(const cSkinnedMesh& pResource);
-	~cSkinnedMesh();
+	friend class cTextureManager;
 
-protected:
-	LPD3DXFRAME m_pRoot;
+private:
+	//하나만 생성
+	ST_BONE*					m_pRootFrame;
+	DWORD						m_dwWorkingPaletteSize;
+	D3DXMATRIX*					m_pmWorkingPalette;
+	LPD3DXEFFECT				m_pEffect;
+	ST_SPHERE					m_stBoundingSphere;
+
+	// 객체마다 생성
 	LPD3DXANIMATIONCONTROLLER	m_pAnimController;
-	D3DXMATRIXA16 m_matWorld;
+	D3DXVECTOR3					m_vPosition;
+	D3DXVECTOR3					m_vForward;
+	int                         m_currentIndex;
 
-	// >> :
-	float m_fBlendTime;
-	float m_fPassedBlendTime;
-	float m_fPassedTime;
-	bool m_isAnimBlend;
-	int m_currentIndex;
+	//Blend용
+	float                       m_fBlendTime;
+	float                       m_fPassedBlendTime;
+	float                       m_fPassedTime;
+	bool                        m_isAnimBlend;
 
-	// << :
-
-	IEntity* m_pIEntity;
+	//현재 애니메이션 재생시간 확인용
 	LPD3DXANIMATIONSET m_currentAnim;
 public:
-	void Setup(char* szFolder, char* szFile);
-	void SetIEntity(IEntity* IEntity) { m_pIEntity = IEntity; }
-	void Update();
-	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
-	void Render(LPD3DXFRAME pFrame);
-	void SetupBoneMatrixPtrs(LPD3DXFRAME pFrame);
-	void UpdateSkinnedMesh(LPD3DXFRAME pFrame);
+	cSkinnedMesh(cSkinnedMesh* pSkinnedMesh);
+	~cSkinnedMesh(void);
 
+	void UpdateAndRender();
 	void SetAnimationIndex(int nIndex);
-
 	void SetAnimationIndexBlend(int nIndex);
-	void SetAnimationChange(OUT cSkinnedMesh * pCurrentMesh, IN cSkinnedMesh * pChangeMesh);
-
-	void SetIndex(int index) { m_currentIndex = index; }
-	int  Getindex() { return m_currentIndex; }
+	int  GetIndex() { return m_currentIndex; }
+	void SetRandomTrackPosition(); // 테스트용
+	void SetPosition(D3DXVECTOR3 v, D3DXVECTOR3 dir)
+	{
+		m_vPosition = v;
+		m_stBoundingSphere.vCenter = v;
+		m_vForward = dir;
+	}
+	ST_SPHERE* GetBoundingSphere()
+	{
+		return &m_stBoundingSphere;
+	}
 	LPD3DXANIMATIONSET GetCurrentAnim() { return m_currentAnim; }
 	float GetPassedTime() { return m_fPassedTime; }
-	LPD3DXFRAME CopyFrame(LPD3DXFRAME pFrame, const LPD3DXFRAME& pCopyedFrame);
+private:
+	cSkinnedMesh();
+	void Load(char* szFolder, char* szFilename);
+	LPD3DXEFFECT LoadEffect(char* szFilename);
+	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent);
+	void Render(ST_BONE* pBone = NULL);
+	void SetupBoneMatrixPtrs(ST_BONE* pBone);
+	void Destroy();
+
+	
 };
 
