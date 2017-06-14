@@ -171,20 +171,12 @@ struct ST_SPHERE
 	float fRadius;
 };
 
-struct ST_SIZE_WH
+struct ST_SIZEN
 {
 	int nWidth;
 	int nHeight;
-	ST_SIZE_WH() : nWidth(0), nHeight(0) {}
-	ST_SIZE_WH(int _w, int _h) : nWidth(_w), nHeight(_h) {}
-};
-
-struct ST_SIZE_UV
-{
-	float fU;
-	float fV;
-	ST_SIZE_UV() : fU(0), fV(0) {}
-	ST_SIZE_UV(float _u, float _v) : fU(_u), fV(_v) {}
+	ST_SIZEN() : nWidth(0), nHeight(0) {}
+	ST_SIZEN(int _w, int _h) : nWidth(_w), nHeight(_h) {}
 };
 
 enum MODE_STATE

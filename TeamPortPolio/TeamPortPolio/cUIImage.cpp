@@ -4,7 +4,7 @@
 
 cUIImage::cUIImage() : m_pTexture(NULL), m_nAlpha(255)
 {
-	SetSizeUV(ST_SIZE_UV(200, 200));
+	SetSize(ST_SIZEN(200, 200));
 }
 
 
@@ -20,7 +20,7 @@ void cUIImage::Render(LPD3DXSPRITE pSprite)
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	pSprite->SetTransform(&m_matWorld);
 
-	SetRect(&rc, 0, 0, m_stSize_UV.fU, m_stSize_UV.fV);
+	SetRect(&rc, 0, 0, m_stSize.nWidth, m_stSize.nHeight);
 	pSprite->Draw(m_pTexture, &rc, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 0, 0), D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
 
 	pSprite->End();

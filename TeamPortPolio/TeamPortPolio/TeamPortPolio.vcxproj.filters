@@ -327,6 +327,9 @@
     <ClInclude Include="cUIMiniMap.h">
       <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
     </ClInclude>
+    <ClInclude Include="cUIButton.h">
+      <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -482,6 +485,9 @@
     </ClCompile>
     <ClCompile Include="Human_Melee_Battle.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIButton.cpp">
+      <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

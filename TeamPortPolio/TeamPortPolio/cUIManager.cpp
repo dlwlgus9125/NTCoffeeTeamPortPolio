@@ -13,7 +13,7 @@ void cUIManager::Setup_TitleScene()
 
 	m_pMiniMap = new cUIMiniMap;
 	m_pMiniMap->Setup(D3DXVECTOR3(WND_WIDTH * 0.25f, WND_HEIGHT * 0.25f, 0), UI_MINIMAP);
-	m_pMiniMap->SetSizeWH(ST_SIZE_WH(500,500));
+	m_pMiniMap->SetSize(ST_SIZEN(500,500));
 	m_pMiniMap->Setup_Image(TEXTURE->GetTexture("image/UI/minimap/testmap.png"), 150);
 }
 
