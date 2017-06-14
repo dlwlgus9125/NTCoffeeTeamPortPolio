@@ -263,6 +263,20 @@ enum PLAYER_MODE_STATE
 };
 //
 
+struct ST_TAB
+{
+	string text;
+	D3DXVECTOR3 pos;
+	int state;
+
+	ST_TAB(string text, D3DXVECTOR3 pos, int state)
+	{
+		this->text = text;
+		this->pos = pos;
+		this->state = state;
+	}
+};
+
 enum MODE_STATE
 {
 	FIGHTING_MODE, 

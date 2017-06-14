@@ -3,6 +3,7 @@
 class cTownScene :
 	public cIScene
 {
+	LPD3DXSPRITE       m_pSprite;
 public:
 	cTownScene();
 	~cTownScene();
