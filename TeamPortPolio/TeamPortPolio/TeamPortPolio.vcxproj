@@ -163,6 +163,7 @@
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
     <ClInclude Include="cMapManager.h" />
+    <ClInclude Include="cMeleeUnit.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cObjectDB.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cIMap.cpp" />
     <ClCompile Include="cMapManager.cpp" />
+    <ClCompile Include="cMeleeUnit.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cObjectDB.cpp" />

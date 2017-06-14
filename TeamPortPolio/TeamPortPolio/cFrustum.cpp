@@ -59,6 +59,23 @@ bool cFrustum::IsIn(ST_SPHERE* pSphere)
 	return true;
 }
 
+bool cFrustum::IsIn(D3DXVECTOR3 vec3)
+{
+	// 각 면에 loop
+	// 안에있는지 밖에잇는지 걸쳐있는지 
+	// 그려줄지 말지 결정
+	// D3DXPlaneDotCoord(면, 정점, 벡터) = > 거리
+	for (int i = 0; i < m_vecPlane.size(); i++)
+	{
+		if (D3DXPlaneDotCoord(&m_vecPlane[i], &vec3)  < 0)
+		{
+			// Outside the frustum, reject it!
+			return false;
+		}
+	}
+	return true;
+}
+
 
 void cFrustum::PlaneSetup()
 {

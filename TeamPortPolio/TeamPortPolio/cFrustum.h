@@ -14,7 +14,8 @@ public:
 	void Setup();
 	void Update();
 	bool IsIn(MeshSpere pShere/**/);
-	bool cFrustum::IsIn(ST_SPHERE* pSphere);
+	bool IsIn(ST_SPHERE* pSphere);
+	bool IsIn(D3DXVECTOR3 vec3);
 
 	void PlaneSetup();
 
