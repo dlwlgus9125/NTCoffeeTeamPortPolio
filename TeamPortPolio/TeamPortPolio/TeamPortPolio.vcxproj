@@ -191,6 +191,7 @@
     <ClInclude Include="ISteeringEntity.h" />
     <ClInclude Include="Leader_State.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Player_State.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -250,6 +251,10 @@
     <ClCompile Include="Leader_State_Battle.cpp" />
     <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Player_Attack.cpp" />
+    <ClCompile Include="Player_Defence.cpp" />
+    <ClCompile Include="Player_Idle.cpp" />
+    <ClCompile Include="Player_Walk.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
