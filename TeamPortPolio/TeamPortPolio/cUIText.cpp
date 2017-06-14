@@ -12,6 +12,11 @@ cUIText::~cUIText()
 
 }
 
+void cUIText::Update(float deltaTime)
+{
+	cUIObject::Update(deltaTime);
+}
+
 void cUIText::Render(LPD3DXSPRITE pSprite)
 {
 	RECT rc;

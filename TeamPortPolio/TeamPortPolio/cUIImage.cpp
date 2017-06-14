@@ -2,7 +2,7 @@
 #include "cUIImage.h"
 
 
-cUIImage::cUIImage() : m_pTexture(NULL), m_nAlpha(255)
+cUIImage::cUIImage() : m_pTexture(NULL)
 {
 	SetSize(ST_SIZEN(200, 200));
 }
@@ -10,7 +10,11 @@ cUIImage::cUIImage() : m_pTexture(NULL), m_nAlpha(255)
 
 cUIImage::~cUIImage()
 {
-	SAFE_RELEASE(m_pTexture);
+}
+
+void cUIImage::Update(float deltaTime)
+{
+	cUIObject::Update(deltaTime);
 }
 
 void cUIImage::Render(LPD3DXSPRITE pSprite)
@@ -24,10 +28,18 @@ void cUIImage::Render(LPD3DXSPRITE pSprite)
 	pSprite->Draw(m_pTexture, &rc, &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 0, 0), D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
 
 	pSprite->End();
+
+	cUIObject::Render(pSprite);
 }
 
-void cUIImage::Setup_Image(LPDIRECT3DTEXTURE9 texture, int a)
+void cUIImage::Destroy()
+{
+	SAFE_RELEASE(m_pTexture);
+
+	cUIObject::Destroy();
+}
+
+void cUIImage::Setup_Image(LPDIRECT3DTEXTURE9 texture)
 {
 	m_pTexture = texture;
-	m_nAlpha = a;
 }

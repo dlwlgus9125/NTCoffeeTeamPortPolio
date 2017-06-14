@@ -13,8 +13,9 @@ public:
 
 	virtual void Update(float deltaTime);
 	virtual void Render(LPD3DXSPRITE pSprite);
+	virtual void Destroy();
 
-	void Setup_Image(LPDIRECT3DTEXTURE9 texture, int nCellPerRow, int a = 255);
+	void Setup_Image(LPDIRECT3DTEXTURE9 texture, int nCellPerRow);
 	int GetIndex();
 };
 
