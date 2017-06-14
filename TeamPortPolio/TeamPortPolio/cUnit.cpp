@@ -5,7 +5,7 @@
 cUnit::cUnit(IEntity* pLeader, D3DXVECTOR3 offset)
 {
 	m_CharacterEntity = new ISteeringEntity(pLeader->Pos(), pLeader->Radius() * 0.6f,
-		pLeader->Forward(), pLeader->Mass(), pLeader->MaxSpeed() * 3);
+		pLeader->Forward(), pLeader->Mass(), pLeader->MaxSpeed());
 	m_pLeader = pLeader;
 	m_offset = offset;
 	m_isDeath = false;
@@ -79,7 +79,7 @@ void cUnit::UpdateState()
 		m_pSkinnedMesh->SetAnimationIndexBlend(F_READYATTACK);
 	}*/
 
-	if (INPUT->IsMouseDown(MOUSE_RIGHT))
+	if (INPUT->IsMousePress(MOUSE_RIGHT))
 	{
 		FOOTMAN_STATE state = F_SHEILDBLOCK;
 		//m_pSkinnedMesh->

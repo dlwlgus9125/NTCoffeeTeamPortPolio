@@ -27,7 +27,7 @@ void cPlayer::Init()
 	m_CollideSphere.m_vCenter.y += 0.5f;
 
 
-	m_arrangeCollideSphere.m_radius = 20.0f;
+	m_arrangeCollideSphere.m_radius = 10.0;
 	m_arrangeCollideSphere.m_vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
 	m_frustum->Setup();
@@ -103,11 +103,11 @@ void cPlayer::Update(float deltaTime)
 	}
 	if (INPUT->IsKeyPress('A'))
 	{
-		m_fRotY -= 0.03f;
+		m_fRotY -= 0.015f;
 	}
 	if (INPUT->IsKeyPress('D'))
 	{
-		m_fRotY += 0.03f;
+		m_fRotY += 0.015f;
 	}
 
 	if (INPUT->IsKeyDown(VK_TAB))

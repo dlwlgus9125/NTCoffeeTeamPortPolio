@@ -36,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -205,9 +205,11 @@
     <ClInclude Include="cUIStatus.h" />
     <ClInclude Include="cUIChatLog.h" />
     <ClInclude Include="cUIChractorView.h" />
+    <ClInclude Include="cThrow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />
+    <ClCompile Include="cThrow.cpp" />
     <ClCompile Include="cAstar.cpp" />
     <ClCompile Include="cAstarManager.cpp" />
     <ClCompile Include="cCamera.cpp" />

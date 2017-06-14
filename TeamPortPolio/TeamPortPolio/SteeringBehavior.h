@@ -8,8 +8,8 @@ class SteeringBehavior
 	IEntity* m_pEntity;
 
 	D3DXVECTOR3 m_force;				// 조종행으로 발생한 조종힘의 합
-	float m_forceMultiplier;	// 조종힘에 곱해주는 값
-	float m_maxForce;			// 최대 조종힘
+	float m_forceMultiplier;			// 조종힘에 곱해주는 값
+	float m_maxForce;					// 최대 조종힘
 
 	D3DXVECTOR3 m_wander;			// 배회 벡터
 

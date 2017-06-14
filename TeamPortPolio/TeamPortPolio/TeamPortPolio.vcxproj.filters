@@ -339,6 +339,9 @@
     <ClInclude Include="cMapManager.h">
       <Filter>00. Manager\10. cMapManager</Filter>
     </ClInclude>
+    <ClInclude Include="cThrow.h">
+      <Filter>01. cObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -518,6 +521,9 @@
     </ClCompile>
     <ClCompile Include="Leader_State_Walk.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClCompile>
+    <ClCompile Include="cThrow.cpp">
+      <Filter>01. cObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

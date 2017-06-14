@@ -2,47 +2,51 @@
 #include "Math.h"
 
 Math::Math() { srand(time(NULL)); }
-
-float Math::Magnitude(D3DXVECTOR3 vec) { return sqrt(SqrMagnitude(vec)); }
-float Math::SqrMagnitude(D3DXVECTOR3 vec) { return pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2); }
+float Math::Magnitude(D3DXVECTOR3 vec) { return D3DXVec3Length(&vec); }
+float Math::SqrMagnitude(D3DXVECTOR3 vec) { return	D3DXVec3LengthSq(&vec); }
 float Math::Min(float a, float b) { return (a < b) ? b : a; }
 float Math::Max(float a, float b) { return (a > b) ? b : a; }
-float Math::Clamp(float num, float min, float max) { num = Max(num, max); return Min(num, min); }
-float Math::Distance(D3DXVECTOR3 from, D3DXVECTOR3 to) { return Magnitude(to - from); }
-float Math::SqrDistance(D3DXVECTOR3 from, D3DXVECTOR3 to) { return SqrMagnitude(to - from); }
+float Math::Clamp(float num, float min, float max)
+{
+	if (num < min)return min;
+	if (num > max)return max;
+	else return num;
+}
+float Math::Distance(D3DXVECTOR3 from, D3DXVECTOR3 to) { return D3DXVec3Length(&(to - from)); }
+float Math::SqrDistance(D3DXVECTOR3 from, D3DXVECTOR3 to) { return D3DXVec3LengthSq(&(to - from)); }
 
 
 float Math::GetRotY(D3DXVECTOR3 dir)
 {
 	return atan2(-dir.x, -dir.z);
 }
+D3DXVECTOR3 Math::Nomalize(D3DXVECTOR3 vec) { D3DXVECTOR3 Nomal; D3DXVec3Normalize(&Nomal, &vec); return Nomal; }
 
 D3DXVECTOR3 Math::Clamp(D3DXVECTOR3 v, float min, float max)
 {
-	float sqrMagnitude = SqrMagnitude(v);
-	if (sqrMagnitude < min * min*min)
-	{
-		D3DXVec3Normalize(&v, &v);
-		return v * min;
-	}
-	if (sqrMagnitude > max * max*max)
-	{
-		D3DXVec3Normalize(&v, &v);
-		return v * max;
-	}
-	return v;
+	D3DXVECTOR3 Nomal;
+	Nomal = Nomalize(v);
+
+	float vLength = Magnitude(v);
+	float vMinLenth = Magnitude(Nomal*min);
+	float vMaxLenth = Magnitude(Nomal*max);
+
+	if (vLength < vMinLenth) { return Nomal*min; }
+	if (vLength > vMaxLenth) { return Nomal*max; }
+	else { return v; }
+
 }
 
 bool Math::IsCollided(ST_SPHERE c0, ST_SPHERE c1)
 {
 	float totalRadius = c0.fRadius + c1.fRadius;
-	return SqrDistance(c0.vCenter, c1.vCenter) <= totalRadius * totalRadius;
+	return Distance(c0.vCenter, c1.vCenter) <= totalRadius;
 }
 
 bool Math::IsCollided(MeshSpere c0, MeshSpere c1)
 {
 	float totalRadius = c0.m_radius + c1.m_radius;
-	return SqrDistance(c0.m_vCenter, c1.m_vCenter) <= totalRadius * totalRadius;
+	return Distance(c0.m_vCenter, c1.m_vCenter) <= totalRadius;
 }
 
 
@@ -53,7 +57,7 @@ D3DXVECTOR3 Math::GetOverlappedVector(ST_SPHERE from, ST_SPHERE to)
 	D3DXVECTOR3 Length = to.vCenter - from.vCenter;
 	D3DXVECTOR3 dir;
 	D3DXVec3Normalize(&dir, &Length);
-	float magnitude = MATH->Magnitude(Length);
+	float magnitude = Magnitude(Length);
 	float length = (from.fRadius + to.fRadius) - magnitude;
 	return dir * length;
 }

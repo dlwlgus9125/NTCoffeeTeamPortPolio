@@ -12,6 +12,8 @@ class Math : public Singleton<Math>
 public:
 	Math();
 
+	D3DXVECTOR3 Nomalize(D3DXVECTOR3 vec);
+
 	float Magnitude(D3DXVECTOR3 vec);
 	float SqrMagnitude(D3DXVECTOR3 vec);
 	float Min(float a, float b);
