@@ -15,12 +15,17 @@ void cTownScene::OnEnter()
 {
 	MAP->Init("TESTTOWN.txt");
 	UI->Change(SCENE_TOWN);
+
+	//cPlayer* pPlayer = new cPlayer(D3DXVECTOR3(-8, 0, 30), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	//pPlayer->Init();
+	//OBJECT->AddCharacter(pPlayer);
 }
 
 void cTownScene::OnUpdate()
 {
 	MAP->Update();
 	UI->Update(TIME->DeltaTime());
+	OBJECT->Update(TIME->DeltaTime());
 }
 
 void cTownScene::OnExit()
