@@ -48,6 +48,7 @@ public:
 	// 배회
 	void Wander(float distance, float radius, float jitter);
 
+
 	// 장애물 회피
 	void AvoidObstacle(IEntity* pObstacle);
 
