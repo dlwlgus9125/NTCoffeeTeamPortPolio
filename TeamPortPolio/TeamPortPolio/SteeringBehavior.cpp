@@ -76,7 +76,7 @@ void SteeringBehavior::Arrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp( Entity()->Forward()*distance*0.005f, 0.015f, 0.4f);
+		movePos += MATH->Clamp( Entity()->Forward()*distance*0.003f, 0.015f, 0.4f);
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
 		/*const float multiplier = 2;
@@ -99,7 +99,6 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 	
 	D3DXVECTOR3 vToTarget = targetPos - vPos;
 	float distance = MATH->SqrMagnitude(vToTarget);
-	//cout << "distance : " << distance << endl;
 	if (distance > EPSILON)
 	{
 
@@ -108,22 +107,32 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.01f, 0.005f, 0.4f);
+		movePos += MATH->Clamp(Entity()->Forward()*0.02f, 0.005f, 0.4f);
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
-		/*const float multiplier = 2;
-		float speed = MATH->Min(distance * multiplier, Entity()->MaxSpeed());
-		D3DXVECTOR3 targetVelocity;
-		D3DXVec3Normalize(&vToTarget, &vToTarget);
-		targetVelocity = vToTarget*speed;
-		AddForce(targetVelocity - Entity()->Velocity());*/
-		//cout << "targetVelocity : " << targetVelocity.x << ", " << targetVelocity.y << ", " << targetVelocity.z << endl;
-		//cout << MATH->SqrMagnitude(movePos - prevPos)*100 << endl;
 		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
 
 	}
+}
 
+void SteeringBehavior::UnitArrive(D3DXVECTOR3 targetPos)
+{
+	D3DXVECTOR3 vPos = Entity()->Pos();
 
+	D3DXVECTOR3 vToTarget = targetPos - vPos;
+	float distance = MATH->SqrMagnitude(vToTarget);
+	if (distance > EPSILON)
+	{
+		D3DXVECTOR3 prevPos = Entity()->Pos();
+		D3DXVECTOR3 movePos = Entity()->Pos();
+		D3DXVECTOR3 dir;
+		D3DXVec3Normalize(&dir, &vToTarget);
+		Entity()->SetForward(dir);
+		movePos += MATH->Clamp(Entity()->Forward()*0.05f, 0.005f, 0.4f)+ Entity()->Forward()*distance*0.000005f;
+		//cout << 0.005f*distance << endl;
+		Entity()->SetPos(movePos);
+		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
+	}
 }
 
 // 추격
@@ -225,14 +234,14 @@ void SteeringBehavior::AvoidObstacle(vector<cUnit*> obstacles)
 // 겹침 제한
 void SteeringBehavior::ConstrainOverlap(IEntity* pTarget)
 {
-	D3DXVECTOR3 vEntity = Entity()->Pos() - pTarget->Pos();
+	D3DXVECTOR3 vEntity =  pTarget->Pos()- Entity()->Pos();
 	float distance = MATH->Magnitude(vEntity);
 	float totalRadius = Entity()->Radius() + pTarget->Radius();
 
 	if (distance < totalRadius)
 	{
 		D3DXVec3Normalize(&vEntity, &vEntity);
-		Entity()->AddPos(vEntity * (totalRadius - distance));
+		pTarget->AddPos(vEntity * (distance)*0.01f);
 	}
 }
 
@@ -247,7 +256,7 @@ void SteeringBehavior::ConstrainOverlap(vector<IEntity*> targets)
 		{
 			D3DXVECTOR3 pushDir = MATH->GetOverlappedVector(thisSphere, itSphere);
 			Entity()->SetPos(Entity()->Pos()- pushDir);
-			/*ConstrainOverlap(targets[i]);*/
+			ConstrainOverlap(targets[i]);
 		}
 	}
 }

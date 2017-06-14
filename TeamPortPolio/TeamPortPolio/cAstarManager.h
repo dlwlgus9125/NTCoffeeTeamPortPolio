@@ -25,5 +25,11 @@ public:
 
 	bool GetCursorIndex(int& TargetIndex);
 	bool IsLoadingComplete() { return m_isMapLoadingComplete; }
+
+	void SetObjectIndex();
+	void SetLeaderPath();
+	void SetTargetOfLeader();
+
+	
 };
 

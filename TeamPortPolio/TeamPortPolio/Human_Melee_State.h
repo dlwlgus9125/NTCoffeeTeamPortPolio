@@ -2,12 +2,12 @@
 #include "cUnit.h"
 //enum UNIT_STATE
 //{
-//	UNIT_STATE_STATE_IDLE,
-//	UNIT_STATE_STATE_WALK,
-//	UNIT_STATE_STATE_ATTACK,
-//	UNIT_STATE_STATE_DEFENCE,
+//	UNIT_Melee_STATE_IDLE,
+//	UNIT_Melee_STATE_WALK,
+//	UNIT_Melee_STATE_ATTACK,
+//	UNIT_Melee_STATE_DEFENCE,
 //};
-class Human_State_Idle : public IState<cUnit*>
+class Human_Melee_Idle : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);
@@ -18,7 +18,7 @@ public:
 
 };
 
-class Human_State_Walk : public IState<cUnit*>
+class Human_Melee_Walk : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);
@@ -30,9 +30,11 @@ public:
 	void StateChanger(cUnit * pUnit);
 };
 
-class Human_State_Attack : public IState<cUnit*>
+class Human_Melee_Battle : public IState<cUnit*>
 {
 	float fPassedTime;
+	cObject* BattleTarget;
+	FG_STATE currentAttackIndex;
 public:
 	void OnBegin(cUnit* pUnit);
 
@@ -41,9 +43,14 @@ public:
 	void OnEnd(cUnit* pUnit);
 
 	void StateChanger(cUnit * pUnit);
+
+	void FindTarget(cUnit * pUnit);
+
+	void FindNearTarget(cUnit * pUnit);
+	
 };
 
-class Human_State_Defence : public IState<cUnit*>
+class Human_Melee_Defence : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);

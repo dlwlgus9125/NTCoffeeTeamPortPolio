@@ -9,6 +9,7 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
 	/*m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
+	m_unitLeader->SetCamp(CAMP_PLAYER);
 	m_unitLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(16001)->Id());
 	OBJECT->AddObject(m_unitLeader);
 	OBJECT->AddLeader(m_unitLeader);*/
@@ -137,5 +138,16 @@ void cPlayer::Render()
 		{
 			m_pSkinnedMesh->UpdateAndRender();
 		}
+	}
+}
+
+void cPlayer::SetUnitLeaderTargetIndex(int index)
+{
+	m_unitLeader->PathClear();
+	if (ASTAR->GetGraph()->GetNode(index)->Active())
+	{
+		m_unitLeader->SetTargetIndex(index);
+		/*cout << "targetInd : " << index << endl;
+		cout << "size : " << m_unitLeader->GetPath().size() << endl;*/
 	}
 }

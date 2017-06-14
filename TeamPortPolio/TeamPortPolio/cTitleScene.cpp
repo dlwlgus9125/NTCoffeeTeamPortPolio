@@ -7,44 +7,69 @@
 
 
 cTitleScene::cTitleScene() :
-	m_pSprite(NULL),
-	m_pTexture(NULL)
-{
-	D3DXCreateSprite(D3DDevice, &m_pSprite);
+	m_pSprite(NULL)
+{	
 }
 
 
 cTitleScene::~cTitleScene()
 {
 	SAFE_RELEASE(m_pSprite);
-	SAFE_RELEASE(m_pTexture);
 }
 
 void cTitleScene::OnEnter()
 {
-	MAP->Init("TESTMAP.txt");
-	cPlayer* pPlayer = new cPlayer(ASTAR->GetGraph()->GetNode(16001)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	D3DXCreateSprite(D3DDevice, &m_pSprite);
+	MAP->Init("TESTMAP3.txt");
+	UI->Change(SCENE_TITLE);
+	cPlayer* pPlayer = new cPlayer(D3DXVECTOR3(-8,0,30), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
 	pPlayer->Init();
-	
+	OBJECT->AddCharacter(pPlayer);
+
+
+
 	OBJECT->AddObject(pPlayer);
 	OBJECT->SetPlayer(pPlayer);
+
+
+	cLeader* pLeader = new cLeader(ASTAR->GetGraph()->GetNode(11581)->Pos(), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
+	pLeader->Init();
+	pLeader->SetCamp(CAMP_ENEMY1);
+	pLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(11581)->Id());
+	OBJECT->AddObject(pLeader);
+	OBJECT->AddLeader(pLeader);
 	Setup_DirLight();
 }
 
 void cTitleScene::OnUpdate()
 {
 	MAP->Update();
-	OBJECT->Update(TIME->DeltaTime());
-	
+	UI->Update(TIME->DeltaTime());
+
+	// >> UI의 이벤트 정보 
+	int indexInMiniMap;
+	int buttonIndex;
+
+	UI->GetEvent(indexInMiniMap, buttonIndex);
+	if (indexInMiniMap > 0)
+	{
+		OBJECT->GetPlayer()->SetUnitLeaderTargetIndex(indexInMiniMap);
+		cout << "UI Index : " << indexInMiniMap << endl;
+	}
+	// <<
+
+	OBJECT->Update(TIME->DeltaTime());	
 }
 
 void cTitleScene::OnExit()
 {
+	SAFE_RELEASE(m_pSprite);
 }
 
 void cTitleScene::OnRender()
 {
 	MAP->Render();
+	UI->Render(m_pSprite);
 	OBJECT->Render();
 	
 }

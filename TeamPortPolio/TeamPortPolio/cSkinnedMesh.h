@@ -19,6 +19,15 @@ private:
 	D3DXVECTOR3					m_vPosition;
 	D3DXVECTOR3					m_vForward;
 	int                         m_currentIndex;
+
+	//Blend용
+	float                       m_fBlendTime;
+	float                       m_fPassedBlendTime;
+	float                       m_fPassedTime;
+	bool                        m_isAnimBlend;
+
+	//현재 애니메이션 재생시간 확인용
+	LPD3DXANIMATIONSET m_currentAnim;
 public:
 	cSkinnedMesh(cSkinnedMesh* pSkinnedMesh);
 	~cSkinnedMesh(void);
@@ -38,6 +47,8 @@ public:
 	{
 		return &m_stBoundingSphere;
 	}
+	LPD3DXANIMATIONSET GetCurrentAnim() { return m_currentAnim; }
+	float GetPassedTime() { return m_fPassedTime; }
 private:
 	cSkinnedMesh();
 	void Load(char* szFolder, char* szFilename);
@@ -46,5 +57,7 @@ private:
 	void Render(ST_BONE* pBone = NULL);
 	void SetupBoneMatrixPtrs(ST_BONE* pBone);
 	void Destroy();
+
+	
 };
 
