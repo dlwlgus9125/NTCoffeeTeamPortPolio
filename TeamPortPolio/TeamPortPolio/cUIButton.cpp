@@ -23,6 +23,8 @@ void cUIButton::Setup_Button(string sPath_idle, string sPath_mouseover, string s
 
 void cUIButton::Update(float deltaTime)
 {
+	if (m_isHidden) return;
+
 	switch (m_eCurrentState)
 	{
 	case UI_IDLE:

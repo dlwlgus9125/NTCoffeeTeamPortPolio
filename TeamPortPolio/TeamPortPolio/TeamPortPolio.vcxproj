@@ -183,6 +183,7 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUITap.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="Human_Melee_State.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUITap.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="Human_Melee_Battle.cpp" />

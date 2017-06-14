@@ -59,7 +59,6 @@ void cGameManager::Init()
 
 
 	TIME->Init(60);
-	TESTMAP->Setup();
 	UI->Setup();
 	INPUT->Init();
 	OBJECT->Init();
@@ -107,7 +106,6 @@ void cGameManager::Update()
 
 			m_prevTime = m_currentTime;
 			INPUT->Update();
-			OBJECT->Update(TIME->DeltaTime());
 			CAMERA->Update();
 			SCENE->Update();
 			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
@@ -132,8 +130,6 @@ void cGameManager::Render()
 			D3DCOLOR_XRGB(47, 121, 112),
 			1.0f, 0);
 		D3DDevice->BeginScene();
-		TESTMAP->Render();
-		OBJECT->Render();
 		SCENE->Render();
 		D3DDevice->EndScene();
 		D3DDevice->Present(NULL, NULL, NULL, NULL);
