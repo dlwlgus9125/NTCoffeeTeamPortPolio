@@ -35,6 +35,7 @@ void cTownScene::OnExit()
 	SAFE_RELEASE(m_pSprite);
 	MAP->Destroy();
 	UI->Release();
+	OBJECT->Render();
 }
 
 void cTownScene::OnRender()
