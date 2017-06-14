@@ -4,7 +4,7 @@
 
 cUnit::cUnit(IEntity* pLeader, D3DXVECTOR3 offset)
 {
-	m_CharacterEntity = new ISteeringEntity(pLeader->Pos(), pLeader->Radius() * 0.6f,
+	m_CharacterEntity = new ISteeringEntity(pLeader->Pos(), 0.5f,
 		pLeader->Forward(), pLeader->Mass(), pLeader->MaxSpeed() * 3);
 	m_pLeader = pLeader;
 	m_offset = offset;
@@ -21,11 +21,11 @@ cUnit::~cUnit()
 
 void cUnit::Init()
 {
-	m_CollideSphere.fRadius = 0.1f;
+	m_CollideSphere.fRadius = 0.5f;
 	m_CollideSphere.vCenter = m_CharacterEntity->Pos();
 	m_CollideSphere.vCenter.y += 0.5f;
 
-	m_arrangeCollideSphere.fRadius = 2.0f;
+	m_arrangeCollideSphere.fRadius = 1.0f;
 	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
 
@@ -34,11 +34,11 @@ void cUnit::Init()
 	m_pSkinnedMesh =  new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
 	
 	m_pFsm = new cStateMachine<cUnit*>(this);
-	m_pFsm->Register(UNIT_STATE_STATE_IDLE,    new Human_State_Idle());
-	m_pFsm->Register(UNIT_STATE_STATE_WALK,    new Human_State_Walk());
-	m_pFsm->Register(UNIT_STATE_STATE_ATTACK,  new Human_State_Attack());
-	m_pFsm->Register(UNIT_STATE_STATE_DEFENCE, new Human_State_Defence());
-	m_pFsm->Play(UNIT_STATE_STATE_IDLE);
+	m_pFsm->Register(UNIT_STATE_MELEE_IDLE,    new Human_Melee_Idle());
+	m_pFsm->Register(UNIT_STATE_MELEE_WALK,    new Human_Melee_Walk());
+	m_pFsm->Register(UNIT_STATE_MELEE_BATTLE,  new Human_Melee_Battle());
+	m_pFsm->Register(UNIT_STATE_MELEE_DEFENCE, new Human_Melee_Defence());
+	m_pFsm->Play(UNIT_STATE_MELEE_IDLE);
 }
 
 void cUnit::Update(float deltaTime)

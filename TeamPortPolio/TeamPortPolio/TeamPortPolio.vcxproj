@@ -236,14 +236,14 @@
     <ClCompile Include="cUIObject.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
-    <ClCompile Include="Human_Melee_Attack.cpp" />
+    <ClCompile Include="Human_Melee_Battle.cpp" />
     <ClCompile Include="Human_Melee_Defence.cpp" />
     <ClCompile Include="Human_Melee_Idle.cpp" />
     <ClCompile Include="Human_Melee_Walk.cpp" />
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
     <ClCompile Include="Leader_State_Idle.cpp" />
-    <ClCompile Include="Leader_State_Pursuit.cpp" />
+    <ClCompile Include="Leader_State_Battle.cpp" />
     <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="stdafx.cpp">

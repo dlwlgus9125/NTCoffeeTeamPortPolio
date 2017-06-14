@@ -9,6 +9,7 @@ void Leader_State_Walk::OnUpdate(cLeader * pLeader, float deltaTime)
 {
 	if (pLeader->GetTargetObject() != NULL)
 	{
+		pLeader->SetTargetIndex(((cCharacter*)pLeader->GetTargetObject())->GetIndex());
 		pLeader->FSM()->Play(LEADER_STATE_STATE_PURSUIT);
 	}
 	else if (pLeader->GetPath().size() > 0)

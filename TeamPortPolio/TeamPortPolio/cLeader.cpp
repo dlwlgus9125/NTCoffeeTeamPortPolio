@@ -34,43 +34,43 @@ void cLeader::Init()
 	{
 		for (float x = 2.0f; x >= -2.0f; x--)
 		{
-			AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(x, 0, z) * 1.5f));
-			m_RectOffest.push_back(D3DXVECTOR3(x, 0, z) * 1.5f);
+			AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(x, 0, z) * 3.0f));
+			m_RectOffest.push_back(D3DXVECTOR3(x, 0, z) * 3.0f);
 		}
 	}
-	//AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(2, 0, 2) *1.5f));
-	m_RectOffest.push_back(D3DXVECTOR3(2, 0, 2) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(0, 0, -4.0f) *1.5f);
+	//AddUnit(new cUnit(m_CharacterEntity, D3DXVECTOR3(2, 0, 2) * 3.0f));
+	m_RectOffest.push_back(D3DXVECTOR3(2, 0, 2) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(0, 0, -4.0f) * 3.0f);
 
-	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -3.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -3.0f) *1.5f);
+	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -3.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -3.0f) * 3.0f);
 
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, -2.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, -2.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, -2.0f) *1.5f);
+	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, -2.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, -2.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, -2.0f) * 3.0f);
 
 
-	m_TriOffest.push_back(D3DXVECTOR3(1.5f, 0, -1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.5f, 0, -1.0f) *1.5f);
+	m_TriOffest.push_back(D3DXVECTOR3(1.5f, 0, -1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(0.5f, 0, -1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-0.5f, 0, -1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-1.5f, 0, -1.0f) * 3.0f);
 
-	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 0.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 0.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 0.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 0.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 0.0f) *1.5f);
+	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 0.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 0.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 0.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 0.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 0.0f) * 3.0f);
 
-	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 1.0f) *1.5f);
-	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 1.0f) *1.5f);
+	m_TriOffest.push_back(D3DXVECTOR3(2.0f, 0, 1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(1.0f, 0, 1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(0.0f, 0, 1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-1.0f, 0, 1.0f) * 3.0f);
+	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 1.0f) * 3.0f);
 
 	m_pFsm = new cStateMachine<cLeader*>(this);
 	m_pFsm->Register(LEADER_STATE_STATE_IDLE, new Leader_State_Idle());
 	m_pFsm->Register(LEADER_STATE_STATE_WALK, new Leader_State_Walk());
-	m_pFsm->Register(LEADER_STATE_STATE_PURSUIT, new Leader_State_Pursuit());
+	m_pFsm->Register(LEADER_STATE_STATE_PURSUIT, new Leader_State_Battle());
 	m_pFsm->Play(LEADER_STATE_STATE_IDLE);
 	m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
 	D3DXCreateSphere(D3DDevice, m_arrangeCollideSphere.fRadius, 10, 10, &m_meshSphere.m_pMeshSphere, NULL);

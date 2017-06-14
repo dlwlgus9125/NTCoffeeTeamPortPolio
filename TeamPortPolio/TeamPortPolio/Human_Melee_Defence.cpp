@@ -2,16 +2,16 @@
 #include "Human_Melee_State.h"
 
 
-void Human_State_Defence::OnBegin(cUnit * pUnit)
+void Human_Melee_Defence::OnBegin(cUnit * pUnit)
 {
 	pUnit->GetMesh()->SetAnimationIndexBlend(FG_SHEILDBLOCK);
 }
 
-void Human_State_Defence::OnUpdate(cUnit * pUnit, float deltaTime)
+void Human_Melee_Defence::OnUpdate(cUnit * pUnit, float deltaTime)
 {
-	pUnit->FSM()->Play(UNIT_STATE_STATE_IDLE);
+	pUnit->FSM()->Play(UNIT_STATE_MELEE_IDLE);
 }
 
-void Human_State_Defence::OnEnd(cUnit * pUnit)
+void Human_Melee_Defence::OnEnd(cUnit * pUnit)
 {
 }
