@@ -117,7 +117,7 @@ void cSkinnedMesh::UpdateAndRender()
 	if (m_pRootFrame)
 	{
 		D3DXMATRIXA16 mat,matS, matR, matT;
-		D3DXMatrixScaling(&matS, 3.0f, 3.0f, 3.0f);
+		D3DXMatrixScaling(&matS, 2.0f, 2.0f, 2.0f);
 		D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_vForward));
 		mat =matS* matR*matT;

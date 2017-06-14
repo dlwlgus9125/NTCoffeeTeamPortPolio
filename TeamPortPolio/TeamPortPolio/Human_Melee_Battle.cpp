@@ -16,13 +16,13 @@ void Human_Melee_Battle::OnUpdate(cUnit * pUnit, float deltaTime)
 	{
 		FindTarget(pUnit);
 
-		D3DXVECTOR3 worldOffset = MATH->LocalToWorld(D3DXVECTOR3((pUnit->GetOffset().x + (pUnit->GetOffset().z)), 0, 0), pUnit->GetLeader()->Forward());
+		D3DXVECTOR3 worldOffset = MATH->LocalToWorld(D3DXVECTOR3((pUnit->GetOffset().x + (pUnit->GetOffset().z*0.5F)), 0, 0), pUnit->GetLeader()->Forward());
 
 		D3DXVECTOR3 dirToTarget = pUnit->GetTargetObject()->GetCharacterEntity()->Pos();
 		D3DXVECTOR3 thisPos = pUnit->GetCharacterEntity()->Pos();
 
 		D3DXVec3Normalize(&dirToTarget, &dirToTarget);
-		D3DXVECTOR3 targetPos = ((cLeader*)pUnit->GetTargetObject())->GetCharacterEntity()->Pos() +worldOffset;
+		D3DXVECTOR3 targetPos = ((cLeader*)pUnit->GetTargetObject())->GetCharacterEntity()->Pos() + worldOffset +(((cLeader*)pUnit->GetTargetObject())->GetCharacterEntity()->Forward()*10.0f);
 
 		float distance = MATH->Distance(thisPos, targetPos);
 
@@ -128,13 +128,17 @@ void Human_Melee_Battle::FindNearTarget(cUnit * pUnit)
 	{
 		if (BattleTarget == NULL) 
 		{ 
-			BattleTarget = ((cLeader*)pUnit->GetTargetObject())->GetUnits()[i];
+			
+				BattleTarget = ((cLeader*)pUnit->GetTargetObject())->GetUnits()[i];
+			
 		}
 		else
 		{
 			if (BattleTarget != ((cLeader*)pUnit->GetTargetObject())->GetUnits()[i])
 			{
-				BattleTarget = ((cLeader*)pUnit->GetTargetObject())->GetUnits()[i];
+				
+					BattleTarget = ((cLeader*)pUnit->GetTargetObject())->GetUnits()[i];
+				
 			}
 		}
 	}
