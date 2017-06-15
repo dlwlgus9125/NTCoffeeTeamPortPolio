@@ -1,11 +1,13 @@
 #include "stdafx.h"
-#include "cSnow.h"
+#include "cWeather.h"
 
-cSnow::cSnow()
+
+cWeather::cWeather()
 {
 }
 
-cSnow::~cSnow()
+
+cWeather::~cWeather()
 {
 }
 
@@ -16,11 +18,11 @@ DWORD FtoDw(float f)
 }
 
 
-void cSnow::Setup()
+void cWeather::Setup(int count)
 {
 	srand((unsigned)time(NULL));
 	m_vecParticleVertex.clear();
-	m_vecParticleVertex.resize(1000);
+	m_vecParticleVertex.resize(count);
 	for (int i = 0; i < m_vecParticleVertex.size(); ++i)
 	{
 		float fRadius = rand() % 100;
@@ -44,7 +46,7 @@ void cSnow::Setup()
 	}
 }
 
-void cSnow::Update()
+void cWeather::Update(float fMove, float fSpeed)
 {
 	int nAlpha = 0;
 	int nDelta = 4;
@@ -68,14 +70,14 @@ void cSnow::Update()
 		m_vecParticleVertex[i].c = D3DCOLOR_ARGB(255, 255, 255, 255);	// alpha 값만 변경
 
 		if (m_vecParticleVertex[i].p.y < -100) m_vecParticleVertex[i].p.y = 50 + rand() % 50;
-		else m_vecParticleVertex[i].p.y -= 0.5f;
+		else m_vecParticleVertex[i].p.y -= fSpeed;
 
 		if (m_vecParticleVertex[i].p.x < -100) m_vecParticleVertex[i].p.x = 100;
-		else m_vecParticleVertex[i].p.x -= 0.1f;
+		else m_vecParticleVertex[i].p.x -= fMove;
 	}
 }
 
-void cSnow::Render()
+void cWeather::Render(char* sFullPath)
 {
 	D3DXMATRIXA16	matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -105,7 +107,7 @@ void cSnow::Render()
 	D3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
 
 	D3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	D3DDevice->SetTexture(0, TEXTURE->GetTexture("obj/Effect/Snow/alpha_tex.tga"));
+	D3DDevice->SetTexture(0, TEXTURE->GetTexture(sFullPath));
 	D3DDevice->DrawPrimitiveUP(D3DPT_POINTLIST, m_vecParticleVertex.size(), &m_vecParticleVertex[0], sizeof(ST_PC_VERTEX));
 
 	D3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);

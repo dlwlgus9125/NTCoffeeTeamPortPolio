@@ -25,6 +25,8 @@ void cTownScene::OnEnter()
 	OBJECT->AddObject(pPlayer);
 	OBJECT->SetPlayer(pPlayer);
 
+	EFFECT->Init(false, 0, true, true);
+
 	// >> 테스트용 
 	m_pMeshSphere = NULL;
 	D3DXCreateSphere(D3DDevice, 1, 10, 10, &m_pMeshSphere, NULL);
@@ -59,6 +61,7 @@ void cTownScene::OnUpdate()
 	MAP->Update();
 	UI->Update(TIME->DeltaTime());
 	OBJECT->Update(TIME->DeltaTime());
+	EFFECT->Update();
 
 	// >> 테스트용
 	if (INPUT->IsMouseDown(MOUSE_LEFT))
@@ -87,6 +90,7 @@ void cTownScene::OnExit()
 
 void cTownScene::OnRender()
 {
+	EFFECT->Render();
 	MAP->Render();
 	UI->Render(m_pSprite);
 	OBJECT->Render();
