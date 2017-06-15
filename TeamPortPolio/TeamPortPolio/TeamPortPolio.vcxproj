@@ -188,7 +188,7 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
-    <ClInclude Include="cUITap.h" />
+    <ClInclude Include="cUITab.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
     <ClInclude Include="Melee_State.h" />
@@ -248,7 +248,7 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
-    <ClCompile Include="cUITap.cpp" />
+    <ClCompile Include="cUITab.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
     <ClCompile Include="Leader_State_Defeat.cpp" />

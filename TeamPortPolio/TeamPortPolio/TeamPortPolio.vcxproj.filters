@@ -354,9 +354,6 @@
     <ClInclude Include="cUIButton.h">
       <Filter>08. UI\03. cUIButton</Filter>
     </ClInclude>
-    <ClInclude Include="cUITap.h">
-      <Filter>08. UI\05. cUITap</Filter>
-    </ClInclude>
     <ClInclude Include="Player_State.h">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClInclude>
@@ -372,6 +369,10 @@
     <ClInclude Include="cMeleeUnit.h" />
     <ClInclude Include="Melee_State.h">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeleeUnit.h" />
+    <ClInclude Include="cUITab.h">
+      <Filter>08. UI\05. cUITap</Filter>
     </ClInclude>
     <ClInclude Include="cShadowManager.h" />
   </ItemGroup>
@@ -521,9 +522,6 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>08. UI\03. cUIButton</Filter>
     </ClCompile>
-    <ClCompile Include="cUITap.cpp">
-      <Filter>08. UI\05. cUITap</Filter>
-    </ClCompile>
     <ClCompile Include="Player_Attack.cpp">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
@@ -563,6 +561,10 @@
     </ClCompile>
     <ClCompile Include="Leader_State_Defeat.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeleeUnit.cpp" />
+    <ClCompile Include="cUITab.cpp">
+      <Filter>08. UI\05. cUITap</Filter>
     </ClCompile>
     <ClCompile Include="cShadowManager.cpp" />
   </ItemGroup>

@@ -109,7 +109,7 @@ enum SCENE_TAG
 
 enum UI_TAG
 {
-	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, 
+	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, UI_TAB,
 };
 
 enum UI_STATE
@@ -218,7 +218,7 @@ struct MeshSpere
 struct ST_SPHERE
 {
 	ST_SPHERE() {}
-	ST_SPHERE(D3DXVECTOR3 pos, float radius) { vCenter = pos; fRadius = radius; }
+	ST_SPHERE(D3DXVECTOR3 pos, float radius) { vCenter = pos; fRadius = radius; isPicked = false; }
 	bool isPicked;
 	D3DXVECTOR3 vCenter;
 	float fRadius;
@@ -352,6 +352,16 @@ enum ITEM_TAG
 	ITEM_NONE = 0,
 	ITEM_MELEE,
 	ITEM_RANGE,
+};
+
+enum EVENTID_TITLESCENE
+{
+	TITLE_BTN_FMT_RECT = 0, TITLE_BTN_FMT_TRI, TITLE_BTN_ATTSTATE, TITLE_BTN_DEFSTATE,
+};
+
+enum EVENTID_TOWNSCENE
+{
+	
 };
 
 #define SYNTHESIZE(varType, varName, funName)\

@@ -31,6 +31,11 @@ void cUIText::Render(LPD3DXSPRITE pSprite)
 	cUIObject::Render(pSprite);
 }
 
+void cUIText::Destroy()
+{
+	cUIObject::Destroy();
+}
+
 
 void cUIText::Setup_Text(string text, int width, int height, FONT_TAG tag)
 {
