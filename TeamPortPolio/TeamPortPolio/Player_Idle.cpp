@@ -3,6 +3,7 @@
 
 void Player_Idle::OnBegin(cPlayer* pPlayer)
 {
+	pPlayer->GetMesh()->SetAnimationIndexBlend(P_READYATTACK);
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_STAND);
 }
 
@@ -13,7 +14,7 @@ void Player_Idle::OnUpdate(cPlayer* pPlayer, float deltaTime)
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_WALK);
 	}
-
+	
 	if (INPUT->IsMouseDown(MOUSE_LEFT) || INPUT->IsMousePress(MOUSE_LEFT))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_ATTACK);
@@ -23,7 +24,7 @@ void Player_Idle::OnUpdate(cPlayer* pPlayer, float deltaTime)
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_DEFENCE);
 	}
-
+	
 }
 
 void Player_Idle::OnEnd(cPlayer* pPlayer)
