@@ -7,7 +7,7 @@
 //	UNIT_Melee_STATE_ATTACK,
 //	UNIT_Melee_STATE_DEFENCE,
 //};
-class Human_Melee_Idle : public IState<cUnit*>
+class Melee_Idle : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);
@@ -18,7 +18,7 @@ public:
 
 };
 
-class Human_Melee_Walk : public IState<cUnit*>
+class Melee_Walk : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);
@@ -30,11 +30,9 @@ public:
 	void StateChanger(cUnit * pUnit);
 };
 
-class Human_Melee_Battle : public IState<cUnit*>
+class Melee_Battle : public IState<cUnit*>
 {
-	float fPassedTime;
 	cObject* BattleTarget;
-	FG_STATE currentAttackIndex;
 public:
 	void OnBegin(cUnit* pUnit);
 
@@ -47,10 +45,15 @@ public:
 	void FindTarget(cUnit * pUnit);
 
 	void FindNearTarget(cUnit * pUnit);
-	
+
+	void Charge(cUnit * pUnit);
+
+	void Battle(cUnit * pUnit);
+
+	void BattleWithTarget(cUnit* pUnit);
 };
 
-class Human_Melee_Defence : public IState<cUnit*>
+class Melee_Defence : public IState<cUnit*>
 {
 public:
 	void OnBegin(cUnit* pUnit);
@@ -60,3 +63,13 @@ public:
 	void OnEnd(cUnit* pUnit);
 };
 
+
+class Melee_Death : public IState<cUnit*>
+{
+public:
+	void OnBegin(cUnit* pUnit);
+
+	void OnUpdate(cUnit* pUnit, float deltaTime);
+
+	void OnEnd(cUnit* pUnit);
+};

@@ -68,6 +68,9 @@ void cGameManager::Init()
 	SCENE->ChangeScene(SCENE_TOWN);
 	CAMERA->Setup();
 
+
+	srand((unsigned)time(NULL));
+
 	
 	//<<
 }

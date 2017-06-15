@@ -37,11 +37,11 @@ void Player_Walk::StateChanger(cPlayer * pPlayer, D3DXVECTOR3 prevPos, D3DXVECTO
 	}
 	else if (INPUT->IsKeyPress(VK_S))
 	{
-		if (pPlayer->GetMesh()->GetIndex() != P_BACKWALK)pPlayer->GetMesh()->SetAnimationIndexBlend(P_BACKWALK);
+		pPlayer->GetMesh()->SetAnimationIndexBlend(P_WALK);
 	}
 	else if (INPUT->IsKeyPress(VK_SHIFT) && 0.04f < MATH->Distance(prevPos, movePos))
 	{
-		if (pPlayer->GetMesh()->GetIndex() != P_RUN)pPlayer->GetMesh()->SetAnimationIndexBlend(P_RUN);
+		pPlayer->GetMesh()->SetAnimationIndexBlend(P_RUN);
 	}
 }
 
