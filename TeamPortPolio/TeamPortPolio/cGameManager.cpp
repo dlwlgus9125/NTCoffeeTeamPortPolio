@@ -126,7 +126,7 @@ void cGameManager::Render()
 	{
 		D3DDevice->Clear(NULL,
 			NULL,
-			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
 			D3DCOLOR_XRGB(47, 121, 112),
 			1.0f, 0);
 		D3DDevice->BeginScene();
