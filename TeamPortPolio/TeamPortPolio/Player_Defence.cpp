@@ -4,12 +4,15 @@
 
 void Player_Defence::OnBegin(cPlayer* pPlayer)
 {
-
+	pPlayer->GetMesh()->SetAnimationIndexBlend(P_SHEILDUP);
 }
 
 void Player_Defence::OnUpdate(cPlayer* pPlayer, float deltaTime)
 {
-
+	if (INPUT->IsMouseUp(MOUSE_RIGHT))
+	{
+		pPlayer->FSM()->Play(PLAYER_STATE_IDLE);
+	}
 }
 
 void Player_Defence::OnEnd(cPlayer* pPlayer)

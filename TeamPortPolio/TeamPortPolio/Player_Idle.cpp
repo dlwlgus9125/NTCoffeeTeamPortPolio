@@ -9,14 +9,19 @@ void Player_Idle::OnBegin(cPlayer* pPlayer)
 void Player_Idle::OnUpdate(cPlayer* pPlayer, float deltaTime)
 {
 
-	if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_A))
+	if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_S))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_WALK);
 	}
 
-	if (INPUT->IsMouseDown(MOUSE_LEFT))
+	if (INPUT->IsMouseDown(MOUSE_LEFT) || INPUT->IsMousePress(MOUSE_LEFT))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_ATTACK);
+	}
+
+	if (INPUT->IsKeyPress(MOUSE_RIGHT))
+	{
+		pPlayer->FSM()->Play(PLAYER_STATE_DEFENCE);
 	}
 
 }
