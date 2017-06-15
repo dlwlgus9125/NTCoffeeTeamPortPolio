@@ -155,6 +155,7 @@
     <ClInclude Include="cFog.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
+    <ClInclude Include="cItemDB.h" />
     <ClInclude Include="cLeader.h" />
     <ClInclude Include="cFrame.h" />
     <ClInclude Include="cFrustum.h" />
@@ -177,10 +178,8 @@
     <ClInclude Include="cShadowManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
-    <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
-    <ClInclude Include="BallisticMotion.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
@@ -189,9 +188,11 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUISlot.h" />
     <ClInclude Include="cUITab.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
+    <ClInclude Include="cWeather.h" />
     <ClInclude Include="Melee_State.h" />
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="ISteeringEntity.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="cFog.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
+    <ClCompile Include="cItemDB.cpp" />
     <ClCompile Include="cLeader.cpp" />
     <ClCompile Include="cFrame.cpp" />
     <ClCompile Include="cFrustum.cpp" />
@@ -240,7 +242,6 @@
     <ClCompile Include="cShadowManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
-    <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="BallisticMotion.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
@@ -251,9 +252,11 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUISlot.cpp" />
     <ClCompile Include="cUITab.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
+    <ClCompile Include="cWeather.cpp" />
     <ClCompile Include="Leader_State_Defeat.cpp" />
     <ClCompile Include="Melee_Battle.cpp" />
     <ClCompile Include="Melee_Defence.cpp" />

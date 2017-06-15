@@ -261,6 +261,36 @@ struct ST_TAB
 	}
 };
 
+struct ST_SLOT
+{
+	D3DXVECTOR3 imagePos;
+	ST_SIZEN imageSize;
+	D3DXVECTOR3 textPos;
+	ST_SIZEN textSize;
+	string text;
+
+	ST_SLOT(D3DXVECTOR3 imagePos, ST_SIZEN imageSize, D3DXVECTOR3 textPos, ST_SIZEN textSize, string text)
+	{
+		this->imagePos=	imagePos;
+		this->imageSize=imageSize;
+		this->textPos=textPos;
+		this->textSize=textSize;
+		this->text=text;
+	}
+};
+
+struct ST_IMAGE_TEXT
+{
+	LPDIRECT3DTEXTURE9 texture;
+	string text;
+
+	ST_IMAGE_TEXT(LPDIRECT3DTEXTURE9 texture, string text)
+	{
+		this->texture = texture;
+		this->text = text;
+	}
+};
+
 enum MODE_STATE
 {
 	FIGHTING_MODE, 
@@ -402,6 +432,7 @@ public: virtual void Set##funName(varType var){\
 #include "cMapManager.h"
 #include "cUIManager.h"
 #include "cFontManager.h"
+#include "cEffectManager.h"
 //<<
 #include "cRay.h"
 

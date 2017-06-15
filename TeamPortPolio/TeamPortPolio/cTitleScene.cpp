@@ -61,16 +61,16 @@ void cTitleScene::OnUpdate()
 	switch (buttonIndex)
 	{
 	case TITLE_BTN_FMT_RECT:
-		Setup_DirLight();
+
 		break;
 	case TITLE_BTN_FMT_TRI:
-		Setup_DirLight();
+
 		break;
 	case TITLE_BTN_ATTSTATE:
-		Setup_DirLight();
+
 		break;
 	case TITLE_BTN_DEFSTATE:
-		Setup_DirLight();
+
 		break;
 	}
 	// <<

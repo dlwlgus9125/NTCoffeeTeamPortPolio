@@ -441,8 +441,22 @@ LPD3DXMESH cObjLoader::LoadMesh_Map(OUT vector<cMtlTex*> &vecMtlTex, OUT vector<
 			pConstruct->SetRotationY(fRotY);
 			pConstruct->SetRotationZ(fRotZ);
 			pConstruct->SetPosition(vPos);
-			pConstruct->Create(nSID);
-			
+			bool createMesh = true;
+
+			for (int i = 0; i < vecConstruct.size(); i++)
+			{
+				if (vecConstruct[i]->GetSObjID() == nSID)
+				{
+					pConstruct->SetObjMesh(vecConstruct[i]->GetObjMesh());
+					pConstruct->SetVecObjMtlTex(vecConstruct[i]->GetVecObjMtlTex());
+					pConstruct->SetSObjID(nSID);
+					createMesh = false;
+
+					pConstruct->Update();
+				}
+			}
+			if (createMesh == true) pConstruct->Create(nSID);
+
 			vecConstruct.push_back(pConstruct);
 		}
 	}

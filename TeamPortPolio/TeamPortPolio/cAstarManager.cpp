@@ -82,7 +82,7 @@ vector<int> cAstarManager::GetPath(int chrindex, int targetIndex)
 
 void cAstarManager::Update()
 {
-	if (m_isMapLoadingComplete == true && TIME->UpdateOneSecond() == true)
+	if (m_isMapLoadingComplete == true )
 	{
 		SetObjectIndex();
 		SetLeaderPath();
@@ -124,13 +124,13 @@ bool cAstarManager::GetCursorIndex(int & TargetIndex)
 
 void cAstarManager::SetObjectIndex()
 {
-	for (int i = 0; i < OBJECT->GetCharacter().size(); i++)
+	/*for (int i = 0; i < OBJECT->GetCharacter().size(); i++)
 	{
 		D3DXVECTOR3 pos = OBJECT->GetCharacter()[i]->GetCharacterEntity()->Pos();
 		int index = 0;
 		MAP->GetMap()->GetIndex(pos.x, pos.z, index);
 		if (OBJECT->GetCharacter()[i]->GetIndex() != index)OBJECT->GetCharacter()[i]->SetIndex(index);
-	}
+	}*/
 	for (int i = 0; i < OBJECT->GetLeader().size(); i++)
 	{
 		D3DXVECTOR3 pos = OBJECT->GetLeader()[i]->GetCharacterEntity()->Pos();
