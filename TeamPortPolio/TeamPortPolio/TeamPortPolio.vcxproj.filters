@@ -381,7 +381,6 @@
     <ClInclude Include="cUISlot.h">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClInclude>
-    <ClInclude Include="cArrow.h" />
     <ClInclude Include="cItemDB.h">
       <Filter>06. Database\02 cItemDB</Filter>
     </ClInclude>
@@ -580,7 +579,6 @@
     <ClCompile Include="cUISlot.cpp">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClCompile>
-    <ClCompile Include="cArrow.cpp" />
     <ClCompile Include="cItemDB.cpp">
       <Filter>06. Database\02 cItemDB</Filter>
     </ClCompile>

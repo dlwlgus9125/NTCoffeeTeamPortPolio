@@ -1,16 +1,6 @@
 #include "stdafx.h"
 #include "cItemDB.h"
 
-
-cItemDB::cItemDB()
-{
-}
-
-
-cItemDB::~cItemDB()
-{
-}
-
 void cItemDB::Setup()
 {
 	Add(new ST_ITEM(I_L_MELEE, I_M_SWORD, I_S_SHORTSWORD,"ºÙ º“µÂ", "∞°¿Â »Á«— ¬™¿∫ ∞À¿Ã¥Ÿ.", 50, ""));
