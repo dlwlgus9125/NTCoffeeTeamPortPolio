@@ -381,7 +381,10 @@
     <ClInclude Include="cUISlot.h">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClInclude>
-    <ClInclude Include="cItemDB.h" />
+    <ClInclude Include="cArrow.h" />
+    <ClInclude Include="cItemDB.h">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -577,7 +580,10 @@
     <ClCompile Include="cUISlot.cpp">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClCompile>
-    <ClCompile Include="cItemDB.cpp" />
+    <ClCompile Include="cArrow.cpp" />
+    <ClCompile Include="cItemDB.cpp">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">
