@@ -36,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -175,11 +175,13 @@
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cSceneManager.h" />
+    <ClInclude Include="cShadowManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
     <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
+    <ClInclude Include="cArrow.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
@@ -237,10 +239,12 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
+    <ClCompile Include="cShadowManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
+    <ClCompile Include="cArrow.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />

@@ -16,6 +16,8 @@ class cMapManager : public Singleton<cMapManager>
 	vector<D3DXVECTOR3>     m_vecPosOfNode;
 	int                     m_CellPerRow;
 	float                   m_fCellSpace;
+
+	ST_PNT_VERTEX           m_vPositionVertex;
 	
 public:
 	cMapManager();
