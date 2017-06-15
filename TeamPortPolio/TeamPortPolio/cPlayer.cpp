@@ -42,7 +42,7 @@ void cPlayer::Init()
 	m_pFsm->Register(PLAYER_STATE_IDLE, new Player_Idle());
 	m_pFsm->Register(PLAYER_STATE_WALK, new Player_Walk());
 	m_pFsm->Register(PLAYER_STATE_ATTACK, new Player_Attack());
-	//m_pFsm->Register(PLAYER_STATE_DEFENCE, new Player_Idle());
+	m_pFsm->Register(PLAYER_STATE_DEFENCE, new Player_Defence());
 	m_pFsm->Play(PLAYER_STATE_IDLE);
 }
 
