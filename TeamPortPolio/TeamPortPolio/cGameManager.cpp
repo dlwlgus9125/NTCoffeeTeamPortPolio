@@ -111,18 +111,13 @@ void cGameManager::Update()
 			INPUT->Update();
 			CAMERA->Update();
 			SCENE->Update();
-			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
-			
-			
+			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();	
 		}
-
 	}
-
 }
 
 void cGameManager::Render()
 {
-	
 	if(!isOkView)
 		pControl->Run();
 	else if (isOkView)
