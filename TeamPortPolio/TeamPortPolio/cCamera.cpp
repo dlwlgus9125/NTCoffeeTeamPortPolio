@@ -51,7 +51,7 @@ void cCamera::Update()
 
 	
 		//m_vLookAt = m_LookAtPos;
-	m_vLookAt += D3DXVECTOR3(0, 1.0f, 0);
+	//m_vLookAt += D3DXVECTOR3(0, 1.0f, 0);
 	m_vEye = m_vEye + m_vLookAt;
 
 		//m_vLookAt.y += 1.0f;
@@ -59,7 +59,7 @@ void cCamera::Update()
 
 
 	D3DXMATRIXA16 matView;
-	D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
+	D3DXMatrixLookAtLH(&matView, &m_vEye, &(m_vLookAt + D3DXVECTOR3(0, 1.0f, 0)), &m_vUp);
 
 	D3DDevice->SetTransform(D3DTS_VIEW, &matView);
 }
