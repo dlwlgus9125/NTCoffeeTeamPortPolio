@@ -65,73 +65,51 @@ void SteeringBehavior::Flee(D3DXVECTOR3 targetPos)
 // 도착 : 목표점으로 도착하는 조종힘을 합산
 void SteeringBehavior::Arrive(D3DXVECTOR3 targetPos)
 {
-	D3DXVECTOR3 vToTarget = targetPos - Entity()->Pos();
-	float distance = MATH->SqrMagnitude(vToTarget);
-	//cout << "distance : " << distance << endl;
+	D3DXVECTOR3 vToTarget = targetPos - Entity()->Pos();	
+	vToTarget.y = 0;
+	float distance = MATH->Magnitude(vToTarget);
 	if (distance > EPSILON)
 	{
+		float speed = distance/TIME->FPS();
 
-		D3DXVECTOR3 prevPos = Entity()->Pos();
-		D3DXVECTOR3 movePos = Entity()->Pos();
-		D3DXVECTOR3 dir;
-		D3DXVec3Normalize(&dir, &vToTarget);
-		Entity()->SetForward(dir);
-		movePos += MATH->Clamp( Entity()->Forward()*distance*0.003f, 0.015f, 0.4f);
-		//cout << 0.005f*distance << endl;
-		Entity()->SetPos(movePos);
-		/*const float multiplier = 2;
-		float speed = MATH->Min(distance * multiplier, Entity()->MaxSpeed());
-		D3DXVECTOR3 targetVelocity;
-		D3DXVec3Normalize(&vToTarget, &vToTarget);
-		targetVelocity = vToTarget*speed;
-		AddForce(targetVelocity - Entity()->Velocity());*/
-		//cout << "targetVelocity : " << targetVelocity.x << ", " << targetVelocity.y << ", " << targetVelocity.z << endl;
-		//cout << MATH->SqrMagnitude(movePos - prevPos)*100 << endl;
-		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos)*100);
-	
+		if (speed > Entity()->MaxSpeed())speed = Entity()->MaxSpeed();
+
+		Entity()->SetForward(vToTarget);
+		Entity()->AddPos(speed*Entity()->Forward());
+		
+		Entity()->SetSpeed(speed*2);
 	}
 
 
 }
 void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 {
-	D3DXVECTOR3 vPos = Entity()->Pos();
-	
-	D3DXVECTOR3 vToTarget = targetPos - vPos;
-	float distance = MATH->SqrMagnitude(vToTarget);
+	D3DXVECTOR3 vToTarget = targetPos - Entity()->Pos();
+	vToTarget.y = 0;
+	float distance = MATH->Magnitude(vToTarget);
 	if (distance > EPSILON)
 	{
-
-		D3DXVECTOR3 prevPos = Entity()->Pos();
-		D3DXVECTOR3 movePos = Entity()->Pos();
-		D3DXVECTOR3 dir;
-		D3DXVec3Normalize(&dir, &vToTarget);
-		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.02f, 0.005f, 0.4f);
 		//cout << 0.005f*distance << endl;
-		Entity()->SetPos(movePos);
-		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
+		float speed = distance /TIME->FPS();
 
+		Entity()->SetForward(vToTarget);
+		Entity()->AddPos(speed*Entity()->Forward());
+		Entity()->SetSpeed(speed*2);
 	}
 }
 
 void SteeringBehavior::UnitArrive(D3DXVECTOR3 targetPos)
 {
-	D3DXVECTOR3 vPos = Entity()->Pos();
-
-	D3DXVECTOR3 vToTarget = targetPos - vPos;
-	float distance = MATH->SqrMagnitude(vToTarget);
+	D3DXVECTOR3 vToTarget = targetPos - Entity()->Pos();
+	vToTarget.y = 0;
+	float distance = MATH->Magnitude(vToTarget);
 	if (distance > EPSILON)
 	{
-		D3DXVECTOR3 prevPos = Entity()->Pos();
-		D3DXVECTOR3 movePos = Entity()->Pos();
-		D3DXVECTOR3 dir;
-		D3DXVec3Normalize(&dir, &vToTarget);
-		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.05f, 0.005f, 0.4f)+ Entity()->Forward()*distance*0.000005f;
-		//cout << 0.005f*distance << endl;
-		Entity()->SetPos(movePos);
-		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
+		float speed = (distance/TIME->FPS());
+
+		Entity()->SetForward(vToTarget);
+		Entity()->AddPos(speed*Entity()->Forward());
+		Entity()->SetSpeed(speed*2);
 	}
 }
 
@@ -140,7 +118,7 @@ void SteeringBehavior::Pursuit(IEntity* pTarget)
 {
 	D3DXVECTOR3 vToTarget = pTarget->Pos() - Entity()->Pos();
 	float distance = MATH->Magnitude(vToTarget);
-	float lookAheadTime = distance / (Entity()->MaxSpeed() + pTarget->MaxSpeed());
+	float lookAheadTime = distance /TIME->FPS();
 	Seek(pTarget->Pos() + pTarget->Velocity() * lookAheadTime);
 }
 
@@ -267,7 +245,7 @@ void SteeringBehavior::OffsetPursuit(IEntity* pLeader, D3DXVECTOR3 offset)
 	D3DXVECTOR3 targetPos = pLeader->Pos() + worldOffset;
 	targetPos.y=0;
 	float distance = MATH->Distance(Entity()->Pos(), targetPos);
-	float arrivalTime = distance / Entity()->MaxSpeed();
+	float arrivalTime = distance / TIME->FPS();
 	Arrive(targetPos + pLeader->Velocity() * arrivalTime);
 
 	/*cout << "worldOffset : " << worldOffset.x << ", " << worldOffset.y << ", " << worldOffset.z << endl;

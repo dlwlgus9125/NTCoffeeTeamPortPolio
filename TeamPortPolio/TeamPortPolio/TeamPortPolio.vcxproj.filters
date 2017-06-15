@@ -330,6 +330,9 @@
     <ClInclude Include="cUIButton.h">
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClInclude>
+    <ClInclude Include="cArrow.h">
+      <Filter>02. cCharacter\00. Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -488,6 +491,9 @@
     </ClCompile>
     <ClCompile Include="cUIButton.cpp">
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
+    </ClCompile>
+    <ClCompile Include="cArrow.cpp">
+      <Filter>02. cCharacter\00. Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

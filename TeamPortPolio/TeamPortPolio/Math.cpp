@@ -86,3 +86,24 @@ D3DXVECTOR3 Math::LocalToWorld(D3DXVECTOR3 local, D3DXVECTOR3 forward)
 	D3DXVec3TransformCoord(&localToWorld, &local, &matR);
 	return localToWorld;
 }
+
+float Math::SinAngle(D3DXVECTOR3 from, D3DXVECTOR3 to)
+{
+	D3DXVECTOR3 Out;
+	D3DXVec3Cross(&Out, &from, &to);
+	float value = Magnitude(Out) / (Magnitude(from) * Magnitude(to));
+	return asinf(value) * RADIAN_TO_ANGLE;
+}
+
+float Math::CosAngle(D3DXVECTOR3 from, D3DXVECTOR3 to)
+{
+	float value = D3DXVec3Dot(&from, &to) / (Magnitude(from) * Magnitude(to));
+	return acosf(value) * RADIAN_TO_ANGLE;
+}
+
+float Math::Angle(D3DXVECTOR3 from, D3DXVECTOR3 to)
+{
+	float angle = CosAngle(from, to);
+	if (SinAngle(from, to) < 0) angle = 360 - angle;
+	return angle;
+}

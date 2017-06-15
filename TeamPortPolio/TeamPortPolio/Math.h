@@ -36,4 +36,10 @@ public:
 	D3DXVECTOR3 LocalToWorld(D3DXVECTOR3 local, D3DXVECTOR3 forward);
 
 
+	//벡터간 각도 계산
+	float SinAngle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	float CosAngle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	float Angle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	
+
 };
