@@ -10,7 +10,7 @@ void Leader_State_Walk::OnUpdate(cLeader * pLeader, float deltaTime)
 	if (pLeader->GetTargetObject() != NULL)
 	{
 		pLeader->SetTargetIndex(((cCharacter*)pLeader->GetTargetObject())->GetIndex());
-		pLeader->FSM()->Play(LEADER_STATE_STATE_PURSUIT);
+		pLeader->FSM()->Play(LEADER_STATE_PURSUIT);
 	}
 	else if (pLeader->GetPath().size() > 0)
 	{
@@ -32,7 +32,7 @@ void Leader_State_Walk::OnUpdate(cLeader * pLeader, float deltaTime)
 			vector<int> n_path = pLeader->GetPath();
 			n_path.pop_back();
 			pLeader->SetPath(n_path);
-			cout << "pop!" << endl;
+			//cout << "pop!" << endl;
 		}
 		}
 
@@ -43,7 +43,7 @@ void Leader_State_Walk::OnUpdate(cLeader * pLeader, float deltaTime)
 		D3DXVECTOR3 pos = ASTAR->GetGraph()->GetNode(pLeader->GetIndex())->Pos();//pLeader->GetCharacterEntity()->Pos();
 		D3DXVECTOR3 targetpos = ASTAR->GetGraph()->GetNode(pLeader->GetTargetIndex())->Pos();
 		cout << "clear!" << endl;
-		pLeader->FSM()->Play(LEADER_STATE_STATE_IDLE);
+		pLeader->FSM()->Play(LEADER_STATE_IDLE);
 	}
 
 	

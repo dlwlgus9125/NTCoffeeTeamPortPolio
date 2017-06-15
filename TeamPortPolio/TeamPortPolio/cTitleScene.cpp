@@ -43,16 +43,35 @@ void cTitleScene::OnEnter()
 
 void cTitleScene::OnUpdate()
 {
+	if (INPUT->IsKeyDown(VK_F2)) SCENE->ChangeScene(SCENE_TOWN);
+
 	MAP->Update();
 	UI->Update(TIME->DeltaTime());
 
 	// >> UI의 이벤트 정보 
 	int indexInMiniMap;
-	UI->GetEvent(indexInMiniMap);
+	int buttonIndex;
+
+	UI->GetEvent(indexInMiniMap, buttonIndex);
 	if (indexInMiniMap > 0)
 	{
 		OBJECT->GetPlayer()->SetUnitLeaderTargetIndex(indexInMiniMap);
 		cout << "UI Index : " << indexInMiniMap << endl;
+	}
+	switch (buttonIndex)
+	{
+	case TITLE_BTN_FMT_RECT:
+		Setup_DirLight();
+		break;
+	case TITLE_BTN_FMT_TRI:
+		Setup_DirLight();
+		break;
+	case TITLE_BTN_ATTSTATE:
+		Setup_DirLight();
+		break;
+	case TITLE_BTN_DEFSTATE:
+		Setup_DirLight();
+		break;
 	}
 	// <<
 
@@ -62,6 +81,8 @@ void cTitleScene::OnUpdate()
 void cTitleScene::OnExit()
 {
 	SAFE_RELEASE(m_pSprite);
+	MAP->Destroy();
+	UI->Release();
 }
 
 void cTitleScene::OnRender()

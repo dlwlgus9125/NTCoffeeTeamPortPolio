@@ -170,3 +170,55 @@ bool cRay::RaySphereIntersect(IN D3DXVECTOR2 & cursorPos, IN MeshSpere sphere, I
 
 	return false;
 }
+
+stRay cRay::RayAtViewSpace(int nScreenX, int nScreenY)
+{
+	D3DVIEWPORT9 vp;
+	D3DDevice->GetViewport(&vp);
+
+	D3DXMATRIXA16 matProj;
+	D3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	stRay r;
+	r.vDirection.x = ((2.0 * nScreenX) / vp.Width - 1.0f) / matProj._11;
+	r.vDirection.y = ((-2.0 * nScreenY) / vp.Height + 1.0f) / matProj._22;
+	r.vDirection.z = 1.0f;
+	return r;
+}
+
+stRay cRay::RayAtWorldSpace(int nScreenX, int nScreenY)
+{
+	stRay r = cRay::RayAtViewSpace(nScreenX, nScreenY);
+
+	D3DXMATRIXA16 matView, matInvView;
+	D3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	D3DXMatrixInverse(&matInvView, 0, &matView);
+
+	D3DXVec3TransformCoord(&r.vOrigin, &r.vOrigin, &matInvView);
+	D3DXVec3TransformNormal(&r.vDirection, &r.vDirection, &matInvView);
+	D3DXVec3Normalize(&r.vDirection, &r.vDirection);
+
+	return r;
+}
+
+// 현재 스크린에 클릭된 위치 넣으면 sphere랑 충돌됨을 확인해줌
+bool cRay::IsPicked(D3DXVECTOR2 cursorPos, ST_SPHERE* pSphere)
+{
+	stRay r = RayAtWorldSpace(cursorPos.x, cursorPos.y);
+
+	D3DXMATRIXA16 matInvWorld;
+	D3DXMatrixIdentity(&matInvWorld);
+	matInvWorld._41 = -pSphere->vCenter.x;
+	matInvWorld._42 = -pSphere->vCenter.y;
+	matInvWorld._43 = -pSphere->vCenter.z;
+
+	D3DXVec3TransformCoord(&r.vOrigin, &r.vOrigin, &matInvWorld);
+	D3DXVec3TransformNormal(&r.vDirection, &r.vDirection, &matInvWorld);
+
+	float vv = D3DXVec3Dot(&r.vDirection, &r.vDirection);
+	float qv = D3DXVec3Dot(&r.vOrigin, &r.vDirection);
+	float qq = D3DXVec3Dot(&r.vOrigin, &r.vOrigin);
+	float rr = pSphere->fRadius * pSphere->fRadius;
+
+	return qv*qv - (qq - rr) >= 0;
+}

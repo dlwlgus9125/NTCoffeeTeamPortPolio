@@ -15,6 +15,7 @@ IEntity::IEntity(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward ,
 	m_mass = mass;
 	m_maxSpeed = maxSpeed;
 	m_currentSpeed = 0.0f;
+	m_isDeath = false;
 }
 
 IEntity::~IEntity() {}
@@ -38,3 +39,9 @@ void IEntity::SetForward(D3DXVECTOR3 forward)
 void IEntity::SetVelocity(D3DXVECTOR3 velocity) { m_velocity = MATH->Clamp(velocity, 0, MaxSpeed()); }
 void IEntity::AddVelocity(D3DXVECTOR3 velocity) { SetVelocity(m_velocity + velocity); }
 void IEntity::SetRadius(float radius) { m_radius = radius; }
+void IEntity::SetDeath(bool death) { m_isDeath = death; }
+
+bool IEntity::IsDeath()
+{
+	return m_isDeath;
+}

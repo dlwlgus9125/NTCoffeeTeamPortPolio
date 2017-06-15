@@ -137,12 +137,20 @@ void cSkyBox::Setup_Texture()
 {
 	map<SKYBOX_FACE, LPDIRECT3DTEXTURE9> mapTexture;
 
+	/**/
 	mapTexture[SKYBOX_FACE_FRONT] = TEXTURE->GetTexture("map/SkyBox1/Front.bmp");
 	mapTexture[SKYBOX_FACE_BACK] = TEXTURE->GetTexture("map/SkyBox1/Back.bmp");
 	mapTexture[SKYBOX_FACE_LEFT] = TEXTURE->GetTexture("map/SkyBox1/Left.bmp");
 	mapTexture[SKYBOX_FACE_RIGHT] = TEXTURE->GetTexture("map/SkyBox1/Right.bmp");
 	mapTexture[SKYBOX_FACE_TOP] = TEXTURE->GetTexture("map/SkyBox1/Top.bmp");
 	mapTexture[SKYBOX_FACE_BOTTOM] = TEXTURE->GetTexture("map/SkyBox1/Bottom.bmp");
+	/*/
+	mapTexture[SKYBOX_FACE_FRONT] = TEXTURE->GetTexture("map/test/Front.png");
+	mapTexture[SKYBOX_FACE_BACK] = TEXTURE->GetTexture("map/test/Back.png");
+	mapTexture[SKYBOX_FACE_LEFT] = TEXTURE->GetTexture("map/test/right.png");
+	mapTexture[SKYBOX_FACE_RIGHT] = TEXTURE->GetTexture("map/test/Left.png");
+	mapTexture[SKYBOX_FACE_TOP] = TEXTURE->GetTexture("map/test/Top.png");
+	mapTexture[SKYBOX_FACE_BOTTOM] = TEXTURE->GetTexture("map/test/Bottom.png");/**/
 
 	m_mapWholeTexture[SKYBOX_TYPE_A] = mapTexture;
 

@@ -54,6 +54,54 @@
 using namespace std;
 //<<
 
+//<<::
+// Mouse Whell
+#define VK_WHELLUP		120
+#define VK_WHELLDOWN	-120
+
+// <<: KEY 
+// Getkeysate "0x8000" == "KF_UP"
+#define VK_A			0x41
+#define VK_B			0x42
+#define VK_C			0x43
+#define VK_D			0x44
+#define VK_E			0x45
+#define VK_F			0x46
+#define VK_G			0x47
+#define VK_H			0x48
+#define VK_I			0x49
+#define VK_J			0x49
+#define VK_K			0x4A
+#define VK_L			0x4B
+#define VK_M			0x4C
+#define VK_N			0x4E
+#define VK_O			0x4F
+#define VK_P			0x50
+#define VK_Q			0x51
+#define VK_R			0x52
+#define VK_S			0x53
+#define VK_T			0x54
+#define VK_U			0x55
+#define VK_V			0x56
+#define VK_W			0x57
+#define VK_X			0x58
+#define VK_Y			0x59
+#define VK_Z			0x5A
+
+
+// NUM KEY
+#define VK_0		0x30
+#define VK_1		0x31
+#define VK_2		0x32
+#define VK_3		0x33
+#define VK_4		0x34
+#define VK_5		0x35
+#define VK_6		0x36
+#define VK_7		0x37
+#define VK_8		0x38
+#define VK_9		0x39
+// <<:
+
 enum SCENE_TAG
 {
 	SCENE_NONE, SCENE_TITLE, SCENE_LOADING, SCENE_TOWN, SCENE_LOGIN,
@@ -61,7 +109,12 @@ enum SCENE_TAG
 
 enum UI_TAG
 {
-	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, 
+	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, UI_TAB,
+};
+
+enum UI_STATE
+{
+	UI_IDLE, UI_MOUSEOVER, UI_PRESSED, UI_CLICKED, UI_SELECTED, 
 };
 
 enum FONT_TAG
@@ -165,7 +218,7 @@ struct MeshSpere
 struct ST_SPHERE
 {
 	ST_SPHERE() {}
-	ST_SPHERE(D3DXVECTOR3 pos, float radius) { vCenter = pos; fRadius = radius; }
+	ST_SPHERE(D3DXVECTOR3 pos, float radius) { vCenter = pos; fRadius = radius; isPicked = false; }
 	bool isPicked;
 	D3DXVECTOR3 vCenter;
 	float fRadius;
@@ -179,6 +232,35 @@ struct ST_SIZEN
 	ST_SIZEN(int _w, int _h) : nWidth(_w), nHeight(_h) {}
 };
 
+struct ST_BONE : public D3DXFRAME
+{
+	D3DXMATRIXA16 CombinedTransformationMatrix;
+};
+
+// 플레이어 모드 추가.
+enum PLAYER_MODE_STATE
+{
+	IDLE_PLAYER_MODE,
+	WALK_PLAYER_MODE,
+	FIGHTING_PLAYER_MODE,
+	DEFENDING_PLAYER_MODE,
+};
+//
+
+struct ST_TAB
+{
+	string text;
+	D3DXVECTOR3 pos;
+	int state;
+
+	ST_TAB(string text, D3DXVECTOR3 pos, int state)
+	{
+		this->text = text;
+		this->pos = pos;
+		this->state = state;
+	}
+};
+
 enum MODE_STATE
 {
 	FIGHTING_MODE, 
@@ -188,6 +270,32 @@ enum MODE_STATE
 /////////////////////////////////////////////////////////////////
 // 애니메이션 키 값
 /////////////////////////////////////////////////////////////////
+// 플레이어 키값
+enum P_STATE // P: Player
+{
+	P_STAND,
+	P_WALK,
+	P_BACKWALK,
+	P_RUN,
+	P_READYATTACK,
+	P_BATTLEWALK,
+	P_BATTLERUN,
+	P_ATTACK1,
+	P_ATTACK2,
+	P_ATTACK3,
+	P_SHEILDBLOCK,
+	P_SHEILDUP,
+	P_HIT,
+	P_BATTLECRY,
+	P_KNOCKDOWN,
+	P_DEATH,
+	//추후 모션 추가.
+	//P_BOWATTACK1,
+	//P_BOWATTACK2,
+};
+
+
+
 // 보병
 enum FG_STATE // F: Footman, G: Grunt
 {
@@ -244,6 +352,16 @@ enum ITEM_TAG
 	ITEM_NONE = 0,
 	ITEM_MELEE,
 	ITEM_RANGE,
+};
+
+enum EVENTID_TITLESCENE
+{
+	TITLE_BTN_FMT_RECT = 0, TITLE_BTN_FMT_TRI, TITLE_BTN_ATTSTATE, TITLE_BTN_DEFSTATE,
+};
+
+enum EVENTID_TOWNSCENE
+{
+	
 };
 
 #define SYNTHESIZE(varType, varName, funName)\

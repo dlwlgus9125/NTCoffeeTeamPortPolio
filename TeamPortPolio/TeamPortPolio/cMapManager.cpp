@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cMapManager.h"
-
+#include "cShadowManager.h"
 
 cMapManager::cMapManager()
 {
@@ -31,6 +31,10 @@ void cMapManager::Init(string fileName)
 	m_pMap->SetVecMtlTex(vecMtlTex);
 	// << 
 
+	// >> : 포지션 좌표 넣어줌 -> 사용 그림자
+	m_vPositionVertex = vecVertex[0];
+	// << :
+
 	// >> 노드에 쓸 노드 중점의 위치 만드는 부분
 	
 	for (int i = 0; i < vecIndex.size(); i += 6)
@@ -54,7 +58,10 @@ void cMapManager::Init(string fileName)
 	m_pSkyBox->Setup(nCellPerRow / 2, nCellPerRow / 2, nCellPerRow / 2);
 	// << 
 	ASTAR->Setup(m_vecPosOfNode);
-	
+
+	// >> : 그림자 세팅
+	SHADOW->Setup(m_vecConstruct);
+	// << :
 }
 
 void cMapManager::Update()
@@ -69,20 +76,22 @@ void cMapManager::Render()
 	{
 		if (test == false)
 		{
-			test = true;
+			//test = true;
 		}
 		else
 		{
-			test = false;
+			//test = false;
 		}
 	}
 
 	if (test == false)
 	{
-		//if (m_pSkyBox) m_pSkyBox->Render();
+
+		if (m_pSkyBox) m_pSkyBox->Render();
 
 		if (m_pMap) m_pMap->Render();
 
+		SHADOW->Render();
 		for (int i = 0; i < m_vecConstruct.size(); i++)
 		{
 			m_vecConstruct[i]->Render();

@@ -12,8 +12,15 @@ cUIText::~cUIText()
 
 }
 
+void cUIText::Update(float deltaTime)
+{
+	cUIObject::Update(deltaTime);
+}
+
 void cUIText::Render(LPD3DXSPRITE pSprite)
 {
+	if (m_isHidden) return;
+
 	RECT rc;
 
 	LPD3DXFONT pFont = FONT->GetFont(m_eFont);
@@ -22,6 +29,11 @@ void cUIText::Render(LPD3DXSPRITE pSprite)
 	pFont->DrawText(NULL, m_sText.c_str(), m_sText.length(), &rc, DT_CENTER | DT_VCENTER, D3DCOLOR_XRGB(0, 0, 0));
 
 	cUIObject::Render(pSprite);
+}
+
+void cUIText::Destroy()
+{
+	cUIObject::Destroy();
 }
 
 

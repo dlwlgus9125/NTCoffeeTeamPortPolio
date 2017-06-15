@@ -151,6 +151,8 @@
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cConstruct.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cEffectManager.h" />
+    <ClInclude Include="cFog.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
     <ClInclude Include="cLeader.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
     <ClInclude Include="cMapManager.h" />
+    <ClInclude Include="cMeleeUnit.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cObjectDB.h" />
@@ -171,8 +174,10 @@
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cSceneManager.h" />
+    <ClInclude Include="cShadowManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
+    <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cArrow.h" />
@@ -184,13 +189,15 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUITab.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
-    <ClInclude Include="Human_Melee_State.h" />
+    <ClInclude Include="Melee_State.h" />
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="ISteeringEntity.h" />
     <ClInclude Include="Leader_State.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Player_State.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -207,6 +214,8 @@
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cConstruct.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cEffectManager.cpp" />
+    <ClCompile Include="cFog.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cLeader.cpp" />
@@ -218,6 +227,7 @@
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cIMap.cpp" />
     <ClCompile Include="cMapManager.cpp" />
+    <ClCompile Include="cMeleeUnit.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cObjectDB.cpp" />
@@ -226,8 +236,10 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
+    <ClCompile Include="cShadowManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
+    <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cArrow.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
@@ -238,18 +250,25 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUITab.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
-    <ClCompile Include="Human_Melee_Battle.cpp" />
-    <ClCompile Include="Human_Melee_Defence.cpp" />
-    <ClCompile Include="Human_Melee_Idle.cpp" />
-    <ClCompile Include="Human_Melee_Walk.cpp" />
+    <ClCompile Include="Leader_State_Defeat.cpp" />
+    <ClCompile Include="Melee_Battle.cpp" />
+    <ClCompile Include="Melee_Defence.cpp" />
+    <ClCompile Include="Melee_Idle.cpp" />
+    <ClCompile Include="Melee_Walk.cpp" />
     <ClCompile Include="IEntity.cpp" />
     <ClCompile Include="ISteeringEntity.cpp" />
     <ClCompile Include="Leader_State_Idle.cpp" />
     <ClCompile Include="Leader_State_Battle.cpp" />
     <ClCompile Include="Leader_State_Walk.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Melee_Death.cpp" />
+    <ClCompile Include="Player_Attack.cpp" />
+    <ClCompile Include="Player_Defence.cpp" />
+    <ClCompile Include="Player_Idle.cpp" />
+    <ClCompile Include="Player_Walk.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

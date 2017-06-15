@@ -24,10 +24,13 @@ public:
 	cConstruct();
 	~cConstruct();
 
-	void Setup(char* szFolder, char* szFile);
+	void Setup(char* szFolder, char* szFile, bool isChecked);
 	void Update();
 	void Render();
 
 	void Create(int sIndex);
 	void Destroy();
+	LPD3DXMESH GetMesh();
+	vector<cMtlTex*> GetMtl();
+
 };

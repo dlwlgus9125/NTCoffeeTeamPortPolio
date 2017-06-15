@@ -12,6 +12,7 @@ protected:
 	SYNTHESIZE(D3DXVECTOR3, m_vPosition, Position);
 	SYNTHESIZE(cUIObject*, m_pParent, Parent);
 	SYNTHESIZE(ST_SIZEN, m_stSize, Size);
+	SYNTHESIZE(int, m_nAlpha, Alpha);
 
 	SYNTHESIZE(int, m_nTag, Tag);
 

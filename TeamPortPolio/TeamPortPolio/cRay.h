@@ -19,5 +19,8 @@ public:
 	static bool IsMounseInMap(IN D3DXVECTOR2& cursorPos, IN float& minX, IN float& maxX);
 	static bool RaySphereIntersect(IN D3DXVECTOR2& cursorPos, IN MeshSpere sphere, IN float minX, IN float maxX);
 
+	static stRay RayAtViewSpace(int nScreenX, int nScreenY);
+	static stRay RayAtWorldSpace(int nScreenX, int nScreenY);
+	static bool IsPicked(D3DXVECTOR2 cursorPos, ST_SPHERE* pSphere);
 };
 

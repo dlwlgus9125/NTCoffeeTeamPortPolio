@@ -1,6 +1,5 @@
 #pragma once
 
-struct ST_BONE;
 
 class cSkinnedMesh
 {
@@ -28,11 +27,14 @@ private:
 
 	//현재 애니메이션 재생시간 확인용
 	LPD3DXANIMATIONSET m_currentAnim;
+
+	//충돌체 확인용
+	ST_BONE*                    m_AttackBone;
 public:
 	cSkinnedMesh(cSkinnedMesh* pSkinnedMesh);
 	~cSkinnedMesh(void);
 
-	void UpdateAndRender();
+	void UpdateAndRender(bool isStop);
 	void SetAnimationIndex(int nIndex);
 	void SetAnimationIndexBlend(int nIndex);
 	int  GetIndex() { return m_currentIndex; }
@@ -49,6 +51,10 @@ public:
 	}
 	LPD3DXANIMATIONSET GetCurrentAnim() { return m_currentAnim; }
 	float GetPassedTime() { return m_fPassedTime; }
+
+	D3DXMATRIXA16  GetAttackBoneMat() { return m_AttackBone->CombinedTransformationMatrix; }
+	void      FindAttackBone(char* BoneName);
+	void      FindAttackBone(ST_BONE* pBone, char* BoneName);
 private:
 	cSkinnedMesh();
 	void Load(char* szFolder, char* szFilename);

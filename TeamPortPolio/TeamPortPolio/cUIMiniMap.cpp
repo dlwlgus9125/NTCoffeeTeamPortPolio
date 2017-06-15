@@ -11,7 +11,6 @@ cUIMiniMap::cUIMiniMap() : m_pTexture(NULL), m_nCellPerRow(0), m_nAlpha(NULL)
 
 cUIMiniMap::~cUIMiniMap()
 {
-	SAFE_RELEASE(m_pTexture);
 }
 
 void cUIMiniMap::Update(float deltaTime)
@@ -36,11 +35,17 @@ void cUIMiniMap::Render(LPD3DXSPRITE pSprite)
 	cUIObject::Render(pSprite);
 }
 
-void cUIMiniMap::Setup_Image(LPDIRECT3DTEXTURE9 texture, int nCellPerRow, int a)
+void cUIMiniMap::Destroy()
+{
+	SAFE_RELEASE(m_pTexture);
+
+	cUIObject::Destroy();
+}
+
+void cUIMiniMap::Setup_Image(LPDIRECT3DTEXTURE9 texture, int nCellPerRow)
 {
 	m_pTexture = texture;
 	m_nCellPerRow = nCellPerRow;
-	m_nAlpha = a;
 }
 
 int cUIMiniMap::GetIndex()
