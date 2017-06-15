@@ -2,7 +2,7 @@
 #include "cUIObject.h"
 
 
-cUIObject::cUIObject() : m_vPosition(0,0,0), m_pParent(NULL), m_stSize(0,0), m_isHidden(false), m_nTag(0), m_nAlpha(255)
+cUIObject::cUIObject() : m_vPosition(0,0,0), m_pParent(NULL), m_stSize(0,0), m_isHidden(true), m_nTag(0), m_nAlpha(255)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }

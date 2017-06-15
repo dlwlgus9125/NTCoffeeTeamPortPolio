@@ -5,6 +5,7 @@
 #include "cUIText.h"
 #include "cUIMiniMap.h"
 #include "cUIButton.h"
+#include "cUITab.h"
 
 #define UI cUIManager::Instance()
 
@@ -13,6 +14,7 @@ class cUIManager : public Singleton<cUIManager>
 	vector<cUIImage*>			m_vecImage;
 	vector<cUIText*>			m_vecText;
 	vector<cUIButton*>			m_vecBtn;
+	vector<cUITab*>				m_vecTab;
 	cUIMiniMap*					m_pMiniMap;
 
 	void Setup_TitleScene();
@@ -25,6 +27,7 @@ public:
 	void Render(LPD3DXSPRITE pSprite);
 	void Change(int sceneID);
 	void PressKey();
+	void SetEvent(int order);
 	void GetEvent(OUT int& minimapIndex, OUT int& buttonIndex);
 
 

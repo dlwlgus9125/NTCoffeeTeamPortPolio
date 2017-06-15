@@ -354,9 +354,6 @@
     <ClInclude Include="cUIButton.h">
       <Filter>08. UI\03. cUIButton</Filter>
     </ClInclude>
-    <ClInclude Include="cUITap.h">
-      <Filter>08. UI\05. cUITap</Filter>
-    </ClInclude>
     <ClInclude Include="Player_State.h">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClInclude>
@@ -368,6 +365,10 @@
     </ClInclude>
     <ClInclude Include="cSnow.h">
       <Filter>07. cEffect\02. cSnow</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeleeUnit.h" />
+    <ClInclude Include="cUITab.h">
+      <Filter>08. UI\05. cUITap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -528,9 +529,6 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>08. UI\03. cUIButton</Filter>
     </ClCompile>
-    <ClCompile Include="cUITap.cpp">
-      <Filter>08. UI\05. cUITap</Filter>
-    </ClCompile>
     <ClCompile Include="Player_Attack.cpp">
       <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
     </ClCompile>
@@ -551,6 +549,10 @@
     </ClCompile>
     <ClCompile Include="cSnow.cpp">
       <Filter>07. cEffect\02. cSnow</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeleeUnit.cpp" />
+    <ClCompile Include="cUITab.cpp">
+      <Filter>08. UI\05. cUITap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
