@@ -28,27 +28,33 @@ void cUITab::AddTitle(string title, D3DXVECTOR3 pos_title)
 {
 	D3DXVECTOR3 translated_pos_title = m_vPosition + pos_title;
 	ST_TAB tab = ST_TAB(title, translated_pos_title, UI_IDLE);
-	vecTabInfo.push_back(tab);
-	if (vecTabInfo.size() == 1) tab.state = UI_SELECTED;
+	m_vecTabInfo.push_back(tab);
 }
 
 void cUITab::Update(float deltaTime)
 {
 	if (m_isHidden) return;
 
+	// >> 탭 켜질 때, 첫번째 메뉴가 보이도록
+	for (int i = 0; i < m_vecTabInfo.size(); i++)
+	{
+		if (m_vecTabInfo[i].state == UI_SELECTED) break;
+		if (i == m_vecTabInfo.size() - 1) m_vecTabInfo[0].state = UI_SELECTED;
+	}
+	// << 
 	// >> 탭의 타이틀 클릭 시 모든 탭 타이틀의 상태 바꿔주는 부분
 	if (INPUT->IsMouseDown(MOUSE_LEFT))
 	{
-		for (int i = 0; i < vecTabInfo.size(); i++)
+		for (int i = 0; i < m_vecTabInfo.size(); i++)
 		{
-			D3DXVECTOR2 lt = D3DXVECTOR2(vecTabInfo[i].pos.x, vecTabInfo[i].pos.y);
-			D3DXVECTOR2 rb = D3DXVECTOR2(vecTabInfo[i].pos.x + m_stTitleSize.nWidth, vecTabInfo[i].pos.y + m_stTitleSize.nHeight);
+			D3DXVECTOR2 lt = D3DXVECTOR2(m_vecTabInfo[i].pos.x, m_vecTabInfo[i].pos.y);
+			D3DXVECTOR2 rb = D3DXVECTOR2(m_vecTabInfo[i].pos.x + m_stTitleSize.nWidth, m_vecTabInfo[i].pos.y + m_stTitleSize.nHeight);
 			if (MATH->IsCollided(INPUT->GetMousePosVector2(), lt, rb))
 			{
-				for (int k = 0; k < vecTabInfo.size(); k++)
+				for (int k = 0; k < m_vecTabInfo.size(); k++)
 				{
-					if (k == i) vecTabInfo[i].state = UI_SELECTED;
-					else vecTabInfo[k].state = UI_IDLE;
+					if (k == i) m_vecTabInfo[i].state = UI_SELECTED;
+					else m_vecTabInfo[k].state = UI_IDLE;
 				}
 				break;
 			}
@@ -68,26 +74,31 @@ void cUITab::Render(LPD3DXSPRITE pSprite)
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	pSprite->SetTransform(&m_matWorld);
 
-	for (int i = 0; i < vecTabInfo.size(); i++)
+	// >> 타이틀 렌더
+	for (int i = 0; i < m_vecTabInfo.size(); i++)
 	{
-		// >> 타이틀 렌더
 		SetRect(&rc, 0, 0, m_stTitleSize.nWidth, m_stTitleSize.nHeight);
-		pSprite->Draw(m_mapTexture_Title[vecTabInfo[i].state], &rc, &D3DXVECTOR3(0, 0, 0), &vecTabInfo[i].pos, D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
-		// << 
-
-		// >> 타이틀 글씨 인쇄
-		LPD3DXFONT pFont = FONT->GetFont(m_eFont);
-		SetRect(&rc, vecTabInfo[i].pos.x, vecTabInfo[i].pos.y, vecTabInfo[i].pos.x + m_stTitleSize.nWidth, vecTabInfo[i].pos.y + m_stTitleSize.nHeight);
-		pFont->DrawText(NULL, vecTabInfo[i].text.c_str(), vecTabInfo[i].text.length(), &rc, DT_CENTER | DT_VCENTER, D3DCOLOR_XRGB(0, 0, 0));
-		// << 
+		pSprite->Draw(m_mapTexture_Title[m_vecTabInfo[i].state], &rc, &D3DXVECTOR3(0, 0, 0), &m_vecTabInfo[i].pos, D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
 	}
+	// << 
 
 	// >> 바디 렌더
+	pSprite->SetTransform(&m_matWorld);
 	SetRect(&rc, 0, 0, m_stBodySize.nWidth, m_stBodySize.nHeight);
 	pSprite->Draw(m_pTexture_Body, &rc, &D3DXVECTOR3(0, 0, 0), &m_vPos_Body, D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
 	// << 
 
 	pSprite->End();
+
+	// >> 타이틀 글씨 인쇄
+	for (int i = 0; i < m_vecTabInfo.size(); i++)
+	{
+		LPD3DXFONT pFont = FONT->GetFont(m_eFont);
+		SetRect(&rc, m_vecTabInfo[i].pos.x, m_vecTabInfo[i].pos.y, m_vecTabInfo[i].pos.x + m_stTitleSize.nWidth, m_vecTabInfo[i].pos.y + m_stTitleSize.nHeight);
+		pFont->DrawText(NULL, m_vecTabInfo[i].text.c_str(), m_vecTabInfo[i].text.length(), &rc, DT_CENTER | DT_VCENTER, 
+			m_vecTabInfo[i].state == UI_IDLE ? D3DCOLOR_XRGB(255, 255, 255) : D3DCOLOR_XRGB(255, 255, 0));
+	}
+	// << 
 
 	cUIObject::Render(pSprite);
 }

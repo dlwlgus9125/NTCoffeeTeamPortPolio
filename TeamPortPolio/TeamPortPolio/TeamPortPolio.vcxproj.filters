@@ -185,6 +185,9 @@
     <Filter Include="07. cEffect\02. cSnow">
       <UniqueIdentifier>{59275c91-1c27-4d75-ac79-36d2e8b43b6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Database\02 cItemDB">
+      <UniqueIdentifier>{6582bded-10a2-45ff-aaa8-e746164a3987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -371,6 +374,10 @@
     <ClInclude Include="cUITab.h">
       <Filter>08. UI\05. cUITap</Filter>
     </ClInclude>
+    <ClInclude Include="cUISlot.h">
+      <Filter>08. UI\06. cUISlot</Filter>
+    </ClInclude>
+    <ClInclude Include="cItemDB.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -562,6 +569,10 @@
     <ClCompile Include="cUITab.cpp">
       <Filter>08. UI\05. cUITap</Filter>
     </ClCompile>
+    <ClCompile Include="cUISlot.cpp">
+      <Filter>08. UI\06. cUISlot</Filter>
+    </ClCompile>
+    <ClCompile Include="cItemDB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">

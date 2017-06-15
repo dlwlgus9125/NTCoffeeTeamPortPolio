@@ -155,6 +155,7 @@
     <ClInclude Include="cFog.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cItem.h" />
+    <ClInclude Include="cItemDB.h" />
     <ClInclude Include="cLeader.h" />
     <ClInclude Include="cFrame.h" />
     <ClInclude Include="cFrustum.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="cUIMiniMap.h" />
     <ClInclude Include="cUIObject.h" />
+    <ClInclude Include="cUISlot.h" />
     <ClInclude Include="cUITab.h" />
     <ClInclude Include="cUIText.h" />
     <ClInclude Include="cUnit.h" />
@@ -216,6 +218,7 @@
     <ClCompile Include="cFog.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cItem.cpp" />
+    <ClCompile Include="cItemDB.cpp" />
     <ClCompile Include="cLeader.cpp" />
     <ClCompile Include="cFrame.cpp" />
     <ClCompile Include="cFrustum.cpp" />
@@ -246,6 +249,7 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="cUIMiniMap.cpp" />
     <ClCompile Include="cUIObject.cpp" />
+    <ClCompile Include="cUISlot.cpp" />
     <ClCompile Include="cUITab.cpp" />
     <ClCompile Include="cUIText.cpp" />
     <ClCompile Include="cUnit.cpp" />
