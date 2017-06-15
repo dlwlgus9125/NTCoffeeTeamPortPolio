@@ -53,3 +53,12 @@ public:
 	void OnEnd(cLeader* pLeader);
 };
 
+class Leader_State_Defeat : public IState<cLeader*>
+{
+public:
+	void OnBegin(cLeader* pLeader);
+
+	void OnUpdate(cLeader* pLeader, float deltaTime);
+
+	void OnEnd(cLeader* pLeader);
+};

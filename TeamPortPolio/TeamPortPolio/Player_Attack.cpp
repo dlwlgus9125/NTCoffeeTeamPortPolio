@@ -4,7 +4,9 @@
 
 void Player_Attack::OnBegin(cPlayer* pPlayer)
 {
+
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_ATTACK1);
+
 }
 
 void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
@@ -28,7 +30,7 @@ void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
 
 		if (pPlayer->GetMesh()->GetPassedTime() > pPlayer->GetMesh()->GetCurrentAnim()->GetPeriod() - 0.4f)
 		{
-			if (pPlayer->GetMesh()->GetIndex() != state)pPlayer->GetMesh()->SetAnimationIndexBlend(state);
+			pPlayer->GetMesh()->SetAnimationIndexBlend(state);
 		}
 
 	}
@@ -36,6 +38,10 @@ void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
 	else if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_S))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_WALK);
+	}
+	else if (INPUT->IsKeyPress(MOUSE_RIGHT) && pPlayer->GetMesh()->GetPassedTime() > pPlayer->GetMesh()->GetCurrentAnim()->GetPeriod() - 0.4f)
+	{
+		pPlayer->FSM()->Play(PLAYER_STATE_DEFENCE);
 	}
 
 

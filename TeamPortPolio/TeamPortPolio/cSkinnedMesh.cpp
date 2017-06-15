@@ -30,6 +30,7 @@ cSkinnedMesh::cSkinnedMesh(cSkinnedMesh* pSkinnedMesh)
 		pSkinnedMesh->m_pAnimController->GetMaxNumEvents(),
 		&m_pAnimController);
 	m_currentIndex = 0;
+	m_pAnimController->GetAnimationSet(m_currentIndex, &m_currentAnim);
 }
 
 cSkinnedMesh::cSkinnedMesh()
@@ -89,7 +90,7 @@ void cSkinnedMesh::Load(char* szDirectory, char* szFilename)
 		SetupBoneMatrixPtrs(m_pRootFrame);
 }
 
-void cSkinnedMesh::UpdateAndRender()
+void cSkinnedMesh::UpdateAndRender(bool isStop)
 {
 	m_fPassedTime += TIME->GetElapsedTime();
 	if (m_pAnimController)
@@ -111,16 +112,17 @@ void cSkinnedMesh::UpdateAndRender()
 
 			}
 		}
-		m_pAnimController->AdvanceTime(TIME->GetElapsedTime(), NULL);
+		if (isStop == false)m_pAnimController->AdvanceTime(TIME->GetElapsedTime(), NULL);
+		else m_pAnimController->AdvanceTime(0.0f, NULL);
 	}
 
 	if (m_pRootFrame)
 	{
-		D3DXMATRIXA16 mat,matS, matR, matT;
+		D3DXMATRIXA16 mat, matS, matR, matT;
 		D3DXMatrixScaling(&matS, 2.0f, 2.0f, 2.0f);
 		D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		D3DXMatrixRotationY(&matR, MATH->GetRotY(m_vForward));
-		mat =matS* matR*matT;
+		mat = matS* matR*matT;
 		Update(m_pRootFrame, &mat);
 		Render(m_pRootFrame);
 	}
@@ -273,7 +275,7 @@ LPD3DXEFFECT cSkinnedMesh::LoadEffect(char* szFilename)
 
 void cSkinnedMesh::Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent)
 {
-	
+
 	pCurrent->CombinedTransformationMatrix = pCurrent->TransformationMatrix;
 	if (pmatParent)
 	{
@@ -346,36 +348,41 @@ void cSkinnedMesh::SetAnimationIndex(int nIndex)
 
 void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 {
-	m_isAnimBlend = true;
-	m_fPassedBlendTime = 0.0f;
 	int num = m_pAnimController->GetNumAnimationSets();
 	if (nIndex > num)nIndex = nIndex%num;
 
-	LPD3DXANIMATIONSET pPrevAnimSet = NULL;
-	LPD3DXANIMATIONSET pNextAnimSet = NULL;
+	if (nIndex != m_currentIndex)
+	{
+	m_isAnimBlend = true;
+	m_fPassedBlendTime = 0.0f;
+	
+		LPD3DXANIMATIONSET pPrevAnimSet = NULL;
+		LPD3DXANIMATIONSET pNextAnimSet = NULL;
 
-	D3DXTRACK_DESC stTrackDesc;
-	m_pAnimController->GetTrackDesc(0, &stTrackDesc);
+		D3DXTRACK_DESC stTrackDesc;
+		m_pAnimController->GetTrackDesc(0, &stTrackDesc);
 
-	m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
-	m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
-	m_pAnimController->SetTrackDesc(1, &stTrackDesc);
+		m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
+		m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
+		m_pAnimController->SetTrackDesc(1, &stTrackDesc);
 
-	m_pAnimController->GetAnimationSet(nIndex, &pNextAnimSet);
-	m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);
-	m_pAnimController->SetTrackPosition(0, 0.0f);
-
-
-	m_pAnimController->SetTrackWeight(0, 0.0f);
-	m_pAnimController->SetTrackWeight(1, 1.0f);
+		m_pAnimController->GetAnimationSet(nIndex, &pNextAnimSet);
+		m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);
+		m_pAnimController->SetTrackPosition(0, 0.0f);
 
 
-	SAFE_RELEASE(pPrevAnimSet);
-	SAFE_RELEASE(pNextAnimSet);
-	m_fPassedTime = 0.0f;
-	m_currentIndex = nIndex;
-	m_pAnimController->GetAnimationSet(m_currentIndex, &m_currentAnim);
+		m_pAnimController->SetTrackWeight(0, 0.0f);
+		m_pAnimController->SetTrackWeight(1, 1.0f);
+
+
+		SAFE_RELEASE(pPrevAnimSet);
+		SAFE_RELEASE(pNextAnimSet);
+		m_fPassedTime = 0.0f;
+		m_currentIndex = nIndex;
+		m_pAnimController->GetAnimationSet(m_currentIndex, &m_currentAnim);
+	}
 }
+
 
 void cSkinnedMesh::Destroy()
 {
@@ -383,6 +390,32 @@ void cSkinnedMesh::Destroy()
 	D3DXFrameDestroy((LPD3DXFRAME)m_pRootFrame, &ah);
 	SAFE_DELETE_ARRAY(m_pmWorkingPalette);
 	SAFE_RELEASE(m_pEffect);
+}
+
+void cSkinnedMesh::FindAttackBone(char* BoneName)
+{
+	FindAttackBone(m_pRootFrame, BoneName);
+}
+
+void cSkinnedMesh::FindAttackBone(ST_BONE * pBone, char* BoneName)
+{
+	if (pBone->Name)
+	{
+		if ((string)pBone->Name == (string)BoneName)
+		{
+			m_AttackBone = pBone;
+		}
+	}
+
+	if (pBone->pFrameSibling)
+	{
+		FindAttackBone((ST_BONE*)pBone->pFrameSibling, BoneName);
+	}
+
+	if (pBone->pFrameFirstChild)
+	{
+		FindAttackBone((ST_BONE*)pBone->pFrameFirstChild, BoneName);
+	}
 }
 
 void cSkinnedMesh::SetRandomTrackPosition()
