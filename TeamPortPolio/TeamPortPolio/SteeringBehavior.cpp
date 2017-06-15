@@ -107,7 +107,7 @@ void SteeringBehavior::LeaderArrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.02f, 0.005f, 0.4f);
+		movePos += MATH->Clamp(Entity()->Forward()*0.04f, 0.005f, 0.4f);
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
 		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);
@@ -234,14 +234,17 @@ void SteeringBehavior::AvoidObstacle(vector<cUnit*> obstacles)
 // °ãÄ§ Á¦ÇÑ
 void SteeringBehavior::ConstrainOverlap(IEntity* pTarget)
 {
-	D3DXVECTOR3 vEntity =  pTarget->Pos()- Entity()->Pos();
-	float distance = MATH->Magnitude(vEntity);
-	float totalRadius = Entity()->Radius() + pTarget->Radius();
-
-	if (distance < totalRadius)
+	if (pTarget->IsDeath() == false)
 	{
-		D3DXVec3Normalize(&vEntity, &vEntity);
-		pTarget->AddPos(vEntity * (distance)*0.01f);
+		D3DXVECTOR3 vEntity = pTarget->Pos() - Entity()->Pos();
+		float distance = MATH->Magnitude(vEntity);
+		float totalRadius = Entity()->Radius() + pTarget->Radius();
+
+		if (distance < totalRadius)
+		{
+			D3DXVec3Normalize(&vEntity, &vEntity);
+			pTarget->AddPos(vEntity * (distance)*0.01f);
+		}
 	}
 }
 
@@ -250,13 +253,16 @@ void SteeringBehavior::ConstrainOverlap(vector<IEntity*> targets)
 {
 	for (int i = 0; i < targets.size(); i++)
 	{
-		ST_SPHERE thisSphere(Entity()->Pos(), Entity()->Radius());
-		ST_SPHERE itSphere(targets[i]->Pos(), targets[i]->Radius());
-		if (MATH->IsCollided(thisSphere, itSphere))
+		if (targets[i]->IsDeath() == false)
 		{
-			D3DXVECTOR3 pushDir = MATH->GetOverlappedVector(thisSphere, itSphere);
-			Entity()->SetPos(Entity()->Pos()- pushDir);
-			ConstrainOverlap(targets[i]);
+			ST_SPHERE thisSphere(Entity()->Pos(), Entity()->Radius());
+			ST_SPHERE itSphere(targets[i]->Pos(), targets[i]->Radius());
+			if (MATH->IsCollided(thisSphere, itSphere))
+			{
+				D3DXVECTOR3 pushDir = MATH->GetOverlappedVector(thisSphere, itSphere);
+				Entity()->SetPos(Entity()->Pos() - pushDir);
+				ConstrainOverlap(targets[i]);
+			}
 		}
 	}
 }

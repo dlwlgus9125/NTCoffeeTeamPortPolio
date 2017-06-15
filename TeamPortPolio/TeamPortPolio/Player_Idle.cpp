@@ -9,7 +9,7 @@ void Player_Idle::OnBegin(cPlayer* pPlayer)
 void Player_Idle::OnUpdate(cPlayer* pPlayer, float deltaTime)
 {
 
-	if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_A))
+	if (INPUT->IsKeyPress(VK_W) || INPUT->IsKeyPress(VK_S))
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_WALK);
 	}

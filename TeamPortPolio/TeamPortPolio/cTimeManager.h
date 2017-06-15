@@ -14,6 +14,7 @@ class cTimeManager : public Singleton<cTimeManager>
 	float m_frequencyTime;		// 주파수당 시간
 	float m_frameTime;			// 프레임당 시간
 	float m_deltaTime;
+	float m_oneSecond;
 
 	int m_fps;					// 초당 프레임 수
 
@@ -30,6 +31,8 @@ public:
 	float DeltaTime();
 
 	bool Update();
+
+	bool UpdateOneSecond();
 
 
 	//>>캐릭터 렌더용

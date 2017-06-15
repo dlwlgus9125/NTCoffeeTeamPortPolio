@@ -46,11 +46,11 @@ void Player_Walk::StateChanger(cPlayer * pPlayer, D3DXVECTOR3 prevPos, D3DXVECTO
 {
 	if (0.001f <= MATH->Distance(prevPos, movePos) && MATH->Distance(prevPos, movePos) <= 0.04f)
 	{
-		if(pPlayer->GetMesh()->GetIndex()!=P_WALK)pPlayer->GetMesh()->SetAnimationIndexBlend(P_WALK);
+		pPlayer->GetMesh()->SetAnimationIndexBlend(P_WALK);
 	}
 	else if (0.04f < MATH->Distance(prevPos, movePos))
 	{
-		if (pPlayer->GetMesh()->GetIndex() != P_RUN)pPlayer->GetMesh()->SetAnimationIndexBlend(P_RUN);
+		pPlayer->GetMesh()->SetAnimationIndexBlend(P_RUN);
 	}
 }
 

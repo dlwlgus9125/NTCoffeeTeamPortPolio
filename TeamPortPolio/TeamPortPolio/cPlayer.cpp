@@ -8,12 +8,12 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 {
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader = NULL;
-	/*m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
+	m_unitLeader = new cLeader(pos, radius, forward, mass, maxSpeed);
 	m_unitLeader->Init();
 	m_unitLeader->SetCamp(CAMP_PLAYER);
 	m_unitLeader->SetTargetIndex(ASTAR->GetGraph()->GetNode(16001)->Id());
 	OBJECT->AddObject(m_unitLeader);
-	OBJECT->AddLeader(m_unitLeader);*/
+	OBJECT->AddLeader(m_unitLeader);
 	m_fRotY = 0.0f;
 }
 
@@ -37,6 +37,8 @@ void cPlayer::Init()
 	m_pSkinnedMesh = NULL;
 	//m_pSkinnedMesh = new cSkinnedMesh();
 	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
+
+	m_pSkinnedMesh->FindAttackBone("Sword_2H_Broadsword_A_03_Bone08");
 		
 	m_pFsm = new cStateMachine<cPlayer*>(this);
 	m_pFsm->Register(PLAYER_STATE_IDLE, new Player_Idle());
@@ -76,80 +78,7 @@ void cPlayer::Update(float deltaTime)
 
 	CAMERA->SetLookAt(m_CharacterEntity->Pos(), m_fRotY);
 
-	/*m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
-	D3DXVECTOR3 prevPos = m_CharacterEntity->Pos();
-	D3DXVECTOR3 movePos = m_CharacterEntity->Pos();
 
-	
-	if (INPUT->IsKeyPress(VK_W))
-	{
-		movePos += m_CharacterEntity->Forward()*0.02f;
-		if (INPUT->IsKeyPress(VK_SHIFT))
-		{
-			movePos += m_CharacterEntity->Forward()*0.03f;
-		}
-	}
-	if (INPUT->IsKeyPress(VK_S))
-	{
-		movePos -= m_CharacterEntity->Forward()*0.02f;
-	}
-	if (INPUT->IsKeyPress(VK_A))
-	{
-		m_fRotY -= 0.03f;
-	}
-	if (INPUT->IsKeyPress(VK_D))
-	{
-		m_fRotY += 0.03f;
-	}*/
-
-	/*
-	if (INPUT->IsKeyDown(VK_TAB))
-	{
-		switch (m_currentMode)
-		{
-		case FIGHTING_MODE: m_currentMode = DEFENDING_MODE; break;
-		case DEFENDING_MODE: m_currentMode = FIGHTING_MODE; break;
-		}
-
-		for (int i = 0; i < m_unitLeader->GetUnits().size(); i++)
-		{
-			m_unitLeader->GetUnits()[i]->SetMode(m_currentMode);
-		}
-	}*/
-
-	/*D3DXMATRIXA16 matR;
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixRotationY(&matR, m_fRotY);
-	D3DXVECTOR3 forward = D3DXVECTOR3(0, 0, 1);
-	D3DXVec3TransformCoord(&forward, &forward, &matR);
-
-	
-	int index = 0;
-	MAP->GetMap()->GetIndex(movePos.x, movePos.z, index);*/
-	/*if (INPUT->IsKeyDown(VK_SPACE))
-	{
-		cout << "move.x : " << movePos.x << ", move.z : " << movePos.z << ", index : " << index << endl;
-		cout << "id : " << ASTAR->GetGraph()->GetNode(index)->Id() << ", move.x : " << ASTAR->GetGraph()->GetNode(index)->Pos().x << ", move.z : " << ASTAR->GetGraph()->GetNode(index)->Pos().z << endl;
-	}*///m_CharacterEntity->SetPos(m_unitLeader->GetCharacterEntity()->Pos());
-	//m_CharacterEntity->SetForward(forward);
-	//
-
-	//if (0.01f<MATH->Distance(prevPos, movePos) && MATH-//>Distance(prevPos, movePos)<=0.03f)
-	//{
-	//	m_pSkinnedMesh->SetAnimationIndex(P_WALK);
-	//}
-	//else if (0.03f<MATH->Distance(prevPos, movePos) )
-	//{
-	//	m_pSkinnedMesh->SetAnimationIndex(P_RUN);
-	//}
-	//else
-	//{
-	//	m_pSkinnedMesh->SetAnimationIndex(P_STAND);
-	//}
-
-	//
-	//if (INPUT->IsKeyPress('1'))m_unitLeader->SetRectOffset();
-	//if (INPUT->IsKeyPress('2'))m_unitLeader->SetTriOffset();
 }
 
 void cPlayer::Render()
@@ -160,9 +89,24 @@ void cPlayer::Render()
 	{
 		if (FRUSTUM->IsIn(m_pSkinnedMesh->GetBoundingSphere()))
 		{
-			m_pSkinnedMesh->UpdateAndRender();
+			m_pSkinnedMesh->UpdateAndRender(m_isDeath);
+
+			SetAttackColliderPos();
+			D3DXMATRIXA16 matT;
+			D3DXMatrixIdentity(&matT);
+
+			D3DXMatrixTranslation(&matT, m_AttackCollideSphere.vCenter.x, m_AttackCollideSphere.vCenter.y, m_AttackCollideSphere.vCenter.z);
+
+			D3DDevice->SetTransform(D3DTS_WORLD, &matT);
+			D3DDevice->SetMaterial(&m_MeshSphere.m_stMtlSphere);
+
+			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+			m_MeshSphere.m_pMeshSphere->DrawSubset(0);
+			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		}
 	}
+
+
 }
 
 void cPlayer::SetUnitLeaderTargetIndex(int index)

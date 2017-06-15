@@ -232,6 +232,11 @@ struct ST_SIZEN
 	ST_SIZEN(int _w, int _h) : nWidth(_w), nHeight(_h) {}
 };
 
+struct ST_BONE : public D3DXFRAME
+{
+	D3DXMATRIXA16 CombinedTransformationMatrix;
+};
+
 // 플레이어 모드 추가.
 enum PLAYER_MODE_STATE
 {

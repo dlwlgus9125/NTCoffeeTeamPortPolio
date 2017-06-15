@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "Human_Melee_State.h"
+#include "Melee_State.h"
 
-void Human_Melee_Idle::OnBegin(cUnit * pUnit)
+void Melee_Idle::OnBegin(cUnit * pUnit)
 {
 
 }
 
-void Human_Melee_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
+void Melee_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 {
 	D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
@@ -21,10 +21,8 @@ void Human_Melee_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 		pUnit->GetCharacterEntity()->Steering()->ConstrainOverlap(OBJECT->GetEntities());
 		switch (pUnit->GetMode())
 		{
-		case FIGHTING_MODE: if ((FG_STATE)pUnit->GetMesh()->GetIndex() != FG_READYATTACK)
-			pUnit->GetMesh()->SetAnimationIndexBlend(FG_READYATTACK); break;
-		case DEFENDING_MODE:if ((FG_STATE)pUnit->GetMesh()->GetIndex() != FG_STAND)
-			pUnit->GetMesh()->SetAnimationIndexBlend(FG_STAND); break;
+		case FIGHTING_MODE: pUnit->GetMesh()->SetAnimationIndexBlend(FG_READYATTACK); break;
+		case DEFENDING_MODE:pUnit->GetMesh()->SetAnimationIndexBlend(FG_STAND); break;
 		}
 
 	}
@@ -34,6 +32,6 @@ void Human_Melee_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 
 }
 
-void Human_Melee_Idle::OnEnd(cUnit * pUnit)
+void Melee_Idle::OnEnd(cUnit * pUnit)
 {
 }
