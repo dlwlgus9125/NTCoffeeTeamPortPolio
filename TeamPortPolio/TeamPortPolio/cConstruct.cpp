@@ -49,13 +49,29 @@ void cConstruct::Update()
 void cConstruct::Render()
 {
 	D3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
+	if (m_nSObjID >= E_S_OBJECTID_H_DW_START && m_nSObjID <= E_S_OBJECTID_H_DW_END ||
+		m_nSObjID >= E_S_OBJECTID_P_DW_START && m_nSObjID <= E_S_OBJECTID_P_ETC_END)
+	{
+		D3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+		D3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+		D3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+		D3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	}
+
 	for (size_t i = 0; i < m_vecObjMtlTex.size(); i++)
 	{
 		D3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 		D3DDevice->SetMaterial(&m_vecObjMtlTex[i]->GetMaterial());
 		D3DDevice->SetTexture(0, m_vecObjMtlTex[i]->GetTexture());
+
 		m_pObjMesh->DrawSubset(i);
-	}	
+	}
+
+	D3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	D3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	D3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	D3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 }
 
 void cConstruct::Create(int sIndex)
