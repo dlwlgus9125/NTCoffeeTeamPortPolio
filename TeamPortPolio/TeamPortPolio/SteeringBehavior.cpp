@@ -128,7 +128,7 @@ void SteeringBehavior::UnitArrive(D3DXVECTOR3 targetPos)
 		D3DXVECTOR3 dir;
 		D3DXVec3Normalize(&dir, &vToTarget);
 		Entity()->SetForward(dir);
-		movePos += MATH->Clamp(Entity()->Forward()*0.05f, 0.005f, 0.4f)+ Entity()->Forward()*distance*0.000005f;
+		movePos += MATH->Clamp(Entity()->Forward()*0.1f, 0.005f, 0.4f)+ Entity()->Forward()*distance*0.000005f;
 		//cout << 0.005f*distance << endl;
 		Entity()->SetPos(movePos);
 		Entity()->SetSpeed(MATH->SqrMagnitude(movePos - prevPos) * 100);

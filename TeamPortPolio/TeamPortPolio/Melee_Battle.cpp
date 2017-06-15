@@ -28,6 +28,7 @@ void Melee_Battle::OnUpdate(cUnit * pUnit, float deltaTime)
 			pUnit->GetCharacterEntity()->Steering()->ConstrainOverlap(OBJECT->GetEntities());
 
 			FindNearTarget(pUnit);
+			if (TIME->UpdateOneSecond())FindTarget(pUnit);
 		}
 		else
 		{
@@ -39,6 +40,7 @@ void Melee_Battle::OnUpdate(cUnit * pUnit, float deltaTime)
 				}
 				BattleTarget = NULL;
 				FindNearTarget(pUnit);
+				if(TIME->UpdateOneSecond())FindTarget(pUnit);
 			}
 			else if (((cCharacter*)BattleTarget)->GetMesh()->GetIndex() != FG_DEATH)
 			{
@@ -78,7 +80,7 @@ void Melee_Battle::FindTarget(cUnit * pUnit)
 //자신과 제일 가까운 적을 찾는 함수
 void Melee_Battle::FindNearTarget(cUnit * pUnit)
 {
-	if (TIME->UpdateOneSecond() == true)
+	if (TIME->UpdateOneSecond())
 	{
 		D3DXVECTOR3 nextTargetPos, prevTargetPos;
 		D3DXVECTOR3 pos = pUnit->GetCharacterEntity()->Pos();
@@ -108,7 +110,7 @@ void Melee_Battle::Charge(cUnit * pUnit)
 
 	D3DXVECTOR3 thisPos = pUnit->GetCharacterEntity()->Pos();
 
-	D3DXVECTOR3 targetPos = worldOffset + pUnit->GetLeader()->Pos() - pUnit->GetLeader()->Forward();
+	D3DXVECTOR3 targetPos = worldOffset + pUnit->GetTargetObject()->GetCharacterEntity()->Pos() - (pUnit->GetLeader()->Forward());
 
 	float distance = MATH->Distance(thisPos, targetPos);
 
