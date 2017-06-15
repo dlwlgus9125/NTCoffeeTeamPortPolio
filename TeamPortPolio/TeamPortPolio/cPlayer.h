@@ -15,7 +15,7 @@ enum PLAYER_STATE
 class cLeader;
 class Player_State;
 class cSkinnedMesh;
-
+class cBallisticArrow;
 class cPlayer :
 	public cCharacter
 {
@@ -25,6 +25,11 @@ private:
 	float          m_fRotY;
 	cStateMachine<cPlayer*>* m_pFsm;
 
+
+	//화살처리 변수랑 메쉬표시변수들
+	cBallisticArrow* m_pBalisticArrow;
+	LPD3DXMESH				m_pMeshSphere;
+	D3DMATERIAL9			m_stMtlSphere;
 public:
 	cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed);
 	~cPlayer();

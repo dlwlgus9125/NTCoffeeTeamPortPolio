@@ -10,8 +10,11 @@ void Melee_Idle::OnUpdate(cUnit * pUnit, float deltaTime)
 {
 	D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
-	float distance = MATH->Distance(pUnit->GetCharacterEntity()->Pos(), targetPos);
+	
+	D3DXVECTOR3 vTotarget = pUnit->GetCharacterEntity()->Pos() - targetPos;
+	vTotarget.y = 0;
 
+	float distance = MATH->Magnitude(vTotarget);
 	if (distance > 0.1f)
 	{
 		pUnit->FSM()->Play(UNIT_STATE_MELEE_WALK);

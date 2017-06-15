@@ -180,7 +180,7 @@
     <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
-    <ClInclude Include="cArrow.h" />
+    <ClInclude Include="BallisticMotion.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
@@ -205,6 +205,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamPortPolio.h" />
     <ClInclude Include="TestMap.h" />
+    <ClInclude Include="cBallisticArrow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />
@@ -241,7 +242,7 @@
     <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
-    <ClCompile Include="cArrow.cpp" />
+    <ClCompile Include="BallisticMotion.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />
@@ -278,6 +279,7 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TeamPortPolio.cpp" />
     <ClCompile Include="TestMap.cpp" />
+    <ClCompile Include="cBallisticArrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc" />

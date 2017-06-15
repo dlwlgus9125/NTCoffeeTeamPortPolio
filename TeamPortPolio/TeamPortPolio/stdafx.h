@@ -145,7 +145,7 @@ extern LPD3DXSPRITE g_Sprite;
 #define EPSILON             0.0001f
 #define ANGLE_TO_RADIAN		0.0174533f
 #define RADIAN_TO_ANGLE		57.2958f
-
+#define COS45	0.52532198881f
 #define WND_WIDTH 1280
 #define WND_HEIGHT 768
 
