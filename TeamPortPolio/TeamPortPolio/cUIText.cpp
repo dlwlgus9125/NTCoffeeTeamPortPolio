@@ -19,6 +19,8 @@ void cUIText::Update(float deltaTime)
 
 void cUIText::Render(LPD3DXSPRITE pSprite)
 {
+	if (m_isHidden) return;
+
 	RECT rc;
 
 	LPD3DXFONT pFont = FONT->GetFont(m_eFont);

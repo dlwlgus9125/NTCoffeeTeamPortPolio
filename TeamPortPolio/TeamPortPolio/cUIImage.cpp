@@ -19,6 +19,8 @@ void cUIImage::Update(float deltaTime)
 
 void cUIImage::Render(LPD3DXSPRITE pSprite)
 {
+	if (m_isHidden) return;
+
 	RECT rc;
 
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);

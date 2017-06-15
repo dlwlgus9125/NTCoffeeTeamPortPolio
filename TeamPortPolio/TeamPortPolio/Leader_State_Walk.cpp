@@ -32,7 +32,7 @@ void Leader_State_Walk::OnUpdate(cLeader * pLeader, float deltaTime)
 			vector<int> n_path = pLeader->GetPath();
 			n_path.pop_back();
 			pLeader->SetPath(n_path);
-			cout << "pop!" << endl;
+			//cout << "pop!" << endl;
 		}
 		}
 

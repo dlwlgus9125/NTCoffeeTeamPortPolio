@@ -22,7 +22,7 @@ void Leader_State_Battle::OnUpdate(cLeader * pLeader, float deltaTime)
 		pLeader->FSM()->Play(LEADER_STATE_STATE_IDLE);
 	}
 	D3DXVECTOR3 pos = pLeader->GetCharacterEntity()->Pos();
-	D3DXVECTOR3 targetPos = pLeader->GetTargetObject()->GetCharacterEntity()->Pos();
+	D3DXVECTOR3 targetPos = pLeader->GetTargetObject()->GetCharacterEntity()->Pos()+ pLeader->GetTargetObject()->GetCharacterEntity()->Forward();
 
 	
 	float distance = MATH->Distance(pos, targetPos);

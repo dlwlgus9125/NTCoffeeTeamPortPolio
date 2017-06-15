@@ -47,9 +47,10 @@ void cObjectManager::Render()
 {
 	//LPD3DXFRAME test = new D3DXFRAME;
 	D3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
-		m_vecObject[i]->Render();
+		if(FRUSTUM->IsIn(m_vecObject[i]->GetCharacterEntity()->Pos()))m_vecObject[i]->Render();
 	}
 }
 

@@ -1,6 +1,17 @@
 #include "stdafx.h"
 #include "cSceneManager.h"
 
+cSceneManager::cSceneManager()
+{
+	m_current = -1;
+	m_currentScene = NULL;
+}
+
+cSceneManager::~cSceneManager()
+{
+
+}
+
 void cSceneManager::StartScene(int tag)
 {
 	if (m_scenes.find(tag) == m_scenes.end())
@@ -23,52 +34,26 @@ void cSceneManager::Register(int tag, cIScene * pScene)
 
 void cSceneManager::ChangeScene(int tag)
 {
-	if (m_current != tag)
-	{
-		cIScene* prevScene = GetScene(m_current);
-
-		if (prevScene != NULL)
-		{
-			prevScene->OnExit();
-		}
-		else
-			::MessageBox(0, TEXT("prevScene error - NULL"), 0, 0);
-
-		cIScene* nextScene = GetScene(tag);
-						
-		if (nextScene != NULL)
-		{
-			nextScene->OnEnter();
-			m_current = tag;
-			Sleep(500);
-		}
-		else
-			::MessageBox(0, TEXT("nextScene error - NULL"), 0, 0);
-	}
-
-	else if (m_current == tag)
-		::MessageBox(0, TEXT("ChangeScene error - m_current == tag"), 0, 0);
+	m_current = tag;
+	m_currentScene = GetScene(m_current);	// 지워야 할 것들
+	m_currentScene->OnEnter();				// 지워야 할 것들
 }
 
 void cSceneManager::Update()
 {
-
-	cIScene* currentScene = GetScene(m_current);
-	if (currentScene != NULL)
+	if (m_currentScene == NULL || m_current != m_currentScene->Tag())
 	{
-		currentScene->OnUpdate();
+		if (m_currentScene != NULL) m_currentScene->OnExit();
+		m_currentScene = GetScene(m_current);
+		if (m_currentScene != NULL) m_currentScene->OnEnter();
 	}
-	else
-		::MessageBox(0, TEXT("Update error - currentScene == NULL"), 0, 0);
+
+	if (m_currentScene != NULL) m_currentScene->OnUpdate();
 }
 
 void cSceneManager::Render()
-{
-	
-	cIScene* currentScene = GetScene(m_current);
-	if (currentScene != NULL) {
-		currentScene->OnRender();
-	}
+{	
+	if (m_currentScene != NULL) m_currentScene->OnRender();
 	else
 		::MessageBox(0, TEXT("Render error - currentScene == NULL"), 0, 0);
 	

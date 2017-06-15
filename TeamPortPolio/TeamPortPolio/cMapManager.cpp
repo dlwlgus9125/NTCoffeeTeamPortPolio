@@ -69,17 +69,17 @@ void cMapManager::Render()
 	{
 		if (test == false)
 		{
-			test = true;
+			//test = true;
 		}
 		else
 		{
-			test = false;
+			//test = false;
 		}
 	}
 
 	if (test == false)
 	{
-		//if (m_pSkyBox) m_pSkyBox->Render();
+		if (m_pSkyBox) m_pSkyBox->Render();
 
 		if (m_pMap) m_pMap->Render();
 

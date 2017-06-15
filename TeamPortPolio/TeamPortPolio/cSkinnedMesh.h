@@ -58,6 +58,7 @@ private:
 	void SetupBoneMatrixPtrs(ST_BONE* pBone);
 	void Destroy();
 
+
 	
 };
 
