@@ -17,10 +17,12 @@ cConstruct::~cConstruct()
 {
 }
 
-void cConstruct::Setup(char* szFolder, char* szFile)
+void cConstruct::Setup(char* szFolder, char* szFile, bool isChecked)
 {
 	cObjLoader	l;
-	m_pObjMesh = l.LoadMesh(m_vecObjMtlTex, szFolder, szFile, true);
+
+	if (isChecked == true)			m_pObjMesh = l.LoadMesh(m_vecObjMtlTex, szFolder, szFile, true);
+	else if (isChecked == false)	m_pObjMesh = l.LoadMesh(m_vecObjMtlTex, szFolder, szFile);
 }
 
 void cConstruct::Update()
@@ -63,7 +65,8 @@ void cConstruct::Create(int sIndex)
 
 	m_nSObjID = sIndex;
 
-	Setup(folder, file);
+	if (sIndex >= E_S_OBJECTID_P_DW_START && sIndex <= E_S_OBJECTID_P_ETC_END) Setup(folder, file, false);
+	else Setup(folder, file, true);
 	Update();
 }
 
