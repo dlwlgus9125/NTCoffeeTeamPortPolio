@@ -30,4 +30,7 @@ public:
 
 	void Create(int sIndex);
 	void Destroy();
+	LPD3DXMESH GetMesh();
+	vector<cMtlTex*> GetMtl();
+
 };

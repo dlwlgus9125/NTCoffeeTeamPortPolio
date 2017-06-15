@@ -20,4 +20,5 @@ public:
 						OUT int& cellPerRow, OUT float& cellSpace, 
 						OUT vector<cConstruct*>& vecConstruct,
 						IN char* szFolder, IN char* szFile, bool doOptimizeInplace = true);
+
 };

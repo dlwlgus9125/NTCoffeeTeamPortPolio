@@ -96,3 +96,13 @@ void cConstruct::Destroy()
 
 	// delete this;
 }
+
+LPD3DXMESH cConstruct::GetMesh()
+{
+	return m_pObjMesh;
+}
+
+vector<cMtlTex*> cConstruct::GetMtl()
+{
+	return m_vecObjMtlTex;
+}

@@ -33,7 +33,7 @@ void IEntity::SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 void IEntity::AddPos(D3DXVECTOR3 pos) { SetPos(m_pos + pos); }
 void IEntity::SetForward(D3DXVECTOR3 forward)
 {
-	if (MATH->SqrMagnitude(forward) < EPSILON) return;
+	if (D3DXVec3Length(&forward) < EPSILON) return;
 	D3DXVec3Normalize(&m_forward, &forward);
 }
 void IEntity::SetVelocity(D3DXVECTOR3 velocity) { m_velocity = MATH->Clamp(velocity, 0, MaxSpeed()); }

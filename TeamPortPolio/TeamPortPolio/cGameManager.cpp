@@ -65,7 +65,7 @@ void cGameManager::Init()
 	OBJECTDB->Setup();
 	SCENE->Register(SCENE_TITLE, new cTitleScene());
 	SCENE->Register(SCENE_TOWN, new cTownScene());
-	SCENE->ChangeScene(SCENE_TITLE);
+	SCENE->ChangeScene(SCENE_TOWN);
 	CAMERA->Setup();
 
 
@@ -111,25 +111,20 @@ void cGameManager::Update()
 			INPUT->Update();
 			CAMERA->Update();
 			SCENE->Update();
-			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();
-			
-			
+			//if (OBJECT->GetPlayer() != NULL)ASTAR->Update();	
 		}
-
 	}
-
 }
 
 void cGameManager::Render()
 {
-	
 	if(!isOkView)
 		pControl->Run();
 	else if (isOkView)
 	{
 		D3DDevice->Clear(NULL,
 			NULL,
-			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
 			D3DCOLOR_XRGB(47, 121, 112),
 			1.0f, 0);
 		D3DDevice->BeginScene();
