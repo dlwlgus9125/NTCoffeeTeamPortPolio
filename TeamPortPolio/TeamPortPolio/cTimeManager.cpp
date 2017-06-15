@@ -20,6 +20,8 @@ void cTimeManager::Init(int fps)
 	m_frameTime = 1.0 / fps;
 
 	m_dwLastUpdateTime = GetTickCount();
+
+	m_oneSecond = 0.0f;
 }
 
 int cTimeManager::FPS() { return m_fps; }
@@ -40,6 +42,23 @@ bool cTimeManager::Update()
 	if (m_deltaTime > m_frameTime)
 	{
 		m_previousCount = m_currentCount;
+
+
+		if (m_oneSecond > 0.5f)
+		{
+			m_oneSecond = 0.0f;
+		}
+		m_oneSecond += m_deltaTime;
+
+		return true;
+	}
+	return false;
+}
+
+bool cTimeManager::UpdateOneSecond()
+{	
+	if (m_oneSecond >=0.5f)
+	{
 		return true;
 	}
 	return false;
@@ -54,7 +73,7 @@ void cTimeManager::ElapsedUpdate()
 
 float cTimeManager::GetElapsedTime()
 {
-	return m_fEllapsedTime/1500.0f;
+	return m_fEllapsedTime/1000.0f;
 }
 
 float cTimeManager::GetLastUpdateTime()

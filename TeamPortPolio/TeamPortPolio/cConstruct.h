@@ -24,7 +24,7 @@ public:
 	cConstruct();
 	~cConstruct();
 
-	void Setup(char* szFolder, char* szFile);
+	void Setup(char* szFolder, char* szFile, bool isChecked);
 	void Update();
 	void Render();
 

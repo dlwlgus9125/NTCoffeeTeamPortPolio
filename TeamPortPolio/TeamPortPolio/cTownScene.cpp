@@ -21,6 +21,8 @@ void cTownScene::OnEnter()
 	cPlayer* pPlayer = new cPlayer(D3DXVECTOR3(-8, 0, 30), 1.0f, D3DXVECTOR3(0, 0, 1), 0.5f, 200);
 	pPlayer->Init();
 	OBJECT->AddCharacter(pPlayer);
+	OBJECT->AddObject(pPlayer);
+	OBJECT->SetPlayer(pPlayer);
 }
 
 void cTownScene::OnUpdate()
@@ -35,7 +37,6 @@ void cTownScene::OnExit()
 	SAFE_RELEASE(m_pSprite);
 	MAP->Destroy();
 	UI->Release();
-	OBJECT->Render();
 }
 
 void cTownScene::OnRender()

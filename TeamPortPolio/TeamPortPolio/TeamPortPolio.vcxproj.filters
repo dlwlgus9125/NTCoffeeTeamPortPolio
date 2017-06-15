@@ -260,9 +260,6 @@
     <ClInclude Include="cTimeManager.h">
       <Filter>00. Manager\08. cTimeManager</Filter>
     </ClInclude>
-    <ClInclude Include="Human_Melee_State.h">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClInclude>
     <ClInclude Include="IEntity.h">
       <Filter>02. cCharacter\00. Entity</Filter>
     </ClInclude>
@@ -369,6 +366,10 @@
     <ClInclude Include="cSnow.h">
       <Filter>07. cEffect\02. cSnow</Filter>
     </ClInclude>
+    <ClInclude Include="cMeleeUnit.h" />
+    <ClInclude Include="Melee_State.h">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -428,15 +429,6 @@
     </ClCompile>
     <ClCompile Include="cTimeManager.cpp">
       <Filter>00. Manager\08. cTimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Human_Melee_Walk.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
-    <ClCompile Include="Human_Melee_Defence.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
-    <ClCompile Include="Human_Melee_Idle.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
     <ClCompile Include="IEntity.cpp">
       <Filter>02. cCharacter\00. Entity</Filter>
@@ -522,9 +514,6 @@
     <ClCompile Include="Leader_State_Battle.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
-    <ClCompile Include="Human_Melee_Battle.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
     <ClCompile Include="cUIButton.cpp">
       <Filter>08. UI\03. cUIButton</Filter>
     </ClCompile>
@@ -551,6 +540,25 @@
     </ClCompile>
     <ClCompile Include="cSnow.cpp">
       <Filter>07. cEffect\02. cSnow</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeleeUnit.cpp" />
+    <ClCompile Include="Melee_Death.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee_Walk.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee_Idle.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee_Defence.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee_Battle.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
+    <ClCompile Include="Leader_State_Defeat.cpp">
+      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

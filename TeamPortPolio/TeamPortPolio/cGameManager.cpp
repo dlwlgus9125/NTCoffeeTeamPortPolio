@@ -65,8 +65,11 @@ void cGameManager::Init()
 	OBJECTDB->Setup();
 	SCENE->Register(SCENE_TITLE, new cTitleScene());
 	SCENE->Register(SCENE_TOWN, new cTownScene());
-	SCENE->ChangeScene(SCENE_TITLE);
+	SCENE->ChangeScene(SCENE_TOWN);
 	CAMERA->Setup();
+
+
+	srand((unsigned)time(NULL));
 
 	
 	//<<

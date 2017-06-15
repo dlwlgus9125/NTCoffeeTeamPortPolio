@@ -68,34 +68,55 @@ void cLeader::Init()
 	m_TriOffest.push_back(D3DXVECTOR3(-2.0f, 0, 1.0f) * 3.0f);
 
 	m_pFsm = new cStateMachine<cLeader*>(this);
-	m_pFsm->Register(LEADER_STATE_STATE_IDLE, new Leader_State_Idle());
-	m_pFsm->Register(LEADER_STATE_STATE_WALK, new Leader_State_Walk());
-	m_pFsm->Register(LEADER_STATE_STATE_PURSUIT, new Leader_State_Battle());
-	m_pFsm->Play(LEADER_STATE_STATE_IDLE);
+	m_pFsm->Register(LEADER_STATE_IDLE, new Leader_State_Idle());
+	m_pFsm->Register(LEADER_STATE_WALK, new Leader_State_Walk());
+	m_pFsm->Register(LEADER_STATE_PURSUIT, new Leader_State_Battle());
+	m_pFsm->Register(LEADER_STATE_DEFEAT, new Leader_State_Defeat());
+	m_pFsm->Play(LEADER_STATE_IDLE);
 	m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
 	D3DXCreateSphere(D3DDevice, m_arrangeCollideSphere.fRadius, 10, 10, &m_meshSphere.m_pMeshSphere, NULL);
 	ZeroMemory(&m_meshSphere.m_stMtlSphere, sizeof(D3DMATERIAL9));
 	m_meshSphere.m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_meshSphere.m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_meshSphere.m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
 }
 
 void cLeader::Update(float deltaTime)
 {
-	cCharacter::Update(deltaTime);
-	m_pFsm->Update(deltaTime);
+	if (m_isDeath == true)
+	{
+		if(m_pFsm->CurrentID()!= LEADER_STATE_DEFEAT)m_pFsm->Play(LEADER_STATE_DEFEAT);
+	}
+	else
+	{
+		cCharacter::Update(deltaTime);
+		m_pFsm->Update(deltaTime);
 
-	D3DXVECTOR3 pos = m_CharacterEntity->Pos();
-	
-	//MAP->GetHeight(pos.x, pos.y, pos.z);
-	//m_CharacterEntity->SetPos(pos);
-	
-	//CAMERA->SetLookAt(pos, 0);
-	m_pFsm->Update(deltaTime);
-	//if (INPUT->IsKeyPress('1'))SetRectOffset();
-	//if (INPUT->IsKeyPress('2'))SetTriOffset();
-	m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
+		D3DXVECTOR3 pos = m_CharacterEntity->Pos();
 
+		//MAP->GetHeight(pos.x, pos.y, pos.z);
+		//m_CharacterEntity->SetPos(pos);
+
+		//CAMERA->SetLookAt(pos, 0);
+		//if (INPUT->IsKeyPress('1'))SetRectOffset();
+		//if (INPUT->IsKeyPress('2'))SetTriOffset();
+		m_meshSphere.m_vCenter = m_arrangeCollideSphere.vCenter;
+
+
+		for (int i = 0; i < m_vectorUnit.size(); i++)
+		{
+			if (m_vectorUnit[i]->IsDeath() == true)
+			{
+				SetDeath(true);
+			}
+			else if (m_vectorUnit[i]->IsDeath() == false)
+			{
+				SetDeath(false);
+				break;
+			}
+		}
+	}
 	
 }
 

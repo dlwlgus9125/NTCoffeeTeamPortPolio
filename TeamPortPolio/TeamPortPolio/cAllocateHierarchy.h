@@ -1,9 +1,6 @@
 #pragma once
 
-struct ST_BONE : public D3DXFRAME
-{
-	D3DXMATRIXA16 CombinedTransformationMatrix;
-};
+
 
 struct ST_BONE_MESH : public D3DXMESHCONTAINER
 {
