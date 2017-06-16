@@ -2,8 +2,9 @@
 #include "cPlayer.h"
 #include "cGameManager.h"
 #include "cLeader.h"
+#include"cBallisticArrow.h"
 
-cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed)
+cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass, float maxSpeed):m_pBalisticArrow(NULL)
 
 {
 	m_CharacterEntity = new ISteeringEntity(pos, radius, forward, mass, maxSpeed);
@@ -15,13 +16,13 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 	OBJECT->AddObject(m_unitLeader);
 	OBJECT->AddLeader(m_unitLeader);
 	m_fRotY = 0.0f;
+	
 }
 
 
 cPlayer::~cPlayer()
 {
 	SAFE_DELETE(m_pFsm);
-
 }
 
 void cPlayer::Init()
@@ -33,7 +34,6 @@ void cPlayer::Init()
 	m_arrangeCollideSphere.fRadius = 20.0f;
 	m_arrangeCollideSphere.vCenter = m_CharacterEntity->Pos();
 	cCharacter::Init();
-	
 	m_pSkinnedMesh = NULL;
 	//m_pSkinnedMesh = new cSkinnedMesh();
 	m_pSkinnedMesh = new cSkinnedMesh(TEXTURE->GetCharacterResource("Character/BloodeHuman/", "b_footman.x"));
@@ -46,6 +46,7 @@ void cPlayer::Init()
 	m_pFsm->Register(PLAYER_STATE_ATTACK, new Player_Attack());
 	m_pFsm->Register(PLAYER_STATE_DEFENCE, new Player_Defence());
 	m_pFsm->Play(PLAYER_STATE_IDLE);
+	
 }
 
 void cPlayer::Update(float deltaTime)
@@ -66,6 +67,36 @@ void cPlayer::Update(float deltaTime)
 	{
 		m_fRotY += 0.03;
 	}
+	//<< 화살처리
+	if (INPUT->IsKeyDown(VK_SPACE)&&!m_pBalisticArrow)
+	{
+		D3DXVECTOR3 vTarget = m_unitLeader->GetUnitLeader()->Pos();
+		D3DXVECTOR3 vDir = m_CharacterEntity->Forward();
+		vDir.y = cosf(30);
+		D3DXVECTOR3 NormalDir = MATH->Nomalize(vDir);
+		m_pBalisticArrow = new cBallisticArrow(m_CharacterEntity->Pos(), vTarget, 10, NormalDir, 0, 0);
+		//화살구체
+		
+		D3DXCreateSphere(D3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
+		ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+		m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+		m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+		m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	}
+
+	if (m_pBalisticArrow)
+	{
+		m_pBalisticArrow->Shoot()->Update_with_dir();
+		if (m_pBalisticArrow->Shoot()->Entity()->Pos().y < -10)
+		{
+			SAFE_RELEASE(m_pMeshSphere);
+			SAFE_DELETE(m_pBalisticArrow);
+		}
+	
+	}
+	//화살처리
+
+
 
 
 
@@ -106,6 +137,26 @@ void cPlayer::Render()
 			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 			m_MeshSphere.m_pMeshSphere->DrawSubset(0);
 			D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+			
+			//test
+			if (m_pBalisticArrow)
+			{
+				D3DXMATRIXA16 matT,matR ,matWorld;
+				D3DXMatrixIdentity(&matT);
+				D3DXMatrixIdentity(&matR);
+				D3DXMatrixTranslation(&matT, m_pBalisticArrow->GetSphere().vCenter.x, m_pBalisticArrow->GetSphere().vCenter.y, m_pBalisticArrow->GetSphere().vCenter.z);
+				
+				D3DXVec3TransformCoord(&m_pBalisticArrow->Shoot()->Entity()->Forward(), &m_pBalisticArrow->Shoot()->Entity()->Forward(), &matR);
+				matWorld = matR*matT;
+				
+				D3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+				D3DDevice->SetMaterial(&m_stMtlSphere);
+				D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);	
+				m_pMeshSphere->DrawSubset(0);
+
+				D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+			}
+		
 		}
 	}
 

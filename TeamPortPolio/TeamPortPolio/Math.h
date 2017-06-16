@@ -12,6 +12,8 @@ class Math : public Singleton<Math>
 public:
 	Math();
 
+	D3DXVECTOR3 Nomalize(D3DXVECTOR3 vec);
+
 	float Magnitude(D3DXVECTOR3 vec);
 	float SqrMagnitude(D3DXVECTOR3 vec);
 	float Min(float a, float b);
@@ -33,5 +35,11 @@ public:
 	D3DXVECTOR3 GetOverlappedVector(ST_SPHERE from, ST_SPHERE to);
 	D3DXVECTOR3 LocalToWorld(D3DXVECTOR3 local, D3DXVECTOR3 forward);
 
+
+	//벡터간 각도 계산
+	float SinAngle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	float CosAngle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	float Angle(D3DXVECTOR3 from, D3DXVECTOR3 to);
+	
 
 };

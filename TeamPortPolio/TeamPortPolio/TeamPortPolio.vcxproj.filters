@@ -86,9 +86,6 @@
     <Filter Include="02. cCharacter\02. cUnit">
       <UniqueIdentifier>{18f4936e-df28-40b2-9bca-86a6a3fe05c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. cCharacter\01. cPlayer">
-      <UniqueIdentifier>{15b440dc-426a-41f1-a54b-df0eae8a2aea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Manager\09. cSceneManager">
       <UniqueIdentifier>{6e8ecffe-7e53-445c-8ad7-d23bcdd2c40e}</UniqueIdentifier>
     </Filter>
@@ -137,6 +134,18 @@
     <Filter Include="03. cScene\02. cTownScene">
       <UniqueIdentifier>{7625283c-81ec-4bab-b1b3-993eeb0cddd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Manager\07. cUIManager\00. cUIObject">
+      <UniqueIdentifier>{68342aad-ac20-4c08-bc1e-7c53a712919e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\01. cUIImage">
+      <UniqueIdentifier>{6884dbb3-27ca-4b65-b5e7-3408c15782a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\02. cUIText">
+      <UniqueIdentifier>{0ba9ec17-2177-47dc-b75b-5c0818ee5a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Manager\07. cUIManager\03. cUIButton">
+      <UniqueIdentifier>{5fcd1a10-77ee-4001-9081-5dbfb58f3f4b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="00. Manager\11. cFontManager">
       <UniqueIdentifier>{889df18f-b33d-47a4-8fe1-2ee7850a9708}</UniqueIdentifier>
     </Filter>
@@ -146,47 +155,20 @@
     <Filter Include="02. cCharacter\02. cUnit\00. Footmans\00. Footman">
       <UniqueIdentifier>{ab58f5c0-cde1-48e3-9fe3-8fb0fcb32854}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. UI">
-      <UniqueIdentifier>{28ca9765-aac9-435e-9f89-f6846c4604ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. UI\00. cUIObject">
-      <UniqueIdentifier>{68342aad-ac20-4c08-bc1e-7c53a712919e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. UI\01. cUIImage">
-      <UniqueIdentifier>{6884dbb3-27ca-4b65-b5e7-3408c15782a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. UI\02. cUIText">
-      <UniqueIdentifier>{0ba9ec17-2177-47dc-b75b-5c0818ee5a19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. UI\03. cUIButton">
-      <UniqueIdentifier>{5fcd1a10-77ee-4001-9081-5dbfb58f3f4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. UI\04. cUIMiniMap">
+    <Filter Include="00. Manager\07. cUIManager\04. cUIMiniMap">
       <UniqueIdentifier>{3ef3e8bc-2305-46f2-8364-1f156be2026e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. UI\05. cUITap">
-      <UniqueIdentifier>{9c105aec-fe63-44c9-aead-274bfdaf3976}</UniqueIdentifier>
+    <Filter Include="01. cObject\01. cPlayer">
+      <UniqueIdentifier>{15b440dc-426a-41f1-a54b-df0eae8a2aea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. UI\06. cUISlot">
-      <UniqueIdentifier>{3b341dbc-6d27-4750-b9a5-454e733b4659}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. cCharacter\01. cPlayer\01.cPlayer_State">
-      <UniqueIdentifier>{b986df2c-d74b-4237-af49-00b69e9f9d43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Manager\12. cEffectManager">
-      <UniqueIdentifier>{7ef5aea2-a587-4137-8b19-e1a73e59bf61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. cEffect">
-      <UniqueIdentifier>{d828614a-a908-4abe-9600-b63fc775ef5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. cEffect\01. cFog">
-      <UniqueIdentifier>{11902b00-3064-4b38-8b46-15d716077828}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. cEffect\02. cSnow">
-      <UniqueIdentifier>{59275c91-1c27-4d75-ac79-36d2e8b43b6c}</UniqueIdentifier>
+    <Filter Include="02. cCharacter\04.cArrow">
+      <UniqueIdentifier>{8c23d38d-ab02-486d-8e22-e802df61f874}</UniqueIdentifier>
     </Filter>
     <Filter Include="00. Manager\13. cShadowManager">
       <UniqueIdentifier>{1afa07c7-2a27-485a-9ee9-6e95be22fd79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Database\02 cItemDB">
+      <UniqueIdentifier>{6582bded-10a2-45ff-aaa8-e746164a3987}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,7 +222,7 @@
       <Filter>00. Manager\01. cObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="cPlayer.h">
-      <Filter>02. cCharacter\01. cPlayer</Filter>
+      <Filter>01. cObject\01. cPlayer</Filter>
     </ClInclude>
     <ClInclude Include="cUnit.h">
       <Filter>02. cCharacter\02. cUnit</Filter>
@@ -334,47 +316,50 @@
       <Filter>00. Manager\07. cUIManager</Filter>
     </ClInclude>
     <ClInclude Include="cUIObject.h">
-      <Filter>08. UI\00. cUIObject</Filter>
+      <Filter>00. Manager\07. cUIManager\00. cUIObject</Filter>
     </ClInclude>
     <ClInclude Include="cUIImage.h">
-      <Filter>08. UI\01. cUIImage</Filter>
+      <Filter>00. Manager\07. cUIManager\01. cUIImage</Filter>
     </ClInclude>
     <ClInclude Include="cFontManager.h">
       <Filter>00. Manager\11. cFontManager</Filter>
     </ClInclude>
     <ClInclude Include="cUIText.h">
-      <Filter>08. UI\02. cUIText</Filter>
+      <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClInclude>
     <ClInclude Include="SteeringBehavior.h">
       <Filter>02. cCharacter\00. Entity</Filter>
     </ClInclude>
     <ClInclude Include="cUIMiniMap.h">
-      <Filter>08. UI\04. cUIMiniMap</Filter>
+      <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
     </ClInclude>
     <ClInclude Include="cUIButton.h">
-      <Filter>08. UI\03. cUIButton</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_State.h">
-      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
-    </ClInclude>
-    <ClInclude Include="cEffectManager.h">
-      <Filter>00. Manager\12. cEffectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cFog.h">
-      <Filter>07. cEffect\01. cFog</Filter>
-    </ClInclude>
-    <ClInclude Include="cSnow.h">
-      <Filter>07. cEffect\02. cSnow</Filter>
+      <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClInclude>
     <ClInclude Include="cMeleeUnit.h" />
+    <ClInclude Include="cShadowManager.h" />
+    <ClInclude Include="cUITab.h" />
+    <ClInclude Include="Player_State.h" />
     <ClInclude Include="Melee_State.h">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClInclude>
-    <ClInclude Include="cMeleeUnit.h" />
-    <ClInclude Include="cUITab.h">
-      <Filter>08. UI\05. cUITap</Filter>
+    <ClInclude Include="cBallisticArrow.h">
+      <Filter>02. cCharacter\04.cArrow</Filter>
     </ClInclude>
     <ClInclude Include="cShadowManager.h" />
+    <ClInclude Include="cItemDB.h">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClInclude>
+    <ClInclude Include="cFog.h" />
+    <ClInclude Include="cUISlot.h" />
+    <ClInclude Include="cWeather.h" />
+    <ClInclude Include="Player_State.h" />
+    <ClInclude Include="cEffectManager.h">
+      <Filter>00. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BallisticMotion.h">
+      <Filter>02. cCharacter\04.cArrow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -415,7 +400,7 @@
       <Filter>00. Manager\01. cObjectManager</Filter>
     </ClCompile>
     <ClCompile Include="cPlayer.cpp">
-      <Filter>02. cCharacter\01. cPlayer</Filter>
+      <Filter>01. cObject\01. cPlayer</Filter>
     </ClCompile>
     <ClCompile Include="cUnit.cpp">
       <Filter>02. cCharacter\02. cUnit</Filter>
@@ -502,71 +487,67 @@
       <Filter>00. Manager\07. cUIManager</Filter>
     </ClCompile>
     <ClCompile Include="cUIObject.cpp">
-      <Filter>08. UI\00. cUIObject</Filter>
+      <Filter>00. Manager\07. cUIManager\00. cUIObject</Filter>
     </ClCompile>
     <ClCompile Include="cUIImage.cpp">
-      <Filter>08. UI\01. cUIImage</Filter>
+      <Filter>00. Manager\07. cUIManager\01. cUIImage</Filter>
     </ClCompile>
     <ClCompile Include="cFontManager.cpp">
       <Filter>00. Manager\11. cFontManager</Filter>
     </ClCompile>
     <ClCompile Include="cUIText.cpp">
-      <Filter>08. UI\02. cUIText</Filter>
+      <Filter>00. Manager\07. cUIManager\02. cUIText</Filter>
     </ClCompile>
     <ClCompile Include="cUIMiniMap.cpp">
-      <Filter>08. UI\04. cUIMiniMap</Filter>
+      <Filter>00. Manager\07. cUIManager\04. cUIMiniMap</Filter>
     </ClCompile>
     <ClCompile Include="Leader_State_Battle.cpp">
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
-    <ClCompile Include="cUIButton.cpp">
-      <Filter>08. UI\03. cUIButton</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Attack.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Defence.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Idle.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Walk.cpp">
-      <Filter>02. cCharacter\01. cPlayer\01.cPlayer_State</Filter>
-    </ClCompile>
-    <ClCompile Include="cEffectManager.cpp">
-      <Filter>00. Manager\12. cEffectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cFog.cpp">
-      <Filter>07. cEffect\01. cFog</Filter>
-    </ClCompile>
-    <ClCompile Include="cSnow.cpp">
-      <Filter>07. cEffect\02. cSnow</Filter>
-    </ClCompile>
     <ClCompile Include="cMeleeUnit.cpp" />
+    <ClCompile Include="cShadowManager.cpp" />
+    <ClCompile Include="cUITab.cpp" />
+    <ClCompile Include="Leader_State_Defeat.cpp" />
+    <ClCompile Include="Player_Attack.cpp" />
+    <ClCompile Include="Player_Defence.cpp" />
+    <ClCompile Include="Player_Idle.cpp" />
+    <ClCompile Include="Player_Walk.cpp" />
+    <ClCompile Include="Melee_Battle.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
+    </ClCompile>
     <ClCompile Include="Melee_Death.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
-    <ClCompile Include="Melee_Walk.cpp">
-      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
-    </ClCompile>
-    <ClCompile Include="Melee_Idle.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
     <ClCompile Include="Melee_Defence.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
-    <ClCompile Include="Melee_Battle.cpp">
+    <ClCompile Include="Melee_Idle.cpp">
       <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
-    <ClCompile Include="Leader_State_Defeat.cpp">
-      <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
+    <ClCompile Include="Melee_Walk.cpp">
+      <Filter>02. cCharacter\02. cUnit\00. Footmans\00. Footman</Filter>
     </ClCompile>
-    <ClCompile Include="cMeleeUnit.cpp" />
-    <ClCompile Include="cUITab.cpp">
-      <Filter>08. UI\05. cUITap</Filter>
+    <ClCompile Include="BallisticMotion.cpp">
+      <Filter>02. cCharacter\04.cArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="cBallisticArrow.cpp">
+      <Filter>02. cCharacter\04.cArrow</Filter>
     </ClCompile>
     <ClCompile Include="cShadowManager.cpp" />
+    <ClCompile Include="cItemDB.cpp">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClCompile>
+    <ClCompile Include="cFog.cpp" />
+    <ClCompile Include="cUIButton.cpp" />
+    <ClCompile Include="cUISlot.cpp" />
+    <ClCompile Include="cWeather.cpp" />
+    <ClCompile Include="Player_Attack.cpp" />
+    <ClCompile Include="Player_Defence.cpp" />
+    <ClCompile Include="Player_Idle.cpp" />
+    <ClCompile Include="Player_Walk.cpp" />
+    <ClCompile Include="cEffectManager.cpp">
+      <Filter>00. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">

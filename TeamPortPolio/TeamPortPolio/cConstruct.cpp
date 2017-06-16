@@ -83,6 +83,7 @@ void cConstruct::Create(int sIndex)
 
 	if (sIndex >= E_S_OBJECTID_P_DW_START && sIndex <= E_S_OBJECTID_P_ETC_END) Setup(folder, file, false);
 	else Setup(folder, file, true);
+
 	Update();
 }
 
@@ -95,14 +96,4 @@ void cConstruct::Destroy()
 	}
 
 	// delete this;
-}
-
-LPD3DXMESH cConstruct::GetMesh()
-{
-	return m_pObjMesh;
-}
-
-vector<cMtlTex*> cConstruct::GetMtl()
-{
-	return m_vecObjMtlTex;
 }

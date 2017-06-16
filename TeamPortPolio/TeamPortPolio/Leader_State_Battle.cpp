@@ -24,9 +24,6 @@ void Leader_State_Battle::OnUpdate(cLeader * pLeader, float deltaTime)
 	{
 		pLeader->SetTargetObject(NULL);
 		pLeader->SetTargetIndex(pLeader->GetIndex());
-	}
-	if (pLeader->GetTargetObject() == NULL)
-	{
 		pLeader->FSM()->Play(LEADER_STATE_IDLE);
 	}
 	else

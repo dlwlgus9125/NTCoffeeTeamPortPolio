@@ -3,7 +3,7 @@
 class cUITab :
 	public cUIObject
 {
-	vector<ST_TAB>	vecTabInfo;
+	vector<ST_TAB>	m_vecTabInfo;
 	ST_SIZEN m_stTitleSize;
 	ST_SIZEN m_stBodySize;
 	D3DXVECTOR3 m_vPos_Body;

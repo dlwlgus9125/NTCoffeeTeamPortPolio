@@ -1,7 +1,7 @@
 #pragma once
 #include "Singleton.h"
 #include "cFog.h"
-#include "cSnow.h"
+#include "cWeather.h"
 #include "cCamera.h"
 
 #define EFFECT cEffectManager::Instance()
@@ -9,14 +9,13 @@
 class cEffectManager : public Singleton<cEffectManager>
 {
 	cFog*		m_pFog;
-	cSnow*		m_pSnow;
+	cWeather*	m_pSnow;
+	cWeather*	m_pRain;
 
-	bool		m_isFogOn;
 	int			m_nFogPassIndex;
-	bool		m_isSnowOn;
 
 public:
-	void Init(bool isFogOn, int fogPassIndex, bool isSnowOn);
+	void Init(bool isFogOn, int fogPassIndex, bool isSnowOn, bool isRainOn);
 	void Update();
 	void Render();
 	void Render_Fog_Begin();

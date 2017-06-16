@@ -19,8 +19,6 @@ cLeader::~cLeader()
 
 void cLeader::Init()
 {
-	
-
 	m_CollideSphere.fRadius = 0.1f;
 	m_CollideSphere.vCenter = m_CharacterEntity->Pos();
 	
@@ -153,21 +151,23 @@ void cLeader::AddUnit(cUnit * pUnit)
 
 void cLeader::DeleteUnit(int key)
 {
-
+	
 }
 
 void cLeader::SetRectOffset()
 {
+	int key = 0;
 	for (int i = 0; i < m_vectorUnit.size(); i++)
 	{
-		m_vectorUnit[i]->SetOffset(m_RectOffest[i]);
+		if(m_vectorUnit[i]->IsDeath()==false)m_vectorUnit[i]->SetOffset(m_RectOffest[key++]);
 	}
 }
 
 void cLeader::SetTriOffset()
 {
+	int key = 0;
 	for (int i = 0; i < m_vectorUnit.size(); i++)
 	{
-		m_vectorUnit[i]->SetOffset(m_TriOffest[i]);
+		if (m_vectorUnit[i]->IsDeath() == false)m_vectorUnit[i]->SetOffset(m_TriOffest[key++]);
 	}
 }

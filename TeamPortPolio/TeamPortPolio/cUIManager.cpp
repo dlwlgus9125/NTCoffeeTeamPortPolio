@@ -4,16 +4,6 @@
 // 타이틀씬에 대한 UI 설정
 void cUIManager::Setup_TitleScene()
 {
-	/*
-	< GetEvent로 반환되는 index 안내 >
-
-	- 버튼 :	0 : pButton1
-				1 : pButton2
-				2 : pButton3
-				3 : pButton4
-
-	*/
-
 	// 미니맵
 	m_pMiniMap = new cUIMiniMap;
 	m_pMiniMap->Setup(D3DXVECTOR3(WND_WIDTH * 0.25f, WND_HEIGHT * 0.10f, 0), UI_MINIMAP);
@@ -66,7 +56,8 @@ void cUIManager::Setup_TownScene()
 {
 	cUITab* pTab_Weapon = new cUITab();
 	pTab_Weapon->Setup(D3DXVECTOR3(0, 0, 0), UI_TAB);
-	pTab_Weapon->Setup_Tap("image/rect/darkgray.png", "image/rect/gray.png", ST_SIZEN(150, 50), "image/rect/gray.png", D3DXVECTOR3(0, 0, 0), ST_SIZEN(400, 600));
+	pTab_Weapon->Setup_Tap("image/ui/townscene/tab_shop/idle.png", "image/ui/townscene/tab_shop/selected.png",
+		ST_SIZEN(150, 40), "image/ui/townscene/tab_shop/body.png", D3DXVECTOR3(0, 0, 0), ST_SIZEN(400, 600));
 	pTab_Weapon->AddTitle("검", D3DXVECTOR3(0, 600, 0));
 	pTab_Weapon->AddTitle("도끼", D3DXVECTOR3(170, 600, 0));
 	m_vecTab.push_back(pTab_Weapon);

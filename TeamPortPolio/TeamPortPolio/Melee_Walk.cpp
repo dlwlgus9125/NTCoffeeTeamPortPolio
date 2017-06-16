@@ -12,10 +12,9 @@ void Melee_Walk::OnUpdate(cUnit * pUnit, float deltaTime)
 	D3DXVECTOR3 worldOffset = MATH->LocalToWorld(pUnit->GetOffset(), pUnit->GetLeader()->Forward());
 	D3DXVECTOR3 targetPos = pUnit->GetLeader()->Pos() + worldOffset;
 	
-	targetPos.y = 0;
-	D3DXVECTOR3 pos = pUnit->GetCharacterEntity()->Pos();
-	pos.y = 0;
-	float distance = MATH->Distance(pos, targetPos);
+	D3DXVECTOR3 vTotarget = pUnit->GetCharacterEntity()->Pos() - targetPos;
+	vTotarget.y = 0;
+	float distance = MATH->Magnitude(vTotarget);
 
 	if (distance > 0.1f)
 	{
