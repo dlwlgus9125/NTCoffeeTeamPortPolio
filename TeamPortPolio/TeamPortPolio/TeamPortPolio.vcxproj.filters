@@ -128,12 +128,6 @@
     <Filter Include="01. cObject\01. cGroup">
       <UniqueIdentifier>{4d387467-6525-4c51-b99b-b40e3a9e8538}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. cScene\01. cTitleScene">
-      <UniqueIdentifier>{d208f0ed-a1e4-4bf4-a008-de67667491e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. cScene\02. cTownScene">
-      <UniqueIdentifier>{7625283c-81ec-4bab-b1b3-993eeb0cddd1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Manager\07. cUIManager\00. cUIObject">
       <UniqueIdentifier>{68342aad-ac20-4c08-bc1e-7c53a712919e}</UniqueIdentifier>
     </Filter>
@@ -175,6 +169,18 @@
     </Filter>
     <Filter Include="01. cObject\03. cParticle">
       <UniqueIdentifier>{38c5c6c9-362b-41d3-9d09-d3430e551230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\00. cTitleScene">
+      <UniqueIdentifier>{d208f0ed-a1e4-4bf4-a008-de67667491e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\01. cLoginScene">
+      <UniqueIdentifier>{70402f8b-1349-49ef-8009-450e9d643802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\02. cSelectScene">
+      <UniqueIdentifier>{a978e296-74a7-4f38-a55f-255cbaefc945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. cScene\03. cTownScene">
+      <UniqueIdentifier>{7625283c-81ec-4bab-b1b3-993eeb0cddd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -313,10 +319,10 @@
       <Filter>00. Manager\10. cMapManager</Filter>
     </ClInclude>
     <ClInclude Include="cTitleScene.h">
-      <Filter>03. cScene\01. cTitleScene</Filter>
+      <Filter>03. cScene\00. cTitleScene</Filter>
     </ClInclude>
     <ClInclude Include="cTownScene.h">
-      <Filter>03. cScene\02. cTownScene</Filter>
+      <Filter>03. cScene\03. cTownScene</Filter>
     </ClInclude>
     <ClInclude Include="cUIManager.h">
       <Filter>00. Manager\07. cUIManager</Filter>
@@ -371,6 +377,12 @@
     </ClInclude>
     <ClInclude Include="cShadowManager.h">
       <Filter>00. Manager\13. cShadowManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cLoginScene.h">
+      <Filter>03. cScene\01. cLoginScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cSelectScene.h">
+      <Filter>03. cScene\02. cSelectScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -490,10 +502,10 @@
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
     <ClCompile Include="cTitleScene.cpp">
-      <Filter>03. cScene\01. cTitleScene</Filter>
+      <Filter>03. cScene\00. cTitleScene</Filter>
     </ClCompile>
     <ClCompile Include="cTownScene.cpp">
-      <Filter>03. cScene\02. cTownScene</Filter>
+      <Filter>03. cScene\03. cTownScene</Filter>
     </ClCompile>
     <ClCompile Include="cUIManager.cpp">
       <Filter>00. Manager\07. cUIManager</Filter>
@@ -565,6 +577,12 @@
     </ClCompile>
     <ClCompile Include="cShadowManager.cpp">
       <Filter>00. Manager\13. cShadowManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cLoginScene.cpp">
+      <Filter>03. cScene\01. cLoginScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cSelectScene.cpp">
+      <Filter>03. cScene\02. cSelectScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

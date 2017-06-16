@@ -166,6 +166,7 @@
     <ClInclude Include="cHeightMap.h" />
     <ClInclude Include="cIMap.h" />
     <ClInclude Include="cInputManager.h" />
+    <ClInclude Include="cLoginScene.h" />
     <ClInclude Include="cMapManager.h" />
     <ClInclude Include="cMeleeUnit.h" />
     <ClInclude Include="cMtlTex.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cSceneManager.h" />
+    <ClInclude Include="cSelectScene.h" />
     <ClInclude Include="cShadowManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkyBox.h" />
@@ -230,6 +232,7 @@
     <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cIMap.cpp" />
+    <ClCompile Include="cLoginScene.cpp" />
     <ClCompile Include="cMapManager.cpp" />
     <ClCompile Include="cMeleeUnit.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
@@ -240,6 +243,7 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
+    <ClCompile Include="cSelectScene.cpp" />
     <ClCompile Include="cShadowManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
