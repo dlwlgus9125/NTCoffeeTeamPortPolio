@@ -4,6 +4,7 @@
 
 void Player_Defence::OnBegin(cPlayer* pPlayer)
 {
+	pPlayer->SetMode(FIGHTING_PLAYER_MODE);
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_SHEILDUP);
 }
 

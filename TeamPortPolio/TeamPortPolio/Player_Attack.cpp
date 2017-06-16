@@ -4,9 +4,8 @@
 
 void Player_Attack::OnBegin(cPlayer* pPlayer)
 {
-
+	pPlayer->SetMode(FIGHTING_PLAYER_MODE);
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_ATTACK1);
-
 }
 
 void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
@@ -31,6 +30,12 @@ void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
 		if (pPlayer->GetMesh()->GetPassedTime() > pPlayer->GetMesh()->GetCurrentAnim()->GetPeriod() - 0.4f)
 		{
 			pPlayer->GetMesh()->SetAnimationIndexBlend(state);
+
+			//'17-06-16 Ãß°¡ ÇÏ°Ú½À´Ï´Ù. feat ±èÀ±Áß
+			//if (MATH->IsCollided(pPlayer->GetAttackCollider(), ((cUnit*)BattleTarget)->GetSphere()))
+			//{
+
+			//}
 		}
 
 	}
@@ -43,7 +48,6 @@ void Player_Attack::OnUpdate(cPlayer* pPlayer, float deltaTime)
 	{
 		pPlayer->FSM()->Play(PLAYER_STATE_DEFENCE);
 	}
-
 
 	else
 	{
