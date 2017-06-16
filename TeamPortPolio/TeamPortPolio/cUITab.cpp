@@ -83,7 +83,6 @@ void cUITab::Render(LPD3DXSPRITE pSprite)
 	// << 
 
 	// >> ¹Ùµð ·»´õ
-	pSprite->SetTransform(&m_matWorld);
 	SetRect(&rc, 0, 0, m_stBodySize.nWidth, m_stBodySize.nHeight);
 	pSprite->Draw(m_pTexture_Body, &rc, &D3DXVECTOR3(0, 0, 0), &m_vPos_Body, D3DCOLOR_ARGB(m_nAlpha, 255, 255, 255));
 	// << 
@@ -95,7 +94,7 @@ void cUITab::Render(LPD3DXSPRITE pSprite)
 	{
 		LPD3DXFONT pFont = FONT->GetFont(m_eFont);
 		SetRect(&rc, m_vecTabInfo[i].pos.x, m_vecTabInfo[i].pos.y, m_vecTabInfo[i].pos.x + m_stTitleSize.nWidth, m_vecTabInfo[i].pos.y + m_stTitleSize.nHeight);
-		pFont->DrawText(NULL, m_vecTabInfo[i].text.c_str(), m_vecTabInfo[i].text.length(), &rc, DT_CENTER | DT_VCENTER, 
+		pFont->DrawText(NULL, m_vecTabInfo[i].text.c_str(), m_vecTabInfo[i].text.length(), &rc, DT_CENTER | DT_VCENTER,
 			m_vecTabInfo[i].state == UI_IDLE ? D3DCOLOR_XRGB(255, 255, 255) : D3DCOLOR_XRGB(255, 255, 0));
 	}
 	// << 

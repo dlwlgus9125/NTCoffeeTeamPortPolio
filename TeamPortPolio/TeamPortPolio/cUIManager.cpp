@@ -54,6 +54,7 @@ void cUIManager::Setup_TitleScene()
 
 void cUIManager::Setup_TownScene()
 {
+	// >> 상점 1 탭 테스트용
 	cUITab* pTab_Weapon = new cUITab();
 	pTab_Weapon->Setup(D3DXVECTOR3(0, 0, 0), UI_TAB);
 	pTab_Weapon->Setup_Tap("image/ui/townscene/tab_shop/idle.png", "image/ui/townscene/tab_shop/selected.png",
@@ -61,6 +62,19 @@ void cUIManager::Setup_TownScene()
 	pTab_Weapon->AddTitle("검", D3DXVECTOR3(0, 600, 0));
 	pTab_Weapon->AddTitle("도끼", D3DXVECTOR3(170, 600, 0));
 	m_vecTab.push_back(pTab_Weapon);
+	// << 
+
+	// >> 상점 1 슬롯 테스트용
+	cUISlot* pSlot_Weapon = new cUISlot;
+	pSlot_Weapon->Setup(D3DXVECTOR3(0, 0, 0), UI_SLOT);
+	pSlot_Weapon->Setup_Slot(2, 10, D3DXVECTOR3(20, 20, 0), ST_SIZEN(50, 50), D3DXVECTOR3(90, 20, 0), ST_SIZEN(90, 50), FONT_SHOP);
+	pSlot_Weapon->AddSlotData(ITEMDB->GetItem(I_S_SHORTSWORD)->name, TEXTURE->GetTexture(ITEMDB->GetItem(I_S_SHORTSWORD)->szImagePath), ITEMDB->GetItem(I_S_SHORTSWORD)->info);
+	pSlot_Weapon->AddSlotData(ITEMDB->GetItem(I_S_LONGSWORD)->name, TEXTURE->GetTexture(ITEMDB->GetItem(I_S_LONGSWORD)->szImagePath), ITEMDB->GetItem(I_S_LONGSWORD)->info);
+	pSlot_Weapon->AddSlotData(ITEMDB->GetItem(I_S_BASTARDSWORD)->name, TEXTURE->GetTexture(ITEMDB->GetItem(I_S_BASTARDSWORD)->szImagePath), ITEMDB->GetItem(I_S_BASTARDSWORD)->info);
+	pSlot_Weapon->SetShownData(0);
+	m_vecSlot.push_back(pSlot_Weapon);
+
+	// <<
 }
 
 void cUIManager::Setup()
@@ -86,6 +100,10 @@ void cUIManager::Release()
 	{
 		p->Destroy();
 	}
+	for each(auto p in m_vecSlot)
+	{
+		p->Destroy();
+	}
 	
 	SAFE_DELETE(m_pMiniMap);
 }
@@ -100,6 +118,10 @@ void cUIManager::Update(float deltaTime)
 	{
 		m_vecTab[i]->Update(deltaTime);
 	}
+	for (int i = 0; i < m_vecSlot.size(); i++)
+	{
+		m_vecSlot[i]->Update(deltaTime);
+	}
 }
 
 void cUIManager::Render(LPD3DXSPRITE pSprite)
@@ -109,6 +131,10 @@ void cUIManager::Render(LPD3DXSPRITE pSprite)
 	for (int i = 0; i < m_vecTab.size(); i++)
 	{
 		m_vecTab[i]->Render(pSprite);
+	}
+	for (int i = 0; i < m_vecSlot.size(); i++)
+	{
+		m_vecSlot[i]->Render(pSprite);
 	}
 }
 
@@ -131,6 +157,9 @@ void cUIManager::Change(int sceneID)
 void cUIManager::PressKey()
 {
 	if (INPUT->IsKeyDown(VK_CONTROL) && m_pMiniMap) m_pMiniMap->SetHiddenAll(!(m_pMiniMap->GetHidden()));
+
+	if (INPUT->IsKeyDown(VK_F3)) m_vecTab[0]->SetHiddenAll(!(m_vecTab[0]->GetHidden()));
+	if (INPUT->IsKeyDown(VK_F4)) m_vecSlot[0]->SetHiddenAll(!(m_vecSlot[0]->GetHidden()));
 }
 
 void cUIManager::SetEvent(int order)

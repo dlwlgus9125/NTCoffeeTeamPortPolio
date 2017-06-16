@@ -181,7 +181,6 @@
     <ClInclude Include="cSnow.h" />
     <ClInclude Include="cStateMachine.h" />
     <ClInclude Include="cTextureManager.h" />
-    <ClInclude Include="cArrow.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cTownScene.h" />
@@ -244,7 +243,6 @@
     <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cSnow.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
-    <ClCompile Include="cArrow.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />

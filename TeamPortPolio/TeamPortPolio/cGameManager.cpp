@@ -62,6 +62,7 @@ void cGameManager::Init()
 	UI->Setup();
 	INPUT->Init();
 	OBJECT->Init();
+	ITEMDB->Setup();
 	OBJECTDB->Setup();
 	SCENE->Register(SCENE_TITLE, new cTitleScene());
 	SCENE->Register(SCENE_TOWN, new cTownScene());

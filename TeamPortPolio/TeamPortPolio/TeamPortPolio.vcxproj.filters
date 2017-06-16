@@ -191,6 +191,9 @@
     <Filter Include="06. Database\02 cItemDB">
       <UniqueIdentifier>{6582bded-10a2-45ff-aaa8-e746164a3987}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98. UTIL\05. Singleton">
+      <UniqueIdentifier>{4e2054a7-e500-427d-a4b3-f1104ec8b45d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -271,9 +274,6 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>98. UTIL\02. Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>98. UTIL</Filter>
     </ClInclude>
     <ClInclude Include="TestMap.h">
       <Filter>99. ETC</Filter>
@@ -381,7 +381,12 @@
     <ClInclude Include="cUISlot.h">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClInclude>
-    <ClInclude Include="cItemDB.h" />
+    <ClInclude Include="cItemDB.h">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>98. UTIL\05. Singleton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamPortPolio.cpp" />
@@ -577,7 +582,9 @@
     <ClCompile Include="cUISlot.cpp">
       <Filter>08. UI\06. cUISlot</Filter>
     </ClCompile>
-    <ClCompile Include="cItemDB.cpp" />
+    <ClCompile Include="cItemDB.cpp">
+      <Filter>06. Database\02 cItemDB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc">

@@ -6,6 +6,7 @@
 #include "cUIMiniMap.h"
 #include "cUIButton.h"
 #include "cUITab.h"
+#include "cUISlot.h"
 
 #define UI cUIManager::Instance()
 
@@ -15,6 +16,7 @@ class cUIManager : public Singleton<cUIManager>
 	vector<cUIText*>			m_vecText;
 	vector<cUIButton*>			m_vecBtn;
 	vector<cUITab*>				m_vecTab;
+	vector<cUISlot*>			m_vecSlot;
 	cUIMiniMap*					m_pMiniMap;
 
 	void Setup_TitleScene();

@@ -109,7 +109,7 @@ enum SCENE_TAG
 
 enum UI_TAG
 {
-	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, UI_TAB,
+	UI_NONE, UI_OBJECT, UI_IMAGE, UI_TEXT, UI_BUTTON, UI_MINIMAP, UI_TAB,UI_SLOT,
 };
 
 enum UI_STATE
@@ -119,7 +119,7 @@ enum UI_STATE
 
 enum FONT_TAG
 {
-	FONT_DEF,
+	FONT_DEF, FONT_SHOP,
 };
 
 //>> define 및 구조체
@@ -267,27 +267,36 @@ struct ST_SLOT
 	ST_SIZEN imageSize;
 	D3DXVECTOR3 textPos;
 	ST_SIZEN textSize;
-	string text;
+	D3DXVECTOR2 LeftTop;
+	D3DXVECTOR2 RightBottom;
 
-	ST_SLOT(D3DXVECTOR3 imagePos, ST_SIZEN imageSize, D3DXVECTOR3 textPos, ST_SIZEN textSize, string text)
+	ST_SLOT(D3DXVECTOR3 imagePos, ST_SIZEN imageSize, D3DXVECTOR3 textPos, ST_SIZEN textSize)
 	{
 		this->imagePos=	imagePos;
 		this->imageSize=imageSize;
 		this->textPos=textPos;
 		this->textSize=textSize;
-		this->text=text;
+
+		LeftTop = D3DXVECTOR2(imagePos.x, imagePos.y);
+		RightBottom = D3DXVECTOR2(textPos.x + textSize.nWidth, textPos.y + textSize.nHeight);
 	}
 };
 
-struct ST_IMAGE_TEXT
+struct ST_SLOTDATA
 {
 	LPDIRECT3DTEXTURE9 texture;
-	string text;
+	string info;
+	string name;
 
-	ST_IMAGE_TEXT(LPDIRECT3DTEXTURE9 texture, string text)
+	ST_SLOTDATA(string name, LPDIRECT3DTEXTURE9 texture, string info)
 	{
+		this->name = name;
 		this->texture = texture;
-		this->text = text;
+		this->info = info;
+	}
+	~ST_SLOTDATA()
+	{
+		SAFE_RELEASE(texture);
 	}
 };
 
@@ -432,6 +441,7 @@ public: virtual void Set##funName(varType var){\
 #include "cMapManager.h"
 #include "cUIManager.h"
 #include "cFontManager.h"
+#include "cItemDB.h"
 //<<
 #include "cRay.h"
 
