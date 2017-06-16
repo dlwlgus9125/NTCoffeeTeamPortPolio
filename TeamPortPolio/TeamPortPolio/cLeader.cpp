@@ -19,8 +19,6 @@ cLeader::~cLeader()
 
 void cLeader::Init()
 {
-	
-
 	m_CollideSphere.fRadius = 0.1f;
 	m_CollideSphere.vCenter = m_CharacterEntity->Pos();
 	

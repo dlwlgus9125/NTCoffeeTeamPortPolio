@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
@@ -144,6 +144,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BallisticMotion.h" />
     <ClInclude Include="cAllocateHierarchy.h" />
     <ClInclude Include="cAstar.h" />
     <ClInclude Include="cAstarManager.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamPortPolio.h" />
     <ClInclude Include="TestMap.h" />
+    <ClInclude Include="cBallisticArrow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cAllocateHierarchy.cpp" />
@@ -242,6 +244,7 @@
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
+    <ClCompile Include="BallisticMotion.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cTownScene.cpp" />
@@ -280,6 +283,7 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TeamPortPolio.cpp" />
     <ClCompile Include="TestMap.cpp" />
+    <ClCompile Include="cBallisticArrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamPortPolio.rc" />

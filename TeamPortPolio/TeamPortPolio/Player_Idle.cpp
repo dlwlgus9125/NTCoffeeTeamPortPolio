@@ -3,7 +3,6 @@
 
 void Player_Idle::OnBegin(cPlayer* pPlayer)
 {
-	pPlayer->GetMesh()->SetAnimationIndexBlend(P_READYATTACK);
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_STAND);
 }
 
