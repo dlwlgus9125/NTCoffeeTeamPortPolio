@@ -23,8 +23,6 @@ cPlayer::cPlayer(D3DXVECTOR3 pos, float radius, D3DXVECTOR3 forward, float mass,
 cPlayer::~cPlayer()
 {
 	SAFE_DELETE(m_pFsm);
-	SAFE_RELEASE(m_pMeshSphere);
-	SAFE_DELETE(m_pBalisticArrow);
 }
 
 void cPlayer::Init()
@@ -70,10 +68,13 @@ void cPlayer::Update(float deltaTime)
 		m_fRotY += 0.03;
 	}
 	//<< 화살처리
-	if (INPUT->IsKeyDown(VK_SPACE))
+	if (INPUT->IsKeyDown(VK_SPACE)&&!m_pBalisticArrow)
 	{
 		D3DXVECTOR3 vTarget = m_unitLeader->GetUnitLeader()->Pos();
-		m_pBalisticArrow = new cBallisticArrow(m_CharacterEntity->Pos(), vTarget, 10, m_CharacterEntity->Forward(), 0, 0);
+		D3DXVECTOR3 vDir = m_CharacterEntity->Forward();
+		vDir.y = cosf(30);
+		D3DXVECTOR3 NormalDir = MATH->Nomalize(vDir);
+		m_pBalisticArrow = new cBallisticArrow(m_CharacterEntity->Pos(), vTarget, 10, NormalDir, 0, 0);
 		//화살구체
 		
 		D3DXCreateSphere(D3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
@@ -85,7 +86,13 @@ void cPlayer::Update(float deltaTime)
 
 	if (m_pBalisticArrow)
 	{
-		m_pBalisticArrow->Shoot()->UpdatevPos();
+		m_pBalisticArrow->Shoot()->Update_with_dir();
+		if (m_pBalisticArrow->Shoot()->Entity()->Pos().y < -10)
+		{
+			SAFE_RELEASE(m_pMeshSphere);
+			SAFE_DELETE(m_pBalisticArrow);
+		}
+	
 	}
 	//화살처리
 
@@ -131,18 +138,22 @@ void cPlayer::Render()
 			//test
 			if (m_pBalisticArrow)
 			{
-				D3DXMATRIXA16 mat;
-				D3DXMatrixIdentity(&mat);
-				D3DXMatrixTranslation(&mat, m_pBalisticArrow->GetSphere().vCenter.x, m_pBalisticArrow->GetSphere().vCenter.y, m_pBalisticArrow->GetSphere().vCenter.z);
-				D3DDevice->SetTransform(D3DTS_WORLD, &mat);
+				D3DXMATRIXA16 matT,matR ,matWorld;
+				D3DXMatrixIdentity(&matT);
+				D3DXMatrixIdentity(&matR);
+				D3DXMatrixTranslation(&matT, m_pBalisticArrow->GetSphere().vCenter.x, m_pBalisticArrow->GetSphere().vCenter.y, m_pBalisticArrow->GetSphere().vCenter.z);
+				
+				D3DXVec3TransformCoord(&m_pBalisticArrow->Shoot()->Entity()->Forward(), &m_pBalisticArrow->Shoot()->Entity()->Forward(), &matR);
+				matWorld = matR*matT;
+				
+				D3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 				D3DDevice->SetMaterial(&m_stMtlSphere);
 				D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);	
 				m_pMeshSphere->DrawSubset(0);
 
 				D3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-
 			}
-
+		
 		}
 	}
 

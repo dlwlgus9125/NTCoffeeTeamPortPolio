@@ -3,17 +3,16 @@ class IEntity;
 class BallisticMotion
 {
 public:
-	BallisticMotion(IEntity * entity,D3DXVECTOR3 vOrigin,D3DXVECTOR3 vtarget);
+	BallisticMotion(IEntity * entity, D3DXVECTOR3 vOrigin, D3DXVECTOR3 vTarget, D3DXVECTOR3 vDir);
 	~BallisticMotion();
-	void UpdatevPos();
+	void Update_with_targetpos();
+	void Update_with_dir();
 	IEntity* Entity() { return m_pEntity; }
 	ST_SPHERE m_stSphere;
 private:
 	D3DXVECTOR3 m_vOrigin;
 	D3DXVECTOR3 m_vTarget;
-	float m_fGravity;; // 중력적용을 위한값.
 	IEntity* m_pEntity;
-	int m_speedMultiplier;
-
-	void SetUpSpeedMultiplier(float distance);
+	float m_fGravity;; // 중력적용을 위한값.
+	float GravityMultiPlier(float distance);//중력 곱연산값
 };
