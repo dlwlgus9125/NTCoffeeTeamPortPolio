@@ -90,8 +90,8 @@ void cTownScene::OnExit()
 
 void cTownScene::OnRender()
 {
-	EFFECT->Render();
 	MAP->Render();
+	EFFECT->Render();
 	UI->Render(m_pSprite);
 	OBJECT->Render();
 
