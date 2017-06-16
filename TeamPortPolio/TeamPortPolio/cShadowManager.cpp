@@ -85,11 +85,11 @@ void cShadowManager::Render()
 
 		D3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 
-		for (int j = 0; j < m_vecConstruct[i]->GetMtl().size(); j++)
+		for (int j = 0; j < m_vecConstruct[i]->GetVecObjMtlTex().size(); j++)
 		{
 			D3DDevice->SetMaterial(&mtrl);
 			D3DDevice->SetTexture(0, 0);
-			m_vecConstruct[i]->GetMesh()->DrawSubset(j);
+			m_vecConstruct[i]->GetObjMesh()->DrawSubset(j);
 		}
 
 		D3DDevice->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL);

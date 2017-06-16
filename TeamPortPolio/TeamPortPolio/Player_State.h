@@ -3,6 +3,7 @@
 
 class Player_Idle : public IState<cPlayer*>
 {
+
 public:
 	void OnBegin(cPlayer* pPlayer);
 
@@ -27,7 +28,7 @@ public:
 
 class Player_Attack : public IState<cPlayer*>
 {
-	float fPassedTime;
+	cObject* BattleTarget;
 
 public:
 	void OnBegin(cPlayer* pPlayer);

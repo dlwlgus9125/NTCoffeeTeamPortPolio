@@ -9,8 +9,8 @@ class cConstruct : public cObject
 private:
 	D3DXMATRIXA16		m_matWorld;
 
-	LPD3DXMESH			m_pObjMesh;
-	vector<cMtlTex*>	m_vecObjMtlTex;
+	SYNTHESIZE(LPD3DXMESH, m_pObjMesh, ObjMesh);
+	SYNTHESIZE(vector<cMtlTex*>, m_vecObjMtlTex, VecObjMtlTex);
 
 	SYNTHESIZE(int, m_nSObjID, SObjID);
 	SYNTHESIZE(D3DXVECTOR3, m_vScale, Scale);
@@ -30,7 +30,4 @@ public:
 
 	void Create(int sIndex);
 	void Destroy();
-	LPD3DXMESH GetMesh();
-	vector<cMtlTex*> GetMtl();
-
 };

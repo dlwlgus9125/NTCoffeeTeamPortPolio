@@ -1,7 +1,7 @@
 // stdafx.h : 자주 사용하지만 자주 변경되지는 않는
 // 표준 시스템 포함 파일 또는 프로젝트 관련 포함 파일이
 // 들어 있는 포함 파일입니다.
-//
+// 
 
 #pragma once
 
@@ -145,7 +145,7 @@ extern LPD3DXSPRITE g_Sprite;
 #define EPSILON             0.0001f
 #define ANGLE_TO_RADIAN		0.0174533f
 #define RADIAN_TO_ANGLE		57.2958f
-
+#define COS45	0.52532198881f
 #define WND_WIDTH 1280
 #define WND_HEIGHT 768
 
@@ -240,10 +240,8 @@ struct ST_BONE : public D3DXFRAME
 // 플레이어 모드 추가.
 enum PLAYER_MODE_STATE
 {
-	IDLE_PLAYER_MODE,
-	WALK_PLAYER_MODE,
 	FIGHTING_PLAYER_MODE,
-	DEFENDING_PLAYER_MODE,
+	IDLE_PLAYER_MODE,
 };
 //
 

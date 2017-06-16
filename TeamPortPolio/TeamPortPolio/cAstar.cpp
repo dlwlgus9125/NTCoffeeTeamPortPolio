@@ -52,7 +52,7 @@ vector<int> cAstar::GetPath()
 {
 	vector<int> path;
 	path.push_back(m_target);
-
+	
 	int index = m_target;
 	while (m_route[index] != m_source)
 	{
