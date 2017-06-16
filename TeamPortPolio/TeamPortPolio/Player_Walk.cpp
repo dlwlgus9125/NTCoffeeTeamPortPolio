@@ -3,6 +3,16 @@
 
 void Player_Walk::OnBegin(cPlayer* pPlayer)
 {
+	if ((PLAYER_MODE_STATE)pPlayer->GetMode() == IDLE_PLAYER_MODE)
+	{
+		pPlayer->SetMode(IDLE_PLAYER_MODE);
+	}
+
+	if ((PLAYER_MODE_STATE)pPlayer->GetMode() == FIGHTING_PLAYER_MODE)
+	{
+		pPlayer->SetMode(FIGHTING_PLAYER_MODE);
+	}
+
 	pPlayer->GetMesh()->SetAnimationIndexBlend(P_WALK);
 
 }
@@ -37,7 +47,7 @@ void Player_Walk::StateChanger(cPlayer * pPlayer, D3DXVECTOR3 prevPos, D3DXVECTO
 	}
 	else if (INPUT->IsKeyPress(VK_S))
 	{
-		pPlayer->GetMesh()->SetAnimationIndexBlend(P_WALK);
+		pPlayer->GetMesh()->SetAnimationIndexBlend(P_BACKWALK);
 	}
 	else if (INPUT->IsKeyPress(VK_SHIFT) && 0.04f < MATH->Distance(prevPos, movePos))
 	{
@@ -52,15 +62,15 @@ void Player_Walk::Move(cPlayer * pPlayer)
 	float rotY = 0.0f;
 	if (INPUT->IsKeyPress(VK_W))
 	{
-		movePos += pPlayer->GetCharacterEntity()->Forward() * 0.3;
+		movePos += pPlayer->GetCharacterEntity()->Forward() * 0.03f;
 		if (INPUT->IsKeyPress(VK_SHIFT))
 		{
-			movePos += pPlayer->GetCharacterEntity()->Forward() * 0.03;
+			movePos += pPlayer->GetCharacterEntity()->Forward() * 0.03f;
 		}
 	}
 	if (INPUT->IsKeyPress(VK_S))
 	{
-		movePos -= pPlayer->GetCharacterEntity()->Forward() * 0.3;
+		movePos -= pPlayer->GetCharacterEntity()->Forward() * 0.03f;
 	}
 
 	pPlayer->GetCharacterEntity()->SetPos(movePos);
