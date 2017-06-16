@@ -4,6 +4,7 @@
 
 void cEffectManager::Init(bool isFogOn, int fogPassIndex, bool isSnowOn, bool isRainOn)
 {
+	int size = MAP->GetMap()->GetCellPerRow() * MAP->GetMap()->GetCellSpace();
 	if (isFogOn)
 	{
 		m_pFog = new cFog();
@@ -13,13 +14,13 @@ void cEffectManager::Init(bool isFogOn, int fogPassIndex, bool isSnowOn, bool is
 	if (isSnowOn)
 	{
 		m_pSnow = new cWeather();
-		m_pSnow->Setup(1500);
+		m_pSnow->Setup(size, size, size, 1500);
 	}
 
 	if (isRainOn)
 	{
 		m_pRain = new cWeather();
-		m_pRain->Setup(3000);
+		m_pRain->Setup(size, size, size, 3000);
 	}
 }
 

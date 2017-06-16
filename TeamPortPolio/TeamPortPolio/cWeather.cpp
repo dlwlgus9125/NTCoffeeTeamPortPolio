@@ -3,6 +3,7 @@
 
 
 cWeather::cWeather()
+	: m_nMapSizeX(0), m_nMapSizeY(0), m_nMapSizeZ(0)
 {
 }
 
@@ -18,15 +19,28 @@ DWORD FtoDw(float f)
 }
 
 
-void cWeather::Setup(int count)
+void cWeather::Setup(int mapSizeX, int mapSizeY, int mapSizeZ, int count)
 {
 	srand((unsigned)time(NULL));
 	m_vecParticleVertex.clear();
 	m_vecParticleVertex.resize(count);
+
+	m_nMapSizeX = mapSizeX;
+	m_nMapSizeY = mapSizeY;
+	m_nMapSizeZ = mapSizeZ;
+
 	for (int i = 0; i < m_vecParticleVertex.size(); ++i)
 	{
-		float fRadius = rand() % 100;
-		m_vecParticleVertex[i].p = D3DXVECTOR3(fRadius, 100, fRadius);
+		float randX = rand() % m_nMapSizeX;
+		randX -= m_nMapSizeX / 2;
+
+		float randY = rand() % m_nMapSizeY;
+		randY -= m_nMapSizeY / 2;
+
+		float randZ = rand() % m_nMapSizeZ;
+		randZ -= m_nMapSizeZ / 2;
+
+		m_vecParticleVertex[i].p = D3DXVECTOR3(randX, randY, randZ);
 
 		D3DXVECTOR3	vAngle = D3DXVECTOR3(
 			D3DXToRadian(rand() % 3600 / 10.0f),
@@ -49,30 +63,22 @@ void cWeather::Setup(int count)
 void cWeather::Update(float fMove, float fSpeed)
 {
 	int nAlpha = 0;
-	int nDelta = 4;
-
-	nAlpha += nDelta;
-	if (nAlpha > 255)
-	{
-		nAlpha = 255;
-		nDelta *= -1;
-	}
-
-	if (nAlpha < 0)
-	{
-		nAlpha = 0;
-		nDelta *= -1;
-	}
+	int nDelta = 50;
 
 	for (int i = 0; i < m_vecParticleVertex.size(); ++i)
 	{
-		if (i % 2) continue;
-		m_vecParticleVertex[i].c = D3DCOLOR_ARGB(255, 255, 255, 255);	// alpha 값만 변경
+		m_vecParticleVertex[i].c = D3DCOLOR_ARGB(150, 255, 255, 255);	// alpha 값만 변경
 
-		if (m_vecParticleVertex[i].p.y < -100) m_vecParticleVertex[i].p.y = 50 + rand() % 50;
+		if (m_vecParticleVertex[i].p.y < -5) m_vecParticleVertex[i].p.y = 50 + rand() % 50;
 		else m_vecParticleVertex[i].p.y -= fSpeed;
 
-		if (m_vecParticleVertex[i].p.x < -100) m_vecParticleVertex[i].p.x = 100;
+		// if (m_vecParticleVertex[i].p.y < 5)
+		// {
+		// 	nAlpha += nDelta;
+		// 	m_vecParticleVertex[i].c = D3DCOLOR_ARGB(nAlpha, 255, 255, 255);
+		// }
+
+		if (m_vecParticleVertex[i].p.x < -m_nMapSizeX / 2) m_vecParticleVertex[i].p.x = m_nMapSizeX / 2;
 		else m_vecParticleVertex[i].p.x -= fMove;
 	}
 }
@@ -116,4 +122,50 @@ void cWeather::Render(char* sFullPath)
 
 	D3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
 	D3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, false);
+}
+
+void cWeather::AddParticle(int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		ST_PC_VERTEX vertex;
+
+		float randX = rand() % m_nMapSizeX;
+		randX -= m_nMapSizeX / 2;
+
+		float randY = rand() % m_nMapSizeY;
+		randY -= m_nMapSizeY / 2;
+
+		float randZ = rand() % m_nMapSizeZ;
+		randZ -= m_nMapSizeZ / 2;
+
+		vertex.p = D3DXVECTOR3(randX, randY, randZ);
+
+		D3DXVECTOR3	vAngle = D3DXVECTOR3(
+			D3DXToRadian(rand() % 3600 / 10.0f),
+			D3DXToRadian(rand() % 3600 / 10.0f),
+			D3DXToRadian(rand() % 3600 / 10.0f));
+
+		D3DXMATRIX	matRX, matRY, matRZ, matWorld;
+		D3DXMatrixIsIdentity(&matWorld);
+		D3DXMatrixRotationX(&matRX, vAngle.x);
+		D3DXMatrixRotationY(&matRY, vAngle.y);
+		D3DXMatrixRotationZ(&matRZ, vAngle.z);
+		matWorld = matRX * matRY * matRZ;
+
+		D3DXVec3TransformCoord(&vertex.p, &vertex.p, &matWorld);
+
+		vertex.c = D3DCOLOR_ARGB(150, 255, 255, 255);
+		m_vecParticleVertex.push_back(vertex);
+	}
+}
+
+void cWeather::DeleteParticle(int count)
+{
+	if (m_vecParticleVertex.size() < count + 1) return;
+
+	for (int i = 0; i < count; i++)
+	{
+		m_vecParticleVertex.pop_back();
+	}
 }

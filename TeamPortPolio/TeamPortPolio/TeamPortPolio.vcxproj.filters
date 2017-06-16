@@ -170,6 +170,12 @@
     <Filter Include="06. Database\02 cItemDB">
       <UniqueIdentifier>{6582bded-10a2-45ff-aaa8-e746164a3987}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Manager\12. cEffectManager">
+      <UniqueIdentifier>{ad96410e-1558-4b33-a1ac-a9916b9c6d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. cObject\03. cParticle">
+      <UniqueIdentifier>{38c5c6c9-362b-41d3-9d09-d3430e551230}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -337,7 +343,6 @@
       <Filter>00. Manager\07. cUIManager\03. cUIButton</Filter>
     </ClInclude>
     <ClInclude Include="cMeleeUnit.h" />
-    <ClInclude Include="cShadowManager.h" />
     <ClInclude Include="cUITab.h" />
     <ClInclude Include="Player_State.h" />
     <ClInclude Include="Melee_State.h">
@@ -350,15 +355,22 @@
     <ClInclude Include="cItemDB.h">
       <Filter>06. Database\02 cItemDB</Filter>
     </ClInclude>
-    <ClInclude Include="cFog.h" />
     <ClInclude Include="cUISlot.h" />
-    <ClInclude Include="cWeather.h" />
     <ClInclude Include="Player_State.h" />
-    <ClInclude Include="cEffectManager.h">
-      <Filter>00. Manager</Filter>
-    </ClInclude>
     <ClInclude Include="BallisticMotion.h">
       <Filter>02. cCharacter\04.cArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffectManager.h">
+      <Filter>00. Manager\12. cEffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cWeather.h">
+      <Filter>01. cObject\03. cParticle</Filter>
+    </ClInclude>
+    <ClInclude Include="cFog.h">
+      <Filter>01. cObject\03. cParticle</Filter>
+    </ClInclude>
+    <ClInclude Include="cShadowManager.h">
+      <Filter>00. Manager\13. cShadowManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -505,7 +517,6 @@
       <Filter>02. cCharacter\03. cLeader\00. Leader_State</Filter>
     </ClCompile>
     <ClCompile Include="cMeleeUnit.cpp" />
-    <ClCompile Include="cShadowManager.cpp" />
     <ClCompile Include="cUITab.cpp" />
     <ClCompile Include="Leader_State_Defeat.cpp" />
     <ClCompile Include="Player_Attack.cpp" />
@@ -537,16 +548,23 @@
     <ClCompile Include="cItemDB.cpp">
       <Filter>06. Database\02 cItemDB</Filter>
     </ClCompile>
-    <ClCompile Include="cFog.cpp" />
     <ClCompile Include="cUIButton.cpp" />
     <ClCompile Include="cUISlot.cpp" />
-    <ClCompile Include="cWeather.cpp" />
     <ClCompile Include="Player_Attack.cpp" />
     <ClCompile Include="Player_Defence.cpp" />
     <ClCompile Include="Player_Idle.cpp" />
     <ClCompile Include="Player_Walk.cpp" />
     <ClCompile Include="cEffectManager.cpp">
-      <Filter>00. Manager</Filter>
+      <Filter>00. Manager\12. cEffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cWeather.cpp">
+      <Filter>01. cObject\03. cParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="cFog.cpp">
+      <Filter>01. cObject\03. cParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="cShadowManager.cpp">
+      <Filter>00. Manager\13. cShadowManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
